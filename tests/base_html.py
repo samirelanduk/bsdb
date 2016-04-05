@@ -10,6 +10,13 @@ class RootHtmlTest(RootTest):
      "http://www.ed.ac.uk/"
     ]
 
+    sponsor_names = [
+     "BBSRC",
+     "MRC",
+     "EPSRC",
+     "The University of Edinburgh"
+    ]
+
     def go_to_page(self, location, title, h1):
         # Go to the page
         self.browser.get(self.root_url + location)
