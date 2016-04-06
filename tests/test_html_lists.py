@@ -123,7 +123,8 @@ class ListHtmlTest(RootHtmlTest):
           "Hydrogen bond acceptors",
           "Hydrogen bond donors",
           "Polar surface area (A2)",
-          "Lipinski rules broken"
+          "Lipinski rules broken",
+          "logP"
          ],
          value_checkers = [
           float,
@@ -131,6 +132,7 @@ class ListHtmlTest(RootHtmlTest):
           lambda k: k == "0" or int(k),
           float,
           lambda k: k == "0" or int(k),
+          float
          ]
         )
 
