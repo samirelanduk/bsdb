@@ -2,21 +2,23 @@
 
 <%@include file="/includes/start.html"%>
 <title>Ligands - BindSequenceDB</title>
+<script src="/js/ligands.js"></script>
+<script src="/js/list.js"></script>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>All Ligands</h1>
 <div id="list_container">
 
   <div id="list_categories">
-    <div class="list_category">All</div>
-    <div class="list_category">Approved</div>
-    <div class="list_category">Synthetic organic</div>
-    <div class="list_category">Metabolite</div>
-    <div class="list_category">Natural product</div>
-    <div class="list_category">Endogenous peptide</div>
-    <div class="list_category">Other peptide</div>
-    <div class="list_category">Inorganic</div>
-    <div class="list_category">Antibody</div>
+    <div class="list_category selected" onclick="selectRows(0)">All</div>
+    <div class="list_category" onclick="selectRows(1)">Approved</div>
+    <div class="list_category" onclick="selectRows(2)">Synthetic organic</div>
+    <div class="list_category" onclick="selectRows(3)">Metabolite</div>
+    <div class="list_category" onclick="selectRows(4)">Natural product</div>
+    <div class="list_category" onclick="selectRows(5)">Endogenous peptide</div>
+    <div class="list_category" onclick="selectRows(6)">Other peptide</div>
+    <div class="list_category" onclick="selectRows(7)">Inorganic</div>
+    <div class="list_category" onclick="selectRows(8)">Antibody</div>
   </div>
 
   <div id="category_description">
@@ -26,11 +28,11 @@
 
   <table id="list_table">
 		<thead>
-			<th>Name</th>
-			<th>ID</th>
-			<th>Approved</th>
-			<th>Type</th>
-			<th>Mass</th>
+			<th onclick="sortColumn(0)" class="N">Name</th>
+			<th onclick="sortColumn(1)" class="A">ID</th>
+			<th onclick="sortColumn(2)" class="N">Approved</th>
+			<th onclick="sortColumn(3)" class="N">Type</th>
+			<th onclick="sortColumn(4)" class="N">Mass</th>
 			<th>Synonyms</th>
 		</thead>
 		<tbody>
