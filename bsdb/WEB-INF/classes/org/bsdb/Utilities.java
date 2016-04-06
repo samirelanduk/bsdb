@@ -379,7 +379,7 @@ public class Utilities {
 			conditions.add(String.format("logP<=%f", searchTerms.get("logpLt")));
 		}
 		if ((searchTerms.containsKey("approvedOnly")) && (boolean)(searchTerms.get("approvedOnly"))) {
-			conditions.add("approved=1");
+			conditions.add("isApproved=1");
 		}
 
 		StringBuilder query = new StringBuilder("SELECT name,ligandID,isApproved,type,mass,synonyms FROM ligands");
@@ -468,7 +468,7 @@ public class Utilities {
 			conditions.add(String.format("sequences.externalContacts / sequences.internalContacts<=%f", searchTerms.get("contactratioLt")));
 		}
 		if ((searchTerms.containsKey("approvedOnly")) && (boolean)(searchTerms.get("approvedOnly"))) {
-			conditions.add("ligands.approved=1");
+			conditions.add("ligands.isApproved=1");
 		}
 		String queryStart = "select sequences.interactionId,targets.name,sequences.species," +
 				"ligands.name,sequences.length,sequences.originalChainLength, ligands.isApproved from sequences inner join targets on " +
@@ -488,10 +488,16 @@ public class Utilities {
 			ResultSet rs = DatabaseAccess.issueRawSqlQuery(query.toString());
 			sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
 		} catch (SQLException e) {
-			sqlResults = new Object[0][0];
+      /*sqlResults = new Object[1][6];
+      sqlResults[0][0] = e.toString();
+      sqlResults[0][1] = 0;
+      sqlResults[0][2] = false;
+      sqlResults[0][3] = "";
+      sqlResults[0][4] = 0.0f;
+      sqlResults[0][5] = "";*/
+      sqlResults = new Object[0][0];
 		}
 		sequenceRows = getSequenceRows(sqlResults);
-		// String[] q = {query.toString()};
 		return sequenceRows;
 	}
 
