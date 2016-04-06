@@ -12,7 +12,6 @@ class ListHtmlTest(RootHtmlTest):
         list_categories = list_container.find_element_by_id("list_categories")
         for category in categories:
             self.assertIn(category, list_categories.text)
-        self.assertEqual(len(list_categories), len(categories))
 
         # Check description
         self.assertEqual(
@@ -180,10 +179,10 @@ class ListHtmlTest(RootHtmlTest):
         # Check structure is correct
         list_categories = [
          "All", "Approved drugs", "Short", "Long", "Hydrophobic", "Hydrophilic",
-         "Small Proportional Length"
+         "Small proportional length"
         ]
         list_headings = [
-         "ID", "Target", "Species", "Ligand", "Length", "Proportional Length"
+         "ID", "Target", "Species", "Ligand", "Length", "Proportional length"
         ]
         column_checkers = [
          int,
