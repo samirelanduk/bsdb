@@ -3,3 +3,4 @@
 *.war
 *.pyc
 __pycache__
+Config.java

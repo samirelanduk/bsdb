@@ -1,3 +1,5 @@
+<%@ page import = "org.bsdb.*" %>
+
 <%@include file="/includes/start.html"%>
 <title>Ligands - BindSequenceDB</title>
 <%@include file="/includes/bodytop.html"%>
@@ -32,6 +34,12 @@
 			<th>Synonyms</th>
 		</thead>
 		<tbody>
+      <%
+  		String[] rows = Utilities.getLigandRows(Utilities.getAllLigandsAsObjects());
+  		for (String row : rows) {
+  			out.println(row);
+  		}
+  		%>
 		</tbody>
 	</table>
 
