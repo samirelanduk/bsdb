@@ -190,7 +190,8 @@ class ListHtmlTest(RootHtmlTest):
          len,
          len,
          int,
-         lambda k: k.endswith("%")
+         lambda k: k.endswith("%"),
+         lambda k: k == ""
         ]
         self.check_list_page_structure(list_categories, list_headings, column_checkers)
 

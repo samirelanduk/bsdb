@@ -1,3 +1,5 @@
+<%@ page import = "org.bsdb.*" %>
+
 <%@include file="/includes/start.html"%>
 <title>Sequences - BindSequenceDB</title>
 <%@include file="/includes/bodytop.html"%>
@@ -29,6 +31,12 @@
 			<th>Proportional length</th>
 		</thead>
 		<tbody>
+      <%
+  		String[] rows = Utilities.getSequenceRows(Utilities.getAllSequencesAsObjects());
+  		for (String row : rows) {
+  			out.println(row);
+  		}
+  		%>
 		</tbody>
 	</table>
 
