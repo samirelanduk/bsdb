@@ -1,0 +1,123 @@
+#detail_container {
+  border: 1px solid black;
+  display: table;
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.col {
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 25px;
+  vertical-align: top;
+  width: 50%;
+}
+
+#ligand_title {
+  margin-left: 25px;
+}
+
+#ligand_title .link {
+  margin-left: 15px;
+  font-size: 90%;
+}
+
+#ligand_title .link .dbname {
+  font-weight: bold;
+}
+
+.box {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.box img.fill {
+  width: 100%;
+  display: block;
+}
+
+.box table {
+	border-collapse: collapse;
+	border: 0px;
+	width: 100%;
+	margin: 0px;
+}
+
+.box tr {
+	margin: 0px;
+	border: 0px;
+	border-bottom: 1px solid #D1D0CE;
+}
+
+.box tr:last-child {
+	border-bottom: 0px solid #D1D0CE;
+}
+
+.field, .value {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	vertical-align: middle;
+}
+
+.field {
+	width: 40%;
+	text-align: right;
+	padding-right: 1%;
+}
+
+.value {
+	text-align: left;
+	border-left: 1px solid #D1D0CE;
+	padding-left: 3%;
+}
+
+.sequence_link {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.sequence_link:hover {
+	background-color: #EEFFEE;
+	cursor: pointer;
+	transition: 0.5s;
+
+}
+
+.sequence_link a, .sequence_link a:hover {
+	text-decoration: none;
+	color: inherit;
+}
+
+#sequence {
+	font-size: 75%;
+	font-family: monospace;
+  padding: 10px;
+  word-wrap: break-word;
+  line-height: 2;
+}
+
+#sequence span {
+	display: inline-block;
+}
+
+.between {
+	font-style: italic;
+}
+
+.up {
+	font-size: 150%;
+	font-weight: bold;
+}
+
+.box iframe {
+	border: none;
+}
+
+svg {
+	border-left: auto;
+	border-right: auro;
+}
