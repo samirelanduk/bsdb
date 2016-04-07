@@ -1,0 +1,29 @@
+#list_container {
+  width: 100%;
+  border: 1px solid black;
+  padding: 0px;
+  margin: 0px;
+  display: table;
+  table-layout: fixed;
+}
+
+#list_categories {
+  display: table-row;
+  width: 100%;
+}
+
+.list_category {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #E2F0D9;
+  font-weight: bold;
+  border-bottom: 5px solid #538135;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.list_category.selected, .list_category:hover {
+  background-color: #538135;
+  color: #FFFFFF;
+}

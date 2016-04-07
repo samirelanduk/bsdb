@@ -1,6 +1,7 @@
 <%@ page import = "org.bsdb.*" %>
 
 <%@include file="/includes/start.html"%>
+<link rel="stylesheet" type="text/css" href="/css/list.css">
 <title>Ligands - BindSequenceDB</title>
 <script src="/js/ligands.js"></script>
 <script src="/js/list.js"></script>

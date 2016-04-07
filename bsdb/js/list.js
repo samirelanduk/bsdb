@@ -1,5 +1,5 @@
 function selectRows(functionNumber) {
-	
+
 	var rows = document.getElementsByTagName("tr");
 	var visibleCount = 0;
 	for (var i = 1; i < rows.length; i++) {
@@ -10,12 +10,18 @@ function selectRows(functionNumber) {
 			rows[i].style.display = "none";
 		}
 	}
-	
+
+	var headers = document.getElementById("list_categories").children;
+	for (var i = 0; i < (headers.length - 1); i++) {
+		headers[i].className = "list_category unselected";
+	}
+	headers[functionNumber].className = "list_category selected";
+
 	var description = document.getElementById("category_description");
 	description.innerHTML = descriptions[functionNumber] + " (" + visibleCount + ").";
-	
+
 	colorRows();
-	
+
 }
 
 var currentRowSortStatus;
@@ -27,7 +33,7 @@ function sortColumn(columnNumber) {
 	var rows = tbody.getElementsByTagName("tr");
 	console.log(thead);
 	currentRowStatus = thead.children[0].children[columnNumber].className;
-	
+
 	var sortTerms = [];
 	for (var i = 0; i < rows.length; i++) {
 		term = rows[i].childNodes[columnNumber].attributes.value.value.toLowerCase();
@@ -40,7 +46,7 @@ function sortColumn(columnNumber) {
 	for (var i = 0; i < rows.length; i++) {
 		searchableRows.push([sortTerms[i], rows[i]]);
 	}
-	
+
 	searchableRows.sort(getSortValue);
 	rows = [];
 	sortTerms = [];
@@ -60,9 +66,9 @@ function sortColumn(columnNumber) {
 	newTbody.setAttribute("id", "tbody");
 	newTbody.appendChild(newRows);
 	table.appendChild(newTbody);
-	
+
 	thead.children[0].children[columnNumber].className = currentRowStatus == "A" ? "D" : "A";
-	
+
 	colorRows();
 }
 
@@ -82,7 +88,7 @@ function colorRows() {
 	var rows = document.getElementsByTagName("tr");
 	var next = 1;
 	var values = ["light", "dark"];
-	
+
 	for (var i = 1; i < rows.length; i++) {
 		if (rows[i].style.display != "none") {
 			rows[i].className = values[next];
@@ -90,5 +96,3 @@ function colorRows() {
 		}
 	}
 }
-
-
