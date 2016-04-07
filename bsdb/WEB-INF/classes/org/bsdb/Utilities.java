@@ -343,10 +343,10 @@ public class Utilities {
 			conditions.add(typeCondition.toString());
 		}
 		if (searchTerms.containsKey("massGt")) {
-			conditions.add(String.format("molecularWeight>=%f", searchTerms.get("massGt")));
+			conditions.add(String.format("mass>=%f", searchTerms.get("massGt")));
 		}
 		if (searchTerms.containsKey("massLt")) {
-			conditions.add(String.format("molecularWeight<=%f", searchTerms.get("massLt")));
+			conditions.add(String.format("mass<=%f", searchTerms.get("massLt")));
 		}
 		if (searchTerms.containsKey("hbondAccGt")) {
 			conditions.add(String.format("hBondAcceptors>=%d", searchTerms.get("hbondAccGt")));
