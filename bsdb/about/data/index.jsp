@@ -5,6 +5,7 @@
 <h1>Data and Statistics</h1>
 
 <div id="ligand_stats">
+
 	<div class="box">
 		<div class="box_title">
 			Ligands by Type
@@ -15,6 +16,9 @@
 			<svg>
 			</svg>
 		</div>
+	</div>
+
+	<div class="box">
 		<div class="box_title">
 			Ligands by Mass
 		</div>
@@ -23,7 +27,11 @@
 			</div>
 			<svg>
 			</svg>
-		</div><div class="box_title">
+		</div>
+	</div>
+
+	<div class="box">
+		<div class="box_title">
 			Ligands by Approval Status
 		</div>
 		<div class="box_body">
@@ -33,9 +41,11 @@
 			</svg>
 		</div>
 	</div>
+
 </div>
 
 <div id="sequence_stats">
+
 	<div class="box">
 		<div class="box_title">
 			Sequences by Target Type
@@ -46,6 +56,9 @@
 			<svg>
 			</svg>
 		</div>
+	</div>
+
+	<div class="box">
 		<div class="box_title">
 			Sequences by Mass
 		</div>
@@ -54,7 +67,11 @@
 			</div>
 			<svg>
 			</svg>
-		</div><div class="box_title">
+		</div>
+	</div>
+
+	<div class="box">
+		<div class="box_title">
 			Sequence Contiguity by Target Type
 		</div>
 		<div class="box_body">
@@ -64,6 +81,7 @@
 			</svg>
 		</div>
 	</div>
+	
 </div>
 
 <div id="aboutback">

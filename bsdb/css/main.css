@@ -5,6 +5,7 @@ body {
 
 header, nav a:hover {
   background-color: #2C5700;
+  text-decoration: none;
 }
 
 header #headertitle {
@@ -53,6 +54,39 @@ main {
   margin-bottom: 20px;
 }
 
+a {
+  text-decoration: none;
+  color: #003399;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.box {
+  border: 1px solid black;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.box_title {
+  text-align: center;
+  border-bottom: 1px solid black;
+  color: #FFFFFF;
+  background-color: #86C67C;
+  font-weight: bold;
+  font-size: 130%;
+}
+
+.box_body {
+  padding: 20px;;
+}
+
+.box_body_readmore {
+  text-align: right;
+  margin-right: 50px;
+}
+
 footer {
   background-color: #267340;
   color: #FFFFFF;
@@ -72,6 +106,11 @@ footer .foot {
 
 footer .footrow {
   line-height: 200%;
+}
+
+footer .footrowtitle {
+  font-weight: bold;
+  font-size: 110%;
 }
 
 footer a {
