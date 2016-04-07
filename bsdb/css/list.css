@@ -3,9 +3,14 @@
   border: 1px solid black;
   padding: 0px;
   margin: 0px;
+}
+
+#category_container {
+  width: 100%;
   display: table;
   table-layout: fixed;
 }
+
 
 #list_categories {
   display: table-row;
@@ -26,4 +31,12 @@
 .list_category.selected, .list_category:hover {
   background-color: #538135;
   color: #FFFFFF;
+}
+
+#category_description {
+  text-align: center;
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }

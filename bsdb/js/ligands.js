@@ -31,10 +31,9 @@ function isApproved(row) {
 function isSyntheticOrganic(row) {
 	console.log(document.getElementById("list_categories").children[2].innerHTML.replace("<br>", " "));
 	if (row.children[3].innerHTML == document.getElementById("list_categories").children[2].innerHTML.trim()) {
-		
+
 		return true;
 	} else {
-		console.log("False!");
 		return false;
 	}
 }

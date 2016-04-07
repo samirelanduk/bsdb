@@ -31,7 +31,6 @@ function sortColumn(columnNumber) {
 	var table = tbody.parentNode;
 	var thead = document.getElementsByTagName("thead")[0];
 	var rows = tbody.getElementsByTagName("tr");
-	console.log(thead);
 	currentRowStatus = thead.children[0].children[columnNumber].className;
 
 	var sortTerms = [];

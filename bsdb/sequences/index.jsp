@@ -10,14 +10,16 @@
 <h1>All Drug Responsive Sequences</h1>
 <div id="list_container">
 
-  <div id="list_categories">
-    <div class="list_category selected" onclick="selectRows(0)">All</div>
-    <div class="list_category" onclick="selectRows(1)">Approved drugs</div>
-    <div class="list_category" onclick="selectRows(2)">Short</div>
-    <div class="list_category" onclick="selectRows(3)">Long</div>
-    <div class="list_category" onclick="selectRows(4)">Hydrophobic</div>
-    <div class="list_category" onclick="selectRows(5)">Hydrophilic</div>
-    <div class="list_category" onclick="selectRows(6)">Small proportional length</div>
+  <div id="category_container">
+    <div id="list_categories">
+      <div class="list_category selected" onclick="selectRows(0)">All</div>
+      <div class="list_category" onclick="selectRows(1)">Approved drugs</div>
+      <div class="list_category" onclick="selectRows(2)">Short</div>
+      <div class="list_category" onclick="selectRows(3)">Long</div>
+      <div class="list_category" onclick="selectRows(4)">Hydrophobic</div>
+      <div class="list_category" onclick="selectRows(5)">Hydrophilic</div>
+      <div class="list_category" onclick="selectRows(6)">Small proportional length</div>
+    </div>
   </div>
 
   <div id="category_description">
@@ -45,4 +47,5 @@
 
 </div>
 
+<script>selectRows(0); colorRows();</script>
 <%@include file="/includes/bodybottom.html"%>

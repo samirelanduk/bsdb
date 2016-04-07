@@ -9,22 +9,23 @@
 
 <h1>All Ligands</h1>
 <div id="list_container">
-
-  <div id="list_categories">
-    <div class="list_category selected" onclick="selectRows(0)">All</div>
-    <div class="list_category" onclick="selectRows(1)">Approved</div>
-    <div class="list_category" onclick="selectRows(2)">Synthetic organic</div>
-    <div class="list_category" onclick="selectRows(3)">Metabolite</div>
-    <div class="list_category" onclick="selectRows(4)">Natural product</div>
-    <div class="list_category" onclick="selectRows(5)">Endogenous peptide</div>
-    <div class="list_category" onclick="selectRows(6)">Other peptide</div>
-    <div class="list_category" onclick="selectRows(7)">Inorganic</div>
-    <div class="list_category" onclick="selectRows(8)">Antibody</div>
+  <div id="category_container">
+    <div id="list_categories">
+      <div class="list_category selected" onclick="selectRows(0)">All</div>
+      <div class="list_category" onclick="selectRows(1)">Approved</div>
+      <div class="list_category" onclick="selectRows(2)">Synthetic organic</div>
+      <div class="list_category" onclick="selectRows(3)">Metabolite</div>
+      <div class="list_category" onclick="selectRows(4)">Natural product</div>
+      <div class="list_category" onclick="selectRows(5)">Endogenous peptide</div>
+      <div class="list_category" onclick="selectRows(6)">Other peptide</div>
+      <div class="list_category" onclick="selectRows(7)">Inorganic</div>
+      <div class="list_category" onclick="selectRows(8)">Antibody</div>
+    </div>
   </div>
 
   <div id="category_description">
-		<p>All ligands with an affinity for one or more of the drug-responsive
-			elements - both approved and unapproved by a regulatory body ().</p>
+		All ligands with an affinity for one or more of the drug-responsive
+			elements - both approved and unapproved by a regulatory body ().
 	</div>
 
   <table id="list_table">
@@ -48,4 +49,5 @@
 
 </div>
 
+<script>selectRows(0); colorRows();</script>
 <%@include file="/includes/bodybottom.html"%>
