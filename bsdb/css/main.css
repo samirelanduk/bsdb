@@ -3,7 +3,7 @@ body {
   margin: 0px;
 }
 
-header {
+header, nav a:hover {
   background-color: #2C5700;
 }
 
@@ -29,4 +29,19 @@ header #headertitle, header #omnisearch {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
+}
+
+nav {
+  background-color: #34944D;
+  text-align: center;
+}
+
+nav a {
+  padding-left: 40px;
+  padding-right: 40px;
+  line-height: 40px;
+  display: inline-block;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: 0.5s;
 }
