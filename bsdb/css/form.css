@@ -15,3 +15,7 @@ input[type=submit] {
 #search_ligands, #search_sequences {
   margin-bottom: 120px;
 }
+
+.pure-form-aligned .pure-control-group label {
+    width: 200px;
+}
