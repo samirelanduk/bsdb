@@ -1,0 +1,17 @@
+form {
+  padding: 30px;
+  border: 1px solid silver;
+}
+
+input[type=submit] {
+  margin-top: 25px;
+}
+
+.detailed_search {
+  font-size: 80%;
+  margin-top: 15px;
+}
+
+#search_ligands, #search_sequences {
+  margin-bottom: 120px;
+}
