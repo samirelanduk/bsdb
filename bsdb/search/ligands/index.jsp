@@ -10,9 +10,9 @@
 
 	<div class="pure-g">
 
-		<div class="pure-u-1-2 formrow" id="nameentry">
-			<label for="ligandname" class="pure-u-1-2">Ligand name:</label>
-			<input class="pure-u-11-24" type="text" id="ligandname" name="ligandname" autocomplete="off">
+		<div class="pure-u-1-1 formrow" id="nameentry">
+			<label for="ligandname" class="pure-u-1-4">Ligand name:</label>
+			<input class="pure-u-5-24" type="text" id="ligandname" name="ligandname" autocomplete="off">
 		</div>
 
 		<div class="pure-u-1 formrow" id="massentry">
@@ -87,35 +87,35 @@
 					<label class="pure-u-1-2" for="typecheckbox">Ligand type:</label>
 					<div id="typecheckbox"  class="pure-u-11-24">
 						<div class="checkrow pure-u-1">
-							<label for="alltype" class="pure-u-4-5">All:</label>
+							<label for="alltype" class="pure-u-4-5 checklabel">All:</label>
 							<input type="checkbox" class="pure-u-1-12" id="alltype" name="type" value="all" checked>
 						</div>
 						<div class="checkrow pure-u-1">
-							<label for="alltype" class="pure-u-4-5">Synthetic organic:</label>
+							<label for="synthorg" class="pure-u-4-5 checklabel">Synthetic organic:</label>
 							<input type="checkbox" class="pure-u-1-12" id="synthorg" name="type" value="Synthetic organic">
 						</div>
 						<div class="checkrow pure-u-1">
-							<label for="alltype" class="pure-u-4-5">Metabolite:</label>
+							<label for="metabolite" class="pure-u-4-5 checklabel">Metabolite:</label>
 							<input type="checkbox" class="pure-u-1-12" id="metabolite" name="type" value="Metabolite">
 						</div>
 						<div class="checkrow pure-u-1">
-							<label for="alltype" class="pure-u-4-5">Natural product:</label>
+							<label for="natprod" class="pure-u-4-5 checklabel">Natural product:</label>
 							<input type="checkbox" class="pure-u-1-12" id="natprod" name="type" value="Natural product">
 						</div>
 						<div class="checkrow pure-u-1">
-							<label for="alltype" class="pure-u-4-5">Endogenous peptide:</label>
+							<label for="endpep" class="pure-u-4-5 checklabel">Endogenous peptide:</label>
 							<input type="checkbox" class="pure-u-1-12" id="endpep" name="type" value="Endogenous peptide">
 						</div>
 						<div class="checkrow pure-u-1">
-							<label for="alltype" class="pure-u-4-5">Other peptide:</label>
+							<label for="othpep" class="pure-u-4-5 checklabel">Other peptide:</label>
 							<input type="checkbox" class="pure-u-1-12" id="othpep" name="type" value="Other peptide">
 						</div>
 						<div class="checkrow pure-u-1">
-							<label for="alltype" class="pure-u-4-5">Inorganic:</label>
+							<label for="inorganic" class="pure-u-4-5 checklabel">Inorganic:</label>
 							<input type="checkbox" class="pure-u-1-12" id="inorganic" name="type" value="Inorganic">
 						</div>
 						<div class="checkrow pure-u-1">
-							<label for="alltype" class="pure-u-4-5">Antibody:</label>
+							<label for="antibody" class="pure-u-4-5 checklabel">Antibody:</label>
 							<input type="checkbox" class="pure-u-1-12" id="antibody" name="type" value="Antibody">
 						</div>
 					</div>
