@@ -19,3 +19,21 @@ input[type=submit] {
 .pure-form-aligned .pure-control-group label {
     width: 200px;
 }
+
+label {
+  text-align: right;
+  font-size: 90%;
+}
+
+.formrow {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#typecheckbox label {
+  font-size: 80%;
+}
+
+input[type=checkbox] {
+  margin-top: 6px;
+}
