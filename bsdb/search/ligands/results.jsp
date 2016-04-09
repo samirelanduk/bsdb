@@ -6,17 +6,20 @@
 %>
 
 <%@include file="/includes/start.html"%>
+<link rel="stylesheet" type="text/css" href="/css/list.css">
+<link rel="stylesheet" type="text/css" href="/css/results.css">
 <title>Ligand Search Results - BindSequenceDB</title>
+<script src="/js/listsort.js"></script>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Ligand Search Results</h1>
 <table id="list_table">
 	<thead>
-		<th>Name</th>
-		<th>ID</th>
-		<th>Approved</th>
-		<th>Type</th>
-		<th>Mass</th>
+		<th onclick="sortColumn(0,false)" class="N">Name</th>
+		<th onclick="sortColumn(1,false)" class="N">ID</th>
+		<th onclick="sortColumn(2,false)" class="N">Approved</th>
+		<th onclick="sortColumn(3,false)" class="N">Type</th>
+		<th onclick="sortColumn(4,false)" class="N">Mass</th>
 		<th>Synonyms</th>
 	</thead>
 	<tbody>

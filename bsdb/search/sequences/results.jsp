@@ -6,18 +6,21 @@
 %>
 
 <%@include file="/includes/start.html"%>
+<link rel="stylesheet" type="text/css" href="/css/list.css">
+<link rel="stylesheet" type="text/css" href="/css/results.css">
 <title>Sequence Search Results - BindSequenceDB</title>
+<script src="/js/listsort.js"></script>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Sequence Search Results</h1>
 <table id="list_table">
 	<thead>
-		<th>ID</th>
-		<th>Target</th>
-		<th>Species</th>
-		<th>Ligand</th>
-		<th>Length</th>
-		<th>Proportional Length</th>
+		<th onclick="sortColumn(0,false)" class="N">ID</th>
+		<th onclick="sortColumn(1,false)" class="N">Target</th>
+		<th onclick="sortColumn(2,false)" class="N">Species</th>
+		<th onclick="sortColumn(3,false)" class="N">Ligand</th>
+		<th onclick="sortColumn(4,false)" class="N">Length</th>
+		<th onclick="sortColumn(5,false)" class="N">Proportional Length</th>
 </thead>
 	<tbody>
 	<%

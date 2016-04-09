@@ -5,6 +5,7 @@
 <title>Sequences - BindSequenceDB</title>
 <script src="/js/sequences.js"></script>
 <script src="/js/list.js"></script>
+<script src="/js/listsort.js"></script>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>All Drug Responsive Sequences</h1>
@@ -28,12 +29,12 @@
 
   <table id="list_table">
 		<thead>
-			<th onclick="sortColumn(0)" class="A">ID</th>
-      <th onclick="sortColumn(1)" class="N">Target</th>
-			<th onclick="sortColumn(2)" class="N">Species</th>
-			<th onclick="sortColumn(3)" class="N">Ligand</th>
-			<th onclick="sortColumn(4)" class="N">Length</th>
-			<th onclick="sortColumn(5)" class="N">Proportional length</th>
+			<th onclick="sortColumn(0,true)" class="A">ID</th>
+      <th onclick="sortColumn(1,true)" class="N">Target</th>
+			<th onclick="sortColumn(2,true)" class="N">Species</th>
+			<th onclick="sortColumn(3,true)" class="N">Ligand</th>
+			<th onclick="sortColumn(4,true)" class="N">Length</th>
+			<th onclick="sortColumn(5,true)" class="N">Proportional length</th>
 		</thead>
 		<tbody>
       <%

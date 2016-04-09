@@ -1,0 +1,19 @@
+tr:nth-child(even) {
+    background-color: #D0ffff;
+}
+
+tr:nth-child(odd) {
+background-color: #E5ffff;
+}
+
+tr {
+  line-height: 200%;
+}
+
+#list_table th {
+  background-color: #0078e7;
+}
+
+table#list_table {
+  width: 100%;
+}
