@@ -11,3 +11,9 @@ for ligand in ligands[:10]:
 print("There are %i interactions." % len(interactions))
 
 connection = utilities.get_connection()
+print("There are %i interactions already in the staging database."
+ % utilities.get_interactions_row_count(connection))
+
+interaction_ids_in_table = utilities.get_interaction_ids_from_table(connection)
+
+connection.close()
