@@ -122,3 +122,10 @@ def update_interaction(interaction, connection):
     )
     connection.commit()
     cursor.close()
+
+
+def remove_interaction_row_by_id(interaction_id, connection):
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM interactions WHERE interactionId='%s'", (interaction_id,))
+    connection.commit()
+    cursor.close()
