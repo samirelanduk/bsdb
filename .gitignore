@@ -4,3 +4,4 @@
 *.pyc
 __pycache__
 Config.java
+config.py
