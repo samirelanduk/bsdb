@@ -42,6 +42,7 @@ def interaction_object_to_dict(interaction):
      "species": interaction.species,
      "type": interaction.type,
      "action": interaction.action,
+     "affinityType": interaction.affinity_type,
      "affinityValue": interaction.affinity_value,
      "affinityRange": affinity_range_to_str(interaction.affinity_range),
      "ligandIsPeptide": "peptide" in interaction.get_ligand().ligand_type.lower()
@@ -62,9 +63,10 @@ def get_table_interaction_as_dict(interaction, connection):
      "species": row[3],
      "type": row[4],
      "action": row[5],
-     "affinityValue": row[6],
-     "affinityRange": row[7],
-     "ligandIsPeptide": row[8]
+     "affinityType": row[6],
+     "affinityValue": row[7],
+     "affinityRange": row[8],
+     "ligandIsPeptide": row[9]
     }
     cursor.close()
     return dictionary
@@ -85,6 +87,7 @@ def add_interaction_to_table(interaction, connection):
       %(species)s,
       %(type)s,
       %(action)s,
+      %(affinityType)s,
       %(affinityValue)s,
       %(affinityRange)s,
       %(ligandIsPeptide)s,
@@ -115,6 +118,7 @@ def update_interaction(interaction, connection):
       species = '%(species)s',
       type = '%(type)s',
       action = '%(action)s',
+      affinityType = '%(affinityType)s',
       affinityValue = '%(affinityValue)s',
       affinityRange = '%(affinityRange)s',
       ligandIsPeptide = '%(ligandIsPeptide)s',
