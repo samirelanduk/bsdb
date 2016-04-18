@@ -28,12 +28,54 @@ def get_interaction_ids_from_table(connection):
     return ids
 
 
+def affinity_range_to_str(range_tuple):
+    return str(range_tuple[0]) if len(range_tuple) == 1 else " - ".join(
+     [str(val) for val in range_tuple]
+    )
+
+
+def interaction_object_to_dict(interaction):
+    return {
+     "interactionId": interaction.interaction_id,
+     "ligandId": interaction._ligand_id,
+     "targetId": interaction._target_id,
+     "species": interaction.species,
+     "type": interaction.type,
+     "action": interaction.action,
+     "affinityValue": interaction.affinity_value,
+     "affinityRange": affinity_range_to_str(interaction.affinity_range),
+     "ligandIsPeptide": "peptide" in interaction.get_ligand().ligand_type.lower()
+    }
+
+
+def get_table_interaction_as_dict(interaction, connection):
+    cursor = connection.cursor()
+    cursor.execute(
+     "SELECT * FROM interactions WHERE interactionId=%s",
+     (interaction.interaction_id,)
+    )
+    row = cursor.fetchone()
+    dictionary = {
+     "interactionId": row[0],
+     "ligandId": row[1],
+     "targetId": row[2],
+     "species": row[3],
+     "type": row[4],
+     "action": row[5],
+     "affinityValue": row[6],
+     "affinityRange": row[7],
+     "ligandIsPeptide": row[8]
+    }
+    cursor.close()
+    return dictionary
+
+
 def add_interaction_to_table(interaction, connection):
     cursor = connection.cursor()
-    affinity_range = str(interaction.affinity_range[0]
-     ) if len(interaction.affinity_range) == 1 else " - ".join(
-      [str(val) for val in interaction.affinity_range])
     now = datetime.datetime.now()
+    dictionary = interaction_object_to_dict(interaction)
+    dictionary["dateAdded"] = now
+    dictionary["dateModified"] = now
 
     cursor.execute(
      """INSERT INTO interactions VALUES (
@@ -48,18 +90,35 @@ def add_interaction_to_table(interaction, connection):
       %(ligandIsPeptide)s,
       %(dateAdded)s,
       %(dateModified)s
-      );""", {
-       "interactionId": interaction.interaction_id,
-       "ligandId": interaction._ligand_id,
-       "targetId": interaction._target_id,
-       "species": interaction.species,
-       "type": interaction.type,
-       "action": interaction.action,
-       "affinityValue": interaction.affinity_value,
-       "affinityRange":affinity_range,
-       "ligandIsPeptide": "peptide" in interaction.get_ligand().ligand_type.lower(),
-       "dateAdded": now,
-       "dateModified": now
-      }
+      );""", dictionary
     )
     connection.commit()
+    cursor.close()
+
+
+def interaction_differs_from_table(interaction, connection):
+    interaction_object_dict = interaction_object_to_dict(interaction)
+    interaction_row_dict = get_table_interaction_as_dict(interaction, connection)
+    return interaction_object_dict != interaction_row_dict
+
+
+def update_interaction(interaction, connection):
+    now = datetime.datetime.now()
+    dictionary = interaction_object_to_dict(interaction)
+    dictionary["dateModified"] = now
+
+    cursor = connection.cursor()
+    cursor.execute(
+     """UPDATE interactions SET
+      ligandId = '%(ligandId)s',
+      targetId = '%(targetId)s',
+      species = '%(species)s',
+      type = '%(type)s',
+      action = '%(action)s',
+      affinityValue = '%(affinityValue)s',
+      affinityRange = '%(affinityRange)s',
+      ligandIsPeptide = '%(ligandIsPeptide)s',
+      dateModified = '%(dateModified)s' WHERE interactionId=%(interactionId)s;""" % dictionary
+    )
+    connection.commit()
+    cursor.close()
