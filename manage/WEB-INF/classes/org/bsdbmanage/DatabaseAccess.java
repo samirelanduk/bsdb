@@ -52,7 +52,7 @@ public class DatabaseAccess {
   public static Interaction[] getAllInteractions() {
     ArrayList<Interaction> interactions = new ArrayList<Interaction>();
     try {
-      ResultSet rs = issueRawSqlQuery("SELECT * FROM interactions;");
+      ResultSet rs = issueRawSqlQuery("SELECT * FROM interactions ORDER BY interactionId;");
       Object[][] rows = getObjectGridFromResultSet(rs);
 
       for (Object[] row : rows) {
