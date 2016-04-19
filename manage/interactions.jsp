@@ -1,10 +1,12 @@
 <%@ page import = "org.bsdbmanage.*" %>
+<% Interaction[] interactions = DatabaseAccess.getAllInteractions(); %>
 <html>
   <head>
     <title>All Interactions</title>
   </head>
   <body>
     <h1>All Interactions</h1>
+    <p>There are <% out.print(interactions.length); %> interactions in the staging database.</p>
     <table>
       <thead>
         <th>Interaction ID</th>
@@ -16,7 +18,6 @@
       </thead>
       <tbody>
         <%
-        Interaction[] interactions = DatabaseAccess.getAllInteractions();
         for (Interaction interaction : interactions) {
           out.println(interaction.toHtmlRow());
         }
