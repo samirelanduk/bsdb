@@ -45,7 +45,7 @@ public class Interaction {
 		return Utilities.enclose(
 			"tr", "",
 			String.format(
-				"%s%s%s%s%s%s%s",
+				"%s%s%s%s%s%s%s%s%s%s%s%s%s",
 				Utilities.enclose("td", "", String.format("%d", interactionId)),
 				Utilities.enclose("td", "", String.format(
 				 "<a href='http://guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d' target='_blank'>%d</a>",
@@ -56,6 +56,12 @@ public class Interaction {
 				 targetId, targetId
 				)),
 				Utilities.enclose("td", "", species),
+				Utilities.enclose("td", "", type),
+				Utilities.enclose("td", "", action),
+				Utilities.enclose("td", "", affinityType),
+				Utilities.enclose("td", "", String.format("%.2f", affinityValue)),
+				Utilities.enclose("td", "", affinityRange),
+				Utilities.enclose("td", "", ligandIsPeptide ? "Yes" : "No"),
 				Utilities.enclose("td", "", ft.format(dateAdded)),
 				Utilities.enclose("td", "", ft.format(dateModified)),
 				Utilities.enclose("td", "", datePdbsLastChecked != null ? ft.format(datePdbsLastChecked) : "Never")
