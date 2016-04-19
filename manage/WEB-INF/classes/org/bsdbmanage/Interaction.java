@@ -12,7 +12,7 @@ public class Interaction {
 	private String type;
 	private String action;
 	private String affinityType;
-	private double affinityValue;
+	private float affinityValue;
 	private String affinityRange;
 	private boolean ligandIsPeptide;
   private Date dateAdded;
@@ -28,7 +28,7 @@ public class Interaction {
     this.type = (String)fields[4];
     this.action = (String)fields[5];
     this.affinityType = (String)fields[6];
-    this.affinityValue = (Double)fields[7];
+    this.affinityValue = (Float)fields[7];
     this.affinityRange = (String)fields[8];
     this.ligandIsPeptide = (Boolean)fields[9];
     this.dateAdded = (Date)fields[10];
@@ -107,12 +107,12 @@ public class Interaction {
 	}
 
 
-	public double getAffinityValue() {
+	public float getAffinityValue() {
 		return affinityValue;
 	}
 
 
-	public void setAffinityValue(double affinityValue) {
+	public void setAffinityValue(float affinityValue) {
 		this.affinityValue = affinityValue;
 	}
 
@@ -165,5 +165,5 @@ public class Interaction {
 	public void setDatePdbsLastChecked(Date datePdbsLastChecked) {
 		this.datePdbsLastChecked = datePdbsLastChecked;
 	}
-  
+
 }
