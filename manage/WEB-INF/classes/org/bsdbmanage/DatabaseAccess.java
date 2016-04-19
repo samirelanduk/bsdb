@@ -7,6 +7,7 @@ import java.io.*;
 
 public class DatabaseAccess {
 
+	//Returns a connection to the bsdb_stage database
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
     Class.forName("org.postgresql.Driver");
     Connection connection;
@@ -19,6 +20,7 @@ public class DatabaseAccess {
 	}
 
 
+	//Issues an SQL query to the database and returns the resulting ResultSet
   public static ResultSet issueRawSqlQuery(String query) throws SQLException, ClassNotFoundException {
 		Connection conn = getConnection();
 		Statement st = conn.createStatement();
@@ -26,6 +28,8 @@ public class DatabaseAccess {
 		return rs;
 	}
 
+
+	//Takes a ResultSet returned by an SQL query and turns it into an Object array
   public static Object[][] getObjectGridFromResultSet(ResultSet rs) throws SQLException {
 		int columnCount = rs.getMetaData().getColumnCount();
 		ArrayList<Object[]> rows = new ArrayList<Object[]>();
@@ -43,6 +47,8 @@ public class DatabaseAccess {
 		return objArray;
 	}
 
+
+	//Gets all interactions in the staging database
   public static Interaction[] getAllInteractions() {
     ArrayList<Interaction> interactions = new ArrayList<Interaction>();
     try {

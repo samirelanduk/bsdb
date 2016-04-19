@@ -5,12 +5,21 @@
   </head>
   <body>
     <h1>All Interactions</h1>
-    <%
-    Interaction[] interactions = DatabaseAccess.getAllInteractions();
-    out.println(String.format("There are %d interactions.", interactions.length));
-    for (Interaction interaction : interactions) {
-      out.println(interaction.getSpecies());
-    }
-    %>
+    <table>
+      <thead>
+        <th>Interaction ID</th>
+        <th>Ligand ID</th>
+        <th>Target ID</th>
+        <th>Species</th>
+      </thead>
+      <tbody>
+        <%
+        Interaction[] interactions = DatabaseAccess.getAllInteractions();
+        for (Interaction interaction : interactions) {
+          out.println(interaction.toHtmlRow());
+        }
+        %>
+      </tbody>
+    </table>
   </body>
 </html>

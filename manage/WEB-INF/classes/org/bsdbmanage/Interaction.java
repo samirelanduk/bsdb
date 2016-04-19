@@ -37,6 +37,20 @@ public class Interaction {
   }
 
 
+	public String toHtmlRow() {
+		return Utilities.enclose(
+			"tr", "",
+			String.format(
+				"%s%s%s%s",
+				Utilities.enclose("td", "", String.format("%d", interactionId)),
+				Utilities.enclose("td", "", String.format("%d", ligandId)),
+				Utilities.enclose("td", "", String.format("%d", targetId)),
+				Utilities.enclose("td", "", species)
+			)
+		);
+	}
+
+
 	public int getInteractionId() {
 		return interactionId;
 	}
