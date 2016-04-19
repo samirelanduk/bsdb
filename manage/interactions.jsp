@@ -6,6 +6,7 @@
   </head>
   <body>
     <h1>All Interactions</h1>
+    <p><a href="index.jsp">Back to index</a></p>
     <p>There are <% out.print(interactions.length); %> interactions in the staging database.</p>
     <table>
       <thead>
