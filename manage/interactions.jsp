@@ -11,6 +11,8 @@
         <th>Ligand ID</th>
         <th>Target ID</th>
         <th>Species</th>
+        <th>Date Added</th>
+        <th>Date Last Modified</th>
       </thead>
       <tbody>
         <%
