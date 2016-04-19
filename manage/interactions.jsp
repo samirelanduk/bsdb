@@ -15,6 +15,7 @@
         <th>Species</th>
         <th>Date Added</th>
         <th>Date Last Modified</th>
+        <th>Last Checked for PDBs</th>
       </thead>
       <tbody>
         <%
