@@ -39,14 +39,22 @@ public class Interaction {
 
 
 	public String toHtmlRow() {
+		String ligandLink = "http://guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d";
+		String targetLink = "http://guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=%d";
 		SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 		return Utilities.enclose(
 			"tr", "",
 			String.format(
 				"%s%s%s%s%s%s",
 				Utilities.enclose("td", "", String.format("%d", interactionId)),
-				Utilities.enclose("td", "", String.format("%d", ligandId)),
-				Utilities.enclose("td", "", String.format("%d", targetId)),
+				Utilities.enclose("td", "", String.format(
+				 "<a href='http://guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d' target='_blank'>%d</a>",
+				 ligandId, ligandId
+				)),
+				Utilities.enclose("td", "", String.format(
+				 "<a href='http://guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=%d' target='_blank'>%d</a>",
+				 targetId, targetId
+				)),
 				Utilities.enclose("td", "", species),
 				Utilities.enclose("td", "", ft.format(dateAdded)),
 				Utilities.enclose("td", "", ft.format(dateModified))
