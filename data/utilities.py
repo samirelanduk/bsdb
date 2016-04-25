@@ -143,3 +143,29 @@ def get_interaction_ids_never_checked_for_pdbs(connection):
     id_pairs = [(row[0], row[1]) for row in cursor.fetchall()]
     cursor.close()
     return id_pairs
+
+
+def give_pdbs_to_interaction(interaction, pdbs, connection):
+    now = datetime.datetime.now()
+    cursor = connection.cursor()
+    cursor.execute(
+     "UPDATE interactions SET dateLastCheckedForPdbs=%s WHERE interactionId=%s;",
+     (now, interaction.interaction_id)
+    )
+    connection.commit()
+    cursor.execute(
+     "SELECT pdbCode FROM interaction_pdbs WHERE interactionId='%s'",
+     (interaction.interaction_id,)
+    )
+    pdbs_already_assigned = [row[0] for row in cursor.fetchall()]
+    pdbs_assigned_now = []
+    for pdb in pdbs:
+        if pdb not in pdbs_already_assigned:
+            pdbs_assigned_now.append(pdb)
+            cursor.execute(
+             "INSERT INTO interaction_pdbs VALUES (%s, '%s', %s);",
+             (str(interaction.interaction_id) + pdb, interaction.interaction_id, pdb)
+            )
+            connection.commit()
+    cursor.close()
+    return pdbs_assigned_now

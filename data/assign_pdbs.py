@@ -16,8 +16,11 @@ print("There are %i such interactions." % (len(unchecked_interactions)))
 print("Assigning PDBs to unchecked interactions...")
 while unchecked_interactions:
     interaction = unchecked_interactions.pop()
-    print("\tChecking %s" % str(interaction))
+    print("\tChecking %s" % str(interaction), end=" ")
     pdbs = interaction.find_all_pdbs()
+    pdbs_assigned = utilities.give_pdbs_to_interaction(interaction, pdbs, connection)
+    print("(Assigned %s)" % (", ".join(pdbs_assigned) if pdbs_assigned else "none"))
+
 
 print("")
 connection.close()
