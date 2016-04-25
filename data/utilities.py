@@ -145,6 +145,16 @@ def get_interaction_ids_never_checked_for_pdbs(connection):
     return id_pairs
 
 
+def get_interaction_ids_already_checked_for_pdbs(connection):
+    cursor = connection.cursor()
+    cursor.execute(
+     "SELECT interactionId, targetId FROM interactions WHERE dateLastCheckedForPdbs IS NOT null ORDER BY dateLastCheckedForPdbs;"
+    )
+    id_pairs = [(row[0], row[1]) for row in cursor.fetchall()]
+    cursor.close()
+    return id_pairs
+
+
 def give_pdbs_to_interaction(interaction, pdbs, connection):
     now = datetime.datetime.now()
     cursor = connection.cursor()
