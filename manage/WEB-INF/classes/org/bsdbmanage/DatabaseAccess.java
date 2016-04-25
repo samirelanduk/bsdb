@@ -77,5 +77,24 @@ public class DatabaseAccess {
   }
 
 
+	public static ArrayList<String> getPdbsOfInteraction(int interactionId) {
+		ArrayList<String> pdbs = new ArrayList<String>();
+		try {
+			ResultSet rs = issueRawSqlQuery(String.format(
+			 "SELECT pdbCode FROM interaction_pdbs WHERE interactionId=%d", interactionId
+			));
+			Object[][] rows = getObjectGridFromResultSet(rs);
+			for (Object[] row : rows) {
+        pdbs.add((String)row[0]);
+      }
+		} catch (SQLException e) {
+
+		} catch (ClassNotFoundException e) {
+
+		}
+		return pdbs;
+	}
+
+
 
 }

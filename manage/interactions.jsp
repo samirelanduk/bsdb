@@ -23,6 +23,7 @@
         <th>Date Added</th>
         <th>Date Last Modified</th>
         <th>Last Checked for PDBs</th>
+        <th>PDBS</th>
       </thead>
       <tbody>
         <%

@@ -2,6 +2,7 @@ package org.bsdbmanage;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.sql.SQLException;
 
 public class Interaction {
@@ -19,6 +20,7 @@ public class Interaction {
   private Date dateAdded;
   private Date dateModified;
   private Date datePdbsLastChecked;
+	private ArrayList<String> pdbs;
 
 
   public Interaction(Object[] fields) {
@@ -39,6 +41,7 @@ public class Interaction {
     this.dateAdded = (Date)fields[10];
     this.dateModified = (Date)fields[11];
     this.datePdbsLastChecked = (Date)fields[12];
+		this.pdbs = DatabaseAccess.getPdbsOfInteraction(this.interactionId);
   }
 
 
@@ -46,10 +49,14 @@ public class Interaction {
 		String ligandLink = "http://guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d";
 		String targetLink = "http://guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=%d";
 		SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+		StringBuilder pdbList = new StringBuilder();
+		for (String pdb : pdbs) {
+			pdbList.append(pdb + ", ");
+		}
 		return Utilities.enclose(
 			"tr", "",
 			String.format(
-				"%s%s%s%s%s%s%s%s%s%s%s%s%s",
+				"%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 				Utilities.enclose("td", "", String.format("%d", interactionId)),
 				Utilities.enclose("td", "", String.format(
 				 "<a href='http://guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d' target='_blank'>%d</a>",
@@ -68,7 +75,8 @@ public class Interaction {
 				Utilities.enclose("td", "", ligandIsPeptide ? "Yes" : "No"),
 				Utilities.enclose("td", "", ft.format(dateAdded)),
 				Utilities.enclose("td", "", ft.format(dateModified)),
-				Utilities.enclose("td", "", datePdbsLastChecked != null ? ft.format(datePdbsLastChecked) : "Never")
+				Utilities.enclose("td", "", datePdbsLastChecked != null ? ft.format(datePdbsLastChecked) : "Never"),
+				Utilities.enclose("td", "", pdbs.size() == 0 ? "-" : pdbList.toString().substring(0, pdbList.length() - 2))
 			)
 		);
 	}
@@ -201,6 +209,16 @@ public class Interaction {
 
 	public void setDatePdbsLastChecked(Date datePdbsLastChecked) {
 		this.datePdbsLastChecked = datePdbsLastChecked;
+	}
+
+
+	public ArrayList<String> getPdbs() {
+		return pdbs;
+	}
+
+
+	public void setPdbs(ArrayList<String> pdbs) {
+		this.pdbs = pdbs;
 	}
 
 }
