@@ -133,3 +133,13 @@ def remove_interaction_row_by_id(interaction_id, connection):
     cursor.execute("DELETE FROM interactions WHERE interactionId='%s'", (interaction_id,))
     connection.commit()
     cursor.close()
+
+
+def get_interaction_ids_never_checked_for_pdbs(connection):
+    cursor = connection.cursor()
+    cursor.execute(
+     "SELECT interactionId, targetId FROM interactions WHERE dateLastCheckedForPdbs IS null;"
+    )
+    id_pairs = [(row[0], row[1]) for row in cursor.fetchall()]
+    cursor.close()
+    return id_pairs
