@@ -29,7 +29,11 @@ public class Interaction {
     this.type = (String)fields[4];
     this.action = (String)fields[5];
     this.affinityType = (String)fields[6];
-    this.affinityValue = (Float)fields[7];
+		try {
+    	this.affinityValue = (Float)fields[7];
+		} catch (NullPointerException e) {
+
+		}
     this.affinityRange = (String)fields[8];
     this.ligandIsPeptide = (Boolean)fields[9];
     this.dateAdded = (Date)fields[10];
@@ -58,9 +62,9 @@ public class Interaction {
 				Utilities.enclose("td", "", species),
 				Utilities.enclose("td", "", type),
 				Utilities.enclose("td", "", action),
-				Utilities.enclose("td", "", affinityType),
-				Utilities.enclose("td", "", String.format("%.2f", affinityValue)),
-				Utilities.enclose("td", "", affinityRange),
+				Utilities.enclose("td", "", affinityType == null ? "-" : affinityType),
+				Utilities.enclose("td", "", affinityValue == 0.0 ? "-" : String.format("%.2f", affinityValue)),
+				Utilities.enclose("td", "", affinityRange.equals("") ? "-" : affinityRange),
 				Utilities.enclose("td", "", ligandIsPeptide ? "Yes" : "No"),
 				Utilities.enclose("td", "", ft.format(dateAdded)),
 				Utilities.enclose("td", "", ft.format(dateModified)),
