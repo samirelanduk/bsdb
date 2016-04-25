@@ -13,5 +13,11 @@ unchecked_interactions = [
 ]
 print("There are %i such interactions." % (len(unchecked_interactions)))
 
+print("Assigning PDBs to unchecked interactions...")
+while unchecked_interactions:
+    interaction = unchecked_interactions.pop()
+    print("\tChecking %s" % str(interaction))
+    pdbs = interaction.find_all_pdbs()
+
 print("")
 connection.close()
