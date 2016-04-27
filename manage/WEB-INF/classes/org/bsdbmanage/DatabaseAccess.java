@@ -27,12 +27,15 @@ public class DatabaseAccess {
 
 
 	//Issues an SQL query to the database and returns the resulting ResultSet
-  public static ResultSet issueRawSqlQuery(String query) {
+  public static ResultSet issuePreparedSqlQuery(String query, Object... params) {
 		Connection conn = getConnection();
 		if (conn != null) {
 			try {
-				Statement st = conn.createStatement();
-				ResultSet rs = st.executeQuery(query);
+				PreparedStatement st = conn.prepareStatement(query);
+				for (int i = 0; i < params.length; i++) {
+					st.setObject(i + 1, params[i]);
+				}
+				ResultSet rs = st.executeQuery();
 				return rs;
 			} catch (SQLException e) {
 				return null;
@@ -69,10 +72,9 @@ public class DatabaseAccess {
 	//Gets all interactions in the staging database
   public static Interaction[] getAllInteractions() {
   	ArrayList<Interaction> interactions = new ArrayList<Interaction>();
-    ResultSet rs = issueRawSqlQuery("SELECT * FROM interactions ORDER BY interactionId;");
+    ResultSet rs = issuePreparedSqlQuery("SELECT * FROM interactions ORDER BY interactionId;");
 		if (rs != null) {
 	    Object[][] rows = getObjectGridFromResultSet(rs);
-
 	    for (Object[] row : rows) {
 	      interactions.add(new Interaction(row));
 	    }
@@ -85,19 +87,18 @@ public class DatabaseAccess {
   }
 
 
+	//Gets all PDB codes belonging to a given Interaction (by interactionId)
 	public static ArrayList<String> getPdbsOfInteraction(int interactionId) {
 		ArrayList<String> pdbs = new ArrayList<String>();
-		ResultSet rs = issueRawSqlQuery(String.format(
-		 "SELECT pdbCode FROM interaction_pdbs WHERE interactionId=%d", interactionId
-		));
+		ResultSet rs = issuePreparedSqlQuery(
+		 "SELECT pdbCode FROM interaction_pdbs WHERE interactionId=?",
+		 interactionId
+		);
 		Object[][] rows = getObjectGridFromResultSet(rs);
 		for (Object[] row : rows) {
       pdbs.add((String)row[0]);
     }
-
 		return pdbs;
 	}
-
-
 
 }
