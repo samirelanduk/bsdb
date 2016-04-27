@@ -51,7 +51,7 @@ public class Interaction {
 		SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 		StringBuilder pdbList = new StringBuilder();
 		for (String pdb : pdbs) {
-			pdbList.append(pdb + ", ");
+			pdbList.append(Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s' target='_blank'", interactionId, pdb), pdb) + ", ");
 		}
 		return Utilities.enclose(
 			"tr", "",
