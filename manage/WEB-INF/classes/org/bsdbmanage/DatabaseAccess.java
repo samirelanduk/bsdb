@@ -120,7 +120,7 @@ public class DatabaseAccess {
 	//Gets a single Interaction object by ID
 	public static InteractionPdb getInteractionPdb(String mapId) {
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT * FROM interaction+pdbs WHERE mapId=?",
+		 "SELECT * FROM interaction_pdbs WHERE mapId=?",
 		 mapId
 		);
 		if (rs != null) {
