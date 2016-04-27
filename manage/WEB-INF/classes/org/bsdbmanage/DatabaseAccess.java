@@ -87,6 +87,21 @@ public class DatabaseAccess {
   }
 
 
+	//Gets a single Interaction object by ID
+	public static Interaction getInteraction(int interactionId) {
+		ResultSet rs = issuePreparedSqlQuery(
+		 "SELECT * FROM interactions WHERE interactionId=?",
+		 interactionId
+		);
+		if (rs != null) {
+				Object[][] rows = getObjectGridFromResultSet(rs);
+				return new Interaction(rows[0]);
+		} else {
+			return null;
+		}
+	}
+
+
 	//Gets all PDB codes belonging to a given Interaction (by interactionId)
 	public static ArrayList<String> getPdbsOfInteraction(int interactionId) {
 		ArrayList<String> pdbs = new ArrayList<String>();

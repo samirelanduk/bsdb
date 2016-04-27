@@ -8,6 +8,7 @@ public class InteractionPdb {
 
   public InteractionPdb(Object[] fields) {
     this.mapId = (String)fields[0];
+    this.interaction = DatabaseAccess.getInteraction((int)fields[1]);
     this.pdbCode = (String)fields[2];
   }
 
