@@ -60,5 +60,15 @@
         </tr>
       </table>
     </div>
+
+    <div id="pdb"><% out.print(interactionPdb == null ? "" : Utilities.enclose(
+     "a",
+     String.format(
+      "href='http://www.rcsb.org/pdb/explore.do?structureId=%s' target='_blank'",
+      interactionPdb.getPdbCode()
+     ),
+     "" + interactionPdb.getPdbCode()
+    )); %></div>
+
   </body>
 </html>
