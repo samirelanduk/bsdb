@@ -173,7 +173,7 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
         if pdb not in pdbs_already_assigned:
             pdbs_assigned_now.append(pdb)
             cursor.execute(
-             "INSERT INTO interaction_pdbs VALUES (%s, '%s', %s);",
+             "INSERT INTO interaction_pdbs VALUES (%s, '%s', %s, false);",
              (str(interaction.interaction_id) + pdb, interaction.interaction_id, pdb)
             )
             connection.commit()

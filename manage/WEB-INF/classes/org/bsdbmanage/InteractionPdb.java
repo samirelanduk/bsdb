@@ -5,11 +5,13 @@ public class InteractionPdb {
   private String mapId;
   private Interaction interaction;
   private String pdbCode;
+  private boolean manuallyMarkedCorrect;
 
   public InteractionPdb(Object[] fields) {
     this.mapId = (String)fields[0];
     this.interaction = DatabaseAccess.getInteraction((int)fields[1]);
     this.pdbCode = (String)fields[2];
+    this.manuallyMarkedCorrect = (boolean)fields[3];
   }
 
 
