@@ -43,4 +43,14 @@ public class InteractionPdb {
 	public void setPdbCode(String pdbCode) {
 		this.pdbCode = pdbCode;
 	}
+
+
+	public boolean isManuallyMarkedCorrect() {
+		return manuallyMarkedCorrect;
+	}
+
+
+	public void setManuallyMarkedCorrect(boolean manuallyMarkedCorrect) {
+		this.manuallyMarkedCorrect = manuallyMarkedCorrect;
+	}
 }

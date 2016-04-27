@@ -70,5 +70,13 @@
      "" + interactionPdb.getPdbCode()
     )); %></div>
 
+    <div id="manual_verification">
+      <form method="POST">
+        <input type="hidden" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
+        <p>This map has <strong>
+          <% out.print((interactionPdb == null || !(interactionPdb.isManuallyMarkedCorrect())) ? "not" : ""); %>
+        </strong>been manually marked as a correct map.</p>
+      </form>
+    </div>
   </body>
 </html>
