@@ -5,14 +5,18 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class DatabaseAccess {
 
-	public static Connection getConnection() throws SQLException {
-		MysqlDataSource dataSource = new MysqlDataSource();
-		dataSource.setUser(Config.user);
-		dataSource.setPassword(Config.password);
-		dataSource.setServerName(Config.hostname);
-		dataSource.setDatabaseName(Config.db);
-		Connection conn = dataSource.getConnection();
-		return conn;
+	public static Connection getConnection() {
+		try {
+			MysqlDataSource dataSource = new MysqlDataSource();
+			dataSource.setUser(Config.user);
+			dataSource.setPassword(Config.password);
+			dataSource.setServerName(Config.hostname);
+			dataSource.setDatabaseName(Config.db);
+			Connection conn = dataSource.getConnection();
+			return conn;
+		} catch (SQLException e) {
+			return null;
+		}
 	}
 
 
@@ -27,15 +31,19 @@ public class DatabaseAccess {
 	}
 
 
-  public static ResultSet issueRawSqlQuery(String query) throws SQLException {
+  public static ResultSet issueRawSqlQuery(String query) {
 		Connection conn = getConnection();
-		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery(query);
-		return rs;
+		if (conn != null) {
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			return rs;
+		} else {
+			return null;
+		}
 	}
 
 
-  public static Object[][] getObjectGridFromResultSet(ResultSet rs) throws SQLException {
+  public static Object[][] getObjectGridFromResultSet(ResultSet rs) {
 		int rowcount = 0;
 		if (rs.last()) {
 		  rowcount = rs.getRow();
