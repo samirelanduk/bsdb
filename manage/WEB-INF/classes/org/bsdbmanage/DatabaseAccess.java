@@ -124,8 +124,12 @@ public class DatabaseAccess {
 		 mapId
 		);
 		if (rs != null) {
-				Object[][] rows = getObjectGridFromResultSet(rs);
-				return new InteractionPdb(rows[0]);
+				try {
+					Object[][] rows = getObjectGridFromResultSet(rs);
+					return new InteractionPdb(rows[0]);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					return null;
+				}
 		} else {
 			return null;
 		}
