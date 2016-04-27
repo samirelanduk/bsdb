@@ -135,4 +135,13 @@ public class DatabaseAccess {
 		}
 	}
 
+
+	//Flips the manualCorrectMark value of a given InteractionPdb
+	public static void toggleInteractionPdbManualCorrectnessMark(String mapId) {
+		issuePreparedSqlQuery(
+		 "UPDATE interaction_pdbs SET manualCorrectMapMark = NOT manualCorrectMapMark WHERE mapId=?",
+		 mapId
+		);
+	}
+
 }
