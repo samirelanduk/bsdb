@@ -116,4 +116,19 @@ public class DatabaseAccess {
 		return pdbs;
 	}
 
+
+	//Gets a single Interaction object by ID
+	public static InteractionPdb getInteractionPdb(String mapId) {
+		ResultSet rs = issuePreparedSqlQuery(
+		 "SELECT * FROM interaction+pdbs WHERE mapId=?",
+		 mapId
+		);
+		if (rs != null) {
+				Object[][] rows = getObjectGridFromResultSet(rs);
+				return new InteractionPdb(rows[0]);
+		} else {
+			return null;
+		}
+	}
+
 }
