@@ -21,6 +21,7 @@ public class Interaction {
   private Date dateModified;
   private Date datePdbsLastChecked;
 	private ArrayList<InteractionPdb> pdbMaps;
+	private ArrayList<FalseMap> falseMaps;
 
 
   public Interaction(Object[] fields) {
@@ -42,6 +43,7 @@ public class Interaction {
     this.dateModified = (Date)fields[11];
     this.datePdbsLastChecked = (Date)fields[12];
 		this.pdbMaps = DatabaseAccess.getPdbMapsOfInteraction(this.interactionId);
+		this.falseMaps = DatabaseAccess.getfalseMapsOfInteraction(this.interactionId);
   }
 
 
@@ -53,10 +55,14 @@ public class Interaction {
 		for (InteractionPdb pdbMap : pdbMaps) {
 			pdbList.append(String.format("%s%s%s", pdbMap.isManuallyMarkedCorrect() ? "<b>" : "", Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s' target='_blank'", interactionId, pdbMap.getPdbCode()), pdbMap.getPdbCode()), pdbMap.isManuallyMarkedCorrect() ? "</b>" : "") + ", ");
 		}
+		StringBuilder falsePdbs = new StringBuilder();
+		for (FalseMap falseMap : falseMaps) {
+			falsePdbs.append(Utilities.enclose("a", String.format("href='/manage/falsemap.jsp?id=%d%s' target='_blank'", interactionId, falseMap.getPdbCode()), falseMap.getPdbCode()));
+		}
 		return Utilities.enclose(
 			"tr", "",
 			String.format(
-				"%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+				"%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 				Utilities.enclose("td", "", String.format("%d", interactionId)),
 				Utilities.enclose("td", "", String.format(
 				 "<a href='http://guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d' target='_blank'>%d</a>",
@@ -76,7 +82,8 @@ public class Interaction {
 				Utilities.enclose("td", "", ft.format(dateAdded)),
 				Utilities.enclose("td", "", ft.format(dateModified)),
 				Utilities.enclose("td", "", datePdbsLastChecked != null ? ft.format(datePdbsLastChecked) : "Never"),
-				Utilities.enclose("td", "", (pdbMaps.size() == 0 ? "-" : pdbList.toString().substring(0, pdbList.length() - 2)) + String.format("<form method='POST' action='/manage/add_pdb.jsp'><input type='hidden' name='interactionId' value='%d'><input type='text' name='pdbCode'></form>", this.interactionId))
+				Utilities.enclose("td", "", (pdbMaps.size() == 0 ? "-" : pdbList.toString().substring(0, pdbList.length() - 2)) + String.format("<form method='POST' action='/manage/add_pdb.jsp'><input type='hidden' name='interactionId' value='%d'><input type='text' name='pdbCode'></form>", this.interactionId)),
+				Utilities.enclose("td", "", (falseMaps.size() == 0 ? "-" : falsePdbs.toString().substring(0, falsePdbs.length() - 2)))
 			)
 		);
 	}
@@ -219,6 +226,16 @@ public class Interaction {
 
 	public void setPdbMaps(ArrayList<InteractionPdb> pdbMaps) {
 		this.pdbMaps = pdbMaps;
+	}
+
+
+	public ArrayList<FalseMap> getFalseMaps() {
+		return falseMaps;
+	}
+
+
+	public void setFalseMaps(ArrayList<FalseMap> falseMaps) {
+		this.falseMaps = falseMaps;
 	}
 
 }

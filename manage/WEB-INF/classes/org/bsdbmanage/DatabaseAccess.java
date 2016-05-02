@@ -190,4 +190,19 @@ public class DatabaseAccess {
 		}
 	}
 
+
+	//Gets all blacklisted PDB codes belonging to a given Interaction (by interactionId)
+	public static ArrayList<FalseMap> getfalseMapsOfInteraction(int interactionId) {
+		ArrayList<FalseMap> falseMaps = new ArrayList<FalseMap>();
+		ResultSet rs = issuePreparedSqlQuery(
+		 "SELECT * FROM false_interaction_pdbs WHERE interactionId=?",
+		 interactionId
+		);
+		Object[][] rows = getObjectGridFromResultSet(rs);
+		for (Object[] row : rows) {
+      falseMaps.add(new FalseMap(row));
+    }
+		return falseMaps;
+	}
+
 }
