@@ -88,6 +88,7 @@
 
 		<div id="deletion">
 			<form method="POST" action="delete_pdb.jsp">
+				<label for="blacklist">Blacklist?</label><input type="checkbox" id="blacklist" name="blacklist" value="yes">
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
 				<input type="submit" value="Delete Map"></input>
 			</form>
