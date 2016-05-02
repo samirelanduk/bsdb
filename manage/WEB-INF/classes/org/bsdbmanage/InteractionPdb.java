@@ -5,13 +5,15 @@ public class InteractionPdb {
   private String mapId;
   private int interactionId;
   private String pdbCode;
+  private boolean manuallyAdded;
   private boolean manuallyMarkedCorrect;
 
   public InteractionPdb(Object[] fields) {
     this.mapId = (String)fields[0];
     this.interactionId = (int)fields[1];
     this.pdbCode = (String)fields[2];
-    this.manuallyMarkedCorrect = (boolean)fields[3];
+    this.manuallyAdded = (boolean)fields[3];
+    this.manuallyMarkedCorrect = (boolean)fields[4];
   }
 
 
@@ -57,5 +59,15 @@ public class InteractionPdb {
 
 	public void setManuallyMarkedCorrect(boolean manuallyMarkedCorrect) {
 		this.manuallyMarkedCorrect = manuallyMarkedCorrect;
+	}
+
+
+	public boolean isManuallyAdded() {
+		return manuallyAdded;
+	}
+
+
+	public void setManuallyAdded(boolean manuallyAdded) {
+		this.manuallyAdded = manuallyAdded;
 	}
 }

@@ -36,6 +36,7 @@ public class DatabaseAccess {
 					st.setObject(i + 1, params[i]);
 				}
 				ResultSet rs = st.executeQuery();
+				conn.close();
 				return rs;
 			} catch (SQLException e) {
 				return null;
@@ -147,12 +148,19 @@ public class DatabaseAccess {
 
 	//Manually adds an Interaction-PDB map
 	public static void addInteractionPdb(int interactionId, String pdbCode) {
-		issuePreparedSqlQuery(
-		 "INSERT INTO interaction_pdbs VALUES (?, ?, ?, true)",
-		 String.format("%d%s", interactionId, pdbCode),
-		 interactionId,
-		 pdbCode
-		);
+		ResultSet rs = issuePreparedSqlQuery("SELECT mapId FROM interaction_pdbs");
+		ArrayList<String> existingIds = new ArrayList<String>();
+		for (Object[] row : getObjectGridFromResultSet(rs)) {
+			existingIds.add((String)row[0]);
+		}
+		if (!(existingIds.contains(String.format("%d%s", interactionId, pdbCode)))) {
+			issuePreparedSqlQuery(
+			 "INSERT INTO interaction_pdbs VALUES (?, ?, ?, true, true)",
+			 String.format("%d%s", interactionId, pdbCode),
+			 interactionId,
+			 pdbCode
+			);
+		}
 	}
 
 }
