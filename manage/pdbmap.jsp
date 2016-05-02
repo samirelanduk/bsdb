@@ -2,14 +2,19 @@
 
 <%
 	InteractionPdb interactionPdb;
+	Interaction interaction;
 	if (Utilities.validMapId(request, "id")) {
 		interactionPdb = DatabaseAccess.getInteractionPdb(request.getParameter("id"));
     if (interactionPdb == null) {
   		response.sendRedirect("/manage/");
-    }
+			interaction = null;
+    } else {
+			interaction = interactionPdb.getInteraction();
+		}
 	} else {
 		response.sendRedirect("/manage/");
 		interactionPdb = null;
+		interaction = null;
 	}
 %>
 
@@ -19,7 +24,7 @@
   </head>
   <body>
     <h1><% out.print(interactionPdb == null ? "" : "Interaction " +
-     interactionPdb.getInteraction().getInteractionId() + " - "
+     interactionPdb.getInteractionId() + " - "
       + interactionPdb.getPdbCode()); %></h1>
 
     <div id="back">
@@ -30,7 +35,7 @@
       <table>
         <tr>
           <td>Interaction ID</td>
-          <td><% out.print(interactionPdb == null ? "" : interactionPdb.getInteraction().getInteractionId()); %></td>
+          <td><% out.print(interactionPdb == null ? "" : interactionPdb.getInteractionId()); %></td>
         </tr>
         <tr>
           <td>Ligand ID</td>
@@ -38,9 +43,9 @@
            "a",
            String.format(
             "href='http://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d' target='_blank'",
-            interactionPdb.getInteraction().getLigandId()
+            interaction.getLigandId()
            ),
-           "" + interactionPdb.getInteraction().getLigandId()
+           "" + interaction.getLigandId()
           )); %></td>
         </tr>
         <tr>
@@ -49,14 +54,14 @@
            "a",
            String.format(
             "href='http://www.guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=%d' target='_blank'",
-            interactionPdb.getInteraction().getTargetId()
+            interaction.getTargetId()
            ),
-           "" + interactionPdb.getInteraction().getTargetId()
+           "" + interaction.getTargetId()
           )); %></td>
         </tr>
         <tr>
           <td>Species</td>
-          <td><% out.print(interactionPdb == null ? "" : interactionPdb.getInteraction().getSpecies()); %></td>
+          <td><% out.print(interactionPdb == null ? "" : interaction.getSpecies()); %></td>
         </tr>
       </table>
     </div>

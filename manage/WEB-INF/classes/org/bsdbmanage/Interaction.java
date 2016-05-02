@@ -53,11 +53,11 @@ public class Interaction {
 		SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 		StringBuilder pdbList = new StringBuilder();
 		for (InteractionPdb pdbMap : pdbMaps) {
-			pdbList.append(String.format("%s%s%s", pdbMap.isManuallyMarkedCorrect() ? "<b>" : "", Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s' target='_blank'", interactionId, pdbMap.getPdbCode()), pdbMap.getPdbCode()), pdbMap.isManuallyMarkedCorrect() ? "</b>" : "") + ", ");
+			pdbList.append(String.format("%s%s%s", pdbMap.isManuallyMarkedCorrect() ? "<b>" : "", Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s'", interactionId, pdbMap.getPdbCode()), pdbMap.getPdbCode()), pdbMap.isManuallyMarkedCorrect() ? "</b>" : "") + ", ");
 		}
 		StringBuilder falsePdbs = new StringBuilder();
 		for (FalseMap falseMap : falseMaps) {
-			falsePdbs.append(Utilities.enclose("a", String.format("href='/manage/falsemap.jsp?id=%d%s' target='_blank'", interactionId, falseMap.getPdbCode()), falseMap.getPdbCode()));
+			falsePdbs.append(Utilities.enclose("a", String.format("href='/manage/falsemap.jsp?id=%d%s'", interactionId, falseMap.getPdbCode()), falseMap.getPdbCode()));
 		}
 		return Utilities.enclose(
 			"tr", "",

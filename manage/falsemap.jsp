@@ -2,14 +2,19 @@
 
 <%
 	FalseMap falseMap;
+	Interaction interaction;
 	if (Utilities.validMapId(request, "id")) {
 		falseMap = DatabaseAccess.getFalseMap(request.getParameter("id"));
     if (falseMap == null) {
   		response.sendRedirect("/manage/");
-    }
+			interaction = null;
+    } else {
+			interaction = falseMap.getInteraction();
+		}
 	} else {
 		response.sendRedirect("/manage/");
 		falseMap = null;
+		interaction = null;
 	}
 %>
 
@@ -19,7 +24,7 @@
   </head>
   <body>
     <h1><% out.print(falseMap == null ? "" : "Interaction " +
-     falseMap.getInteraction().getInteractionId() + " - "
+     falseMap.getInteractionId() + " - "
       + falseMap.getPdbCode()); %></h1>
 
     <div id="back">
@@ -30,7 +35,7 @@
       <table>
         <tr>
           <td>Interaction ID</td>
-          <td><% out.print(falseMap == null ? "" : falseMap.getInteraction().getInteractionId()); %></td>
+          <td><% out.print(falseMap == null ? "" : falseMap.getInteractionId()); %></td>
         </tr>
         <tr>
           <td>Ligand ID</td>
@@ -38,9 +43,9 @@
            "a",
            String.format(
             "href='http://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d' target='_blank'",
-            falseMap.getInteraction().getLigandId()
+            interaction.getLigandId()
            ),
-           "" + falseMap.getInteraction().getLigandId()
+           "" + interaction.getLigandId()
           )); %></td>
         </tr>
         <tr>
@@ -49,14 +54,14 @@
            "a",
            String.format(
             "href='http://www.guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=%d' target='_blank'",
-            falseMap.getInteraction().getTargetId()
+            interaction.getTargetId()
            ),
-           "" + falseMap.getInteraction().getTargetId()
+           "" + interaction.getTargetId()
           )); %></td>
         </tr>
         <tr>
           <td>Species</td>
-          <td><% out.print(falseMap == null ? "" : falseMap.getInteraction().getSpecies()); %></td>
+          <td><% out.print(falseMap == null ? "" : interaction.getSpecies()); %></td>
         </tr>
       </table>
     </div>
