@@ -20,7 +20,7 @@ public class Interaction {
   private Date dateAdded;
   private Date dateModified;
   private Date datePdbsLastChecked;
-	private ArrayList<String> pdbs;
+	private ArrayList<InteractionPdb> pdbMaps;
 
 
   public Interaction(Object[] fields) {
@@ -41,7 +41,7 @@ public class Interaction {
     this.dateAdded = (Date)fields[10];
     this.dateModified = (Date)fields[11];
     this.datePdbsLastChecked = (Date)fields[12];
-		this.pdbs = DatabaseAccess.getPdbsOfInteraction(this.interactionId);
+		this.pdbMaps = DatabaseAccess.getPdbMapsOfInteraction(this.interactionId);
   }
 
 
@@ -50,8 +50,8 @@ public class Interaction {
 		String targetLink = "http://guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=%d";
 		SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yyyy hh:mm");
 		StringBuilder pdbList = new StringBuilder();
-		for (String pdb : pdbs) {
-			pdbList.append(Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s' target='_blank'", interactionId, pdb), pdb) + ", ");
+		for (InteractionPdb pdbMap : pdbMaps) {
+			pdbList.append(String.format("%s%s%s", pdbMap.isManuallyMarkedCorrect() ? "<b>" : "", Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s' target='_blank'", interactionId, pdbMap.getPdbCode()), pdbMap.getPdbCode()), pdbMap.isManuallyMarkedCorrect() ? "</b>" : "") + ", ");
 		}
 		return Utilities.enclose(
 			"tr", "",
@@ -76,7 +76,7 @@ public class Interaction {
 				Utilities.enclose("td", "", ft.format(dateAdded)),
 				Utilities.enclose("td", "", ft.format(dateModified)),
 				Utilities.enclose("td", "", datePdbsLastChecked != null ? ft.format(datePdbsLastChecked) : "Never"),
-				Utilities.enclose("td", "", pdbs.size() == 0 ? "-" : pdbList.toString().substring(0, pdbList.length() - 2))
+				Utilities.enclose("td", "", pdbMaps.size() == 0 ? "-" : pdbList.toString().substring(0, pdbList.length() - 2))
 			)
 		);
 	}
@@ -212,13 +212,13 @@ public class Interaction {
 	}
 
 
-	public ArrayList<String> getPdbs() {
-		return pdbs;
+	public ArrayList<InteractionPdb> getPdbMaps() {
+		return pdbMaps;
 	}
 
 
-	public void setPdbs(ArrayList<String> pdbs) {
-		this.pdbs = pdbs;
+	public void setPdbMaps(ArrayList<InteractionPdb> pdbMaps) {
+		this.pdbMaps = pdbMaps;
 	}
 
 }

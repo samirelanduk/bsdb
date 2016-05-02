@@ -103,17 +103,17 @@ public class DatabaseAccess {
 
 
 	//Gets all PDB codes belonging to a given Interaction (by interactionId)
-	public static ArrayList<String> getPdbsOfInteraction(int interactionId) {
-		ArrayList<String> pdbs = new ArrayList<String>();
+	public static ArrayList<InteractionPdb> getPdbMapsOfInteraction(int interactionId) {
+		ArrayList<InteractionPdb> pdbMaps = new ArrayList<InteractionPdb>();
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT pdbCode FROM interaction_pdbs WHERE interactionId=?",
+		 "SELECT * FROM interaction_pdbs WHERE interactionId=?",
 		 interactionId
 		);
 		Object[][] rows = getObjectGridFromResultSet(rs);
 		for (Object[] row : rows) {
-      pdbs.add((String)row[0]);
+      pdbMaps.add(new InteractionPdb(row));
     }
-		return pdbs;
+		return pdbMaps;
 	}
 
 

@@ -3,13 +3,13 @@ package org.bsdbmanage;
 public class InteractionPdb {
 
   private String mapId;
-  private Interaction interaction;
+  private int interactionId;
   private String pdbCode;
   private boolean manuallyMarkedCorrect;
 
   public InteractionPdb(Object[] fields) {
     this.mapId = (String)fields[0];
-    this.interaction = DatabaseAccess.getInteraction((int)fields[1]);
+    this.interactionId = (int)fields[1];
     this.pdbCode = (String)fields[2];
     this.manuallyMarkedCorrect = (boolean)fields[3];
   }
@@ -25,14 +25,19 @@ public class InteractionPdb {
   }
 
 
-	public Interaction getInteraction() {
-		return interaction;
+	public int getInteractionId() {
+		return interactionId;
 	}
 
 
-	public void setInteraction(Interaction interaction) {
-		this.interaction = interaction;
+	public void setInteractionId(int interactionId) {
+		this.interactionId = interactionId;
 	}
+
+
+  public Interaction getInteraction() {
+     return DatabaseAccess.getInteraction(this.interactionId);
+  }
 
 
 	public String getPdbCode() {
