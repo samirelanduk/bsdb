@@ -165,11 +165,29 @@ public class DatabaseAccess {
 
 
 	//Deletes an InteractionPdb
-	public static void removeInteractionPdb(String mapId) {
+	public static void removeInteractionPdb(int interactionId, String pdbCode) {
 		issuePreparedSqlQuery(
 		 "DELETE FROM interaction_pdbs WHERE mapId=?",
-		 mapId
+		 String.format("%d%s", interactionId, pdbCode)
 		);
+	}
+
+
+	//Blacklists an InteractionPdb
+	public static void blacklistMap(int interactionId, String pdbCode) {
+		ResultSet rs = issuePreparedSqlQuery("SELECT mapId FROM false_interaction_pdbs");
+		ArrayList<String> existingIds = new ArrayList<String>();
+		for (Object[] row : getObjectGridFromResultSet(rs)) {
+			existingIds.add((String)row[0]);
+		}
+		if (!(existingIds.contains(String.format("%d%s", interactionId, pdbCode)))) {
+			issuePreparedSqlQuery(
+			 "INSERT INTO false_interaction_pdbs VALUES (?, ?, ?)",
+			 String.format("%d%s", interactionId, pdbCode),
+			 interactionId,
+			 pdbCode
+			);
+		}
 	}
 
 }
