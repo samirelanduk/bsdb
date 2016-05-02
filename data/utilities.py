@@ -168,9 +168,15 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
      (interaction.interaction_id,)
     )
     pdbs_already_assigned = [row[0] for row in cursor.fetchall()]
+    cursor.execute(
+     "SELECT pdbCode FROM false_interaction_pdbs WHERE interactionId='%s'",
+     (interaction.interaction_id,)
+    )
+    blacklisted_pdbs = [row[0] for row in cursor.fetchall()]
+
     pdbs_assigned_now = []
     for pdb in pdbs:
-        if pdb not in pdbs_already_assigned:
+        if pdb not in pdbs_already_assigned and pdb not in blacklisted_pdbs:
             pdbs_assigned_now.append(pdb)
             cursor.execute(
              "INSERT INTO interaction_pdbs VALUES (%s, '%s', %s, false, false);",
