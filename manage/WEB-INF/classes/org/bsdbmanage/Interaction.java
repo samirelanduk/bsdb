@@ -76,7 +76,7 @@ public class Interaction {
 				Utilities.enclose("td", "", ft.format(dateAdded)),
 				Utilities.enclose("td", "", ft.format(dateModified)),
 				Utilities.enclose("td", "", datePdbsLastChecked != null ? ft.format(datePdbsLastChecked) : "Never"),
-				Utilities.enclose("td", "", (pdbMaps.size() == 0 ? "-" : pdbList.toString().substring(0, pdbList.length() - 2)) + String.format("<form method='POST' action='/manage/addPdb.jsp'><input type='hidden' value='%d'><input type='text' name='pdbCode'></form>", this.interactionId))
+				Utilities.enclose("td", "", (pdbMaps.size() == 0 ? "-" : pdbList.toString().substring(0, pdbList.length() - 2)) + String.format("<form method='POST' action='/manage/add_pdb.jsp'><input type='hidden' name='interactionId' value='%d'><input type='text' name='pdbCode'></form>", this.interactionId))
 			)
 		);
 	}

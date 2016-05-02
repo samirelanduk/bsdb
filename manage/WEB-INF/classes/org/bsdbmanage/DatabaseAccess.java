@@ -144,4 +144,15 @@ public class DatabaseAccess {
 		);
 	}
 
+
+	//Manually adds an Interaction-PDB map
+	public static void addInteractionPdb(int interactionId, String pdbCode) {
+		issuePreparedSqlQuery(
+		 "INSERT INTO interaction_pdbs VALUES (?, ?, ?, true)",
+		 String.format("%d%s", interactionId, pdbCode),
+		 interactionId,
+		 pdbCode
+		);
+	}
+
 }
