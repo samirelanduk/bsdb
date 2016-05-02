@@ -3,7 +3,7 @@
 <%
 	if (Utilities.validInteractionId(request, "interactionId") && Utilities.validPdbCode(request, "pdbCode")) {
     if (request.getParameter("blacklist") != null) {
-      DatabaseAccess.blacklistMap(Integer.parseInt(request.getParameter("interactionId")), request.getParameter("interactionId"));
+      DatabaseAccess.blacklistMap(Integer.parseInt(request.getParameter("interactionId")), request.getParameter("pdbCode"));
     }
 		DatabaseAccess.removeInteractionPdb(Integer.parseInt(request.getParameter("interactionId")), request.getParameter("pdbCode"));
 	}

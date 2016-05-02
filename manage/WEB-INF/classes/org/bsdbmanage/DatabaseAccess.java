@@ -118,7 +118,7 @@ public class DatabaseAccess {
 	}
 
 
-	//Gets a single Interaction object by ID
+	//Gets a single Interaction PDB map object by ID
 	public static InteractionPdb getInteractionPdb(String mapId) {
 		ResultSet rs = issuePreparedSqlQuery(
 		 "SELECT * FROM interaction_pdbs WHERE mapId=?",
@@ -203,6 +203,34 @@ public class DatabaseAccess {
       falseMaps.add(new FalseMap(row));
     }
 		return falseMaps;
+	}
+
+
+	//Gets a single false Interaction PDB map object by ID
+	public static FalseMap getFalseMap(String mapId) {
+		ResultSet rs = issuePreparedSqlQuery(
+		 "SELECT * FROM false_interaction_pdbs WHERE mapId=?",
+		 mapId
+		);
+		if (rs != null) {
+				try {
+					Object[][] rows = getObjectGridFromResultSet(rs);
+					return new FalseMap(rows[0]);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					return null;
+				}
+		} else {
+			return null;
+		}
+	}
+
+
+	//Deletes a blacklistmark
+	public static void removeFalseMap(int interactionId, String pdbCode) {
+		issuePreparedSqlQuery(
+		 "DELETE FROM false_interaction_pdbs WHERE mapId=?",
+		 String.format("%d%s", interactionId, pdbCode)
+		);
 	}
 
 }
