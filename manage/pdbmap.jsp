@@ -75,6 +75,7 @@
 				<% out.print((interactionPdb == null || !(interactionPdb.isManuallyMarkedCorrect())) ? "not" : ""); %>
 			</strong>been manually marked as a correct map.</p>
 		</div>
+
     <div id="manual_verification">
       <form method="POST" action="toggle_correct.jsp">
         <input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
@@ -84,5 +85,12 @@
         <input type="submit">Toggle Correctness</input>
       </form>
     </div>
+
+		<div id="deletion">
+			<form method="POST" action="delete_pdb.jsp">
+				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
+				<input type="submit" value="Delete Map"></input>
+			</form>
+		</div>
   </body>
 </html>

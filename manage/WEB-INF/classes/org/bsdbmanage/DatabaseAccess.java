@@ -163,4 +163,13 @@ public class DatabaseAccess {
 		}
 	}
 
+
+	//Deletes an InteractionPdb
+	public static void removeInteractionPdb(String mapId) {
+		issuePreparedSqlQuery(
+		 "DELETE FROM interaction_pdbs WHERE mapId=?",
+		 mapId
+		);
+	}
+
 }
