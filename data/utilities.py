@@ -185,3 +185,18 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
             connection.commit()
     cursor.close()
     return pdbs_assigned_now
+
+
+def get_interaction_pdb_maps(connection):
+    cursor = connection.cursor()
+    cursor.execute(
+     """
+     SELECT
+      interactions.targetId, interaction_pdbs.interactionId, interaction_pdbs.pdbCode
+     FROM interaction_pdbs LEFT JOIN interactions ON
+      interaction_pdbs.interactionId = interactions.interactionId;"""
+    )
+    interaction_pdb_maps =  [[row[0], row[1], row[2]] for row in cursor.fetchall()]
+
+    cursor.close()
+    return interaction_pdb_maps
