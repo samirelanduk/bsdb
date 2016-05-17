@@ -9,6 +9,19 @@ try:
     interaction_pdb_maps = utilities.get_interaction_pdb_maps(connection)
     print("There are %i Interaction-PDB maps." % len(interaction_pdb_maps))
 
+    interaction_pdb_maps = [
+     pdb_map for pdb_map in interaction_pdb_maps if not pdb_map[3]
+    ]
+    print("There are %i Interaction-PDB maps with no HET." % len(interaction_pdb_maps))
+
+    print("Looking for HETs...")
+    for pdb_map in interaction_pdb_maps:
+        interaction = pygtop.get_target_by_id(pdb_map[0]).get_interaction_by_id(pdb_map[1])
+        ligand = interaction.get_ligand()
+        print("\t%i%s: Looking for %s in PDB %s..." % (
+         pdb_map[1], pdb_map[2], ligand.name, pdb_map[2]
+        ))
+
 finally:
     connection.close()
     print("")
