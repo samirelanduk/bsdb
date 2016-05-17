@@ -233,4 +233,14 @@ public class DatabaseAccess {
 		);
 	}
 
+
+	//Adds a het to a pdbmap
+	public static void addHet(String mapId, String het) {
+		issuePreparedSqlQuery(
+		 "UPDATE interaction_pdbs SET het = ? WHERE mapId=?",
+		 (het.equals("") || het.equals("-")) ? null : het,
+		 mapId
+		);
+	}
+
 }
