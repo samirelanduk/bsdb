@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-bsdb_dir = "/home/sam/Dropbox/WORK/Inverse pharmacology project/bsdb/manage"
+bsdb_dir = "/home/sam/Dropbox/WORK/InversePharmacologyProject/bsdb/bsdb/manage"
 class_dir = bsdb_dir + "/WEB-INF/classes"
 jar_dir = bsdb_dir + "/WEB-INF/lib/postgresql-connector.jar"
 java_dir = class_dir + "/org/bsdbmanage"
@@ -11,11 +11,12 @@ servlet_dir = "/usr/share/tomcat7/lib/servlet-api.jar"
 try:
     os.chdir(java_dir)
 except FileNotFoundError:
-    bsdb_dir = "/Users/sam/Dropbox/WORK/Inverse pharmacology project/bsdb/manage"
+    bsdb_dir = "/Users/sam/Dropbox/WORK/InversePharmacologyProject/bsdb/bsdb/manage"
     class_dir = bsdb_dir + "/WEB-INF/classes"
     jar_dir = bsdb_dir + "/WEB-INF/lib/postgresql-connector.jar"
     java_dir = class_dir + "/org/bsdbmanage"
     tomcat_dir = "/usr/local/tomcat/webapps/"
+    servlet_dir = "/usr/local/tomcat/lib/servlet-api.jar"
     os.chdir(java_dir)
 
 subprocess.call('javac -cp "%s":"%s":"%s" *.java' % (jar_dir, class_dir, servlet_dir), shell=True)

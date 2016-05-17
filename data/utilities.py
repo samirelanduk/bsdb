@@ -1,9 +1,9 @@
-import psycopg2
+import pg8000
 import datetime
 import config
 
 def get_connection():
-    conn = psycopg2.connect(
+    conn = pg8000.connect(
      host=config.host,
      database=config.db,
      user=config.user,
@@ -79,21 +79,25 @@ def add_interaction_to_table(interaction, connection):
     dictionary["dateAdded"] = now
     dictionary["dateModified"] = now
 
+    values = [dictionary[key] for key in [
+     "interactionId",
+     "ligandId",
+     "targetId",
+     "species",
+     "type",
+     "action",
+     "affinityType",
+     "affinityValue",
+     "affinityRange",
+     "ligandIsPeptide",
+     "dateAdded",
+     "dateModified"
+    ]]
+
     cursor.execute(
      """INSERT INTO interactions VALUES (
-      %(interactionId)s,
-      %(ligandId)s,
-      %(targetId)s,
-      %(species)s,
-      %(type)s,
-      %(action)s,
-      %(affinityType)s,
-      %(affinityValue)s,
-      %(affinityRange)s,
-      %(ligandIsPeptide)s,
-      %(dateAdded)s,
-      %(dateModified)s
-      );""", dictionary
+      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+      );""", values
     )
     connection.commit()
     cursor.close()
@@ -164,12 +168,12 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
     )
     connection.commit()
     cursor.execute(
-     "SELECT pdbCode FROM interaction_pdbs WHERE interactionId='%s'",
+     "SELECT pdbCode FROM interaction_pdbs WHERE interactionId=%s",
      (interaction.interaction_id,)
     )
     pdbs_already_assigned = [row[0] for row in cursor.fetchall()]
     cursor.execute(
-     "SELECT pdbCode FROM false_interaction_pdbs WHERE interactionId='%s'",
+     "SELECT pdbCode FROM false_interaction_pdbs WHERE interactionId=%s",
      (interaction.interaction_id,)
     )
     blacklisted_pdbs = [row[0] for row in cursor.fetchall()]
@@ -179,7 +183,7 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
         if pdb not in pdbs_already_assigned and pdb not in blacklisted_pdbs:
             pdbs_assigned_now.append(pdb)
             cursor.execute(
-             "INSERT INTO interaction_pdbs VALUES (%s, '%s', %s, false, false);",
+             "INSERT INTO interaction_pdbs VALUES (%s, %s, %s, false, false);",
              (str(interaction.interaction_id) + pdb, interaction.interaction_id, pdb)
             )
             connection.commit()
