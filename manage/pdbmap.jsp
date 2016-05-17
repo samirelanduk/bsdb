@@ -99,5 +99,10 @@
 				<input type="submit" value="Delete Map"></input>
 			</form>
 		</div>
+
+		<div id="het">
+			<h2>Ligand in PDB</h2>
+			<p><% out.print((interactionPdb == null || interactionPdb.getHet() == null) ?
+			  "-" : interactionPdb.getHet()); %></p>
   </body>
 </html>
