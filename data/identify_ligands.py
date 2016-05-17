@@ -1,4 +1,4 @@
-import biosci
+import molecupy
 import pygtop
 import utilities
 print("")
@@ -20,7 +20,23 @@ try:
         ligand = interaction.get_ligand()
         print("\t%i%s: Looking for %s in PDB %s..." % (
          pdb_map[1], pdb_map[2], ligand.name, pdb_map[2]
-        ))
+        ), end=" ")
+        pdb = molecupy.get_pdb_remotely(pdb_map[2])
+        molecule = ligand.find_in_pdb_by_smiles(pdb)
+        if not molecule:
+            molecule = ligand.find_in_pdb_by_name(pdb)
+        if not molecule:
+            molecule = ligand.find_in_pdb_by_mass(pdb)
+        if not molecule:
+            molecule = ligand.find_in_pdb_by_peptide_string(pdb)
+        if molecule:
+            try:
+                name = molecule.molecule_name
+            except:
+                name = molecule.chain_id
+            print(name)
+        else:
+            print("Not found")
 
 finally:
     connection.close()
