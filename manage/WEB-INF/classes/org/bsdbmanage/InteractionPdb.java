@@ -7,6 +7,8 @@ public class InteractionPdb {
   private String pdbCode;
   private boolean manuallyAdded;
   private boolean manuallyMarkedCorrect;
+  private String het;
+
 
   public InteractionPdb(Object[] fields) {
     this.mapId = (String)fields[0];
@@ -14,6 +16,7 @@ public class InteractionPdb {
     this.pdbCode = (String)fields[2];
     this.manuallyAdded = (boolean)fields[3];
     this.manuallyMarkedCorrect = (boolean)fields[4];
+    this.het = (String)fields[5];
   }
 
 
@@ -70,4 +73,14 @@ public class InteractionPdb {
 	public void setManuallyAdded(boolean manuallyAdded) {
 		this.manuallyAdded = manuallyAdded;
 	}
+
+
+	public String getHet() {
+		return het;
+	}
+
+
+	public void setHet(String het) {
+		this.het = het;
+  }
 }
