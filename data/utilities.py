@@ -205,3 +205,13 @@ def get_interaction_pdb_maps(connection):
 
     cursor.close()
     return interaction_pdb_maps
+
+
+def give_pdb_map_het_code(interaction_id, pdb_code, het_code, connection):
+    cursor = connection.cursor()
+    cursor.execute(
+     "UPDATE interaction_pdbs SET het=%s WHERE mapId=%s;",
+     (het_code, str(interaction_id) + pdb_code)
+    )
+    connection.commit()
+    cursor.close()

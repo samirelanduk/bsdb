@@ -35,6 +35,7 @@ try:
             except:
                 name = molecule.chain_id
             print(name)
+            utilities.give_pdb_map_het_code(pdb_map[1], pdb_map[2], name, connection)
         else:
             print("Not found")
 
