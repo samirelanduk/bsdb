@@ -123,10 +123,10 @@
 						}
 					}
 				} %></p>
-			<!--<form method="POST" action="edit_het.jsp">
-				<input type="input" id="het" name="het">
+			<form method="POST" action="add_residue.jsp">
+				<input type="input" id="residue" name="residue">
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
-			</form>-->
+			</form>
 		</div>
   </body>
 </html>

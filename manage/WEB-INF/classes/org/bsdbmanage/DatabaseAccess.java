@@ -267,4 +267,21 @@ public class DatabaseAccess {
 		);
 	}
 
+
+	//Adds a residue to a pdbmap
+	public static void addMapResidue(String mapId, String newResidue) {
+		InteractionPdb map = getInteractionPdb(mapId);
+		StringBuilder newResidues = new StringBuilder();
+		for (String residue : map.getBindingResidues()) {
+			newResidues.append(residue + ", ");
+		}
+		newResidues.append(newResidue);
+		String residues = newResidues.toString();
+		issuePreparedSqlQuery(
+		 "UPDATE interaction_pdbs SET bindingResidues = ? WHERE mapId=?",
+		 residues,
+		 mapId
+		);
+	}
+
 }
