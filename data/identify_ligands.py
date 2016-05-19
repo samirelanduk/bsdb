@@ -31,7 +31,7 @@ try:
             molecule = ligand.find_in_pdb_by_peptide_string(pdb)
         if molecule:
             try:
-                name = molecule.molecule_name
+                name = molecule.molecule_id
             except:
                 name = molecule.chain_id
             print(name)
