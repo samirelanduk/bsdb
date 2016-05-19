@@ -243,4 +243,28 @@ public class DatabaseAccess {
 		);
 	}
 
+
+	//Removes a residue from a pdbmap
+	public static void deleteMapResidue(String mapId, String doomedResidue) {
+		InteractionPdb map = getInteractionPdb(mapId);
+		StringBuilder newResidues = new StringBuilder();
+		for (String residue : map.getBindingResidues()) {
+			if (!(residue.equals(doomedResidue))) {
+				newResidues.append(residue + ", ");
+			}
+		}
+		String residues;
+		if (newResidues.length() >= 1) {
+			residues = newResidues.toString();
+			residues = residues.substring(0, residues.length() - 2);
+		} else {
+			residues = "";
+		}
+		issuePreparedSqlQuery(
+		 "UPDATE interaction_pdbs SET bindingResidues = ? WHERE mapId=?",
+		 residues,
+		 mapId
+		);
+	}
+
 }

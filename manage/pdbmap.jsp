@@ -116,7 +116,11 @@
 					out.println("-");
 				} else {
 					for (String residue : interactionPdb.getBindingResidues()) {
-						out.print(residue + " ");
+						if (residue.length() > 1) {
+							out.print(residue +
+							 "<form method='POST' action='delete_residue.jsp'><input type='hidden' name='residue' value='" + residue + "'><input type='hidden' name='id' value='" + interactionPdb.getMapId() + "'><input type='submit'></form> "
+							);
+						}
 					}
 				} %></p>
 			<!--<form method="POST" action="edit_het.jsp">
