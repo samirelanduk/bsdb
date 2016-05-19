@@ -104,9 +104,20 @@
 			<h2>Ligand in PDB</h2>
 			<p><% out.print((interactionPdb == null || interactionPdb.getHet() == null) ?
 			  "-" : interactionPdb.getHet()); %></p>
-				<form method="POST" action="edit_het.jsp">
-					<input type="input" id="het" name="het">
-					<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
-				</form>
+			<form method="POST" action="edit_het.jsp">
+				<input type="input" id="het" name="het">
+				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
+			</form>
+		</div>
+
+		<div id="bindsite">
+			<h2>BindSite in PDB</h2>
+			<p><% out.print((interactionPdb == null || interactionPdb.getBindingResidues() == null) ?
+			  "-" : interactionPdb.getBindingResidues()); %></p>
+			<!--<form method="POST" action="edit_het.jsp">
+				<input type="input" id="het" name="het">
+				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
+			</form>-->
+		</div>
   </body>
 </html>
