@@ -8,7 +8,7 @@ public class InteractionPdb {
   private boolean manuallyAdded;
   private boolean manuallyMarkedCorrect;
   private String het;
-  private String bindingResidues;
+  private String[] bindingResidues;
 
 
   public InteractionPdb(Object[] fields) {
@@ -18,7 +18,7 @@ public class InteractionPdb {
     this.manuallyAdded = (boolean)fields[3];
     this.manuallyMarkedCorrect = (boolean)fields[4];
     this.het = (String)fields[5];
-    this.bindingResidues = (String)fields[6];
+    this.bindingResidues = ((String)fields[6]).split(", ");
   }
 
 
@@ -87,12 +87,12 @@ public class InteractionPdb {
   }
 
 
-	public String getBindingResidues() {
+	public String[] getBindingResidues() {
 		return bindingResidues;
 	}
 
 
-	public void setBindingResidues(String bindingResidues) {
+	public void setBindingResidues(String[] bindingResidues) {
 		this.bindingResidues = bindingResidues;
   }
 }

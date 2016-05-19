@@ -112,8 +112,13 @@
 
 		<div id="bindsite">
 			<h2>BindSite in PDB</h2>
-			<p><% out.print((interactionPdb == null || interactionPdb.getBindingResidues() == null) ?
-			  "-" : interactionPdb.getBindingResidues()); %></p>
+			<p><% if (interactionPdb == null || interactionPdb.getBindingResidues() == null) {
+					out.println("-");
+				} else {
+					for (String residue : interactionPdb.getBindingResidues()) {
+						out.print(residue + " ");
+					}
+				} %></p>
 			<!--<form method="POST" action="edit_het.jsp">
 				<input type="input" id="het" name="het">
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
