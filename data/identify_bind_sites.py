@@ -23,6 +23,17 @@ try:
         print("\t%i%s: Looking for %s's binding site in PDB %s..." % (
          pdb_map[1], pdb_map[2], ligand, pdb_map[2]
         ), end=" ")
+        if ligand:
+            site = ligand.get_binding_site()
+            if not site:
+                site = ligand.calculate_binding_site()
+            if site:
+                utilities.give_pdb_map_bind_site(pdb_map[1], pdb_map[2], site, connection)
+                print("Found %i residues." % len(site.residues))
+            else:
+                print("Not found")
+        else:
+            print("Not found")
 finally:
     connection.close()
     print("")

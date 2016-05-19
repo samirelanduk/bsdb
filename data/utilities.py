@@ -217,3 +217,15 @@ def give_pdb_map_het_code(interaction_id, pdb_code, het_code, connection):
     )
     connection.commit()
     cursor.close()
+
+
+def give_pdb_map_bind_site(interaction_id, pdb_code, site, connection):
+    cursor = connection.cursor()
+    cursor.execute(
+     "UPDATE interaction_pdbs SET bindingResidues=%s WHERE mapId=%s;", (
+      ", ".join([residue.residue_id for residue in site.residues]),
+      str(interaction_id) + pdb_code
+     )
+    )
+    connection.commit()
+    cursor.close()
