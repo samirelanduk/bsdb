@@ -128,5 +128,16 @@
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
 			</form>
 		</div>
+
+		<div id="bindsequence">
+			<h2>Bind Sequence and Properties</h2>
+			<table>
+				<tr>
+					<td>Sequence</td>
+					<td><% out.print((interactionPdb == null || interactionPdb.getBindSequence() == null) ?
+					  "-" : interactionPdb.getBindSequence()); %></td>
+				</tr>
+			</table>
+		</div>
   </body>
 </html>
