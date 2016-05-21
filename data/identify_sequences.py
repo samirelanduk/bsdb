@@ -28,7 +28,7 @@ try:
         for residue_id in residue_ids:
             if residue_id[0].isalpha():
                 chain = pdb.model.get_chain_by_id(residue_id[0])
-                if chain:
+                if chain and chain.residues:
                     residue = chain.get_residue_by_id(residue_id)
                     if residue:
                         residues.append(residue)
@@ -47,12 +47,16 @@ try:
                 sequence_string = "".join([
                  RESIDUES.get(res.residue_name, "x") if res in residues else RESIDUES.get(res.residue_name, "x").lower() for res in sequence.residues
                 ])
+                chain_length = len(chain.residues) + len(chain.missing_residues)
                 utilities.give_pdb_map_bind_sequence(
                  pdb_map[1], pdb_map[2],
                  sequence_string,
                  chain.chain_id,
+                 chain_length,
+                 len(sequence_string) / chain_length,
                  connection
                 )
+
                 print("Found %i residue sequence on chain %s" % (
                  len(sequence_string), chain.chain_id
                 ))

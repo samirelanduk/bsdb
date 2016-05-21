@@ -231,12 +231,20 @@ def give_pdb_map_bind_site(interaction_id, pdb_code, site, connection):
     cursor.close()
 
 
-def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id, connection):
+def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
+ chain_length, proportional_length, connection):
     cursor = connection.cursor()
     cursor.execute(
-     "UPDATE interaction_pdbs SET bindSequence=%s, receptorChain=%s WHERE mapId=%s;", (
+     """UPDATE interaction_pdbs SET
+      bindSequence=%s,
+      receptorChain=%s,
+      originalChainLength=%s,
+      proportionalLength=%s
+      WHERE mapId=%s;""", (
       sequence,
       chain_id,
+      chain_length,
+      proportional_length,
       str(interaction_id) + pdb_code
      )
     )
