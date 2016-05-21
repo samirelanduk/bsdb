@@ -1,4 +1,5 @@
 import molecupy
+from molecupy.structures import ResiduicSequence, RESIDUES
 import utilities
 print("")
 
@@ -32,7 +33,21 @@ try:
                     if residue:
                         residues.append(residue)
         if len(set([residue.chain.chain_id for residue in residues])) == 1:
-            print("")
+            chain = residues[0].chain
+            residues = sorted(residues, key=lambda k: chain.residues.index(k))
+            sequence_residues = [residues[0]]
+            while sequence_residues[-1].downstream_residue:
+                sequence_residues.append(sequence_residues[-1].downstream_residue)
+                if sequence_residues[-1] is residues[-1]:
+                    break
+            if residues[-1] is not sequence_residues[-1]:
+                print("Can't - sequence is missing residues")
+            else:
+                sequence = ResiduicSequence(*sequence_residues)
+                sequence_string = "".join([
+                 RESIDUES.get(res.residue_name, "x") if res in residues else RESIDUES.get(res.residue_name, "x").lower() for res in sequence.residues
+                ])
+                print("")
         else:
             print("Can't - residues on different chains")
 
