@@ -18,7 +18,7 @@ public class InteractionPdb {
     this.manuallyAdded = (boolean)fields[3];
     this.manuallyMarkedCorrect = (boolean)fields[4];
     this.het = (String)fields[5];
-    this.bindingResidues = ((String)fields[6]).split(", ");
+    this.bindingResidues = ((String)fields[6]) == null ? null : ((String)fields[6]).split(", ");
   }
 
 
