@@ -48,12 +48,17 @@ try:
                  RESIDUES.get(res.residue_name, "x") if res in residues else RESIDUES.get(res.residue_name, "x").lower() for res in sequence.residues
                 ])
                 chain_length = len(chain.residues) + len(chain.missing_residues)
+                internal_contacts = len(sequence.get_internal_contacts())
+                external_contacts = len(sequence.get_external_contacts_with(chain))
                 utilities.give_pdb_map_bind_sequence(
                  pdb_map[1], pdb_map[2],
                  sequence_string,
                  chain.chain_id,
                  chain_length,
                  len(sequence_string) / chain_length,
+                 internal_contacts,
+                 external_contacts,
+                 internal_contacts / external_contacts,
                  connection
                 )
 
