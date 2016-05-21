@@ -47,7 +47,15 @@ try:
                 sequence_string = "".join([
                  RESIDUES.get(res.residue_name, "x") if res in residues else RESIDUES.get(res.residue_name, "x").lower() for res in sequence.residues
                 ])
-                print("")
+                utilities.give_pdb_map_bind_sequence(
+                 pdb_map[1], pdb_map[2],
+                 sequence_string,
+                 chain.chain_id,
+                 connection
+                )
+                print("Found %i residue sequence on chain %s" % (
+                 len(sequence_string), chain.chain_id
+                ))
         else:
             print("Can't - residues on different chains")
 
