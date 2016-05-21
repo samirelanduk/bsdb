@@ -12,6 +12,10 @@ public class InteractionPdb {
   private String receptorChain;
   private int originalChainLength;
   private String bindSequence;
+  private double proportionalLength;
+  private int internalContacts;
+  private int externalContacts;
+  private double contactRatio;
 
 
   public InteractionPdb(Object[] fields) {
@@ -25,6 +29,10 @@ public class InteractionPdb {
     this.receptorChain = (String)fields[7];
     this.originalChainLength = fields[8] == null ? 0 : (int)fields[8];
     this.bindSequence = (String)fields[9];
+    this.proportionalLength = fields[10] == null ? 0.0 : (float)fields[10];
+    this.internalContacts = fields[11] == null ? 0 : (int)fields[11];
+    this.externalContacts = fields[12] == null ? 0 : (int)fields[12];
+    this.contactRatio = fields[13] == null ? 0.0 : (float)fields[13];
   }
 
 
@@ -131,4 +139,44 @@ public class InteractionPdb {
 	public void setBindSequence(String bindSequence) {
 		this.bindSequence = bindSequence;
   }
+
+
+	public double getProportionalLength() {
+		return proportionalLength;
+	}
+
+
+	public void setProportionalLength(double proportionalLength) {
+		this.proportionalLength = proportionalLength;
+	}
+
+
+	public int getInternalContacts() {
+		return internalContacts;
+	}
+
+
+	public void setInternalContacts(int internalContacts) {
+		this.internalContacts = internalContacts;
+	}
+
+
+	public int getExternalContacts() {
+		return externalContacts;
+	}
+
+
+	public void setExternalContacts(int externalContacts) {
+		this.externalContacts = externalContacts;
+	}
+
+
+	public double getContactRatio() {
+		return contactRatio;
+	}
+
+
+	public void setContactRatio(double contactRatio) {
+		this.contactRatio = contactRatio;
+	}
 }

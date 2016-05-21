@@ -147,6 +147,26 @@
 					<td><% out.print((interactionPdb == null || interactionPdb.getOriginalChainLength() == 0) ?
 					  "-" : interactionPdb.getOriginalChainLength()); %></td>
 				</tr>
+				<tr>
+					<td>Length Ratio</td>
+					<td><% out.print((interactionPdb == null || interactionPdb.getProportionalLength() == 0) ?
+					  "-" : interactionPdb.getProportionalLength()); %></td>
+				</tr>
+				<tr>
+					<td>Internal Contacts</td>
+					<td><% out.print((interactionPdb == null || interactionPdb.getInternalContacts() == 0) ?
+					  "-" : interactionPdb.getInternalContacts()); %></td>
+				</tr>
+				<tr>
+					<td>External Contacts</td>
+					<td><% out.print((interactionPdb == null || interactionPdb.getExternalContacts() == 0) ?
+					  "-" : interactionPdb.getExternalContacts()); %></td>
+				</tr>
+				<tr>
+					<td>Contact Ratio</td>
+					<td><% out.print((interactionPdb == null || interactionPdb.getContactRatio() == 0) ?
+					  "-" : interactionPdb.getContactRatio()); %></td>
+				</tr>
 			</table>
 		</div>
   </body>

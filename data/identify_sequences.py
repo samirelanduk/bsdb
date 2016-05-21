@@ -54,7 +54,7 @@ try:
                  pdb_map[1], pdb_map[2],
                  sequence_string,
                  chain.chain_id,
-                 chain_length,
+                 len(sequence_string),
                  len(sequence_string) / chain_length,
                  internal_contacts,
                  external_contacts,
