@@ -1,5 +1,4 @@
 import molecupy
-import pygtop
 import utilities
 print("")
 

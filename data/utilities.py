@@ -196,13 +196,13 @@ def get_interaction_pdb_maps(connection):
     cursor.execute(
      """
      SELECT
-      interactions.targetId, interaction_pdbs.interactionId,
-      interaction_pdbs.pdbCode, interaction_pdbs.het, interaction_pdbs.bindingResidues
+      interactions.targetId, interaction_pdbs.interactionId, interaction_pdbs.pdbCode,
+      interaction_pdbs.het, interaction_pdbs.bindingResidues, interaction_pdbs.bindSequence
      FROM interaction_pdbs LEFT JOIN interactions ON
       interaction_pdbs.interactionId = interactions.interactionId;"""
     )
     interaction_pdb_maps =  [
-     [row[0], row[1], row[2], row[3], row[4]] for row in cursor.fetchall()
+     [row[0], row[1], row[2], row[3], row[4], row[5]] for row in cursor.fetchall()
     ]
 
     cursor.close()
