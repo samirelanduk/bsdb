@@ -284,4 +284,21 @@ public class DatabaseAccess {
 		);
 	}
 
+
+	//Removes a sequence and associated information from a pdbmap
+	public static void removeSequence(String mapId) {
+		issuePreparedSqlQuery(
+		 "UPDATE interaction_pdbs SET " +
+		  "bindSequence = null," +
+			"receptorChain = null," +
+			"originalChainLength = null," +
+			"proportionalLength = null," +
+			"internalContacts = null," +
+			"externalContacts = null," +
+			"contactRatio = null" +
+		" WHERE mapId=?",
+		 mapId
+		);
+	}
+
 }

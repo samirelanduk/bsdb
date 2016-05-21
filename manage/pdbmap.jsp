@@ -131,6 +131,10 @@
 
 		<div id="bindsequence">
 			<h2>Bind Sequence and Properties</h2>
+			<form method="POST" action="delete_sequence.jsp">
+				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
+				<input type="submit">
+			</form>
 			<table>
 				<tr>
 					<td>Sequence</td>
