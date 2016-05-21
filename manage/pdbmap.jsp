@@ -137,6 +137,16 @@
 					<td><% out.print((interactionPdb == null || interactionPdb.getBindSequence() == null) ?
 					  "-" : interactionPdb.getBindSequence()); %></td>
 				</tr>
+				<tr>
+					<td>Chain</td>
+					<td><% out.print((interactionPdb == null || interactionPdb.getReceptorChain() == null) ?
+					  "-" : interactionPdb.getReceptorChain()); %></td>
+				</tr>
+				<tr>
+					<td>Original Chain Length</td>
+					<td><% out.print((interactionPdb == null || interactionPdb.getOriginalChainLength() == 0) ?
+					  "-" : interactionPdb.getOriginalChainLength()); %></td>
+				</tr>
 			</table>
 		</div>
   </body>

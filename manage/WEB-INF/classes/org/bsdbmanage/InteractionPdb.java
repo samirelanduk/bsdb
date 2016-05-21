@@ -9,6 +9,8 @@ public class InteractionPdb {
   private boolean manuallyMarkedCorrect;
   private String het;
   private String[] bindingResidues;
+  private String receptorChain;
+  private int originalChainLength;
   private String bindSequence;
 
 
@@ -20,6 +22,8 @@ public class InteractionPdb {
     this.manuallyMarkedCorrect = (boolean)fields[4];
     this.het = (String)fields[5];
     this.bindingResidues = ((String)fields[6]) == null ? null : ((String)fields[6]).split(", ");
+    this.receptorChain = (String)fields[7];
+    this.originalChainLength = fields[8] == null ? 0 : (int)fields[8];
     this.bindSequence = (String)fields[9];
   }
 
@@ -97,6 +101,26 @@ public class InteractionPdb {
 	public void setBindingResidues(String[] bindingResidues) {
 		this.bindingResidues = bindingResidues;
   }
+
+
+	public String getReceptorChain() {
+		return receptorChain;
+	}
+
+
+	public void setReceptorChain(String receptorChain) {
+		this.receptorChain = receptorChain;
+  }
+
+
+	public int getOriginalChainLength() {
+		return originalChainLength;
+	}
+
+
+	public void setOriginalChainLength(int originalChainLength) {
+		this.originalChainLength = originalChainLength;
+	}
 
 
 	public String getBindSequence() {
