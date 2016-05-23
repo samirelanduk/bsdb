@@ -267,3 +267,11 @@ def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
     )
     connection.commit()
     cursor.close()
+
+
+def get_live_interaction_ids(connection):
+    cursor = connection.cursor()
+    cursor.execute("SELECT sequenceId FROM sequences;")
+    ids = [row[0] for row in cursor.fetchall()]
+    cursor.close()
+    return ids
