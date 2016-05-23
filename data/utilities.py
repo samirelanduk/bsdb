@@ -12,6 +12,16 @@ def get_connection():
     return conn
 
 
+def get_live_connection():
+    conn = pg8000.connect(
+     host=config.livehost,
+     database=config.livedb,
+     user=config.liveuser,
+     password=config.livepassword
+    )
+    return conn
+
+
 def get_interactions_row_count(connection):
     cursor = connection.cursor()
     cursor.execute("SELECT COUNT(*) FROM interactions;")
