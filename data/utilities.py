@@ -298,3 +298,32 @@ def get_live_interaction_ids(connection):
     ids = [row[0] for row in cursor.fetchall()]
     cursor.close()
     return ids
+
+
+def make_live_sequence_from_stage_map(interaction, pdb_map, stage_connection, live_connection):
+    interaction_dict = interaction_object_to_dict(interaction)
+    cursor = live_connection.cursor()
+    cursor.execute("""
+     INSERT INTO sequences VALUES (
+      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+     );""", [
+      pdb_map["interactionId"],
+      interaction_dict["ligandId"],
+      interaction_dict["targetId"],
+      interaction_dict["species"],
+      interaction_dict["action"],
+      interaction_dict["affinityValue"],
+      interaction_dict["affinityRange"],
+      interaction_dict["affinityType"],
+      pdb_map["het"],
+      pdb_map["bindingResidues"],
+      pdb_map["receptorChain"],
+      pdb_map["originalChainLength"],
+      pdb_map["bindSequence"],
+      pdb_map["proportionalLength"],
+      pdb_map["internalContacts"],
+      pdb_map["externalContacts"],
+      pdb_map["contactRatio"]
+     ])
+    live_connection.commit()
+    cursor.close()

@@ -31,15 +31,28 @@ try:
         print("\tNew interaction %i has %i usable PDB maps..." % (
          stage_interaction_id, len(maps))
         , end=" ")
-        map_to_use = None
-        correct_maps = [pdbmap for pdbmap in maps if pdbmap["manuallyMarkedCorrect"]]
-        if len(correct_maps) == 0:
-            map_to_use = sorted(maps, key=lambda k: k["contactRatio"])[-1]
-        elif len(correct_maps) == 1:
-            map_to_use = correct_maps[0]
+        if maps:
+            map_to_use = None
+            correct_maps = [pdbmap for pdbmap in maps if pdbmap["manuallyMarkedCorrect"]]
+            if len(correct_maps) == 0:
+                map_to_use = sorted(maps, key=lambda k: k["contactRatio"])[-1]
+            elif len(correct_maps) == 1:
+                map_to_use = correct_maps[0]
+            else:
+                map_to_use = sorted(correct_maps, key=lambda k: k["contactRatio"])[-1]
+
+            interaction = pygtop.get_target_by_id(
+             map_to_use["targetId"]).get_interaction_by_id(
+              map_to_use["interactionId"])
+            utilities.make_live_sequence_from_stage_map(
+             interaction,
+             map_to_use,
+             stage_connection,
+             live_connection
+            )
+            print("Using map %i%s" % (map_to_use["interactionId"], map_to_use["pdbCode"]))
         else:
-            map_to_use = sorted(correct_maps, key=lambda k: k["contactRatio"])[-1]
-        print("Using map %i%s" % (map_to_use["interactionId"], map_to_use["pdbCode"]))
+            print("")
 
 
 finally:
