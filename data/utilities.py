@@ -1,6 +1,7 @@
 import pg8000
 import datetime
 import config
+import math
 
 def get_connection():
     conn = pg8000.connect(
@@ -116,7 +117,14 @@ def add_interaction_to_table(interaction, connection):
 def interaction_differs_from_table(interaction, connection):
     interaction_object_dict = interaction_object_to_dict(interaction)
     interaction_row_dict = get_table_interaction_as_dict(interaction, connection)
-    return interaction_object_dict != interaction_row_dict
+    for key in interaction_object_dict:
+        if type(interaction_object_dict[key]) is float:
+            if math.floor(interaction_object_dict[key]) != math.floor(interaction_row_dict[key]):
+                return True
+        else:
+            if interaction_object_dict[key] != interaction_row_dict[key]:
+                return True
+    return False
 
 
 def update_interaction(interaction, connection):
@@ -207,13 +215,27 @@ def get_interaction_pdb_maps(connection):
      """
      SELECT
       interactions.targetId, interaction_pdbs.interactionId, interaction_pdbs.pdbCode,
-      interaction_pdbs.het, interaction_pdbs.bindingResidues, interaction_pdbs.bindSequence
+      interaction_pdbs.het, interaction_pdbs.bindingResidues, interaction_pdbs.bindSequence,
+      interaction_pdbs.receptorChain, interaction_pdbs.originalChainLength,
+      interaction_pdbs.proportionalLength, interaction_pdbs.internalContacts,
+      interaction_pdbs.externalContacts, interaction_pdbs.contactRatio
      FROM interaction_pdbs LEFT JOIN interactions ON
       interaction_pdbs.interactionId = interactions.interactionId;"""
     )
-    interaction_pdb_maps =  [
-     [row[0], row[1], row[2], row[3], row[4], row[5]] for row in cursor.fetchall()
-    ]
+    interaction_pdb_maps = [{
+     "targetId": row[0],
+     "interactionId": row[1],
+     "pdbCode": row[2],
+     "het": row[3],
+     "bindingResidues": row[4],
+     "bindSequence": row[5],
+     "receptorChain": row[6],
+     "originalChainLength": row[7],
+     "proportionalLength": row[8],
+     "internalContacts": row[9],
+     "externalContacts": row[10],
+     "contactRatio": row[11]
+    } for row in cursor.fetchall()]
 
     cursor.close()
     return interaction_pdb_maps

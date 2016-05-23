@@ -10,7 +10,7 @@ try:
     print("There are %i Interaction-PDB maps." % len(interaction_pdb_maps))
 
     interaction_pdb_maps = [
-     pdb_map for pdb_map in interaction_pdb_maps if not pdb_map[5]
+     pdb_map for pdb_map in interaction_pdb_maps if not pdb_map["bindSequence"]
     ]
     print("There are %i Interaction-PDB maps with no bind sequence." % len(
      interaction_pdb_maps
@@ -18,12 +18,12 @@ try:
 
     print("Looking for bind sequences...")
     for pdb_map in interaction_pdb_maps:
-        pdb = molecupy.get_pdb_remotely(pdb_map[2])
-        ligand = pdb.model.get_small_molecule_by_id(pdb_map[3])
+        pdb = molecupy.get_pdb_remotely(pdb_map["pdbCode"])
+        ligand = pdb.model.get_small_molecule_by_id(pdb_map["het"])
         print("\t%i%s: Looking for %s's bind sequence in PDB %s..." % (
-         pdb_map[1], pdb_map[2], ligand, pdb_map[2]
+         pdb_map["interactionId"], pdb_map["pdbCode"], ligand, pdb_map["pdbCode"]
         ), end=" ")
-        residue_ids = pdb_map[4].split(", ")
+        residue_ids = pdb_map["bindingResidues"].split(", ")
         residues = []
         for residue_id in residue_ids:
             if residue_id[0].isalpha():
@@ -45,13 +45,14 @@ try:
             else:
                 sequence = ResiduicSequence(*sequence_residues)
                 sequence_string = "".join([
-                 RESIDUES.get(res.residue_name, "x") if res in residues else RESIDUES.get(res.residue_name, "x").lower() for res in sequence.residues
+                 RESIDUES.get(res.residue_name, "x") if res in residues else
+                  RESIDUES.get(res.residue_name, "x").lower() for res in sequence.residues
                 ])
                 chain_length = len(chain.residues) + len(chain.missing_residues)
                 internal_contacts = len(sequence.get_internal_contacts())
                 external_contacts = len(sequence.get_external_contacts_with(chain))
                 utilities.give_pdb_map_bind_sequence(
-                 pdb_map[1], pdb_map[2],
+                 pdb_map["interactionId"], pdb_map["pdbCode"],
                  sequence_string,
                  chain.chain_id,
                  len(sequence_string),

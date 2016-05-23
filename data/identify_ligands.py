@@ -10,18 +10,20 @@ try:
     print("There are %i Interaction-PDB maps." % len(interaction_pdb_maps))
 
     interaction_pdb_maps = [
-     pdb_map for pdb_map in interaction_pdb_maps if not pdb_map[3]
+     pdb_map for pdb_map in interaction_pdb_maps if not pdb_map["het"]
     ]
     print("There are %i Interaction-PDB maps with no HET." % len(interaction_pdb_maps))
 
     print("Looking for HETs...")
     for pdb_map in interaction_pdb_maps:
-        interaction = pygtop.get_target_by_id(pdb_map[0]).get_interaction_by_id(pdb_map[1])
+        interaction = pygtop.get_target_by_id(
+         pdb_map["targetId"]).get_interaction_by_id(
+          pdb_map["interactionId"])
         ligand = interaction.get_ligand()
         print("\t%i%s: Looking for %s in PDB %s..." % (
-         pdb_map[1], pdb_map[2], ligand.name, pdb_map[2]
+         pdb_map["interactionId"], pdb_map["pdbCode"], ligand.name, pdb_map["pdbCode"]
         ), end=" ")
-        pdb = molecupy.get_pdb_remotely(pdb_map[2])
+        pdb = molecupy.get_pdb_remotely(pdb_map["pdbCode"])
         molecule = ligand.find_in_pdb_by_smiles(pdb)
         if not molecule:
             molecule = ligand.find_in_pdb_by_name(pdb)
@@ -35,7 +37,9 @@ try:
             except:
                 name = molecule.chain_id
             print(name)
-            utilities.give_pdb_map_het_code(pdb_map[1], pdb_map[2], name, connection)
+            utilities.give_pdb_map_het_code(
+             pdb_map["interactionId"], pdb_map["pdbCode"], name, connection
+            )
         else:
             print("Not found")
 
