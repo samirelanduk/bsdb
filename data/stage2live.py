@@ -24,6 +24,15 @@ try:
     ))
     print("These have %i PDB maps between them." % len(new_interaction_pdb_maps))
 
+    print("Transferring new interactions to live database as sequences...")
+    for stage_interaction_id in stage_interaction_ids:
+        maps = [pdbmap for pdbmap in new_interaction_pdb_maps
+         if pdbmap[1] == stage_interaction_id]
+        print("\tNew interaction %i has %i PDB maps..." % (
+         stage_interaction_id, len(maps))
+        )
+
+
 finally:
     print("")
     stage_connection.close()
