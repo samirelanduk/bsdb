@@ -25,7 +25,7 @@ try:
     print("These have %i PDB maps between them." % len(new_interaction_pdb_maps))
 
     print("Transferring new interactions to live database as sequences...")
-    for stage_interaction_id in stage_interaction_ids:
+    for stage_interaction_id in new_stage_interaction_ids:
         maps = [pdbmap for pdbmap in new_interaction_pdb_maps
          if pdbmap["interactionId"] == stage_interaction_id and pdbmap["contactRatio"]]
         print("\tNew interaction %i has %i usable PDB maps..." % (
@@ -53,6 +53,9 @@ try:
             print("Using map %i%s" % (map_to_use["interactionId"], map_to_use["pdbCode"]))
         else:
             print("")
+
+
+    utilities.fill_out_other_tables(live_connection)
 
 
 finally:

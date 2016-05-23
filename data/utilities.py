@@ -2,6 +2,7 @@ import pg8000
 import datetime
 import config
 import math
+import pygtop
 
 def get_connection():
     conn = pg8000.connect(
@@ -327,3 +328,38 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, stage_connection, li
      ])
     live_connection.commit()
     cursor.close()
+
+
+def fill_out_other_tables(connection):
+    cursor = connection.cursor()
+    cursor.execute("SELECT sequenceId, ligandId, targetId FROM sequences;")
+    sequences = cursor.fetchall()
+    for sequence in sequences:
+        print("Adding any ligands that might be needed...")
+        cursor.execute("SELECT ligandId FROM ligands WHERE ligandId=%s;", (sequence[1],))
+        if len(cursor.fetchall()) == 0:
+            ligand = pygtop.get_ligand_by_id(sequence[1])
+            ligand.request_molecular_properties()
+            ligand.request_structural_properties()
+            ligand.request_synonym_properties()
+            cursor.execute("""
+             INSERT INTO ligands VALUES (
+              %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+             );""", [
+              ligand.ligand_id,
+              ligand.name,
+              ligand.ligand_type,
+              ligand.radioactive,
+              ligand.approved,
+              ligand.approval_source,
+              ligand.hydrogen_bond_acceptors,
+              ligand.hydrogen_bond_donors,
+              ligand.rotatable_bonds,
+              ligand.topological_polar_surface_area,
+              ligand.molecular_weight,
+              ligand.log_p,
+              ligand.lipinksi_rules_broken,
+              "#".join(ligand.synonyms).replace("{", "#").replace("}", "$").replace("'", "''").replace(u'\u2010', "-")
+             ])
+            print("Added %s" % str(ligand))
+            connection.commit()
