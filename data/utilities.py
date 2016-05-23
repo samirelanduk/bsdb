@@ -216,7 +216,7 @@ def get_interaction_pdb_maps(connection):
      SELECT
       interactions.targetId, interaction_pdbs.interactionId, interaction_pdbs.pdbCode,
       interaction_pdbs.het, interaction_pdbs.bindingResidues, interaction_pdbs.bindSequence,
-      interaction_pdbs.receptorChain, interaction_pdbs.originalChainLength,
+      interaction_pdbs.manualCorrectMapMark, interaction_pdbs.receptorChain, interaction_pdbs.originalChainLength,
       interaction_pdbs.proportionalLength, interaction_pdbs.internalContacts,
       interaction_pdbs.externalContacts, interaction_pdbs.contactRatio
      FROM interaction_pdbs LEFT JOIN interactions ON
@@ -229,12 +229,13 @@ def get_interaction_pdb_maps(connection):
      "het": row[3],
      "bindingResidues": row[4],
      "bindSequence": row[5],
-     "receptorChain": row[6],
-     "originalChainLength": row[7],
-     "proportionalLength": row[8],
-     "internalContacts": row[9],
-     "externalContacts": row[10],
-     "contactRatio": row[11]
+     "manuallyMarkedCorrect": row[6],
+     "receptorChain": row[7],
+     "originalChainLength": row[8],
+     "proportionalLength": row[9],
+     "internalContacts": row[10],
+     "externalContacts": row[11],
+     "contactRatio": row[12]
     } for row in cursor.fetchall()]
 
     cursor.close()

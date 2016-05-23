@@ -27,10 +27,19 @@ try:
     print("Transferring new interactions to live database as sequences...")
     for stage_interaction_id in stage_interaction_ids:
         maps = [pdbmap for pdbmap in new_interaction_pdb_maps
-         if pdbmap["interactionId"] == stage_interaction_id]
-        print("\tNew interaction %i has %i PDB maps..." % (
+         if pdbmap["interactionId"] == stage_interaction_id and pdbmap["contactRatio"]]
+        print("\tNew interaction %i has %i usable PDB maps..." % (
          stage_interaction_id, len(maps))
-        )
+        , end=" ")
+        map_to_use = None
+        correct_maps = [pdbmap for pdbmap in maps if pdbmap["manuallyMarkedCorrect"]]
+        if len(correct_maps) == 0:
+            map_to_use = sorted(maps, key=lambda k: k["contactRatio"])[-1]
+        elif len(correct_maps) == 1:
+            map_to_use = correct_maps[0]
+        else:
+            map_to_use = sorted(correct_maps, key=lambda k: k["contactRatio"])[-1]
+        print("Using map %i%s" % (map_to_use["interactionId"], map_to_use["pdbCode"]))
 
 
 finally:
