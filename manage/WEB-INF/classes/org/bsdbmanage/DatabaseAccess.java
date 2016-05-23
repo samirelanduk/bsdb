@@ -71,9 +71,27 @@ public class DatabaseAccess {
 
 
 	//Gets all interactions in the staging database
-  public static Interaction[] getAllInteractions() {
+	public static Interaction[] getAllInteractions() {
+		ArrayList<Interaction> interactions = new ArrayList<Interaction>();
+		ResultSet rs = issuePreparedSqlQuery("SELECT * FROM interactions ORDER BY interactionId;");
+		if (rs != null) {
+			Object[][] rows = getObjectGridFromResultSet(rs);
+			for (Object[] row : rows) {
+				interactions.add(new Interaction(row));
+			}
+			Interaction[] interactionsArray = new Interaction[interactions.size()];
+			interactionsArray = interactions.toArray(interactionsArray);
+			return interactionsArray;
+		} else {
+			return null;
+		}
+	}
+
+	
+	//Gets all interactions in the staging database that have PDB maps
+  public static Interaction[] getMapInteractions() {
   	ArrayList<Interaction> interactions = new ArrayList<Interaction>();
-    ResultSet rs = issuePreparedSqlQuery("SELECT * FROM interactions ORDER BY interactionId;");
+    ResultSet rs = issuePreparedSqlQuery("SELECT interactions.* FROM interactions LEFT OUTER JOIN interaction_pdbs ON interactions.interactionId=interaction_pdbs.interactionId where interaction_pdbs.interactionId is not null ORDER BY interactionId;");
 		if (rs != null) {
 	    Object[][] rows = getObjectGridFromResultSet(rs);
 	    for (Object[] row : rows) {
