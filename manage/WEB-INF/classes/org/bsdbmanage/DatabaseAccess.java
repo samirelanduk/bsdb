@@ -87,11 +87,11 @@ public class DatabaseAccess {
 		}
 	}
 
-	
+
 	//Gets all interactions in the staging database that have PDB maps
   public static Interaction[] getMapInteractions() {
   	ArrayList<Interaction> interactions = new ArrayList<Interaction>();
-    ResultSet rs = issuePreparedSqlQuery("SELECT interactions.* FROM interactions LEFT OUTER JOIN interaction_pdbs ON interactions.interactionId=interaction_pdbs.interactionId where interaction_pdbs.interactionId is not null ORDER BY interactionId;");
+    ResultSet rs = issuePreparedSqlQuery("SELECT DISTINCT interactions.* FROM interactions RIGHT OUTER JOIN interaction_pdbs ON interactions.interactionId=interaction_pdbs.interactionId where interaction_pdbs.interactionId is not null ORDER BY interactionId;");
 		if (rs != null) {
 	    Object[][] rows = getObjectGridFromResultSet(rs);
 	    for (Object[] row : rows) {

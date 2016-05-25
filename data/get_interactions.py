@@ -14,23 +14,24 @@ if len(sys.argv) > 1:
         print("Unkown argument: %s\n" % sys.argv[1])
         sys.exit()
 
-print("Obtaining ligands from GtoP...")
-ligands = pygtop.get_all_ligands()
+print("Obtaining targets from GtoP...")
+targets = pygtop.get_all_targets()
 
 print("Obtaining interactions from GtoP...")
 interactions = []
-for ligand in ligands[:500]:
-    interactions += ligand.get_interactions()
-print("There are %i interactions." % len(interactions))
+for target in targets[:5]:
+    interactions += target.get_interactions()
+print("There are %i interactions currently in GtoP." % len(interactions))
 
 connection = utilities.get_connection()
-print("There are %i interactions already in the staging database."
+print("There are %i interactions already in the BSDB staging database."
  % utilities.get_interactions_row_count(connection))
 
 interaction_ids_in_table = utilities.get_interaction_ids_from_table(connection)
 
 interactions_added = 0
 interactions_modified = 0
+print("Updating stage database with interactions...")
 for interaction in interactions:
     if interaction.interaction_id not in interaction_ids_in_table:
         utilities.add_interaction_to_table(interaction, connection)
@@ -46,7 +47,7 @@ if flag_unknown or del_unknown:
         if row_id not in object_ids:
             if flag_unknown:
                 print(
-                 "\tInteraction %i exists in the table but doesn't seem to be in GtoP any longer."
+                 "\tInteraction %i exists in the BSDB stage database but doesn't seem to be in GtoP any longer."
                   % row_id
                 )
             elif del_unknown:
