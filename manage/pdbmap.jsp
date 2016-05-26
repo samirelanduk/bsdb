@@ -21,9 +21,10 @@
 <html>
   <head>
     <title><% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %></title>
+    <link rel="stylesheet" type="text/css" href="/manage/css/map.css">
   </head>
   <body>
-    <h1><% out.print(interactionPdb == null ? "" : "Interaction " +
+    <h1>Map: <% out.print(interactionPdb == null ? "" : "Interaction " +
      interactionPdb.getInteractionId() + " - "
       + interactionPdb.getPdbCode()); %></h1>
 
@@ -31,7 +32,8 @@
       <a href="/manage/mapinteractions.jsp">Back to Interactions</a>
     </div>
 
-    <div id="interaction">
+    <div class="section" id="interaction">
+			<h2>Interaction <% out.print(interactionPdb == null ? "" : interactionPdb.getInteractionId()); %></h2>
       <table>
         <tr>
           <td>Interaction ID</td>
@@ -66,7 +68,7 @@
       </table>
     </div>
 
-    <div id="pdb"><% out.print(interactionPdb == null ? "" : Utilities.enclose(
+    <div class="section" id="pdb"><h2>PDB Link</h2><% out.print(interactionPdb == null ? "" : Utilities.enclose(
      "a",
      String.format(
       "href='http://www.rcsb.org/pdb/explore.do?structureId=%s' target='_blank'",
@@ -75,23 +77,22 @@
      "" + interactionPdb.getPdbCode()
     )); %></div>
 
-		<div id="manual_addition">
-			<p>This map has <strong>
+		<div class="section" id="manual">
+			<h2>Manual Verification</h2>
+			<p>This map <strong>has
 				<% out.print((interactionPdb == null || !(interactionPdb.isManuallyMarkedCorrect())) ? "not" : ""); %>
 			</strong>been manually marked as a correct map.</p>
-		</div>
-
-    <div id="manual_verification">
       <form method="POST" action="toggle_correct.jsp">
         <input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
-        <p>This map has <strong>
+        <p>This map <strong>was
           <% out.print((interactionPdb == null || !(interactionPdb.isManuallyAdded())) ? "not" : ""); %>
-        </strong>been manually added.</p>
-        <input type="submit">Toggle Correctness</input>
+        </strong>manually added.</p>
+        <input type="submit" value="Toggle Correctness"></input>
       </form>
     </div>
 
-		<div id="deletion">
+		<div class="section" id="deletion">
+			<h2>Deletion</h2>
 			<form method="POST" action="delete_pdb.jsp">
 				<label for="blacklist">Blacklist?</label><input type="checkbox" id="blacklist" name="blacklist" value="yes">
 				<input type="hidden" name="interactionId" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getInteractionId()); %>">
@@ -100,7 +101,7 @@
 			</form>
 		</div>
 
-		<div id="het">
+		<div class="section" id="het">
 			<h2>Ligand in PDB</h2>
 			<p><% out.print((interactionPdb == null || interactionPdb.getHet() == null) ?
 			  "-" : interactionPdb.getHet()); %></p>
@@ -110,7 +111,7 @@
 			</form>
 		</div>
 
-		<div id="bindsite">
+		<div class="section" id="bindsite">
 			<h2>BindSite in PDB</h2>
 			<p><% if (interactionPdb == null || interactionPdb.getBindingResidues() == null) {
 					out.println("-");
@@ -129,7 +130,7 @@
 			</form>
 		</div>
 
-		<div id="bindsequence">
+		<div class="section" id="bindsequence">
 			<h2>Bind Sequence and Properties</h2>
 			<form method="POST" action="delete_sequence.jsp">
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
