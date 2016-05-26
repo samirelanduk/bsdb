@@ -1,0 +1,16 @@
+table {
+  font-size: 75%;
+}
+
+table form {
+  display: inline;
+  margin-left: 5px;
+}
+
+table input {
+  width: 50px;
+  display: inline;
+  height: 70%;
+  color: #00CC00;
+  font-weight: bold;
+}

@@ -3,6 +3,7 @@
 <html>
   <head>
     <title>Interactions with PDB Maps</title>
+    <link rel="stylesheet" type="text/css" href="/manage/css/list.css">
   </head>
   <body>
     <h1>Interactions with PDB Maps</h1>
