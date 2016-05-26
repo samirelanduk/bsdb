@@ -18,13 +18,13 @@
         <th>Type</th>
         <th>Action</th>
         <th>Affinity Type</th>
-        <th>Affinity Value</th>
+        <th>Affinity</th>
         <th>Affinity Range</th>
-        <th>Ligand is Peptide?</th>
+        <th>Peptide Ligand</th>
         <th>Date Added</th>
-        <th>Date Last Modified</th>
-        <th>Last Checked for PDBs</th>
-        <th>PDBS</th>
+        <th>Last Modified</th>
+        <th>Last PDB Check</th>
+        <th>PDBs</th>
         <th>Blacklisted PDBs</th>
       </thead>
       <tbody>

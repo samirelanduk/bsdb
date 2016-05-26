@@ -1,5 +1,10 @@
 table {
   font-size: 75%;
+  text-align: center;
+}
+
+table .pdblist {
+  text-align: right;
 }
 
 table form {
@@ -10,7 +15,6 @@ table form {
 table input {
   width: 50px;
   display: inline;
-  height: 70%;
   color: #00CC00;
   font-weight: bold;
 }
