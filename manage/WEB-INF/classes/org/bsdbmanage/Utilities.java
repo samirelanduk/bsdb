@@ -4,8 +4,14 @@ import javax.servlet.http.HttpServletRequest;
 
 public class Utilities {
 
-  public static String enclose(String element, String attributes, String body) {
-    return String.format("<%s %s>%s</%s>", element, attributes, body, element);
+  public static String enclose(String element, String attributes, Object body) {
+    return String.format(
+     "<%s %s>%s</%s>",
+     element,
+     attributes,
+     body == null ? "" : body.toString(),
+     element
+    );
   }
 
 

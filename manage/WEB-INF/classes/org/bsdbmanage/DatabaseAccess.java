@@ -2,6 +2,7 @@ package org.bsdbmanage;
 
 import java.sql.*;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.io.*;
 
@@ -100,6 +101,46 @@ public class DatabaseAccess {
 	    Interaction[] interactionsArray = new Interaction[interactions.size()];
 	    interactionsArray = interactions.toArray(interactionsArray);
 	    return interactionsArray;
+		} else {
+			return null;
+		}
+  }
+
+
+	//Gets all interactions in the staging database that have PDB maps as HTML rows
+  public static String[] getMapRows() {
+		ArrayList<String> htmlRows = new ArrayList<String>();
+		SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yy HH:mm");
+    ResultSet rs = issuePreparedSqlQuery("SELECT * FROM interactions ORDER BY interactionId;");
+		if (rs != null) {
+	    Object[][] rows = getObjectGridFromResultSet(rs);
+	    for (Object[] row : rows) {
+	      htmlRows.add(Utilities.enclose("tr", "", String.format(
+				 "%s%s%s%s%s%s%s%s%s%s%s%s%s",
+				 Utilities.enclose("td", "", (Integer)row[0]),
+				 Utilities.enclose("td", "", Utilities.enclose("a", String.format(
+				  "href='http://guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d'",
+					(Integer)row[1]
+				 ), (Integer)row[1])),
+				 Utilities.enclose("td", "", Utilities.enclose("a", String.format(
+				  "href='http://guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=%d'",
+					(Integer)row[2]
+				 ), (Integer)row[2])),
+				 Utilities.enclose("td", "", (String)row[3]),
+				 Utilities.enclose("td", "", (String)row[4]),
+				 Utilities.enclose("td", "", (String)row[5]),
+				 Utilities.enclose("td", "", (String)row[6]),
+				 Utilities.enclose("td", "", (Float)row[7]),
+				 Utilities.enclose("td", "", (String)row[8]),
+				 Utilities.enclose("td", "", (Boolean)row[9] ? "Yes" : "No"),
+				 Utilities.enclose("td", "", ft.format((Date)row[10])),
+				 Utilities.enclose("td", "", ft.format((Date)row[11])),
+				 Utilities.enclose("td", "", ft.format((Date)row[12]))
+				)));
+	    }
+	    String[] rowArray = new String[htmlRows.size()];
+	    rowArray = htmlRows.toArray(rowArray);
+	    return rowArray;
 		} else {
 			return null;
 		}
