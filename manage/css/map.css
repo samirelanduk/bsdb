@@ -40,3 +40,7 @@ body {
   display: block;
   margin-top: 5px;
 }
+
+#het input[type='input'] {
+  width: 150px;
+}

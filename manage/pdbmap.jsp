@@ -106,7 +106,7 @@
 			<p><% out.print((interactionPdb == null || interactionPdb.getHet() == null) ?
 			  "-" : interactionPdb.getHet()); %></p>
 			<form method="POST" action="edit_het.jsp">
-				<input type="input" id="het" name="het">
+				<input type="input" id="het" name="het" placeholder="Specify ligand ID...">
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
 			</form>
 		</div>
