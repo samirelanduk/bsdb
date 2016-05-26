@@ -53,11 +53,11 @@ public class Interaction {
 		SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yy HH:mm");
 		StringBuilder pdbList = new StringBuilder();
 		for (InteractionPdb pdbMap : pdbMaps) {
-			pdbList.append(String.format("%s%s%s", pdbMap.isManuallyMarkedCorrect() ? "<b>" : "", Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s'", interactionId, pdbMap.getPdbCode()), pdbMap.getPdbCode()), pdbMap.isManuallyMarkedCorrect() ? "</b>" : "") + ", ");
+			pdbList.append(String.format("%s%s</span>", pdbMap.isManuallyMarkedCorrect() ? "<span class='manual'>" : "<span class='auto'>", Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s'", interactionId, pdbMap.getPdbCode()), pdbMap.getPdbCode())) + ", ");
 		}
 		StringBuilder falsePdbs = new StringBuilder();
 		for (FalseMap falseMap : falseMaps) {
-			falsePdbs.append(Utilities.enclose("a", String.format("href='/manage/falsemap.jsp?id=%d%s'", interactionId, falseMap.getPdbCode()), falseMap.getPdbCode()));
+			falsePdbs.append(String.format("<span class='incorrect'>%s</span>", Utilities.enclose("a", String.format("href='/manage/falsemap.jsp?id=%d%s'", interactionId, falseMap.getPdbCode()), falseMap.getPdbCode())));
 		}
 		return Utilities.enclose(
 			"tr", "",
@@ -83,7 +83,7 @@ public class Interaction {
 				Utilities.enclose("td", "", ft.format(dateModified)),
 				Utilities.enclose("td", "", datePdbsLastChecked != null ? ft.format(datePdbsLastChecked) : "Never"),
 				Utilities.enclose("td", "class='pdblist'", (pdbMaps.size() == 0 ? "-" : pdbList.toString().substring(0, pdbList.length() - 2)) + String.format("<form method='POST' action='/manage/add_pdb.jsp'><input type='hidden' name='interactionId' value='%d'><input type='text' name='pdbCode'></form>", this.interactionId)),
-				Utilities.enclose("td", "class='pdblist'", (falseMaps.size() == 0 ? "-" : falsePdbs.toString().substring(0, falsePdbs.length() - 2)))
+				Utilities.enclose("td", "", (falseMaps.size() == 0 ? "-" : falsePdbs.toString().substring(0, falsePdbs.length() - 2)))
 			)
 		);
 	}

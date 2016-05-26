@@ -7,5 +7,5 @@
     }
 		DatabaseAccess.removeInteractionPdb(Integer.parseInt(request.getParameter("interactionId")), request.getParameter("pdbCode"));
 	}
-	response.sendRedirect("/manage/interactions.jsp");
+	response.sendRedirect("/manage/mapinteractions.jsp");
 %>

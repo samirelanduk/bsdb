@@ -30,6 +30,20 @@ table form {
 table input {
   width: 50px;
   display: inline;
-  color: #00CC00;
+  color: #00AA00;
   font-weight: bold;
+}
+
+.auto a {
+  color: #0000CC;
+}
+
+.manual a {
+  color: #00AA00;
+  font-weight: bold;
+}
+
+.incorrect a {
+  color: #AA0000;
+  font-style: italic;
 }
