@@ -21,9 +21,10 @@
 <html>
   <head>
     <title><% out.print(falseMap == null ? "" : falseMap.getMapId()); %></title>
+    <link rel="stylesheet" type="text/css" href="/manage/css/map.css">
   </head>
   <body>
-    <h1><% out.print(falseMap == null ? "" : "Interaction " +
+    <h1>False Map: <% out.print(falseMap == null ? "" : "Interaction " +
      falseMap.getInteractionId() + " - "
       + falseMap.getPdbCode()); %></h1>
 
@@ -31,7 +32,8 @@
       <a href="/manage/mapinteractions.jsp">Back to Interactions</a>
     </div>
 
-    <div id="interaction">
+    <div class="section" id="interaction">
+			<h2>Interaction <% out.print(falseMap == null ? "" : falseMap.getInteractionId()); %></h2>
       <table>
         <tr>
           <td>Interaction ID</td>
@@ -66,7 +68,7 @@
       </table>
     </div>
 
-    <div id="pdb"><% out.print(falseMap == null ? "" : Utilities.enclose(
+    <div id="pdb" class="section"><h2>PDB Link</h2><% out.print(falseMap == null ? "" : Utilities.enclose(
      "a",
      String.format(
       "href='http://www.rcsb.org/pdb/explore.do?structureId=%s' target='_blank'",
@@ -75,7 +77,8 @@
      "" + falseMap.getPdbCode()
     )); %></div>
 
-		<div id="deletion">
+		<div id="deletion" class="section">
+			<h2>Deletion</h2>
 			<form method="POST" action="delete_falsemap.jsp">
 				<input type="hidden" name="interactionId" value="<% out.print(falseMap == null ? "" : falseMap.getInteractionId()); %>">
 				<input type="hidden" name="pdbCode" value="<% out.print(falseMap == null ? "" : falseMap.getPdbCode()); %>">
