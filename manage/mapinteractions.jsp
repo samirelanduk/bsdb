@@ -1,5 +1,5 @@
 <%@ page import = "org.bsdbmanage.*" %>
-<% String[] mapRows = DatabaseAccess.getMapRows(); %>
+<% Interaction[] interactions = DatabaseAccess.getMapInteractions(); %>
 <html>
   <head>
     <title>Interactions with PDB Maps</title>
@@ -8,7 +8,7 @@
   <body>
     <h1>Interactions with PDB Maps</h1>
     <p><a href="index.jsp">Back to index</a></p>
-    <p>There are <% out.print(mapRows.length); %> interactions with PDBs in the staging database.</p>
+    <p>There are <% out.print(interactions.length); %> interactions with PDBs in the staging database.</p>
     <table>
       <thead>
         <th>Interaction ID</th>
@@ -29,8 +29,8 @@
       </thead>
       <tbody>
         <%
-        for (String mapRow : mapRows) {
-          out.println(mapRow);
+        for (Interaction interaction : interactions) {
+          out.println(interaction.toHtmlRow());
         }
         %>
       </tbody>
