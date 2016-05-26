@@ -28,7 +28,7 @@
       + interactionPdb.getPdbCode()); %></h1>
 
     <div id="back">
-      <a href="/manage/interactions.jsp">Back to Interactions</a>
+      <a href="/manage/mapinteractions.jsp">Back to Interactions</a>
     </div>
 
     <div id="interaction">
