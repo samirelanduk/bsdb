@@ -118,8 +118,8 @@
 				} else {
 					for (String residue : interactionPdb.getBindingResidues()) {
 						if (residue.length() > 1) {
-							out.print(residue +
-							 "<form method='POST' action='delete_residue.jsp'><input type='hidden' name='residue' value='" + residue + "'><input type='hidden' name='id' value='" + interactionPdb.getMapId() + "'><input type='submit'></form> "
+							out.print("<div class='residue'>" + residue +
+							 "<form method='POST' action='delete_residue.jsp'><input type='hidden' name='residue' value='" + residue + "'><input type='hidden' name='id' value='" + interactionPdb.getMapId() + "'><input type='submit' value='x'></form></div>"
 							);
 						}
 					}

@@ -44,3 +44,20 @@ body {
 #het input[type='input'] {
   width: 150px;
 }
+
+#bindsite form, #bindsite .residue {
+  display: inline;
+}
+
+.residue {
+  margin-right: 10px;
+  line-height: 30px;
+}
+
+.residue input[type='submit'] {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  border-radius: 10px;
+  cursor: pointer;
+}
