@@ -5,18 +5,22 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class DatabaseAccess {
 
+	//Returns a connection to the live database
 	public static Connection getConnection() {
 		try {
-			MysqlDataSource dataSource = new MysqlDataSource();
-			dataSource.setUser(Config.user);
-			dataSource.setPassword(Config.password);
-			dataSource.setServerName(Config.hostname);
-			dataSource.setDatabaseName(Config.db);
-			Connection conn = dataSource.getConnection();
-			return conn;
-		} catch (SQLException e) {
+	    Class.forName("org.postgresql.Driver");
+	    Connection connection;
+	    String url = String.format("jdbc:postgresql://%s/%s", Config.host, Config.db);
+	    String user = Config.user;
+	    String password = Config.password;
+
+	    connection = DriverManager.getConnection(url, user, password);
+	    return connection;
+		}	catch (SQLException e) {
 			return null;
-		}
+ 		} catch (ClassNotFoundException e) {
+			return null;
+ 		}
 	}
 
 
