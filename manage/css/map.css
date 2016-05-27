@@ -22,16 +22,16 @@ body {
   margin-bottom: 50px;
 }
 
-#interaction table {
+.section table {
   border: 1px solid gray;
   border-collapse: collapse;
 }
 
-#interaction td:first-child {
+.section td:first-child {
   text-align: right;
 }
 
-#interaction table td {
+.section table td {
   border: 1px solid gray;
   padding: 10px;
 }
@@ -60,4 +60,17 @@ body {
   padding: 0px;
   border-radius: 10px;
   cursor: pointer;
+}
+
+#bindsequence td:first-child {
+  width: 20%;
+}
+
+.sequence {
+  font-family: monospace;
+  word-wrap: break-word;
+}
+
+.letter {
+  display: inline-block;
 }

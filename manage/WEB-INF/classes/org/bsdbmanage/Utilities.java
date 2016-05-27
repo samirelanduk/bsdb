@@ -55,4 +55,13 @@ public class Utilities {
 		}
 		return true;
 	}
+
+
+  public static String sequenceToHtml(String sequence) {
+    StringBuilder htmlSequence = new StringBuilder();
+    for (char c : sequence.toCharArray()) {
+      htmlSequence.append(Utilities.enclose("span", "class='letter'", c));
+    }
+    return htmlSequence.toString();
+  }
 }

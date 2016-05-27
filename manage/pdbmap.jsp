@@ -139,8 +139,8 @@
 			<table>
 				<tr>
 					<td>Sequence</td>
-					<td><% out.print((interactionPdb == null || interactionPdb.getBindSequence() == null) ?
-					  "-" : interactionPdb.getBindSequence()); %></td>
+					<td><div class="sequence"><% out.print((interactionPdb == null || interactionPdb.getBindSequence() == null) ?
+					  "-" : Utilities.sequenceToHtml(interactionPdb.getBindSequence())); %></div></td>
 				</tr>
 				<tr>
 					<td>Chain</td>
