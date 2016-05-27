@@ -55,7 +55,7 @@ public class Interaction {
 		for (InteractionPdb pdbMap : pdbMaps) {
 			pdbList.append(
 			 String.format(
-			  "<span class='%s'>%s<span class='%s'>&deg;</span></span>",
+			  "<span class='%s'>%s<span class='%s'>&deg;</span><span class='%s'>&deg;</span><span class='%s'>&deg;</span></span>",
 				pdbMap.isManuallyMarkedCorrect() ? "manual" : "auto",
 				Utilities.enclose(
 				 "a",
@@ -66,7 +66,9 @@ public class Interaction {
 				 ),
 				pdbMap.getPdbCode()
 			 ),
-			 pdbMap.getHet() == null ? "notannotated" : "annotated"
+			 pdbMap.getHet() == null ? "notannotated" : "annotated",
+			 pdbMap.getBindingResidues() == null ? "notannotated" : "annotated",
+			 pdbMap.getBindSequence() == null ? "notannotated" : "annotated"
 			) + ", "
 			);
 		}
