@@ -53,7 +53,22 @@ public class Interaction {
 		SimpleDateFormat ft = new SimpleDateFormat("dd.MM.yy HH:mm");
 		StringBuilder pdbList = new StringBuilder();
 		for (InteractionPdb pdbMap : pdbMaps) {
-			pdbList.append(String.format("%s%s</span>", pdbMap.isManuallyMarkedCorrect() ? "<span class='manual'>" : "<span class='auto'>", Utilities.enclose("a", String.format("href='/manage/pdbmap.jsp?id=%d%s'", interactionId, pdbMap.getPdbCode()), pdbMap.getPdbCode())) + ", ");
+			pdbList.append(
+			 String.format(
+			  "<span class='%s'>%s<span class='%s'>&deg;</span></span>",
+				pdbMap.isManuallyMarkedCorrect() ? "manual" : "auto",
+				Utilities.enclose(
+				 "a",
+				 String.format(
+				  "href='/manage/pdbmap.jsp?id=%d%s'",
+					interactionId,
+					pdbMap.getPdbCode()
+				 ),
+				pdbMap.getPdbCode()
+			 ),
+			 pdbMap.getHet() == null ? "notannotated" : "annotated"
+			) + ", "
+			);
 		}
 		StringBuilder falsePdbs = new StringBuilder();
 		for (FalseMap falseMap : falseMaps) {

@@ -47,3 +47,11 @@ table input {
   color: #AA0000;
   font-style: italic;
 }
+
+.annotated {
+  color: #00DD00;
+}
+
+.notannotated {
+  color: #DD0000;
+}
