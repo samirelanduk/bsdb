@@ -303,6 +303,15 @@ public class DatabaseAccess {
 	}
 
 
+	//Removes a bindsite from a pdb map
+	public static void removeSite(String mapId) {
+		issuePreparedSqlQuery(
+		 "UPDATE interaction_pdbs SET bindingResidues = null WHERE mapId=?",
+		 mapId
+		);
+	}
+
+
 	//Removes a sequence and associated information from a pdbmap
 	public static void removeSequence(String mapId) {
 		issuePreparedSqlQuery(
