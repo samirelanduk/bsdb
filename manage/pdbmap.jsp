@@ -125,7 +125,7 @@
 					}
 				} %></p>
 			<form method="POST" action="add_residue.jsp">
-				<input type="input" id="residue" name="residue">
+				<input type="input" id="residue" name="residue" placeholder="Add a residue ID...">
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
 			</form>
 		</div>
@@ -134,7 +134,7 @@
 			<h2>Bind Sequence and Properties</h2>
 			<form method="POST" action="delete_sequence.jsp">
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">
-				<input type="submit">
+				<input type="submit" value="Delete Sequence">
 			</form>
 			<table>
 				<tr>
