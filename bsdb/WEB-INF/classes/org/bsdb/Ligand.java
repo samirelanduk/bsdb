@@ -4,16 +4,12 @@ import java.sql.SQLException;
 
 public class Ligand {
 
-	 /*private int ligandId;
+	private int ligandId;
 	private String name;
 	private String type;
 	private boolean radioactive;
 	private boolean approved;
 	private String approvalSource;
-	private String iupac;
-	private String smiles;
-	private String inchi;
-	private String inchiKey;
 	private int hBondAcceptors;
 	private int hBondDonors;
 	private int rotatableBonds;
@@ -34,18 +30,14 @@ public class Ligand {
 		this.radioactive = (Boolean)fields[3];
 		this.approved = (Boolean)fields[4];
 		this.approvalSource = (String)fields[5];
-		this.iupac = ((String)fields[6]).replace("''", "'").replace("$", "}").replace("#", "{");
-		this.smiles = (String)fields[7];
-		this.inchi = (String)fields[8];
-		this.inchiKey = (String)fields[9];
-		this.hBondAcceptors = (Integer)fields[10];
-		this.hBondDonors = (Integer)fields[11];
-		this.rotatableBonds = (Integer)fields[12];
-		this.surfaceArea = (Float)fields[13];
-		this.mass = (Float)fields[14];
-		this.logP = (Float)fields[15];
-		this.lipinksi = (Integer)fields[16];
-		this.synonyms = ((String)fields[17]).split("#");
+		this.hBondAcceptors = (Integer)fields[6];
+		this.hBondDonors = (Integer)fields[7];
+		this.rotatableBonds = (Integer)fields[8];
+		this.surfaceArea = (Float)fields[9];
+		this.mass = (Float)fields[10];
+		this.logP = (Float)fields[11];
+		this.lipinksi = (Integer)fields[11];
+		this.synonyms = ((String)fields[13]).split("#");
 	}
 
 	public LigandLink[] getExternalLinks() {
@@ -98,38 +90,6 @@ public class Ligand {
 
 	public void setApprovalSource(String approvalSource) {
 		this.approvalSource = approvalSource;
-	}
-
-	public String getIupac() {
-		return iupac;
-	}
-
-	public void setIupac(String iupac) {
-		this.iupac = iupac;
-	}
-
-	public String getSmiles() {
-		return smiles;
-	}
-
-	public void setSmiles(String smiles) {
-		this.smiles = smiles;
-	}
-
-	public String getInchi() {
-		return inchi;
-	}
-
-	public void setInchi(String inchi) {
-		this.inchi = inchi;
-	}
-
-	public String getInchiKey() {
-		return inchiKey;
-	}
-
-	public void setInchiKey(String inchiKey) {
-		this.inchiKey = inchiKey;
 	}
 
 	public int gethBondAcceptors() {
