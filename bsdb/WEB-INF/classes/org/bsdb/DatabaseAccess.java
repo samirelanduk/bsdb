@@ -1,7 +1,6 @@
 package org.bsdb;
 
 import java.sql.*;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class DatabaseAccess {
 
@@ -24,23 +23,21 @@ public class DatabaseAccess {
 	}
 
 
-  public static ResultSet issueOrderedSqlQuery(
-   String columns, String table, String orderBy
-  ) throws SQLException {
-		String query = String.format(
-     "SELECT %s FROM %s ORDER BY %s;", columns, table, orderBy
-    );
-		ResultSet rs = issueRawSqlQuery(query);
-		return rs;
-	}
-
-
-  public static ResultSet issueRawSqlQuery(String query) {
+	//Issues an SQL query to the database and returns the resulting ResultSet
+  public static ResultSet issuePreparedSqlQuery(String query, Object... params) {
 		Connection conn = getConnection();
 		if (conn != null) {
-			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
-			return rs;
+			try {
+				PreparedStatement st = conn.prepareStatement(query);
+				for (int i = 0; i < params.length; i++) {
+					st.setObject(i + 1, params[i]);
+				}
+				ResultSet rs = st.executeQuery();
+				conn.close();
+				return rs;
+			} catch (SQLException e) {
+				return null;
+			}
 		} else {
 			return null;
 		}
