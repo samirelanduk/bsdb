@@ -175,4 +175,20 @@ public class DatabaseAccess {
 			return null;
 		}
 	}
+
+
+	// Get all LigandLinks for a given Ligand
+	public static LigandLink[] getLigandLinks(int ligandId) {
+		LigandLink[] links;
+		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+		 "SELECT * FROM ligandLinks WHERE ligandId=?",
+		 ligandId
+		);
+		Object[][] sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
+		links = new LigandLink[sqlResults.length];
+		for (int i = 0; i < links.length; i++) {
+			links[i] = new LigandLink(sqlResults[i]);
+		}
+		return links;
+	}
 }

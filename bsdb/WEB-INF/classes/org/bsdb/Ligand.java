@@ -41,7 +41,7 @@ public class Ligand {
 	}
 
 	public LigandLink[] getExternalLinks() {
-		return Utilities.getLigandLinks(this.ligandId);
+		return DatabaseAccess.getLigandLinks(this.ligandId);
 	}
 
 	public int getLigandId() {
