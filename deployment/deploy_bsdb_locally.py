@@ -11,7 +11,7 @@ servlet_dir = "/usr/share/tomcat7/lib/servlet-api.jar"
 try:
     os.chdir(java_dir)
 except FileNotFoundError:
-    bsdb_dir = "/home/sam/Dropbox/WORK/InversePharmacologyProject/bsdb/bsdb/bsdb"
+    bsdb_dir = "/Users/sam/Dropbox/WORK/InversePharmacologyProject/bsdb/bsdb/bsdb"
     class_dir = bsdb_dir + "/WEB-INF/classes"
     jar_dir = bsdb_dir + "/WEB-INF/lib/mysql-connector.jar"
     java_dir = class_dir + "/org/bsdb"
