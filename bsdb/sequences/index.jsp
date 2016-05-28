@@ -38,7 +38,7 @@
 		</thead>
 		<tbody>
       <%
-  		String[] rows = Utilities.getSequenceRows(Utilities.getAllSequencesAsObjects());
+  		String[] rows = DatabaseAccess.getSequenceRows();
   		for (String row : rows) {
   			out.println(row);
   		}

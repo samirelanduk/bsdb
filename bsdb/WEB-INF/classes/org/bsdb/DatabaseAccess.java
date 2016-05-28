@@ -117,4 +117,34 @@ public class DatabaseAccess {
 			return null;
 		}
 	}
+
+
+	// Gets HTML rows for each sequence
+	public static String[] getSequenceRows() {
+		ResultSet rs = issuePreparedSqlQuery(
+		 "SELECT s.sequenceId, t.name, s.species, l.name, s.bindSequence, s.proportionalLength, l.approved FROM sequences s INNER JOIN targets t ON s.targetId=t.targetId INNER JOIN ligands l on s.ligandId=l.ligandId ORDER BY s.sequenceId"
+		);
+		if (rs != null) {
+			Object[][] sqlRows = getObjectGridFromResultSet(rs);
+			String[] tableRows = new String[sqlRows.length];
+			for (int i = 0; i < sqlRows.length; i++) {
+				Object[] row = sqlRows[i];
+				int id = (Integer)row[0];
+				String hyperlink = String.format("/ligands/detail.jsp?id=%d", id);
+				String approved = (Boolean)row[6] ? "Yes" : "No";
+				String cells = String.format(
+				 "%s",
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%s'", row[0]),
+					Utilities.enclose("a", String.format("href='%s'", hyperlink), "" + id)
+				 )
+				);
+				tableRows[i] = Utilities.enclose("tr", "", cells);
+			}
+			return tableRows;
+		} else {
+			return null;
+		}
+	}
 }
