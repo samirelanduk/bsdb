@@ -131,14 +131,42 @@ public class DatabaseAccess {
 				Object[] row = sqlRows[i];
 				int id = (Integer)row[0];
 				String hyperlink = String.format("/ligands/detail.jsp?id=%d", id);
+				int length = ((String)row[4]).length();
+				String percent = Utilities.floatToPercentage((Float)row[5]);
 				String approved = (Boolean)row[6] ? "Yes" : "No";
 				String cells = String.format(
-				 "%s",
+				 "%s%s%s%s%s%s%s",
 				 Utilities.enclose(
 				  "td",
 					String.format("value='%s'", row[0]),
 					Utilities.enclose("a", String.format("href='%s'", hyperlink), "" + id)
-				 )
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%s'", (String)row[1]),
+					(String)row[1]
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%s'", (String)row[2]),
+					(String)row[2]
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%s'", (String)row[3]),
+					(String)row[3]
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%d'", length),
+					String.format("%d", length)
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%s'", percent.replace("%", "")),
+					percent
+				 ),
+				 Utilities.enclose("td", "style='display:none;'", approved)
 				);
 				tableRows[i] = Utilities.enclose("tr", "", cells);
 			}

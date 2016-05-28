@@ -10,6 +10,16 @@ public class Utilities {
 		return String.format("<%s %s>%s</%s>", element, attributes, body, element);
 	}
 
+
+  public static String floatToPercentage(float value) {
+    return String.format("%.1f%%", value * 100);
+  }
+
+  
+  public static String divideToPercentage(int val1, int val2) {
+		return floatToPercentage(val1 / Float.valueOf(val2));
+	}
+
   /*public static Object[][] getAllLigandsAsObjects() {
     Object[][] sqlResults;
 
@@ -137,10 +147,6 @@ public class Utilities {
 		html = html.replaceAll("</sub>", "");
 
 		return html;
-	}
-
-	public static String floatToPercentage(float value) {
-		return String.format("%.1f%%", value * 100);
 	}
 
 	public static String divideToPercentage(int val1, int val2) {
