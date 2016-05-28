@@ -44,24 +44,26 @@ public class DatabaseAccess {
 	}
 
 
+	//Takes a ResultSet returned by an SQL query and turns it into an Object array
   public static Object[][] getObjectGridFromResultSet(ResultSet rs) {
-		int rowcount = 0;
-		if (rs.last()) {
-		  rowcount = rs.getRow();
-		  rs.beforeFirst();
-		}
-		int columnCount = rs.getMetaData().getColumnCount();
-		Object[][] rows = new Object[rowcount][columnCount];
-		int i = 0;
-		while (rs.next()) {
-			Object[] values = new Object[columnCount];
-			for (int c = 1; c <= columnCount; c++) {
-				values[c-1] = rs.getObject(c);
+		try {
+			int columnCount = rs.getMetaData().getColumnCount();
+			ArrayList<Object[]> rows = new ArrayList<Object[]>();
+			int i = 0;
+			while (rs.next()) {
+				Object[] values = new Object[columnCount];
+				for (int c = 1; c <= columnCount; c++) {
+					values[c-1] = rs.getObject(c);
+				}
+				rows.add(values);
+				i++;
 			}
-			rows[i] = values;
-			i++;
+	    Object[][] objArray = new Object[rows.size()][columnCount];
+	    objArray = rows.toArray(objArray);
+			return objArray;
+		} catch (SQLException e) {
+			return null;
 		}
-		return rows;
 	}
 
 }
