@@ -1,7 +1,8 @@
 package org.bsdb;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 
 public class DatabaseAccess {
 
@@ -74,48 +75,53 @@ public class DatabaseAccess {
 		);
 		if (rs != null) {
 			Object[][] sqlRows = getObjectGridFromResultSet(rs);
-			String[] tableRows = new String[sqlRows.length];
-			for (int i = 0; i < sqlRows.length; i++) {
-				Object[] row = sqlRows[i];
-				int id = (Integer)row[1];
-				String hyperlink = String.format("/ligands/detail.jsp?id=%d", id);
-				String approved = (Boolean)row[2] ? "Yes" : "No";
-				String synonyms = ((String)row[5]).replace("#", ", ");
-				String cells = String.format(
-				 "%s%s%s%s%s%s",
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%s'", row[0]),
-					Utilities.enclose("a", String.format("href='%s'", hyperlink), (String)row[0])
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%d'", id),
-					"" + id
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%s'", approved),
-					approved
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%s'", (String)row[3]),
-					(String)row[3]
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%f'", (Float)row[4]),
-					String.format("%f", (Float)row[4])
-				 ),
-				 Utilities.enclose("td", "", synonyms)
-				);
-				tableRows[i] = Utilities.enclose("tr", "", cells);
-			}
-			return tableRows;
+			return getLigandRowsFromObjectGrid(sqlRows);
 		} else {
 			return null;
 		}
+	}
+
+
+	public static String[] getLigandRowsFromObjectGrid(Object[][] sqlRows) {
+		String[] tableRows = new String[sqlRows.length];
+		for (int i = 0; i < sqlRows.length; i++) {
+			Object[] row = sqlRows[i];
+			int id = (Integer)row[1];
+			String hyperlink = String.format("/ligands/detail.jsp?id=%d", id);
+			String approved = (Boolean)row[2] ? "Yes" : "No";
+			String synonyms = ((String)row[5]).replace("#", ", ");
+			String cells = String.format(
+			 "%s%s%s%s%s%s",
+			 Utilities.enclose(
+				"td",
+				String.format("value='%s'", row[0]),
+				Utilities.enclose("a", String.format("href='%s'", hyperlink), (String)row[0])
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%d'", id),
+				"" + id
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%s'", approved),
+				approved
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%s'", (String)row[3]),
+				(String)row[3]
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%f'", (Float)row[4]),
+				String.format("%f", (Float)row[4])
+			 ),
+			 Utilities.enclose("td", "", synonyms)
+			);
+			tableRows[i] = Utilities.enclose("tr", "", cells);
+		}
+		return tableRows;
 	}
 
 
@@ -126,54 +132,59 @@ public class DatabaseAccess {
 		);
 		if (rs != null) {
 			Object[][] sqlRows = getObjectGridFromResultSet(rs);
-			String[] tableRows = new String[sqlRows.length];
-			for (int i = 0; i < sqlRows.length; i++) {
-				Object[] row = sqlRows[i];
-				int id = (Integer)row[0];
-				String hyperlink = String.format("/sequences/detail.jsp?id=%d", id);
-				int length = ((String)row[4]).length();
-				String percent = Utilities.floatToPercentage((Float)row[5]);
-				String approved = (Boolean)row[6] ? "Yes" : "No";
-				String cells = String.format(
-				 "%s%s%s%s%s%s%s",
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%s'", row[0]),
-					Utilities.enclose("a", String.format("href='%s'", hyperlink), "" + id)
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%s'", (String)row[1]),
-					(String)row[1]
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%s'", (String)row[2]),
-					(String)row[2]
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%s'", (String)row[3]),
-					(String)row[3]
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%d'", length),
-					String.format("%d", length)
-				 ),
-				 Utilities.enclose(
-				  "td",
-					String.format("value='%s'", percent.replace("%", "")),
-					percent
-				 ),
-				 Utilities.enclose("td", "style='display:none;'", approved)
-				);
-				tableRows[i] = Utilities.enclose("tr", "", cells);
-			}
-			return tableRows;
+			return getSequenceRowsFromObjectGrid(sqlRows);
 		} else {
 			return null;
 		}
+	}
+
+
+	public static String[] getSequenceRowsFromObjectGrid(Object[][] sqlRows) {
+		String[] tableRows = new String[sqlRows.length];
+		for (int i = 0; i < sqlRows.length; i++) {
+			Object[] row = sqlRows[i];
+			int id = (Integer)row[0];
+			String hyperlink = String.format("/sequences/detail.jsp?id=%d", id);
+			int length = ((String)row[4]).length();
+			String percent = Utilities.floatToPercentage((Float)row[5]);
+			String approved = (Boolean)row[6] ? "Yes" : "No";
+			String cells = String.format(
+			 "%s%s%s%s%s%s%s",
+			 Utilities.enclose(
+				"td",
+				String.format("value='%s'", row[0]),
+				Utilities.enclose("a", String.format("href='%s'", hyperlink), "" + id)
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%s'", (String)row[1]),
+				(String)row[1]
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%s'", (String)row[2]),
+				(String)row[2]
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%s'", (String)row[3]),
+				(String)row[3]
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%d'", length),
+				String.format("%d", length)
+			 ),
+			 Utilities.enclose(
+				"td",
+				String.format("value='%s'", percent.replace("%", "")),
+				percent
+			 ),
+			 Utilities.enclose("td", "style='display:none;'", approved)
+			);
+			tableRows[i] = Utilities.enclose("tr", "", cells);
+		}
+		return tableRows;
 	}
 
 
