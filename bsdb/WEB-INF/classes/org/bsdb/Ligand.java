@@ -154,6 +154,6 @@ public class Ligand {
 
 	public void setSynonyms(String[] synonyms) {
 		this.synonyms = synonyms;
-	}*/
+	}
 
 }
