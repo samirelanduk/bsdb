@@ -10,7 +10,7 @@ public class LigandLink {
 	public LigandLink(Object[] fields) {
 		this.accession = (String)fields[0];
 		this.database = (String)fields[1];
-		this.url = ((String)fields[2]).contains(".") ? (String)fields[3] : "";
+		this.url = ((String)fields[2]) != null ? (String)fields[2] : "";
 	}
 
 	public String getHtml() {

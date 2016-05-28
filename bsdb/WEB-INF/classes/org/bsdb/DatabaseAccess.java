@@ -177,6 +177,17 @@ public class DatabaseAccess {
 	}
 
 
+	// Get Ligand Object by ID
+	public static Ligand getLigand(int ligandId)  {
+		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+		 "SELECT * FROM ligands WHERE ligandId=?",
+		 ligandId
+		);
+		Object[][] sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
+		return new Ligand(sqlResults[0]);
+	}
+
+
 	// Get all LigandLinks for a given Ligand
 	public static LigandLink[] getLigandLinks(int ligandId) {
 		LigandLink[] links;

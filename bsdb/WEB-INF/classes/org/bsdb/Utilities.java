@@ -15,9 +15,23 @@ public class Utilities {
     return String.format("%.1f%%", value * 100);
   }
 
-  
+
   public static String divideToPercentage(int val1, int val2) {
 		return floatToPercentage(val1 / Float.valueOf(val2));
+	}
+
+
+  public static boolean validParam(HttpServletRequest request, String param) {
+		String paramValue = request.getParameter(param);
+		if (paramValue == null) {
+			return false;
+		}
+		for (int i = 0; i < paramValue.length(); i++) {
+			if (!("0123456789".contains(paramValue.subSequence(i, i+1)))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
   /*public static Object[][] getAllLigandsAsObjects() {

@@ -36,7 +36,7 @@ public class Ligand {
 		this.surfaceArea = (Float)fields[9];
 		this.mass = (Float)fields[10];
 		this.logP = (Float)fields[11];
-		this.lipinksi = (Integer)fields[11];
+		this.lipinksi = (Integer)fields[12];
 		this.synonyms = ((String)fields[13]).split("#");
 	}
 

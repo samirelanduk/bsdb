@@ -3,12 +3,9 @@
 <%
 	Ligand ligand;
 	if (Utilities.validParam(request, "id")) {
-		try {
-			ligand = Utilities.getLigand(Integer.parseInt(request.getParameter("id")));
-		} catch (ArrayIndexOutOfBoundsException e) {
-			response.sendRedirect("/ligands");
-			ligand = new Ligand();
-		}
+		ligand = DatabaseAccess.getLigand(
+		 Integer.parseInt(request.getParameter("id"))
+		);
 	} else {
 		response.sendRedirect("/ligands");
 		ligand = new Ligand();
@@ -113,20 +110,20 @@
 		</td>
 	</tr>
 
-	<tr>
+	<!--<tr>
 		<td class="col" colspan="2">
 			<div class="box">
 				<div class="box_title">
 					Responsive Sequences
 				</div>
-				<%
+				<%/*
 				for (Sequence sequence : Utilities.getLigandSequences(ligand.getLigandId())) {
 					out.println(sequence.getConciseHtml());
-				}
+				}*/
 				%>
 			</div>
 		</td>
-	</tr>
+	</tr>-->
 </table>
 
 
