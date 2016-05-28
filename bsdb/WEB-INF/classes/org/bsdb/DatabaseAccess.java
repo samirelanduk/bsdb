@@ -82,12 +82,33 @@ public class DatabaseAccess {
 				String approved = (Boolean)row[2] ? "Yes" : "No";
 				String synonyms = ((String)row[5]).replace("#", ", ");
 				String cells = String.format(
-				 "%s",
+				 "%s%s%s%s%s%s",
 				 Utilities.enclose(
 				  "td",
 					String.format("value='%s'", row[0]),
 					Utilities.enclose("a", String.format("href='%s'", hyperlink), (String)row[0])
-				 )
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%d'", id),
+					"" + id
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%s'", approved),
+					approved
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%s'", (String)row[3]),
+					(String)row[3]
+				 ),
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%f'", (Float)row[4]),
+					String.format("%f", (Float)row[4])
+				 ),
+				 Utilities.enclose("td", "", synonyms)
 				);
 				tableRows[i] = Utilities.enclose("tr", "", cells);
 			}
