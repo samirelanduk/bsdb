@@ -40,7 +40,7 @@
 		</thead>
 		<tbody>
       <%
-  		String[] rows = Utilities.getLigandRows(Utilities.getAllLigandsAsObjects());
+  		String[] rows = DatabaseAccess.getLigandRows();
   		for (String row : rows) {
   			out.println(row);
   		}

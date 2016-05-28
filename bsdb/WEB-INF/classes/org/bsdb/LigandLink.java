@@ -2,7 +2,7 @@ package org.bsdb;
 
 public class LigandLink {
 
-	private int linkId;
+	/*private int linkId;
 	private String accession;
 	private String database;
 	private String url;
@@ -53,6 +53,6 @@ public class LigandLink {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
+	}*/
 
 }

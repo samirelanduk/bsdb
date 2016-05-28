@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class Sequence {
 
-	private int interactionId;
+	/*private int interactionId;
 	private Ligand ligand;
 	private Target target;
 	private String species;
@@ -217,5 +217,5 @@ public class Sequence {
 
 	public void setChain(String chain) {
 		this.chain = chain;
-	}
+	}*/
 }

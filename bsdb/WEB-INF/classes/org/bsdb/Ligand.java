@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class Ligand {
 
-	private int ligandId;
+	 /*private int ligandId;
 	private String name;
 	private String type;
 	private boolean radioactive;
@@ -194,6 +194,6 @@ public class Ligand {
 
 	public void setSynonyms(String[] synonyms) {
 		this.synonyms = synonyms;
-	}
+	}*/
 
 }

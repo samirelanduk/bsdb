@@ -6,7 +6,11 @@ import java.util.*;
 
 public class Utilities {
 
-  public static Object[][] getAllLigandsAsObjects() {
+  public static String enclose(String element, String attributes, String body) {
+		return String.format("<%s %s>%s</%s>", element, attributes, body, element);
+	}
+
+  /*public static Object[][] getAllLigandsAsObjects() {
     Object[][] sqlResults;
 
     try {
@@ -23,37 +27,12 @@ public class Utilities {
       sqlResults[0][2] = false;
       sqlResults[0][3] = "";
       sqlResults[0][4] = 0.0f;
-      sqlResults[0][5] = "";*/
+      sqlResults[0][5] = "";
       sqlResults = new Object[0][0];
 
     }
     return sqlResults;
   }
-
-
-  public static String[] getLigandRows(Object[][] sqlResults) {
-		String[] rows = new String[sqlResults.length];
-
-		for (int i = 0; i < rows.length; i++) {
-			Object[] sqlRow = sqlResults[i];
-			String name = (String)sqlRow[0];
-			int id = (Integer)sqlRow[1];
-			String hyperlink = String.format("/ligands/detail.jsp?id=%d", id);
-			String approved = (Boolean)sqlRow[2] ? "Yes" : "No";
-			String type = (String)sqlRow[3];
-			float mass = (Float)sqlRow[4];
-			String synonyms = ((String)sqlRow[5]).replace("#", ", ");
-			String cells = String.format("%s%s%s%s%s%s",
-					enclose("td", "value=\"" + name + "\"", enclose("a",String.format("href='%s'", hyperlink), name)),
-					enclose("td", "value=\"" + id + "\"", "" + id),
-					enclose("td", "value=\"" + approved + "\"", approved),
-					enclose("td", "value=\"" + type + "\"", type),
-					enclose("td", "value=\"" + mass + "\"", String.format("%f", mass)),
-					enclose("td", "", synonyms));
-			rows[i] = enclose("tr", "", cells);
-		}
-		return rows;
-	}
 
 
   public static Object[][] getAllSequencesAsObjects() {
@@ -150,9 +129,7 @@ public class Utilities {
 	}
 
 
-  public static String enclose(String element, String attributes, String body) {
-		return String.format("<%s %s>%s</%s>", element, attributes, body, element);
-	}
+
 
 
   public static String stripHtml(String html) {
@@ -402,7 +379,7 @@ public class Utilities {
       sqlResults[0][2] = false;
       sqlResults[0][3] = "";
       sqlResults[0][4] = 0.0f;
-      sqlResults[0][5] = "";*/
+      sqlResults[0][5] = "";
       sqlResults = new Object[0][0];
 		}
 		ligandRows = getLigandRows(sqlResults);
@@ -494,12 +471,12 @@ public class Utilities {
       sqlResults[0][2] = false;
       sqlResults[0][3] = "";
       sqlResults[0][4] = 0.0f;
-      sqlResults[0][5] = "";*/
+      sqlResults[0][5] = "";*
       sqlResults = new Object[0][0];
 		}
 		sequenceRows = getSequenceRows(sqlResults);
 		return sequenceRows;
-	}
+	}*/
 
 
 }

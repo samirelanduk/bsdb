@@ -1,6 +1,7 @@
 package org.bsdb;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseAccess {
 
@@ -66,4 +67,33 @@ public class DatabaseAccess {
 		}
 	}
 
+	// Gets HTML rows for each ligand
+	public static String[] getLigandRows() {
+		ResultSet rs = issuePreparedSqlQuery(
+		 "SELECT name, ligandId, approved, type, mass, synonyms FROM ligands"
+		);
+		if (rs != null) {
+			Object[][] sqlRows = getObjectGridFromResultSet(rs);
+			String[] tableRows = new String[sqlRows.length];
+			for (int i = 0; i < sqlRows.length; i++) {
+				Object[] row = sqlRows[i];
+				int id = (Integer)row[1];
+				String hyperlink = String.format("/ligands/detail.jsp?id=%d", id);
+				String approved = (Boolean)row[2] ? "Yes" : "No";
+				String synonyms = ((String)row[5]).replace("#", ", ");
+				String cells = String.format(
+				 "%s",
+				 Utilities.enclose(
+				  "td",
+					String.format("value='%s'", row[0]),
+					Utilities.enclose("a", String.format("href='%s'", hyperlink), (String)row[0])
+				 )
+				);
+				tableRows[i] = Utilities.enclose("tr", "", cells);
+			}
+			return tableRows;
+		} else {
+			return null;
+		}
+	}
 }

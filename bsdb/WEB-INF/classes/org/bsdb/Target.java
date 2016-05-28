@@ -2,7 +2,7 @@ package org.bsdb;
 
 public class Target {
 
-	private int targetId;
+	/*private int targetId;
 	private String name;
 	private String type;
 	private boolean subunit;
@@ -59,5 +59,5 @@ public class Target {
 
 	public void setComplex(boolean complex) {
 		this.complex = complex;
-	}
+	}*/
 }
