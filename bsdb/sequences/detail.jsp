@@ -4,7 +4,7 @@
 	Sequence sequence;
 	if (Utilities.validParam(request, "id")) {
 		try {
-			sequence = Utilities.getSequence(Integer.parseInt(request.getParameter("id")));
+			sequence = DatabaseAccess.getSequence(Integer.parseInt(request.getParameter("id")));
 		} catch (ArrayIndexOutOfBoundsException e) {
 			response.sendRedirect("/sequences");
 			sequence = new Sequence();
@@ -38,7 +38,8 @@
 				<div class="box_title">
 					Structure
 				</div>
-				<img class="fill" src="/static/images/pymol/<% out.print(sequence.getInteractionId()); %>.png">
+
+				<!--<img class="fill" src="/static/images/pymol/<% out.print(sequence.getSequenceId()); %>.png">-->
 			</div>
 		</td>
 	</tr>
@@ -67,10 +68,6 @@
 						<tr>
 							<td class="field">PDB code</td>
 							<td class="value"><% out.print(sequence.getPdb()); %></td>
-						</tr>
-						<tr>
-							<td class="field">HET name</td>
-							<td class="value"><% out.print(sequence.getHetName()); %></td>
 						</tr>
 						<tr>
 							<td class="field">HET ID</td>
@@ -104,7 +101,7 @@
 						</tr>
 						<tr>
 							<td class="field">Proportion of original chain length</td>
-							<td class="value"><% out.print(Utilities.divideToPercentage(sequence.getSequence().length(), sequence.getOriginalChainLength())); %></td>
+							<td class="value"><% out.print(Utilities.floatToPercentage(sequence.getProportionalLength())); %></td>
 						</tr>
 						<tr>
 							<td class="field">Internal contacts</td>
@@ -116,23 +113,23 @@
 						</tr>
 						<tr>
 							<td class="field">Contact ratio</td>
-							<td class="value"><% out.print(Utilities.divideToPercentage(sequence.getExternalContacts(), sequence.getInternalContacts())); %></td>
+							<td class="value"><% out.print(Utilities.floatToPercentage(sequence.getContactRatio() / 10)); %></td>
 						</tr>
 					</table>
 			</div>
 		</td>
 	</tr>
 
-	<tr>
+	<!--<tr>
 		<td class="col" colspan="2">
 			<div class="box">
 				<div class="box_title">
 					Residue Distances
 				</div>
-				<iframe seamless='seamless' width="750px" height="750px" src="/static/svg/<% out.print(sequence.getInteractionId()); %>.html"></iframe>
+				<iframe seamless='seamless' width="750px" height="750px" src="/static/svg/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
 			</div>
 		</td>
-	</tr>
+	</tr>-->
 </table>
 
 

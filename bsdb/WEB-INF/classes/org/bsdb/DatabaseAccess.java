@@ -122,7 +122,7 @@ public class DatabaseAccess {
 	// Gets HTML rows for each sequence
 	public static String[] getSequenceRows() {
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT s.sequenceId, t.name, s.species, l.name, s.bindSequence, s.proportionalLength, l.approved FROM sequences s INNER JOIN targets t ON s.targetId=t.targetId INNER JOIN ligands l on s.ligandId=l.ligandId ORDER BY s.sequenceId"
+		 "SELECT s.sequenceId, t.name, s.species, l.name, s.sequence, s.proportionalLength, l.approved FROM sequences s INNER JOIN targets t ON s.targetId=t.targetId INNER JOIN ligands l on s.ligandId=l.ligandId ORDER BY s.sequenceId"
 		);
 		if (rs != null) {
 			Object[][] sqlRows = getObjectGridFromResultSet(rs);
@@ -130,7 +130,7 @@ public class DatabaseAccess {
 			for (int i = 0; i < sqlRows.length; i++) {
 				Object[] row = sqlRows[i];
 				int id = (Integer)row[0];
-				String hyperlink = String.format("/ligands/detail.jsp?id=%d", id);
+				String hyperlink = String.format("/sequences/detail.jsp?id=%d", id);
 				int length = ((String)row[4]).length();
 				String percent = Utilities.floatToPercentage((Float)row[5]);
 				String approved = (Boolean)row[6] ? "Yes" : "No";
@@ -185,6 +185,28 @@ public class DatabaseAccess {
 		);
 		Object[][] sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
 		return new Ligand(sqlResults[0]);
+	}
+
+
+	// Get Target Object by ID
+	public static Target getTarget(int targetId)  {
+		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+		 "SELECT * FROM targets WHERE targetId=?",
+		 targetId
+		);
+		Object[][] sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
+		return new Target(sqlResults[0]);
+	}
+
+
+	// Get Sequence Object by ID
+	public static Sequence getSequence(int sequenceId)  {
+		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+		 "SELECT * FROM sequences WHERE sequenceId=?",
+		 sequenceId
+		);
+		Object[][] sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
+		return new Sequence(sqlResults[0]);
 	}
 
 

@@ -33,17 +33,17 @@ public class Sequence {
 	public Sequence(Object[] fields) {
 		this.sequenceId = (Integer)fields[0];
 		try {
-			this.ligand = Utilities.getLigand((Integer)fields[1]);
+			this.ligand = DatabaseAccess.getLigand((Integer)fields[1]);
 		} catch (IndexOutOfBoundsException ce) {
 			this.ligand = new Ligand();
 		}
 		try {
-			this.target = Utilities.getTarget((Integer)fields[2]);
+			this.target = DatabaseAccess.getTarget((Integer)fields[2]);
 		} catch (IndexOutOfBoundsException ce) {
 			this.target = new Target();
 		}
 		this.species = (String)fields[3];
-		this.type = (String)fields[4]
+		this.type = (String)fields[4];
 		this.action = (String)fields[5];
 		this.affinity = (float)fields[6];
 		this.affinityRange = (String)fields[7];
@@ -64,7 +64,11 @@ public class Sequence {
 		String contents = Utilities.enclose(
 				"a",
 				String.format("href='/sequences/detail.jsp?id=%d'", getSequenceId()),
-				String.format("%s (%d residues)", getTarget().getName(), getLength())
+				String.format(
+				 "%s (%d residues)",
+				 getTarget().getName(),
+				 getSequence().length()
+				)
 		);
 		return Utilities.enclose("div", "class='sequence_link'", contents);
 	}
@@ -238,7 +242,7 @@ public class Sequence {
 	}
 
 
-	public float setProportionalLength(int proportionalLength) {
+	public void setProportionalLength(float proportionalLength) {
 		this.proportionalLength = proportionalLength;
 	}
 
@@ -268,7 +272,7 @@ public class Sequence {
 	}
 
 
-	public float setContactRatio(int contactRatio) {
+	public void setContactRatio(float contactRatio) {
 		this.contactRatio = contactRatio;
 	}
 }
