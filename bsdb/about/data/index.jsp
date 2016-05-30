@@ -9,12 +9,14 @@ for (int i = 0; i < ligandMassBins.length; i++) {
 	ligandMassBins[i] = "'" + (String)ligandMassDistribution[i][0] + "'";
 	ligandMasses[i] = (Long)ligandMassDistribution[i][1];
 }
+long[] ligandApprovalCounts = DatabaseAccess.getLigandApprovalCounts();
 %>
 
 <%@include file="/includes/start.html"%>
 <title>Data and Statistics - BindSequenceDB</title>
 <link rel="stylesheet" type="text/css" href="/css/charts.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.jquery.com/jquery.min.js"></script>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Data and Statistics</h1>
@@ -43,36 +45,63 @@ for (int i = 0; i < ligandMassBins.length; i++) {
 							<tr><td>Antibody</td><td><% out.print(ligandTypeCounts[6]); %></td></tr>
 						</table>
 					</td><td>
-						<canvas id="ligandTypeChart"></canvas>
+
+						<div id="ligandTypesChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 						<script>
-						var ctx = document.getElementById("ligandTypeChart");
-						var myChart = new Chart(ctx, {
-						    type: 'pie',
-						    data: {
-						        labels: ["Synthetic Organic", "Metabolite", "Natural Product", "Endogenous Peptide", "Other Peptide", "Inorganic", "Antibody"],
-						        datasets: [{
-						            label: 'Count',
-						            data: <% out.print(Arrays.toString(ligandTypeCounts)); %>,
-						            backgroundColor: [
-						                'rgba(255, 99, 132, 0.2)',
-						                'rgba(54, 162, 235, 0.2)',
-						                'rgba(255, 206, 86, 0.2)',
-						                'rgba(75, 192, 192, 0.2)',
-						                'rgba(153, 102, 255, 0.2)',
-						                'rgba(255, 159, 64, 0.2)'
-						            ],
-						            borderColor: [
-						                'rgba(255,99,132,1)',
-						                'rgba(54, 162, 235, 1)',
-						                'rgba(255, 206, 86, 1)',
-						                'rgba(75, 192, 192, 1)',
-						                'rgba(153, 102, 255, 1)',
-						                'rgba(255, 159, 64, 1)'
-						            ],
-						            borderWidth: 1
-						        }]
-						    }
-						});
+							var chart = new Highcharts.Chart({
+				        chart: {
+			            plotBackgroundColor: null,
+			            plotBorderWidth: null,
+			            plotShadow: false,
+			            type: 'pie',
+									renderTo: 'ligandTypesChart'
+				        },
+				        title: {
+			            text: 'Ligand Types'
+				        },
+				        tooltip: {
+			            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				        },
+				        plotOptions: {
+			            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+	                    enabled: true,
+	                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+	                    style: {
+	                    	color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+	                    }
+		                }
+			            }
+				        },
+				        series: [{
+			            name: 'Proportion',
+			            colorByPoint: true,
+			            data: [{
+		                name: 'Synthetic Organic',
+		                y: <% out.print(ligandTypeCounts[0]); %>
+			            }, {
+		                name: 'Metabolite',
+		                y: <% out.print(ligandTypeCounts[1]); %>
+			            }, {
+		                name: 'Natural Product',
+		                y: <% out.print(ligandTypeCounts[2]); %>
+			            }, {
+		                name: 'Endogenous Peptide',
+		                y: <% out.print(ligandTypeCounts[3]); %>
+			            }, {
+		                name: 'Other Peptide',
+		                y: <% out.print(ligandTypeCounts[4]); %>
+			            }, {
+		                name: 'Inorganic',
+		                y: <% out.print(ligandTypeCounts[5]); %>
+			            }, {
+		                name: 'Antibody',
+		                y:<% out.print(ligandTypeCounts[6]); %>
+			            }]
+				        }]
+						  });
 						</script>
 					</td>
 				</tr>
@@ -99,21 +128,50 @@ for (int i = 0; i < ligandMassBins.length; i++) {
 
 						</table>
 					</td><td>
-						<canvas id="ligandMassChart"></canvas>
+						<div id="ligandMassChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 						<script>
-						var ctx = document.getElementById("ligandMassChart");
-						var myChart = new Chart(ctx, {
-						    type: 'bar',
-						    data: {
-						        labels: <% out.print(Arrays.toString(ligandMassBins)); %>,
-						        datasets: [{
-												label: "Number of ligands",
-						            data: <% out.print(Arrays.toString(ligandMasses)); %>,
-						            borderWidth: 1,
-												backgroundColor: "rgba(255,99,132,0.8)"
-						        }]
-						    }
-						});
+					    var chart = new Highcharts.Chart({
+					        chart: {
+					            type: 'column',
+											renderTo: 'ligandMassChart'
+					        },
+					        title: {
+					            text: 'Ligand Mass Distribution'
+					        },
+					        xAxis: {
+					            categories: [
+												<% for (int i = 0; i < ligandMassDistribution.length; i++) {
+															out.println(String.format("'%s',", ligandMassDistribution[i][0]));
+												} %>
+					            ],
+					            crosshair: true
+					        },
+					        yAxis: {
+					            min: 0,
+					            title: {
+					                text: 'Count'
+					            }
+					        },
+					        tooltip: {
+					            headerFormat: '<span style="font-size:10px">{point.key} Da</span><table>',
+					            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+					                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+					            footerFormat: '</table>',
+					            shared: true,
+					            useHTML: true
+					        },
+					        plotOptions: {
+					            column: {
+					                pointPadding: 0.2,
+					                borderWidth: 0
+					            }
+					        },
+					        series: [{
+					            name: 'Ligand Count',
+					            data: <% out.print(Arrays.toString(ligandMasses)); %>
+
+					        }]
+					    });
 						</script>
 					</td>
 				</tr>
@@ -127,9 +185,63 @@ for (int i = 0; i < ligandMassBins.length; i++) {
 		</div>
 		<div class="box_body">
 			<div class="explanation">
+				A breakdown of the ligands in the BSDB database by approval status.
 			</div>
-			<svg>
-			</svg>
+			<table class="boxtable">
+				<tr>
+					<td>
+						<table class="datatable">
+							<tr><td>Approved</td><td><% out.print(ligandApprovalCounts[0]); %></td></tr>
+							<tr><td>Not Approved</td><td><% out.print(ligandApprovalCounts[1]); %></td></tr>
+						</table>
+					</td><td>
+					<div id="ligandApprovalChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+					<script>
+						var chart = new Highcharts.Chart({
+							chart: {
+								plotBackgroundColor: null,
+								plotBorderWidth: null,
+								plotShadow: false,
+								type: 'pie',
+								renderTo: 'ligandApprovalChart'
+							},
+							title: {
+								text: 'Ligand Approval'
+							},
+							tooltip: {
+								pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+							},
+							plotOptions: {
+								pie: {
+									allowPointSelect: true,
+									cursor: 'pointer',
+									dataLabels: {
+										enabled: true,
+										format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+										style: {
+											color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+										}
+									}
+								}
+							},
+							series: [{
+								name: 'Proportion',
+								colorByPoint: true,
+								data: [{
+									name: 'Approved',
+									y: <% out.print(ligandApprovalCounts[0]); %>,
+									color: '#2ECC40'
+								}, {
+									name: 'Not Approved',
+									y: <% out.print(ligandApprovalCounts[1]); %>,
+									color: '#FF4136'
+								}]
+							}]
+						});
+					</script>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 

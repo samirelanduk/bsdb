@@ -28,7 +28,6 @@ table.datatable {
 }
 
 canvas {
-  margin-left: 20px;
-  margin-right: 20px;
-  box-model: border-box;
+  margin-left: auto;
+  margin-right: auto;
 }

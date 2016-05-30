@@ -288,4 +288,19 @@ public class DatabaseAccess {
 		}
 		return ligandMassDistribution;
 	}
+
+
+	// Get ligand approval counts
+	public static long[] getLigandApprovalCounts() {
+		long[] ligandApprovalCounts = new long[2];
+		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+		 "SELECT COUNT(*) FROM ligands WHERE approved=true"
+		);
+		ligandApprovalCounts[0] = (Long)getObjectGridFromResultSet(rs)[0][0];
+		rs = DatabaseAccess.issuePreparedSqlQuery(
+		 "SELECT COUNT(*) FROM ligands WHERE approved=false"
+		);
+		ligandApprovalCounts[1] = (Long)getObjectGridFromResultSet(rs)[0][0];
+		return ligandApprovalCounts;
+	}
 }
