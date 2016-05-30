@@ -255,7 +255,7 @@ public class DatabaseAccess {
 	}
 
 
-	public static Object[][] getLigandMassDsitribution() {
+	public static Object[][] getLigandMassDistribution() {
 		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
 		 "SELECT mass FROM ligands ORDER BY mass DESC"
 		);
@@ -272,9 +272,9 @@ public class DatabaseAccess {
 		}
 		String label;
 		long count;
-		double binCount = Math.ceil(masses[0] / 50);
+		int binCount = boundaries.size() - 1;
 
-		Object[][] ligandMassDistribution = new Object[(int)binCount][2];
+		Object[][] ligandMassDistribution = new Object[binCount][2];
 		for (int i = 1; i < boundaries.size(); i++) {
 			label = String.format("%d - %d", boundaries.get(i - 1), boundaries.get(i));
 			count = 0;
@@ -320,5 +320,40 @@ public class DatabaseAccess {
 			sequenceTypeCounts[i] = (Long)getObjectGridFromResultSet(rs)[0][0];
 		}
 		return sequenceTypeCounts;
+	}
+
+
+	public static Object[][] getSequenceLengthDistribution() {
+		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+		 "SELECT length(sequence) FROM sequences ORDER BY length(sequence) DESC"
+		);
+		Object[][] grid = getObjectGridFromResultSet(rs);
+		int[] lengths = new int[grid.length];
+		for (int i = 0; i < grid.length; i++) {
+			lengths[i] = (int)grid[i][0];
+		}
+		ArrayList<Integer> boundaries = new ArrayList<Integer>();
+		int value = 0;
+		boundaries.add(value);
+		while (boundaries.get(boundaries.size() - 1) < lengths[0]) {
+			boundaries.add(boundaries.get(boundaries.size() - 1) + 50);
+		}
+		String label;
+		long count;
+		int binCount = boundaries.size() - 1;
+
+		Object[][] sequenceLengthDistribution = new Object[binCount][2];
+		for (int i = 1; i < boundaries.size(); i++) {
+			label = String.format("%d - %d", boundaries.get(i - 1), boundaries.get(i));
+			count = 0;
+			for (int length : lengths) {
+				if ((length > boundaries.get(i - 1)) && (length <= boundaries.get(i))) {
+					count++;
+				}
+			}
+			sequenceLengthDistribution[i - 1][0] = label;
+			sequenceLengthDistribution[i - 1][1] = count;
+		}
+		return sequenceLengthDistribution;
 	}
 }

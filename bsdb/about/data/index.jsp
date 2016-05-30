@@ -2,7 +2,7 @@
 <%@ page import = "java.util.*" %>
 <%
 long[] ligandTypeCounts = DatabaseAccess.getLigandTypeCounts();
-Object[][] ligandMassDistribution = DatabaseAccess.getLigandMassDsitribution();
+Object[][] ligandMassDistribution = DatabaseAccess.getLigandMassDistribution();
 String[] ligandMassBins = new String[ligandMassDistribution.length];
 long[] ligandMasses = new long[ligandMassDistribution.length];
 for (int i = 0; i < ligandMassBins.length; i++) {
@@ -11,6 +11,13 @@ for (int i = 0; i < ligandMassBins.length; i++) {
 }
 long[] ligandApprovalCounts = DatabaseAccess.getLigandApprovalCounts();
 long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
+Object[][] sequenceLengthDistribution = DatabaseAccess.getSequenceLengthDistribution();
+String[] sequenceLengthBins = new String[sequenceLengthDistribution.length];
+long[] sequenceLengths = new long[sequenceLengthDistribution.length];
+for (int i = 0; i < sequenceLengthBins.length; i++) {
+	sequenceLengthBins[i] = "'" + (String)sequenceLengthDistribution[i][0] + "'";
+	sequenceLengths[i] = (Long)sequenceLengthDistribution[i][1];
+}
 %>
 
 <%@include file="/includes/start.html"%>
@@ -346,13 +353,71 @@ long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
 
 	<div class="box">
 		<div class="box_title">
-			Sequences by Mass
+			Sequences by Length
 		</div>
 		<div class="box_body">
 			<div class="explanation">
+				A breakdown of the sequences in the BSDB database by sequence length.
 			</div>
-			<svg>
-			</svg>
+			<table class="boxtable">
+				<tr>
+					<td>
+						<table class="datatable">
+							<thead><th>Sequence Length (residues)</th><th>Count</th></thead>
+							<% for (int i = 0; i < sequenceLengthDistribution.length; i++) {
+										out.println(String.format("<tr><td>%s</td><td>%d</td</tr>", sequenceLengthDistribution[i][0], sequenceLengthDistribution[i][1]));
+							} %>
+
+						</table>
+					</td><td>
+						<div id="sequenceLengthChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+						<script>
+					    var chart = new Highcharts.Chart({
+					        chart: {
+					            type: 'column',
+											renderTo: 'sequenceLengthChart'
+					        },
+					        title: {
+					            text: 'Sequence Length Distribution'
+					        },
+					        xAxis: {
+					            categories: [
+												<% for (int i = 0; i < sequenceLengthDistribution.length; i++) {
+															out.println(String.format("'%s',", sequenceLengthDistribution[i][0]));
+												} %>
+					            ],
+					            crosshair: true
+					        },
+					        yAxis: {
+					            min: 0,
+					            title: {
+					                text: 'Count'
+					            }
+					        },
+					        tooltip: {
+					            headerFormat: '<span style="font-size:10px">{point.key} residues</span><table>',
+					            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+					                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+					            footerFormat: '</table>',
+					            shared: true,
+					            useHTML: true
+					        },
+					        plotOptions: {
+					            column: {
+					                pointPadding: 0.2,
+					                borderWidth: 0
+					            }
+					        },
+					        series: [{
+					            name: 'Sequence Count',
+					            data: <% out.print(Arrays.toString(sequenceLengths)); %>
+
+					        }]
+					    });
+						</script>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 
