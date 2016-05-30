@@ -17,7 +17,7 @@ table.datatable {
   border-collapse: collapse;
 }
 
-.datatable td {
+.datatable td, th {
   border: 1px solid #666666;
   padding: 10px;
 }

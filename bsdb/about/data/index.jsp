@@ -1,7 +1,14 @@
 <%@ page import = "org.bsdb.*" %>
-<%@ page import = "java.util.Arrays" %>
+<%@ page import = "java.util.*" %>
 <%
 long[] ligandTypeCounts = DatabaseAccess.getLigandTypeCounts();
+Object[][] ligandMassDistribution = DatabaseAccess.getLigandMassDsitribution();
+String[] ligandMassBins = new String[ligandMassDistribution.length];
+long[] ligandMasses = new long[ligandMassDistribution.length];
+for (int i = 0; i < ligandMassBins.length; i++) {
+	ligandMassBins[i] = "'" + (String)ligandMassDistribution[i][0] + "'";
+	ligandMasses[i] = (Long)ligandMassDistribution[i][1];
+}
 %>
 
 <%@include file="/includes/start.html"%>
@@ -79,9 +86,38 @@ long[] ligandTypeCounts = DatabaseAccess.getLigandTypeCounts();
 		</div>
 		<div class="box_body">
 			<div class="explanation">
+				A breakdown of the ligands in the BSDB database by mass.
 			</div>
-			<svg>
-			</svg>
+			<table class="boxtable">
+				<tr>
+					<td>
+						<table class="datatable">
+							<thead><th>Ligand Mass (Da)</th><th>Count</th></thead>
+							<% for (int i = 0; i < ligandMassDistribution.length; i++) {
+										out.println(String.format("<tr><td>%s</td><td>%d</td</tr>", ligandMassDistribution[i][0], ligandMassDistribution[i][1]));
+							} %>
+
+						</table>
+					</td><td>
+						<canvas id="ligandMassChart"></canvas>
+						<script>
+						var ctx = document.getElementById("ligandMassChart");
+						var myChart = new Chart(ctx, {
+						    type: 'bar',
+						    data: {
+						        labels: <% out.print(Arrays.toString(ligandMassBins)); %>,
+						        datasets: [{
+												label: "Number of ligands",
+						            data: <% out.print(Arrays.toString(ligandMasses)); %>,
+						            borderWidth: 1,
+												backgroundColor: "rgba(255,99,132,0.8)"
+						        }]
+						    }
+						});
+						</script>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 

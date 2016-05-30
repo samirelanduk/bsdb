@@ -253,4 +253,39 @@ public class DatabaseAccess {
 		}
 		return ligandTypeCounts;
 	}
+
+
+	public static Object[][] getLigandMassDsitribution() {
+		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+		 "SELECT mass FROM ligands ORDER BY mass DESC"
+		);
+		Object[][] grid = getObjectGridFromResultSet(rs);
+		float[] masses = new float[grid.length];
+		for (int i = 0; i < grid.length; i++) {
+			masses[i] = (float)grid[i][0];
+		}
+		ArrayList<Integer> boundaries = new ArrayList<Integer>();
+		int value = 0;
+		boundaries.add(value);
+		while (boundaries.get(boundaries.size() - 1) < masses[0]) {
+			boundaries.add(boundaries.get(boundaries.size() - 1) + 50);
+		}
+		String label;
+		long count;
+		double binCount = Math.ceil(masses[0] / 50);
+
+		Object[][] ligandMassDistribution = new Object[(int)binCount][2];
+		for (int i = 1; i < boundaries.size(); i++) {
+			label = String.format("%d - %d", boundaries.get(i - 1), boundaries.get(i));
+			count = 0;
+			for (float mass : masses) {
+				if ((mass > boundaries.get(i - 1)) && (mass <= boundaries.get(i))) {
+					count++;
+				}
+			}
+			ligandMassDistribution[i - 1][0] = label;
+			ligandMassDistribution[i - 1][1] = count;
+		}
+		return ligandMassDistribution;
+	}
 }
