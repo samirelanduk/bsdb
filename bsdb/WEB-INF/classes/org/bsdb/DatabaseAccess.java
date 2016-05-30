@@ -235,4 +235,22 @@ public class DatabaseAccess {
 		}
 		return links;
 	}
+
+
+	// Get ligand type counts
+	public static long[] getLigandTypeCounts() {
+		String[] ligandTypes = {
+			 "Synthetic organic", "Metabolite", "Natural product",
+			 "Endogenous peptide", "Other peptide", "Inorganic", "Antibody"
+		};
+		long[] ligandTypeCounts = new long[7];
+		for (int i = 0; i < 7; i++) {
+			ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+			 "SELECT COUNT(*) FROM ligands WHERE type=?",
+			 ligandTypes[i]
+			);
+			ligandTypeCounts[i] = (Long)getObjectGridFromResultSet(rs)[0][0];
+		}
+		return ligandTypeCounts;
+	}
 }
