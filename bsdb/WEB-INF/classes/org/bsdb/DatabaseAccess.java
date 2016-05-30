@@ -356,4 +356,27 @@ public class DatabaseAccess {
 		}
 		return sequenceLengthDistribution;
 	}
+
+
+	public static	ArrayList<int[][]> getSequenceContiguity() {
+		String[] targetTypes = {
+			 "GPCR", "LGIC", "VGIC", "OtherIC", "NHR", "Enzyme", "CatalyticReceptor",
+			 "Transporter", "OtherProtein"
+		};
+		ArrayList<int[][]> sequenceContiguity = new ArrayList<int[][]>();
+		for (int i = 0; i < targetTypes.length; i++) {
+			ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+			 "SELECT sequences.sequence, sequences.bindingResidues FROM sequences LEFT JOIN targets ON sequences.targetId=targets.targetId WHERE targets.type=?",
+			 targetTypes[i]
+			);
+			Object[][] grid = getObjectGridFromResultSet(rs);
+			int[][] typeContiguity = new int[grid.length][2];
+			for (int t = 0; t < grid.length; t++) {
+				typeContiguity[t][0] = ((String)(grid[t][0])).length();
+				typeContiguity[t][1] = ((String)(grid[t][1])).length() - ((String)(grid[t][1])).replace(",", "").length();
+			}
+			sequenceContiguity.add(typeContiguity);
+		}
+		return sequenceContiguity;
+	}
 }

@@ -18,6 +18,7 @@ for (int i = 0; i < sequenceLengthBins.length; i++) {
 	sequenceLengthBins[i] = "'" + (String)sequenceLengthDistribution[i][0] + "'";
 	sequenceLengths[i] = (Long)sequenceLengthDistribution[i][1];
 }
+ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 %>
 
 <%@include file="/includes/start.html"%>
@@ -427,9 +428,98 @@ for (int i = 0; i < sequenceLengthBins.length; i++) {
 		</div>
 		<div class="box_body">
 			<div class="explanation">
+				This is a measure of how close together on the sequence the actual
+				binding residues are - sequences with low contiguity will have widely
+				separated residues. Here it is represented as the proportion of binding
+				residues to non-binding residues.
 			</div>
-			<svg>
-			</svg>
+			<div id="sequenceContiguityChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			<script>
+		    var chart = new Highcharts.Chart({
+		        chart: {
+		            type: 'scatter',
+		            zoomType: 'xy',
+								renderTo: 'sequenceContiguityChart'
+		        },
+		        title: {
+		            text: 'Sequence Binding Residue Proportion'
+		        },
+		        xAxis: {
+		            title: {
+		                enabled: true,
+		                text: 'Sequence Length (residues)'
+		            },
+		            startOnTick: true,
+		            endOnTick: true,
+		            showLastLabel: true
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Number of Binding Residues'
+		            },
+								allowDecimals: false
+		        },
+		        legend: {
+		            layout: 'vertical',
+		            align: 'left',
+		            verticalAlign: 'top',
+		            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+		            borderWidth: 1
+		        },
+		        plotOptions: {
+		            scatter: {
+		                marker: {
+		                    radius: 5,
+		                    states: {
+		                        hover: {
+		                            enabled: true,
+		                            lineColor: 'rgb(100,100,100)'
+		                        }
+		                    }
+		                },
+		                states: {
+		                    hover: {
+		                        marker: {
+		                            enabled: false
+		                        }
+		                    }
+		                },
+		                tooltip: {
+		                    headerFormat: '<b>{series.name}</b><br>',
+		                    pointFormat: '{point.x} total residues, {point.y} binding residues'
+		                }
+		            }
+		        },
+		        series: [{
+		            name: 'GPCR',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(0))); %>
+		        }, {
+		            name: 'LGIC',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(1))); %>
+		        }, {
+		            name: 'VGIC',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(2))); %>
+		        }, {
+		            name: 'Other Ion Channel',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(3))); %>
+		        }, {
+		            name: 'NHR',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(4))); %>
+		        }, {
+		            name: 'Enzyme',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(5))); %>
+		        }, {
+		            name: 'Catalytic Receptor',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(6))); %>
+		        }, {
+		            name: 'Transporter',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(7))); %>
+		        }, {
+		            name: 'Other Protein',
+		            data: <% out.print(Arrays.deepToString(sequenceContiguity.get(8))); %>
+		        }]
+		    });
+			</script>
 		</div>
 	</div>
 
