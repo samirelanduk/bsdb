@@ -1,0 +1,34 @@
+.explanation {
+  margin-top: 30px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+.boxtable td:first-child {
+  width: 40%;
+}
+
+table.datatable {
+  border: 1px solid #333333;
+  border-collapse: collapse;
+}
+
+.datatable td {
+  border: 1px solid #666666;
+  padding: 10px;
+}
+
+.datatable td:first-child {
+  text-align: right;
+  width: 70%;
+}
+
+canvas {
+  margin-left: 20px;
+  margin-right: 20px;
+  box-model: border-box;
+}
