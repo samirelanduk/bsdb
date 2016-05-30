@@ -247,10 +247,10 @@ public class Utilities {
 		ArrayList<String> conditions = new ArrayList<String>();
 
 		if (searchTerms.containsKey("targetname")) {
-			conditions.add(String.format("targets.name LIKE \"%%%s%%\"", searchTerms.get("targetname")));
+			conditions.add(String.format("targets.name LIKE '%%%s%%'", searchTerms.get("targetname")));
 		}
 		if (searchTerms.containsKey("sequence")) {
-			conditions.add(String.format("sequences.sequence LIKE \"%%%s%%\"", searchTerms.get("sequence")));
+			conditions.add(String.format("sequences.sequence LIKE '%%%s%%'", searchTerms.get("sequence")));
 		}
 		if (searchTerms.containsKey("types")) {
 			StringBuilder typeCondition = new StringBuilder("(");
