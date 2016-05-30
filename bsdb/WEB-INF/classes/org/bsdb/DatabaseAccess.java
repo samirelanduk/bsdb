@@ -303,4 +303,22 @@ public class DatabaseAccess {
 		ligandApprovalCounts[1] = (Long)getObjectGridFromResultSet(rs)[0][0];
 		return ligandApprovalCounts;
 	}
+
+
+	// Get sequence type counts
+	public static long[] getSequenceTypeCounts() {
+		String[] targetTypes = {
+			 "GPCR", "LGIC", "VGIC", "OtherIC", "NHR", "Enzyme", "CatalyticReceptor",
+			 "Transporter", "OtherProtein"
+		};
+		long[] sequenceTypeCounts = new long[9];
+		for (int i = 0; i < 9; i++) {
+			ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
+			 "SELECT COUNT(*) FROM sequences LEFT JOIN targets ON sequences.targetId=targets.targetId WHERE targets.type=?",
+			 targetTypes[i]
+			);
+			sequenceTypeCounts[i] = (Long)getObjectGridFromResultSet(rs)[0][0];
+		}
+		return sequenceTypeCounts;
+	}
 }

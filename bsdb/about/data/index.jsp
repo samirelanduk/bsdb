@@ -10,6 +10,7 @@ for (int i = 0; i < ligandMassBins.length; i++) {
 	ligandMasses[i] = (Long)ligandMassDistribution[i][1];
 }
 long[] ligandApprovalCounts = DatabaseAccess.getLigandApprovalCounts();
+long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
 %>
 
 <%@include file="/includes/start.html"%>
@@ -255,9 +256,91 @@ long[] ligandApprovalCounts = DatabaseAccess.getLigandApprovalCounts();
 		</div>
 		<div class="box_body">
 			<div class="explanation">
+				A breakdown of the sequences in the BSDB database by Guide to PHARMACOLOGY
+				target type.
 			</div>
-			<svg>
-			</svg>
+			<table class="boxtable">
+				<tr>
+					<td>
+						<table class="datatable">
+							<tr><td>GPCR</td><td><% out.print(sequenceTypeCounts[0]); %></td></tr>
+							<tr><td>LGIC</td><td><% out.print(sequenceTypeCounts[1]); %></td></tr>
+							<tr><td>VGIC</td><td><% out.print(sequenceTypeCounts[2]); %></td></tr>
+							<tr><td>Other Ion Channel</td><td><% out.print(sequenceTypeCounts[3]); %></td></tr>
+							<tr><td>NHR</td><td><% out.print(sequenceTypeCounts[4]); %></td></tr>
+							<tr><td>Enzyme</td><td><% out.print(sequenceTypeCounts[5]); %></td></tr>
+							<tr><td>Catalytic Receptor</td><td><% out.print(sequenceTypeCounts[6]); %></td></tr>
+							<tr><td>Transporter</td><td><% out.print(sequenceTypeCounts[7]); %></td></tr>
+							<tr><td>Other Protein</td><td><% out.print(sequenceTypeCounts[8]); %></td></tr>
+						</table>
+					</td><td>
+
+						<div id="sequenceTypesChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+						<script>
+							var chart = new Highcharts.Chart({
+								chart: {
+									plotBackgroundColor: null,
+									plotBorderWidth: null,
+									plotShadow: false,
+									type: 'pie',
+									renderTo: 'sequenceTypesChart'
+								},
+								title: {
+									text: 'Sequence Types'
+								},
+								tooltip: {
+									pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+								},
+								plotOptions: {
+									pie: {
+										allowPointSelect: true,
+										cursor: 'pointer',
+										dataLabels: {
+											enabled: true,
+											format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+											style: {
+												color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+											}
+										}
+									}
+								},
+								series: [{
+									name: 'Proportion',
+									colorByPoint: true,
+									data: [{
+										name: 'GPCR',
+										y: <% out.print(sequenceTypeCounts[0]); %>
+									}, {
+										name: 'LGIC',
+										y: <% out.print(sequenceTypeCounts[1]); %>
+									}, {
+										name: 'VGIC',
+										y: <% out.print(sequenceTypeCounts[2]); %>
+									}, {
+										name: 'Other Ion Channel',
+										y: <% out.print(sequenceTypeCounts[3]); %>
+									}, {
+										name: 'NHR',
+										y: <% out.print(sequenceTypeCounts[4]); %>
+									}, {
+										name: 'Enzyme',
+										y: <% out.print(sequenceTypeCounts[5]); %>
+									}, {
+										name: 'Catalytic Receptor',
+										y:<% out.print(sequenceTypeCounts[6]); %>
+									}, {
+										name: 'Transporter',
+										y: <% out.print(sequenceTypeCounts[7]); %>
+									}, {
+										name: 'Other Protein',
+										y: <% out.print(sequenceTypeCounts[8]); %>
+									}]
+								}]
+							});
+						</script>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 
