@@ -88,6 +88,22 @@ public class DatabaseAccess {
 	}
 
 
+	// Checks to see if an interaction ID exists
+	public static boolean interactionExists(int interactionId) {
+		ResultSet rs = issuePreparedSqlQuery("SELECT interactionId FROM interactions");
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		if (rs != null) {
+	    Object[][] rows = getObjectGridFromResultSet(rs);
+	    for (Object[] row : rows) {
+	      ids.add((Integer)row[0]);
+	    }
+	    return ids.contains(interactionId);
+		} else {
+			return false;
+		}
+	}
+
+
 	//Gets all interactions in the staging database that have PDB maps
   public static Interaction[] getMapInteractions() {
   	ArrayList<Interaction> interactions = new ArrayList<Interaction>();

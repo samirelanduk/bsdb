@@ -31,7 +31,7 @@ public class Utilities {
 
   public static boolean validInteractionId(HttpServletRequest request, String param) {
 		String paramValue = request.getParameter(param);
-		if (paramValue == null) {
+		if ((paramValue == null) || (paramValue.equals(""))) {
 			return false;
 		}
 		for (int i = 0; i < paramValue.length(); i++) {
