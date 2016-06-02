@@ -127,6 +127,7 @@
 					Features
 				</div>
 				<div id="feature"></div>
+				<link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/calipho-sib/feature-viewer/master/css/style.css">
 				<script src="/js/feature.js"></script>
 				<script>
 					var FeatureViewer = require("feature-viewer");
@@ -138,6 +139,18 @@
 							if (sequence[i] == sequence[i].toUpperCase()) {
 								residue_locations.push({x: i + 1, y: i + 1});
 							}
+						}
+						var hydrophobicity = [];
+						for (var i = 0; i < sequence.length; i++) {
+							hydrophobicity.push({
+								x: i + 1,
+								y: {
+									'M': 1.9, 'S': -0.8, 'F': 2.8, 'I': 4.5, 'C': 2.5,
+									'N': -3.5, 'L': 3.8, 'R': -4.5, 'V': 4.2, 'A': 1.8,
+									'Q': -3.5, 'G': -0.4, 'W': -0.9, 'K': -3.9, 'D': -3.5,
+									'T': -0.7, 'H': -3.2, 'E': -3.5, 'P': -1.6, 'Y': -1.3
+								}[sequence[i].toUpperCase()]
+							})
 						}
 
 						var ft2 = new FeatureViewer(sequence,"#feature", {
@@ -152,11 +165,20 @@
 						ft2.addFeature({
 				        data: residue_locations,
 				        name: "Binding residues",
-				        className: "rez",
 				        color: "#006588",
 				        type: "rect",
-				        filter: "v"
+				        height: "20",
+								filter: "type1"
 				    });
+
+						ft2.addFeature({
+			        data: hydrophobicity,
+			        name: "Hydropathy",
+			        color: "#008B8D",
+			        type: "line",
+			        height: "5",
+							filter: "type2"
+			    });
 
 						ft2.onAll(function(name,data){
 							console.log(arguments);
