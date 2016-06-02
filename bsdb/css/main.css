@@ -3,15 +3,15 @@ body {
   margin: 0px;
 }
 
-header, nav a:hover {
+header {
   background-color: #2C5700;
   text-decoration: none;
 }
 
 header #headertitle {
   color: #FFFFFF;
-  font-size: 300%;
-  line-height: 100px;
+  font-size: 200%;
+  line-height: 80px;
 }
 
 header #omnisearch input {
@@ -40,11 +40,17 @@ nav {
 nav a {
   padding-left: 40px;
   padding-right: 40px;
-  line-height: 40px;
+  line-height: 30px;
   display: inline-block;
   color: #FFFFFF;
   text-decoration: none;
-  transition: 0.5s;
+  font-weight: bold;
+  transition: 0.6s;
+}
+
+nav a:hover {
+  color: #CCFFCC;
+  text-decoration: none;
 }
 
 main {
