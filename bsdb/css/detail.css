@@ -57,6 +57,15 @@
 	border-bottom: 0px solid #D1D0CE;
 }
 
+.box #feature {
+  text-align: left;
+  margin-left: 5%;
+}
+
+.box #feature svg {
+  width: 100%;
+}
+
 .field, .value {
 	padding-top: 8px;
 	padding-bottom: 8px;
@@ -115,9 +124,4 @@
 
 .box iframe {
 	border: none;
-}
-
-svg {
-	border-left: auto;
-	border-right: auro;
 }

@@ -120,6 +120,53 @@
 		</td>
 	</tr>
 
+	<tr>
+		<td class="col" colspan="2">
+			<div class="box">
+				<div class="box_title">
+					Features
+				</div>
+				<div id="feature"></div>
+				<script src="/js/feature.js"></script>
+				<script>
+					var FeatureViewer = require("feature-viewer");
+
+					window.onload = function() {
+						var sequence = "<% out.print(sequence.getSequence()); %>";
+						var residue_locations = [];
+						for (var i = 0; i < sequence.length; i++) {
+							if (sequence[i] == sequence[i].toUpperCase()) {
+								residue_locations.push({x: i + 1, y: i + 1});
+							}
+						}
+
+						var ft2 = new FeatureViewer(sequence,"#feature", {
+								showAxis: true,
+								showSequence: true,
+								brushActive: true,
+								toolbar:true,
+								bubbleHelp:true,
+								zoomMax:10
+												});
+
+						ft2.addFeature({
+				        data: residue_locations,
+				        name: "Binding residues",
+				        className: "rez",
+				        color: "#006588",
+				        type: "rect",
+				        filter: "v"
+				    });
+
+						ft2.onAll(function(name,data){
+							console.log(arguments);
+						});
+					};
+				</script>
+			</div>
+		</td>
+	</tr>
+
 	<!--<tr>
 		<td class="col" colspan="2">
 			<div class="box">
