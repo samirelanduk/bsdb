@@ -1,6 +1,7 @@
-body {
+html, body {
   font-family: 'PT Sans';
   margin: 0px;
+  height: 100%;
 }
 
 header {
@@ -58,6 +59,7 @@ main {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
+  min-height: 70%;
 }
 
 a {
