@@ -267,7 +267,7 @@ def give_pdb_map_bind_site(interaction_id, pdb_code, site, connection):
 
 def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
  chain_length, proportional_length, internal_contacts, external_contacts,
- contact_ratio, connection):
+ contact_ratio, residue_internal_contacts, residue_external_contacts, connection):
     cursor = connection.cursor()
     cursor.execute(
      """UPDATE interaction_pdbs SET
@@ -277,7 +277,9 @@ def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
       proportionalLength=%s,
       internalContacts=%s,
       externalContacts=%s,
-      contactRatio=%s
+      contactRatio=%s,
+      residue_internal_contacts=%s,
+      residue_external_contacts=%s
       WHERE mapId=%s;""", (
       sequence,
       chain_id,
@@ -286,6 +288,8 @@ def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
       internal_contacts,
       external_contacts,
       contact_ratio,
+      ",".join([str(c) for c in residue_internal_contacts]),
+      ",".join([str(c) for c in residue_external_contacts]),
       str(interaction_id) + pdb_code
      )
     )
@@ -306,7 +310,7 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, stage_connection, li
     cursor = live_connection.cursor()
     cursor.execute("""
      INSERT INTO sequences VALUES (
-      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
      );""", [
       pdb_map["interactionId"],
       interaction_dict["ligandId"],
