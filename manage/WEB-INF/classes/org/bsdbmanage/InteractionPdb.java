@@ -16,6 +16,8 @@ public class InteractionPdb {
   private int internalContacts;
   private int externalContacts;
   private double contactRatio;
+  private String residueInternalContacts;
+  private String residueExternalContacts;
 
 
   public InteractionPdb(Object[] fields) {
@@ -33,6 +35,8 @@ public class InteractionPdb {
     this.internalContacts = fields[11] == null ? 0 : (int)fields[11];
     this.externalContacts = fields[12] == null ? 0 : (int)fields[12];
     this.contactRatio = fields[13] == null ? 0.0 : (float)fields[13];
+    this.residueInternalContacts = (String)fields[14];
+    this.residueExternalContacts = (String)fields[15];
   }
 
 
@@ -179,4 +183,24 @@ public class InteractionPdb {
 	public void setContactRatio(double contactRatio) {
 		this.contactRatio = contactRatio;
 	}
+
+
+	public String getResidueInternalContacts() {
+		return residueInternalContacts;
+	}
+
+
+	public void setResidueInternalContacts(String residueInternalContacts) {
+		this.residueInternalContacts = residueInternalContacts;
+  }
+
+
+	public String getResidueExternalContacts() {
+		return residueExternalContacts;
+	}
+
+
+	public void setResidueExternalContacts(String residueExternalContacts) {
+		this.residueExternalContacts = residueExternalContacts;
+  }
 }

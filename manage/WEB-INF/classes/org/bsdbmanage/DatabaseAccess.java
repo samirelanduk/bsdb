@@ -339,6 +339,8 @@ public class DatabaseAccess {
 			"internalContacts = null," +
 			"externalContacts = null," +
 			"contactRatio = null" +
+			"residueInternalContacts = null" +
+			"residueExternalContacts = null" +
 		" WHERE mapId=?",
 		 mapId
 		);
