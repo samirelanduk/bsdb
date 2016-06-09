@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <style>
+      #display {
+        height: 20px;
+        text-align: center;
+        font-family: 'Courier New';
+      }
+      svg {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+    <script>
+      function cellHovered(cell) {
+        var data = cell.attributes.data.value.split(",");
+        var text = data[0] + " (" + data[1] + ") - " + data[2] + " (" + data[3] + ") " + data[4] + " A";
+        document.getElementById("display").innerHTML = text;
+      }
+      function cellLeft(cell) {
+        document.getElementById("display").innerHTML = "";
+      }
+    </script>
+  </head>
+  <body>
+    <div id="display"></div>
+    <div id="svg">
+      %s
+    </div>
+  </body>
+</html>

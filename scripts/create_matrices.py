@@ -22,9 +22,12 @@ try:
         pdb = molecupy.get_pdb_remotely(sequence["pdb"])
         chain = pdb.model.get_chain_by_id(sequence["chain"])
         matrix = chain.generate_residue_distance_matrix()
-        location = paths["tomcat_dir"] + "/static/matrices/%i.svg" % sequence_id
+        with open("matrix.html") as f:
+            matrix_html = f.read() % matrix.to_svg()
+        location = paths["tomcat_dir"] + "/static/matrices/%i.html" % sequence_id
         print("\tSaving %s..." % location)
-        matrix.save(location)
+        with open(location, "w") as f:
+            f.write(matrix_html)
 finally:
     connection.close()
     print("")
