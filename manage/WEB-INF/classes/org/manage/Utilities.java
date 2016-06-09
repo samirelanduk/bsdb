@@ -1,4 +1,4 @@
-package org.bsdbmanage;
+package org.manage;
 
 import javax.servlet.http.HttpServletRequest;
 

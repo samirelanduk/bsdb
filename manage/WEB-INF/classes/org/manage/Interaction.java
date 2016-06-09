@@ -1,4 +1,4 @@
-package org.bsdbmanage;
+package org.manage;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;

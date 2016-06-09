@@ -1,4 +1,4 @@
-package org.bsdbmanage;
+package org.manage;
 
 import java.sql.*;
 import java.util.Date;

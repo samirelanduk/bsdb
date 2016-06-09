@@ -1,4 +1,4 @@
-<%@ page import = "org.bsdbmanage.*" %>
+<%@ page import = "org.manage.*" %>
 
 <%
 	if (Utilities.validInteractionId(request, "interactionId") && Utilities.validPdbCode(request, "pdbCode")) {

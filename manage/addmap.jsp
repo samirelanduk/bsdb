@@ -1,4 +1,4 @@
-<%@ page import = "org.bsdbmanage.*" %>
+<%@ page import = "org.manage.*" %>
 
 <%
   boolean validInteractionId = true;

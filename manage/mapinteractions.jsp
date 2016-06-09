@@ -1,4 +1,4 @@
-<%@ page import = "org.bsdbmanage.*" %>
+<%@ page import = "org.manage.*" %>
 <% Interaction[] interactions = DatabaseAccess.getMapInteractions(); %>
 <html>
   <head>

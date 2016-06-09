@@ -1,5 +1,6 @@
 import pg8000
 import datetime
+import os
 import config
 import math
 import pygtop
@@ -407,3 +408,21 @@ def fill_out_other_tables(connection):
                  ])
                 connection.commit()
                 print("\tAdded %s" % str(db_link))
+
+
+def get_paths(app_name):
+    paths = {}
+    paths["app_dir"] = "/home/sam/Dropbox/WORK/InversePharmacologyProject/bsdb/bsdb/" + app_name
+    paths["class_dir"] = paths["app_dir"] + "/WEB-INF/classes"
+    paths["jar_dir"] = paths["app_dir"] + "/WEB-INF/lib/postgresql-connector.jar"
+    paths["java_dir"] = paths["class_dir"] + "/org/" + app_name
+    paths["tomcat_dir"] = "/var/lib/tomcat7/webapps/"
+    paths["servlet_dir"] = "/usr/share/tomcat7/lib/servlet-api.jar"
+    if not os.path.exists(paths["app_dir"]):
+        paths["app_dir"] = "/Users/sam/Dropbox/WORK/InversePharmacologyProject/bsdb/bsdb/" + app_name
+        paths["class_dir"] = paths["app_dir"] + "/WEB-INF/classes"
+        paths["jar_dir"] = paths["app_dir"] + "/WEB-INF/lib/postgresql-connector.jar"
+        paths["java_dir"] = paths["class_dir"] + "/org/" + app_name
+        paths["tomcat_dir"] = "/usr/local/tomcat/webapps/"
+        paths["servlet_dir"] = "/usr/local/tomcat/lib/servlet-api.jar"
+    return paths
