@@ -1,6 +1,7 @@
 import utilities
 import sys
 import os
+import molecupy
 print("")
 
 connection = utilities.get_live_connection()
@@ -14,6 +15,16 @@ try:
     matrix_ids = [int(f.split(".")[0]) for f in matrices if f[0] != "."]
     sequences_without_matrix = [i for i in sequence_ids if i not in matrix_ids]
     print("%i of these need a matrix generating." % len(sequences_without_matrix))
+
+    print("Creating matrices...")
+    for sequence_id in sequences_without_matrix:
+        sequence = utilities.get_sequence_as_dict(sequence_id, connection)
+        pdb = molecupy.get_pdb_remotely(sequence["pdb"])
+        chain = pdb.model.get_chain_by_id(sequence["chain"])
+        matrix = chain.generate_residue_distance_matrix()
+        location = paths["tomcat_dir"] + "/static/matrices/%i.svg" % sequence_id
+        print("\tSaving %s..." % location)
+        matrix.save(location)
 finally:
     connection.close()
     print("")
