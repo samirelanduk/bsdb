@@ -426,3 +426,11 @@ def get_paths(app_name):
         paths["tomcat_dir"] = "/usr/local/tomcat/webapps/"
         paths["servlet_dir"] = "/usr/local/tomcat/lib/servlet-api.jar"
     return paths
+
+
+def get_sequence_ids_from_table(connection):
+    cursor = connection.cursor()
+    cursor.execute("SELECT sequenceId FROM sequences;")
+    ids = [row[0] for row in cursor.fetchall()]
+    cursor.close()
+    return ids
