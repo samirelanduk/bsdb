@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <style>
+      #feature {
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/calipho-sib/feature-viewer/master/css/style.css">
+    <script src="https://wzrd.in/bundle/feature-viewer@0.1.41"></script>
+  </head>
+  <body>
+    <div id="feature"></div>
+    <script>
+    var FeatureViewer = require("feature-viewer");
+
+    window.onload = function() {
+      var sequence = "%s";
+      var residue_locations = [];
+      for (var i = 0; i < sequence.length; i++) {
+        if (sequence[i] == sequence[i].toUpperCase()) {
+          residue_locations.push({x: i + 1, y: i + 1});
+        }
+      }
+
+      var ft2 = new FeatureViewer(sequence,"#feature", {
+       showAxis: true,
+       showSequence: true,
+       brushActive: true,
+       toolbar: true,
+       bubbleHelp: true,
+       zoomMax: 10
+      });
+    };
+    </script>
+  </body>
+</html>

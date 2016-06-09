@@ -23,6 +23,12 @@ try:
         sequence = utilities.get_sequence_as_dict(sequence_id, connection)
         pdb = molecupy.get_pdb_remotely(sequence["pdb"])
         chain = pdb.model.get_chain_by_id(sequence["chain"])
+        with open("feature.html") as f:
+            feature_html = f.read() % sequence["sequence"]
+        location = paths["tomcat_dir"] + "static/features/%i.html" % sequence_id
+        print("\tSaving %s..." % location)
+        with open(location, "w") as f:
+            f.write(feature_html)
 
 finally:
     connection.close()
