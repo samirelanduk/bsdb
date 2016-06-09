@@ -11,7 +11,7 @@ try:
     print("There are %i sequences in the live database." % len(sequence_ids))
 
     paths = utilities.get_paths("bsdb")
-    matrices = os.listdir(paths["tomcat_dir"] + "/static/matrices")
+    matrices = os.listdir(paths["tomcat_dir"] + "static/matrices")
     matrix_ids = [int(f.split(".")[0]) for f in matrices if f[0] != "."]
     sequences_without_matrix = [i for i in sequence_ids if i not in matrix_ids]
     print("%i of these need a matrix generating." % len(sequences_without_matrix))
@@ -21,10 +21,13 @@ try:
         sequence = utilities.get_sequence_as_dict(sequence_id, connection)
         pdb = molecupy.get_pdb_remotely(sequence["pdb"])
         chain = pdb.model.get_chain_by_id(sequence["chain"])
-        matrix = chain.generate_residue_distance_matrix()
+        matrix = chain.generate_residue_distance_matrix(subsequence=(
+         chain.get_residue_by_id(sequence["residueIds"][0]),
+         chain.get_residue_by_id(sequence["residueIds"][-1])
+        ))
         with open("matrix.html") as f:
             matrix_html = f.read() % matrix.to_svg()
-        location = paths["tomcat_dir"] + "/static/matrices/%i.html" % sequence_id
+        location = paths["tomcat_dir"] + "static/matrices/%i.html" % sequence_id
         print("\tSaving %s..." % location)
         with open(location, "w") as f:
             f.write(matrix_html)

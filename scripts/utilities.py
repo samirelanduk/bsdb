@@ -439,14 +439,15 @@ def get_sequence_ids_from_table(connection):
 def get_sequence_as_dict(sequence_id, connection):
     cursor = connection.cursor()
     cursor.execute(
-     "SELECT sequenceId, pdb, chain FROM sequences WHERE sequenceId=%s",
+     "SELECT sequenceId, pdb, chain, residueIds FROM sequences WHERE sequenceId=%s",
      (sequence_id,)
     )
     row = cursor.fetchone()
     dictionary = {
      "sequenceId": row[0],
      "pdb": row[1],
-     "chain": row[2]
+     "chain": row[2],
+     "residueIds": row[3].split(",")
     }
     cursor.close()
     return dictionary
