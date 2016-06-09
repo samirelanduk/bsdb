@@ -51,15 +51,7 @@ try:
                 chain_length = len(chain.residues) + len(chain.missing_residues)
                 internal_contacts = len(sequence.get_internal_contacts())
                 external_contacts = len(sequence.get_external_contacts_with(chain))
-                non_sequence = ResiduicStructure(*[
-                 residue for residue in chain.residues if residue not in sequence.residues
-                ])
-                residue_internal_contacts = [
-                 len(residue.get_external_contacts_with(sequence)) for residue in sequence.residues
-                ]
-                residue_external_contacts = [
-                 len(residue.get_external_contacts_with(non_sequence)) for residue in sequence.residues
-                ]
+                residue_ids = ",".join([res.residue_id for res in sequence.residues])
                 utilities.give_pdb_map_bind_sequence(
                  pdb_map["interactionId"], pdb_map["pdbCode"],
                  sequence_string,
@@ -69,8 +61,7 @@ try:
                  internal_contacts,
                  external_contacts,
                  internal_contacts / external_contacts,
-                 residue_internal_contacts,
-                 residue_external_contacts,
+                 residue_ids,
                  connection
                 )
 

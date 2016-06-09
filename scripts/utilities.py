@@ -220,7 +220,7 @@ def get_interaction_pdb_maps(connection):
       interaction_pdbs.het, interaction_pdbs.bindingResidues, interaction_pdbs.bindSequence,
       interaction_pdbs.manualCorrectMapMark, interaction_pdbs.receptorChain, interaction_pdbs.originalChainLength,
       interaction_pdbs.proportionalLength, interaction_pdbs.internalContacts,
-      interaction_pdbs.externalContacts, interaction_pdbs.contactRatio
+      interaction_pdbs.externalContacts, interaction_pdbs.contactRatio, interaction_pdbs.residueIds
      FROM interaction_pdbs LEFT JOIN interactions ON
       interaction_pdbs.interactionId = interactions.interactionId;"""
     )
@@ -237,7 +237,8 @@ def get_interaction_pdb_maps(connection):
      "proportionalLength": row[9],
      "internalContacts": row[10],
      "externalContacts": row[11],
-     "contactRatio": row[12]
+     "contactRatio": row[12],
+     "residueIds": row[13]
     } for row in cursor.fetchall()]
 
     cursor.close()
@@ -268,7 +269,7 @@ def give_pdb_map_bind_site(interaction_id, pdb_code, site, connection):
 
 def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
  chain_length, proportional_length, internal_contacts, external_contacts,
- contact_ratio, residue_internal_contacts, residue_external_contacts, connection):
+ contact_ratio, residueIds, connection):
     cursor = connection.cursor()
     cursor.execute(
      """UPDATE interaction_pdbs SET
@@ -279,8 +280,7 @@ def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
       internalContacts=%s,
       externalContacts=%s,
       contactRatio=%s,
-      residue_internal_contacts=%s,
-      residue_external_contacts=%s
+      residueIds=%s
       WHERE mapId=%s;""", (
       sequence,
       chain_id,
@@ -289,8 +289,7 @@ def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
       internal_contacts,
       external_contacts,
       contact_ratio,
-      ",".join([str(c) for c in residue_internal_contacts]),
-      ",".join([str(c) for c in residue_external_contacts]),
+      residueIds,
       str(interaction_id) + pdb_code
      )
     )
@@ -311,7 +310,7 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, stage_connection, li
     cursor = live_connection.cursor()
     cursor.execute("""
      INSERT INTO sequences VALUES (
-      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
      );""", [
       pdb_map["interactionId"],
       interaction_dict["ligandId"],
@@ -331,7 +330,8 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, stage_connection, li
       pdb_map["proportionalLength"],
       pdb_map["internalContacts"],
       pdb_map["externalContacts"],
-      pdb_map["contactRatio"]
+      pdb_map["contactRatio"],
+      pdb_map["residueIds"]
      ])
     live_connection.commit()
     cursor.close()
