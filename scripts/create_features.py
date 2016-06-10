@@ -46,10 +46,35 @@ try:
                 helices[index + 1]["x"] = helix["x"]
                 helix["x"] = helix["y"] = -1
         helices = [h for h in helices if h["x"] != -1]
+
+        strands = []
+        for strand in sorted(chain.beta_strands, key=lambda k: k.strand_id):
+            try:
+                strand_start = sequence["residueIds"].index(strand.residues[0].residue_id)
+            except ValueError:
+                strand_start = -1
+            try:
+                strand_end = sequence["residueIds"].index(strand.residues[-1].residue_id)
+            except ValueError:
+                strand_end = -1
+            if strand_start != -1 and strand_end != -1:
+                strands.append({"x": strand_start + 1, "y": strand_end + 1})
+            elif strand_start != -1 and strand_end == -1:
+                strands.append({"x": strand_start + 1, "y": len(sequence["sequence"])})
+            elif strand_start == -1 and strand_end != -1:
+                strands.append({"x": 0, "y": strand_end + 1})
+        strands = sorted(strands, key=lambda k: k["x"])
+        for index, strand in enumerate(strands[:-1]):
+            if strands[index + 1]["x"] - strand["y"] <= 1:
+                strands[index + 1]["x"] = strand["x"]
+                strand["x"] = strand["y"] = -1
+        strands = [s for s in strands if s["x"] != -1]
+
         with open("feature.html") as f:
             feature_html = f.read() % (
              sequence["sequence"],
-             str(helices)
+             str(helices),
+             str(strands)
             )
         location = paths["tomcat_dir"] + "static/features/%i.html" % (sequence_id)
         print("\tSaving %s..." % location)
