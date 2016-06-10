@@ -23,9 +23,35 @@ try:
         sequence = utilities.get_sequence_as_dict(sequence_id, connection)
         pdb = molecupy.get_pdb_remotely(sequence["pdb"])
         chain = pdb.model.get_chain_by_id(sequence["chain"])
+
+        helices = []
+        for helix in sorted(chain.alpha_helices, key=lambda k: k.helix_id):
+            try:
+                helix_start = sequence["residueIds"].index(helix.residues[0].residue_id)
+            except ValueError:
+                helix_start = -1
+            try:
+                helix_end = sequence["residueIds"].index(helix.residues[-1].residue_id)
+            except ValueError:
+                helix_end = -1
+            if helix_start != -1 and helix_end != -1:
+                helices.append({"x": helix_start + 1, "y": helix_end + 1})
+            elif helix_start != -1 and helix_end == -1:
+                helices.append({"x": helix_start + 1, "y": len(sequence["sequence"])})
+            elif helix_start == -1 and helix_end != -1:
+                helices.append({"x": 0, "y": helix_end + 1})
+        helices = sorted(helices, key=lambda k: k["x"])
+        for index, helix in enumerate(helices[:-1]):
+            if helices[index + 1]["x"] - helix["y"] <= 1:
+                helices[index + 1]["x"] = helix["x"]
+                helix["x"] = helix["y"] = -1
+        helices = [h for h in helices if h["x"] != -1]
         with open("feature.html") as f:
-            feature_html = f.read() % sequence["sequence"]
-        location = paths["tomcat_dir"] + "static/features/%i.html" % sequence_id
+            feature_html = f.read() % (
+             sequence["sequence"],
+             str(helices)
+            )
+        location = paths["tomcat_dir"] + "static/features/%i.html" % (sequence_id)
         print("\tSaving %s..." % location)
         with open(location, "w") as f:
             f.write(feature_html)
