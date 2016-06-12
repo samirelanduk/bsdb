@@ -161,20 +161,21 @@
 				<div class="box_title">
 					Features
 				</div>
+				<iframe seamless='seamless' width="750px" height="450px" src="/static/features/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
 			</div>
 		</td>
 	</tr>
 
-	<!--<tr>
+	<tr>
 		<td class="col" colspan="2">
 			<div class="box">
 				<div class="box_title">
 					Residue Distances
 				</div>
-				<iframe seamless='seamless' width="750px" height="750px" src="/static/svg/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
+				<iframe seamless='seamless' width="750px" height="750px" src="/static/matrices/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
 			</div>
 		</td>
-	</tr>-->
+	</tr>
 </table>
 
 

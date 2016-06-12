@@ -125,3 +125,8 @@
 .box iframe {
 	border: none;
 }
+
+#viewer {
+  background-color: #000000;
+  padding: 0px;
+}
