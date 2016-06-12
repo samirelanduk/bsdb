@@ -53,7 +53,9 @@
 				<script type="text/javascript">
 					function loadStructure() {
 						pv.io.fetchPdb("/static/pdbs/<% out.print(sequence.getSequenceId()); %>.pdb", function(structure) {
+							var ligand = structure.select({rnum : parseInt("<% out.print(sequence.getHetId()); %>".replace(/\D/g,''))});
 							viewer.cartoon("protein", structure, {color: pv.color.uniform("white")});
+							viewer.ballsAndSticks("ligand", ligand);
 							var chainA = structure.select({cname : "<% sequence.getChain(); %>"});
 							var residueIds = ["<% out.print(sequence.getResidueIds().replace(",", "\",\"")); %>"];
 							var sequenceIds = [];
@@ -64,7 +66,7 @@
 							viewer.forEach(function(object) {
 							  object.setOpacity(0.1);
 								object.setOpacity(1, object.select({chain:"A"}));
-								object.colorBy(color.uniform("#34944D"), object.select({chain:"A"}).select({rnums:sequenceIds}));
+								object.colorBy(color.uniform("#34944D"), object.select({chain:"A", rnums:sequenceIds}));
 							});
 
 							viewer.centerOn(structure);
