@@ -54,10 +54,19 @@
 					function loadStructure() {
 						pv.io.fetchPdb("/static/pdbs/<% out.print(sequence.getSequenceId()); %>.pdb", function(structure) {
 							viewer.cartoon("protein", structure, {color: pv.color.uniform("white")});
+							var chainA = structure.select({cname : "<% sequence.getChain(); %>"});
+							var residueIds = ["<% out.print(sequence.getResidueIds().replace(",", "\",\"")); %>"];
+							var sequenceIds = [];
+							for (var i = 0; i < residueIds.length; i++) {
+								sequenceIds.push(parseInt(residueIds[i].replace(/\D/g,'')))
+							}
+							console.log(sequenceIds);
 							viewer.forEach(function(object) {
 							  object.setOpacity(0.1);
 								object.setOpacity(1, object.select({chain:"A"}));
+								object.colorBy(color.uniform("#34944D"), object.select({chain:"A"}).select({rnums:sequenceIds}));
 							});
+
 							viewer.centerOn(structure);
 							viewer.autoZoom();
 						});

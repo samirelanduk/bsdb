@@ -23,6 +23,7 @@ public class Sequence {
 	private int internalContacts;
 	private int externalContacts;
 	private float contactRatio;
+	private String residueIds;
 
 	public Sequence() {
 		this.target = new Target();
@@ -58,6 +59,7 @@ public class Sequence {
 		this.internalContacts = (Integer)fields[16];
 		this.externalContacts = (Integer)fields[17];
 		this.contactRatio = (float)fields[18];
+		this.residueIds = (String)fields[19];
 	}
 
 	public String getConciseHtml() {
@@ -274,5 +276,15 @@ public class Sequence {
 
 	public void setContactRatio(float contactRatio) {
 		this.contactRatio = contactRatio;
+	}
+
+
+	public String getResidueIds() {
+		return residueIds;
+	}
+
+
+	public void setResidueIds(String residueIds) {
+		this.residueIds = residueIds;
 	}
 }
