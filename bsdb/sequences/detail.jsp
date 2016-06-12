@@ -43,18 +43,23 @@
 				<script type="text/javascript">
 					var options = {
 					 width: 394,
-					 height: 394,
+					 height: 390,
 					 antialias: true,
-					 quality : "high"
+					 quality : "high",
+					 background: "#000000"
 					};
 					var viewer = pv.Viewer(document.getElementById("viewer"), options);
 				</script>
 				<script type="text/javascript">
 					function loadStructure() {
-					pv.io.fetchPdb("/static/pdbs/<% out.print(sequence.getSequenceId()); %>.pdb", function(structure) {
-						viewer.cartoon("protein", structure, { color : color.ssSuccession() });
-						viewer.centerOn(structure);
-						viewer.autoZoom();
+						pv.io.fetchPdb("/static/pdbs/<% out.print(sequence.getSequenceId()); %>.pdb", function(structure) {
+							viewer.cartoon("protein", structure, {color: pv.color.uniform("white")});
+							viewer.forEach(function(object) {
+							  object.setOpacity(0.1);
+								object.setOpacity(1, object.select({chain:"A"}));
+							});
+							viewer.centerOn(structure);
+							viewer.autoZoom();
 						});
 					}
 					document.addEventListener("DOMContentLoaded", loadStructure);
