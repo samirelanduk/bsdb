@@ -37,7 +37,6 @@ try:
         if len(set([binding_residue.chain.chain_id for binding_residue in binding_residues])) == 1: # Esure all residues on same chain
             chain = binding_residues[0].chain
             binding_residues = sorted(binding_residues, key=lambda k: chain.residues.index(k))
-            print([r.residue_id for r in binding_residues])
             sequence_residues = [binding_residues[0]]
             while sequence_residues[-1].downstream_residue:
                 sequence_residues.append(sequence_residues[-1].downstream_residue)

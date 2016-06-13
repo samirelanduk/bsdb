@@ -173,14 +173,9 @@
 					  "-" : interactionPdb.getContactRatio()); %></td>
 				</tr>
 				<tr>
-					<td>Residue Internal Contacts</td>
-					<td><% out.print((interactionPdb == null || interactionPdb.getResidueInternalContacts() == null) ?
-					  "-" : interactionPdb.getResidueInternalContacts()); %></td>
-				</tr>
-				<tr>
-					<td>Residue External Contacts</td>
-					<td><% out.print((interactionPdb == null || interactionPdb.getResidueExternalContacts() == null) ?
-					  "-" : interactionPdb.getResidueExternalContacts()); %></td>
+					<td>Residue IDs</td>
+					<td><% out.print((interactionPdb == null || interactionPdb.getResidueIds() == null) ?
+					  "-" : interactionPdb.getResidueIds()); %></td>
 				</tr>
 			</table>
 		</div>
