@@ -56,7 +56,6 @@
 							var ligand = structure.select({rnum : parseInt("<% out.print(sequence.getHetId()); %>".replace(/\D/g,''))});
 							viewer.cartoon("protein", structure, {color: pv.color.uniform("white")});
 							viewer.ballsAndSticks("ligand", ligand);
-							var chainA = structure.select({cname : "<% sequence.getChain(); %>"});
 							var residueIds = ["<% out.print(sequence.getResidueIds().replace(",", "\",\"")); %>"];
 							var sequenceIds = [];
 							for (var i = 0; i < residueIds.length; i++) {
@@ -65,8 +64,8 @@
 							console.log(sequenceIds);
 							viewer.forEach(function(object) {
 							  object.setOpacity(0.1);
-								object.setOpacity(1, object.select({chain:"A"}));
-								object.colorBy(color.uniform("#34944D"), object.select({chain:"A", rnums:sequenceIds}));
+								object.setOpacity(1, object.select({chain:"<% out.print(sequence.getChain()); %>"}));
+								object.colorBy(color.uniform("#34944D"), object.select({chain:"<% out.print(sequence.getChain()); %>", rnums:sequenceIds}));
 							});
 
 							viewer.centerOn(structure);
