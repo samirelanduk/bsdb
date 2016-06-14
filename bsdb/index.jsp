@@ -3,8 +3,7 @@
 <%@include file="/includes/bodytop.html"%>
 
 <div id="intro">
-  BSDB is a database of drug-responsive protein sequences, which can be used to
-  place a synthetic protein under orthogonal control. It is a sister database to
+  BSDB is a database of drug-responsive protein sequences, derived from
   the <a href="http://guidetopharmacology.org" target="_blank">IUPHAR/BPS Guide
   to PHARMACOLOGY</a>.
 </div>
