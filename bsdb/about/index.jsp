@@ -9,19 +9,12 @@
 		This Database
 	</div>
 	<div class="box_body">
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-		 nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.
-		  Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
-		  Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
-		  massa. Vestibulum lacinia arcu eget nulla.</p>
-		<p>Class aptent taciti sociosqu ad litora torquent per conubia
-		nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.
-		 Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh.
-		 Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed
-		 convallis tristique sem. Proin ut ligula vel nunc egestas porttitor.
-		  Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.
-		   Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla
-		    metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.</p>
+		<p>BSDB is a database of drug-responsive protein sequences, derived from
+	  the <a href="http://guidetopharmacology.org" target="_blank">IUPHAR/BPS Guide
+	  to PHARMACOLOGY</a>.</p>
+		<p>The sequences can be used to confer druggability to a synthetic protein,
+		and each sequence contains links back to the Guide to PHARMACOLOGY for more
+		detailed information on the oriignal drug target and the ligand itself.</p>
 		<div class="box_body_readmore">
 			<a href="database">Read more...</a>
 		</div>
