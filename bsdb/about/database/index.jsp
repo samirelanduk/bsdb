@@ -4,7 +4,7 @@
 
 <h1>About the Database</h1>
 
-<h2>The Guide to PHARMACOLOGY</h2>
+<h2 id="gtop">The Guide to PHARMACOLOGY</h2>
 <p>
 	The <a href="http://guidetopharmacology.org" target="_blank">Guide to
 	PHARMACOLOGY</a> (GtoPdb) is a searchable database with quantitative
