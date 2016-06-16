@@ -110,20 +110,20 @@
 		</td>
 	</tr>
 
-	<!--<tr>
+	<tr>
 		<td class="col" colspan="2">
 			<div class="box">
 				<div class="box_title">
 					Responsive Sequences
 				</div>
-				<%/*
-				for (Sequence sequence : Utilities.getLigandSequences(ligand.getLigandId())) {
+				<%
+				for (Sequence sequence : DatabaseAccess.getLigandSequences(ligand.getLigandId())) {
 					out.println(sequence.getConciseHtml());
-				}*/
+				}
 				%>
 			</div>
 		</td>
-	</tr>-->
+	</tr>
 </table>
 
 

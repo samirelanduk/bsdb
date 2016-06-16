@@ -236,6 +236,19 @@ public class DatabaseAccess {
 		return links;
 	}
 
+	// Get sequences for a ligand
+	public static Sequence[] getLigandSequences(int ligandId) {
+		Sequence[] sequences;
+		ResultSet rs = issuePreparedSqlQuery("SELECT * FROM sequences WHERE ligandId=" + ligandId);
+		Object[][] sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
+		sequences = new Sequence[sqlResults.length];
+
+		for (int i = 0; i < sequences.length; i++) {
+			sequences[i] = new Sequence(sqlResults[i]);
+		}
+		return sequences;
+	}
+
 
 	// Get ligand type counts
 	public static long[] getLigandTypeCounts() {
