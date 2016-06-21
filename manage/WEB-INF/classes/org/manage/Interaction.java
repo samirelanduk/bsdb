@@ -13,10 +13,9 @@ public class Interaction {
 	private String species;
 	private String type;
 	private String action;
-	private String affinityType;
 	private float affinityValue;
 	private String affinityRange;
-	private boolean ligandIsPeptide;
+	private String affinityType;
   private Date dateAdded;
   private Date dateModified;
   private Date datePdbsLastChecked;
@@ -31,17 +30,16 @@ public class Interaction {
     this.species = (String)fields[3];
     this.type = (String)fields[4];
     this.action = (String)fields[5];
-    this.affinityType = (String)fields[6];
 		try {
-    	this.affinityValue = (Float)fields[7];
+    	this.affinityValue = (Float)fields[6];
 		} catch (NullPointerException e) {
 
 		}
-    this.affinityRange = (String)fields[8];
-    this.ligandIsPeptide = (Boolean)fields[9];
-    this.dateAdded = (Date)fields[10];
-    this.dateModified = (Date)fields[11];
-    this.datePdbsLastChecked = (Date)fields[12];
+    this.affinityRange = (String)fields[7];
+    this.affinityType = (String)fields[8];
+    this.dateAdded = (Date)fields[9];
+    this.dateModified = (Date)fields[10];
+    this.datePdbsLastChecked = (Date)fields[11];
 		this.pdbMaps = DatabaseAccess.getPdbMapsOfInteraction(this.interactionId);
 		this.falseMaps = DatabaseAccess.getfalseMapsOfInteraction(this.interactionId);
   }
@@ -66,7 +64,7 @@ public class Interaction {
 				 ),
 				pdbMap.getPdbCode()
 			 ),
-			 pdbMap.getHet() == null ? "notannotated" : "annotated",
+			 pdbMap.getHetId() == null ? "notannotated" : "annotated",
 			 pdbMap.getBindingResidues() == null ? "notannotated" : "annotated",
 			 pdbMap.getBindSequence() == null ? "notannotated" : "annotated"
 			) + ", "
@@ -79,7 +77,7 @@ public class Interaction {
 		return Utilities.enclose(
 			"tr", "",
 			String.format(
-				"%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
+				"%s%s%s%s%s%s%s%s%s%s%s%s%s%s",
 				Utilities.enclose("td", "", String.format("%d", interactionId)),
 				Utilities.enclose("td", "", String.format(
 				 "<a href='http://guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=%d' target='_blank'>%d</a>",
@@ -95,7 +93,6 @@ public class Interaction {
 				Utilities.enclose("td", "", affinityType == null ? "-" : affinityType),
 				Utilities.enclose("td", "", affinityValue == 0.0 ? "-" : String.format("%.2f", affinityValue)),
 				Utilities.enclose("td", "", affinityRange.equals("") ? "-" : affinityRange),
-				Utilities.enclose("td", "", ligandIsPeptide ? "Yes" : "No"),
 				Utilities.enclose("td", "", ft.format(dateAdded)),
 				Utilities.enclose("td", "", ft.format(dateModified)),
 				Utilities.enclose("td", "", datePdbsLastChecked != null ? ft.format(datePdbsLastChecked) : "Never"),
@@ -166,16 +163,6 @@ public class Interaction {
 	}
 
 
-	public String getAffinityType() {
-		return affinityType;
-	}
-
-
-	public void setAffinityType(String affinityType) {
-		this.affinityType = affinityType;
-	}
-
-
 	public float getAffinityValue() {
 		return affinityValue;
 	}
@@ -196,13 +183,13 @@ public class Interaction {
 	}
 
 
-	public boolean isLigandIsPeptide() {
-		return ligandIsPeptide;
+	public String getAffinityType() {
+		return affinityType;
 	}
 
 
-	public void setLigandIsPeptide(boolean ligandIsPeptide) {
-		this.ligandIsPeptide = ligandIsPeptide;
+	public void setAffinityType(String affinityType) {
+		this.affinityType = affinityType;
 	}
 
 

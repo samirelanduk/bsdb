@@ -7,7 +7,8 @@ public class InteractionPdb {
   private String pdbCode;
   private boolean manuallyAdded;
   private boolean manuallyMarkedCorrect;
-  private String het;
+  private String hetCode;
+  private String hetId;
   private String[] bindingResidues;
   private String receptorChain;
   private int originalChainLength;
@@ -25,16 +26,17 @@ public class InteractionPdb {
     this.pdbCode = (String)fields[2];
     this.manuallyAdded = (boolean)fields[3];
     this.manuallyMarkedCorrect = (boolean)fields[4];
-    this.het = (String)fields[5];
-    this.bindingResidues = ((String)fields[6]) == null ? null : ((String)fields[6]).split(", ");
-    this.receptorChain = (String)fields[7];
-    this.originalChainLength = fields[8] == null ? 0 : (int)fields[8];
-    this.bindSequence = (String)fields[9];
-    this.proportionalLength = fields[10] == null ? 0.0 : (float)fields[10];
-    this.internalContacts = fields[11] == null ? 0 : (int)fields[11];
-    this.externalContacts = fields[12] == null ? 0 : (int)fields[12];
-    this.contactRatio = fields[13] == null ? 0.0 : (float)fields[13];
-    this.residueIds = (String)fields[14];
+    this.hetCode = (String)fields[5];
+    this.hetId = (String)fields[6];
+    this.bindingResidues = ((String)fields[7]) == null ? null : ((String)fields[7]).split(", ");
+    this.receptorChain = (String)fields[8];
+    this.originalChainLength = fields[9] == null ? 0 : (int)fields[9];
+    this.bindSequence = (String)fields[10];
+    this.proportionalLength = fields[11] == null ? 0.0 : (float)fields[11];
+    this.internalContacts = fields[12] == null ? 0 : (int)fields[12];
+    this.externalContacts = fields[13] == null ? 0 : (int)fields[13];
+    this.contactRatio = fields[14] == null ? 0.0 : (float)fields[14];
+    this.residueIds = (String)fields[15];
   }
 
 
@@ -93,13 +95,23 @@ public class InteractionPdb {
 	}
 
 
-	public String getHet() {
-		return het;
+	public String getHetCode() {
+		return hetCode;
 	}
 
 
-	public void setHet(String het) {
-		this.het = het;
+	public void setHetCode(String hetCode) {
+		this.hetCode = hetCode;
+  }
+
+
+	public String getHetId() {
+		return hetId;
+	}
+
+
+	public void setHetId(String hetId) {
+		this.hetId = hetId;
   }
 
 
