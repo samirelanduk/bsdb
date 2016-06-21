@@ -13,6 +13,7 @@ public class LigandLink {
 		this.url = ((String)fields[2]) != null ? (String)fields[2] : "";
 	}
 
+
 	public String getHtml() {
 		String text = this.accession;
 		if (this.url.length() > 1) {

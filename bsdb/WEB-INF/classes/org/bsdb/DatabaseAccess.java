@@ -199,17 +199,6 @@ public class DatabaseAccess {
 	}
 
 
-	// Get Target Object by ID
-	public static Target getTarget(int targetId)  {
-		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
-		 "SELECT * FROM targets WHERE targetId=?",
-		 targetId
-		);
-		Object[][] sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
-		return new Target(sqlResults[0]);
-	}
-
-
 	// Get Sequence Object by ID
 	public static Sequence getSequence(int sequenceId)  {
 		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(

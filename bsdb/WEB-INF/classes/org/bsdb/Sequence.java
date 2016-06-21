@@ -1,24 +1,30 @@
 package org.bsdb;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 public class Sequence {
 
 	private int sequenceId;
 	private Ligand ligand;
-	private Target target;
+	private int targetId;
+	private String targetName;
+	private String targetNameStripped;
 	private String species;
 	private String type;
 	private String action;
 	private float affinity;
 	private String affinityRange;
 	private String affinityType;
+	private Date dateAdded;
+	private Date dateModified;
+	private String pdb;
+	private String hetCode;
 	private String hetId;
 	private String bindingResidues;
 	private String chain;
 	private int originalChainLength;
 	private String sequence;
-	private String pdb;
 	private float proportionalLength;
 	private int internalContacts;
 	private int externalContacts;
@@ -26,7 +32,6 @@ public class Sequence {
 	private String residueIds;
 
 	public Sequence() {
-		this.target = new Target();
 		this.ligand = new Ligand();
 		this.sequence = "";
 	}
@@ -38,28 +43,29 @@ public class Sequence {
 		} catch (IndexOutOfBoundsException ce) {
 			this.ligand = new Ligand();
 		}
-		try {
-			this.target = DatabaseAccess.getTarget((Integer)fields[2]);
-		} catch (IndexOutOfBoundsException ce) {
-			this.target = new Target();
-		}
-		this.species = (String)fields[3];
-		this.type = (String)fields[4];
-		this.action = (String)fields[5];
-		this.affinity = (float)fields[6];
-		this.affinityRange = (String)fields[7];
-		this.affinityType = (String)fields[8];
-		this.hetId = (String)fields[9];
-		this.bindingResidues = (String)fields[10];
-		this.chain = (String)fields[11];
-		this.originalChainLength = (Integer)fields[12];
-		this.sequence = (String)fields[13];
-		this.pdb = (String)fields[14];
-		this.proportionalLength = (float)fields[15];
-		this.internalContacts = (Integer)fields[16];
-		this.externalContacts = (Integer)fields[17];
-		this.contactRatio = (float)fields[18];
-		this.residueIds = (String)fields[19];
+		this.targetId = (Integer)fields[2];
+		this.targetName = (String)fields[3];
+		this.targetNameStripped = (String)fields[4];
+		this.species = (String)fields[5];
+		this.type = (String)fields[6];
+		this.action = (String)fields[7];
+		this.affinity = (float)fields[8];
+		this.affinityRange = (String)fields[9];
+		this.affinityType = (String)fields[10];
+		this.dateAdded = (Date)fields[11];
+		this.dateModified = (Date)fields[12];
+		this.pdb = (String)fields[13];
+		this.hetCode = (String)fields[14];
+		this.hetId = (String)fields[16];
+		this.bindingResidues = (String)fields[16];
+		this.chain = (String)fields[17];
+		this.originalChainLength = (Integer)fields[18];
+		this.sequence = (String)fields[19];
+		this.proportionalLength = (float)fields[20];
+		this.internalContacts = (Integer)fields[21];
+		this.externalContacts = (Integer)fields[22];
+		this.contactRatio = (float)fields[23];
+		this.residueIds = (String)fields[24];
 	}
 
 	public String getConciseHtml() {
@@ -68,7 +74,7 @@ public class Sequence {
 				String.format("href='/sequences/detail.jsp?id=%d'", getSequenceId()),
 				String.format(
 				 "%s (%d residues)",
-				 getTarget().getName(),
+				 getTargetName(),
 				 getSequence().length()
 				)
 		);
@@ -96,13 +102,33 @@ public class Sequence {
 	}
 
 
-	public Target getTarget() {
-		return target;
+	public int getTargetId() {
+		return targetId;
 	}
 
 
-	public void setTarget(Target target) {
-		this.target = target;
+	public void setTargetId(int targetId) {
+		this.targetId = targetId;
+	}
+
+
+	public String getTargetName() {
+		return targetName;
+	}
+
+
+	public void setTargetName(String targetName) {
+		this.targetName = targetName;
+	}
+
+
+	public String getTargetNameStripped() {
+		return targetNameStripped;
+	}
+
+
+	public void setTargetNameStripped(String targetNameStripped) {
+		this.targetNameStripped = targetNameStripped;
 	}
 
 
@@ -166,6 +192,46 @@ public class Sequence {
 	}
 
 
+	public Date getDateAdded() {
+		return dateAdded;
+	}
+
+
+	public void setDateAdded(Date dateAdded) {
+		this.dateAdded = dateAdded;
+	}
+
+
+	public Date getDateModified() {
+		return dateModified;
+	}
+
+
+	public void setDateModified(Date dateModified) {
+		this.dateModified = dateModified;
+	}
+
+
+	public String getPdb() {
+		return pdb;
+	}
+
+
+	public void setPdb(String pdb) {
+		this.pdb = pdb;
+	}
+
+
+	public String getHetCode() {
+		return hetCode;
+	}
+
+
+	public void setHetCode(String hetCode) {
+		this.hetCode = hetCode;
+	}
+
+
 	public String getHetId() {
 		return hetId;
 	}
@@ -226,16 +292,6 @@ public class Sequence {
 			));
 		}
 		return s.toString();
-	}
-
-
-	public String getPdb() {
-		return pdb;
-	}
-
-
-	public void setPdb(String pdb) {
-		this.pdb = pdb;
 	}
 
 

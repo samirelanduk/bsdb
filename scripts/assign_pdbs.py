@@ -14,7 +14,7 @@ if len(sys.argv) > 1:
 
 connection = utilities.get_connection()
 
-print("Getting interactions that have never been checked for PDBs...")
+print("Getting interaction objects that have never been checked for PDBs...")
 unchecked_interactions = [
  pygtop.get_target_by_id(target_id).get_interaction_by_id(interaction_id)
   for interaction_id, target_id
