@@ -107,7 +107,7 @@ public class DatabaseAccess {
 	//Gets all interactions in the staging database that have PDB maps
   public static Interaction[] getMapInteractions() {
   	ArrayList<Interaction> interactions = new ArrayList<Interaction>();
-    ResultSet rs = issuePreparedSqlQuery("SELECT DISTINCT interactions.* FROM interactions RIGHT OUTER JOIN interaction_pdbs ON interactions.interactionId=interaction_pdbs.interactionId where interaction_pdbs.interactionId is not null ORDER BY interactionId;");
+    ResultSet rs = issuePreparedSqlQuery("SELECT DISTINCT interactions.* FROM interactions RIGHT OUTER JOIN interaction_pdb_maps ON interactions.interactionId=interaction_pdb_maps.interactionId where interaction_pdb_maps.interactionId is not null ORDER BY interactionId;");
 		if (rs != null) {
 	    Object[][] rows = getObjectGridFromResultSet(rs);
 	    for (Object[] row : rows) {
@@ -141,7 +141,7 @@ public class DatabaseAccess {
 	public static ArrayList<InteractionPdb> getPdbMapsOfInteraction(int interactionId) {
 		ArrayList<InteractionPdb> pdbMaps = new ArrayList<InteractionPdb>();
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT * FROM interaction_pdbs WHERE interactionId=?",
+		 "SELECT * FROM interaction_pdb_maps WHERE interactionId=?",
 		 interactionId
 		);
 		Object[][] rows = getObjectGridFromResultSet(rs);
@@ -155,7 +155,7 @@ public class DatabaseAccess {
 	//Gets a single Interaction PDB map object by ID
 	public static InteractionPdb getInteractionPdb(String mapId) {
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT * FROM interaction_pdbs WHERE mapId=?",
+		 "SELECT * FROM interaction_pdb_maps WHERE mapId=?",
 		 mapId
 		);
 		if (rs != null) {
@@ -174,7 +174,7 @@ public class DatabaseAccess {
 	//Flips the manualCorrectMark value of a given InteractionPdb
 	public static void toggleInteractionPdbManualCorrectnessMark(String mapId) {
 		issuePreparedSqlQuery(
-		 "UPDATE interaction_pdbs SET manualCorrectMapMark = NOT manualCorrectMapMark WHERE mapId=?",
+		 "UPDATE interaction_pdb_maps SET manualCorrectMapMark = NOT manualCorrectMapMark WHERE mapId=?",
 		 mapId
 		);
 	}
@@ -182,14 +182,14 @@ public class DatabaseAccess {
 
 	//Manually adds an Interaction-PDB map
 	public static void addInteractionPdb(int interactionId, String pdbCode) {
-		ResultSet rs = issuePreparedSqlQuery("SELECT mapId FROM interaction_pdbs");
+		ResultSet rs = issuePreparedSqlQuery("SELECT mapId FROM interaction_pdb_maps");
 		ArrayList<String> existingIds = new ArrayList<String>();
 		for (Object[] row : getObjectGridFromResultSet(rs)) {
 			existingIds.add((String)row[0]);
 		}
 		if (!(existingIds.contains(String.format("%d%s", interactionId, pdbCode)))) {
 			issuePreparedSqlQuery(
-			 "INSERT INTO interaction_pdbs VALUES (?, ?, ?, true, true)",
+			 "INSERT INTO interaction_pdb_maps VALUES (?, ?, ?, true, true)",
 			 String.format("%d%s", interactionId, pdbCode),
 			 interactionId,
 			 pdbCode
@@ -201,7 +201,7 @@ public class DatabaseAccess {
 	//Deletes an InteractionPdb
 	public static void removeInteractionPdb(int interactionId, String pdbCode) {
 		issuePreparedSqlQuery(
-		 "DELETE FROM interaction_pdbs WHERE mapId=?",
+		 "DELETE FROM interaction_pdb_maps WHERE mapId=?",
 		 String.format("%d%s", interactionId, pdbCode)
 		);
 	}
@@ -209,14 +209,14 @@ public class DatabaseAccess {
 
 	//Blacklists an InteractionPdb
 	public static void blacklistMap(int interactionId, String pdbCode) {
-		ResultSet rs = issuePreparedSqlQuery("SELECT mapId FROM false_interaction_pdbs");
+		ResultSet rs = issuePreparedSqlQuery("SELECT mapId FROM false_interaction_pdb_maps");
 		ArrayList<String> existingIds = new ArrayList<String>();
 		for (Object[] row : getObjectGridFromResultSet(rs)) {
 			existingIds.add((String)row[0]);
 		}
 		if (!(existingIds.contains(String.format("%d%s", interactionId, pdbCode)))) {
 			issuePreparedSqlQuery(
-			 "INSERT INTO false_interaction_pdbs VALUES (?, ?, ?)",
+			 "INSERT INTO false_interaction_pdb_maps VALUES (?, ?, ?)",
 			 String.format("%d%s", interactionId, pdbCode),
 			 interactionId,
 			 pdbCode
@@ -229,7 +229,7 @@ public class DatabaseAccess {
 	public static ArrayList<FalseMap> getfalseMapsOfInteraction(int interactionId) {
 		ArrayList<FalseMap> falseMaps = new ArrayList<FalseMap>();
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT * FROM false_interaction_pdbs WHERE interactionId=?",
+		 "SELECT * FROM false_interaction_pdb_maps WHERE interactionId=?",
 		 interactionId
 		);
 		Object[][] rows = getObjectGridFromResultSet(rs);
@@ -243,7 +243,7 @@ public class DatabaseAccess {
 	//Gets a single false Interaction PDB map object by ID
 	public static FalseMap getFalseMap(String mapId) {
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT * FROM false_interaction_pdbs WHERE mapId=?",
+		 "SELECT * FROM false_interaction_pdb_maps WHERE mapId=?",
 		 mapId
 		);
 		if (rs != null) {
@@ -262,7 +262,7 @@ public class DatabaseAccess {
 	//Deletes a blacklistmark
 	public static void removeFalseMap(int interactionId, String pdbCode) {
 		issuePreparedSqlQuery(
-		 "DELETE FROM false_interaction_pdbs WHERE mapId=?",
+		 "DELETE FROM false_interaction_pdb_maps WHERE mapId=?",
 		 String.format("%d%s", interactionId, pdbCode)
 		);
 	}
@@ -271,7 +271,7 @@ public class DatabaseAccess {
 	//Adds a het to a pdbmap
 	public static void addHet(String mapId, String het) {
 		issuePreparedSqlQuery(
-		 "UPDATE interaction_pdbs SET het = ? WHERE mapId=?",
+		 "UPDATE interaction_pdb_maps SET het = ? WHERE mapId=?",
 		 (het.equals("") || het.equals("-")) ? null : het,
 		 mapId
 		);
@@ -295,7 +295,7 @@ public class DatabaseAccess {
 			residues = "";
 		}
 		issuePreparedSqlQuery(
-		 "UPDATE interaction_pdbs SET bindingResidues = ? WHERE mapId=?",
+		 "UPDATE interaction_pdb_maps SET bindingResidues = ? WHERE mapId=?",
 		 residues,
 		 mapId
 		);
@@ -312,7 +312,7 @@ public class DatabaseAccess {
 		newResidues.append(newResidue);
 		String residues = newResidues.toString();
 		issuePreparedSqlQuery(
-		 "UPDATE interaction_pdbs SET bindingResidues = ? WHERE mapId=?",
+		 "UPDATE interaction_pdb_maps SET bindingResidues = ? WHERE mapId=?",
 		 residues,
 		 mapId
 		);
@@ -322,7 +322,7 @@ public class DatabaseAccess {
 	//Removes a bindsite from a pdb map
 	public static void removeSite(String mapId) {
 		issuePreparedSqlQuery(
-		 "UPDATE interaction_pdbs SET bindingResidues = null WHERE mapId=?",
+		 "UPDATE interaction_pdb_maps SET bindingResidues = null WHERE mapId=?",
 		 mapId
 		);
 	}
@@ -331,7 +331,7 @@ public class DatabaseAccess {
 	//Removes a sequence and associated information from a pdbmap
 	public static void removeSequence(String mapId) {
 		issuePreparedSqlQuery(
-		 "UPDATE interaction_pdbs SET " +
+		 "UPDATE interaction_pdb_maps SET " +
 		  "bindSequence = null," +
 			"receptorChain = null," +
 			"originalChainLength = null," +

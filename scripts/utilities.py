@@ -57,8 +57,7 @@ def interaction_object_to_dict(interaction):
      "action": interaction.action,
      "affinityType": interaction.affinity_type,
      "affinityValue": interaction.affinity_value,
-     "affinityRange": affinity_range_to_str(interaction.affinity_range),
-     "ligandIsPeptide": "peptide" in interaction.get_ligand().ligand_type.lower()
+     "affinityRange": affinity_range_to_str(interaction.affinity_range)
     }
 
 
@@ -76,10 +75,9 @@ def get_table_interaction_as_dict(interaction, connection):
      "species": row[3],
      "type": row[4],
      "action": row[5],
-     "affinityType": row[6],
-     "affinityValue": row[7],
-     "affinityRange": row[8],
-     "ligandIsPeptide": row[9]
+     "affinityValue": row[6],
+     "affinityRange": row[7],
+     "affinityType": row[8]
     }
     cursor.close()
     return dictionary
@@ -99,17 +97,16 @@ def add_interaction_to_table(interaction, connection):
      "species",
      "type",
      "action",
-     "affinityType",
      "affinityValue",
      "affinityRange",
-     "ligandIsPeptide",
+     "affinityType",
      "dateAdded",
      "dateModified"
     ]]
 
     cursor.execute(
      """INSERT INTO interactions VALUES (
-      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
       );""", values
     )
     connection.commit()
@@ -145,7 +142,6 @@ def update_interaction(interaction, connection):
       affinityType = '%(affinityType)s',
       affinityValue = '%(affinityValue)s',
       affinityRange = '%(affinityRange)s',
-      ligandIsPeptide = '%(ligandIsPeptide)s',
       dateModified = '%(dateModified)s' WHERE interactionId=%(interactionId)s;""" % dictionary
     )
     connection.commit()
