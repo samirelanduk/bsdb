@@ -139,9 +139,9 @@ def update_interaction(interaction, connection):
       species = '%(species)s',
       type = '%(type)s',
       action = '%(action)s',
-      affinityType = '%(affinityType)s',
       affinityValue = '%(affinityValue)s',
       affinityRange = '%(affinityRange)s',
+      affinityType = '%(affinityType)s',
       dateModified = '%(dateModified)s' WHERE interactionId=%(interactionId)s;""" % dictionary
     )
     connection.commit()
@@ -158,7 +158,7 @@ def remove_interaction_row_by_id(interaction_id, connection):
 def get_interaction_ids_never_checked_for_pdbs(connection):
     cursor = connection.cursor()
     cursor.execute(
-     "SELECT interactionId, targetId FROM interactions WHERE dateLastCheckedForPdbs IS null;"
+     "SELECT interactionId, targetId FROM interactions WHERE lastPdbCheck IS null;"
     )
     id_pairs = [(row[0], row[1]) for row in cursor.fetchall()]
     cursor.close()
@@ -168,7 +168,7 @@ def get_interaction_ids_never_checked_for_pdbs(connection):
 def get_interaction_ids_already_checked_for_pdbs(connection):
     cursor = connection.cursor()
     cursor.execute(
-     "SELECT interactionId, targetId FROM interactions WHERE dateLastCheckedForPdbs IS NOT null ORDER BY dateLastCheckedForPdbs;"
+     "SELECT interactionId, targetId FROM interactions WHERE lastPdbCheck IS NOT null ORDER BY lastPdbCheck;"
     )
     id_pairs = [(row[0], row[1]) for row in cursor.fetchall()]
     cursor.close()
@@ -179,17 +179,17 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
     now = datetime.datetime.now()
     cursor = connection.cursor()
     cursor.execute(
-     "UPDATE interactions SET dateLastCheckedForPdbs=%s WHERE interactionId=%s;",
+     "UPDATE interactions SET lastPdbCheck=%s WHERE interactionId=%s;",
      (now, interaction.interaction_id)
     )
     connection.commit()
     cursor.execute(
-     "SELECT pdbCode FROM interaction_pdbs WHERE interactionId=%s",
+     "SELECT pdb FROM interaction_pdb_maps WHERE interactionId=%s",
      (interaction.interaction_id,)
     )
     pdbs_already_assigned = [row[0] for row in cursor.fetchall()]
     cursor.execute(
-     "SELECT pdbCode FROM false_interaction_pdbs WHERE interactionId=%s",
+     "SELECT pdb FROM false_maps WHERE interactionId=%s",
      (interaction.interaction_id,)
     )
     blacklisted_pdbs = [row[0] for row in cursor.fetchall()]
@@ -199,7 +199,7 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
         if pdb not in pdbs_already_assigned and pdb not in blacklisted_pdbs:
             pdbs_assigned_now.append(pdb)
             cursor.execute(
-             "INSERT INTO interaction_pdbs VALUES (%s, %s, %s, false, false);",
+             "INSERT INTO interaction_pdb_maps VALUES (%s, %s, %s, false, false);",
              (str(interaction.interaction_id) + pdb, interaction.interaction_id, pdb)
             )
             connection.commit()
@@ -212,13 +212,13 @@ def get_interaction_pdb_maps(connection):
     cursor.execute(
      """
      SELECT
-      interactions.targetId, interaction_pdbs.interactionId, interaction_pdbs.pdbCode,
-      interaction_pdbs.het, interaction_pdbs.bindingResidues, interaction_pdbs.bindSequence,
-      interaction_pdbs.manualCorrectMapMark, interaction_pdbs.receptorChain, interaction_pdbs.originalChainLength,
-      interaction_pdbs.proportionalLength, interaction_pdbs.internalContacts,
-      interaction_pdbs.externalContacts, interaction_pdbs.contactRatio, interaction_pdbs.residueIds
-     FROM interaction_pdbs LEFT JOIN interactions ON
-      interaction_pdbs.interactionId = interactions.interactionId;"""
+      interactions.targetId, interaction_pdb_maps.interactionId, interaction_pdb_maps.pdbCode,
+      interaction_pdb_maps.het, interaction_pdb_maps.bindingResidues, interaction_pdb_maps.bindSequence,
+      interaction_pdb_maps.manualCorrectMapMark, interaction_pdb_maps.receptorChain, interaction_pdb_maps.originalChainLength,
+      interaction_pdb_maps.proportionalLength, interaction_pdb_maps.internalContacts,
+      interaction_pdb_maps.externalContacts, interaction_pdb_maps.contactRatio, interaction_pdb_maps.residueIds
+     FROM interaction_pdb_maps LEFT JOIN interactions ON
+      interaction_pdb_maps.interactionId = interactions.interactionId;"""
     )
     interaction_pdb_maps = [{
      "targetId": row[0],
@@ -244,7 +244,7 @@ def get_interaction_pdb_maps(connection):
 def give_pdb_map_het_code(interaction_id, pdb_code, het_code, connection):
     cursor = connection.cursor()
     cursor.execute(
-     "UPDATE interaction_pdbs SET het=%s WHERE mapId=%s;",
+     "UPDATE interaction_pdb_maps SET het=%s WHERE mapId=%s;",
      (het_code, str(interaction_id) + pdb_code)
     )
     connection.commit()
@@ -254,7 +254,7 @@ def give_pdb_map_het_code(interaction_id, pdb_code, het_code, connection):
 def give_pdb_map_bind_site(interaction_id, pdb_code, site, connection):
     cursor = connection.cursor()
     cursor.execute(
-     "UPDATE interaction_pdbs SET bindingResidues=%s WHERE mapId=%s;", (
+     "UPDATE interaction_pdb_maps SET bindingResidues=%s WHERE mapId=%s;", (
       ", ".join([residue.residue_id for residue in site.residues]),
       str(interaction_id) + pdb_code
      )
@@ -268,7 +268,7 @@ def give_pdb_map_bind_sequence(interaction_id, pdb_code, sequence, chain_id,
  contact_ratio, residueIds, connection):
     cursor = connection.cursor()
     cursor.execute(
-     """UPDATE interaction_pdbs SET
+     """UPDATE interaction_pdb_maps SET
       bindSequence=%s,
       receptorChain=%s,
       originalChainLength=%s,

@@ -20,7 +20,6 @@
         <th>Affinity Type</th>
         <th>Affinity</th>
         <th>Affinity Range</th>
-        <th>Peptide Ligand</th>
         <th>Date Added</th>
         <th>Last Modified</th>
         <th>Last PDB Check</th>

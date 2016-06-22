@@ -46,7 +46,6 @@ public class DatabaseAccess {
 		}
 	}
 
-
 	//Takes a ResultSet returned by an SQL query and turns it into an Object array
   public static Object[][] getObjectGridFromResultSet(ResultSet rs) {
 		try {
@@ -174,7 +173,7 @@ public class DatabaseAccess {
 	//Flips the manualCorrectMark value of a given InteractionPdb
 	public static void toggleInteractionPdbManualCorrectnessMark(String mapId) {
 		issuePreparedSqlQuery(
-		 "UPDATE interaction_pdb_maps SET manualCorrectMapMark = NOT manualCorrectMapMark WHERE mapId=?",
+		 "UPDATE interaction_pdb_maps SET manualCorrectMark = NOT manualCorrectMark WHERE mapId=?",
 		 mapId
 		);
 	}
@@ -209,14 +208,14 @@ public class DatabaseAccess {
 
 	//Blacklists an InteractionPdb
 	public static void blacklistMap(int interactionId, String pdbCode) {
-		ResultSet rs = issuePreparedSqlQuery("SELECT mapId FROM false_interaction_pdb_maps");
+		ResultSet rs = issuePreparedSqlQuery("SELECT mapId FROM false_maps");
 		ArrayList<String> existingIds = new ArrayList<String>();
 		for (Object[] row : getObjectGridFromResultSet(rs)) {
 			existingIds.add((String)row[0]);
 		}
 		if (!(existingIds.contains(String.format("%d%s", interactionId, pdbCode)))) {
 			issuePreparedSqlQuery(
-			 "INSERT INTO false_interaction_pdb_maps VALUES (?, ?, ?)",
+			 "INSERT INTO false_maps VALUES (?, ?, ?)",
 			 String.format("%d%s", interactionId, pdbCode),
 			 interactionId,
 			 pdbCode
@@ -229,7 +228,7 @@ public class DatabaseAccess {
 	public static ArrayList<FalseMap> getfalseMapsOfInteraction(int interactionId) {
 		ArrayList<FalseMap> falseMaps = new ArrayList<FalseMap>();
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT * FROM false_interaction_pdb_maps WHERE interactionId=?",
+		 "SELECT * FROM false_maps WHERE interactionId=?",
 		 interactionId
 		);
 		Object[][] rows = getObjectGridFromResultSet(rs);
@@ -243,7 +242,7 @@ public class DatabaseAccess {
 	//Gets a single false Interaction PDB map object by ID
 	public static FalseMap getFalseMap(String mapId) {
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT * FROM false_interaction_pdb_maps WHERE mapId=?",
+		 "SELECT * FROM false_maps WHERE mapId=?",
 		 mapId
 		);
 		if (rs != null) {
@@ -262,7 +261,7 @@ public class DatabaseAccess {
 	//Deletes a blacklistmark
 	public static void removeFalseMap(int interactionId, String pdbCode) {
 		issuePreparedSqlQuery(
-		 "DELETE FROM false_interaction_pdb_maps WHERE mapId=?",
+		 "DELETE FROM false_maps WHERE mapId=?",
 		 String.format("%d%s", interactionId, pdbCode)
 		);
 	}
