@@ -104,7 +104,7 @@
 		<div class="section" id="het">
 			<h2>Ligand in PDB</h2>
 			<p><% out.print((interactionPdb == null || interactionPdb.getHetId() == null) ?
-			  "-" : interactionPdb.getHetId() + "/" + interactionPdb.getHetCode()); %></p>
+			  "-" : interactionPdb.getHetId()); %></p>
 			<form method="POST" action="edit_het.jsp">
 				<input type="input" id="het" name="het" placeholder="Specify ligand ID...">
 				<input type="hidden" name="id" value="<% out.print(interactionPdb == null ? "" : interactionPdb.getMapId()); %>">

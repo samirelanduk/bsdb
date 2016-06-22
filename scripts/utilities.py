@@ -212,8 +212,8 @@ def get_interaction_pdb_maps(connection):
     cursor.execute(
      """
      SELECT
-      interactions.targetId, interaction_pdb_maps.interactionId, interaction_pdb_maps.pdbCode,
-      interaction_pdb_maps.het, interaction_pdb_maps.bindingResidues, interaction_pdb_maps.bindSequence,
+      interactions.targetId, interaction_pdb_maps.interactionId, interaction_pdb_maps.pdb,
+      interaction_pdb_maps.hetId, interaction_pdb_maps.bindingResidues, interaction_pdb_maps.bindSequence,
       interaction_pdb_maps.manualCorrectMapMark, interaction_pdb_maps.receptorChain, interaction_pdb_maps.originalChainLength,
       interaction_pdb_maps.proportionalLength, interaction_pdb_maps.internalContacts,
       interaction_pdb_maps.externalContacts, interaction_pdb_maps.contactRatio, interaction_pdb_maps.residueIds
@@ -224,7 +224,7 @@ def get_interaction_pdb_maps(connection):
      "targetId": row[0],
      "interactionId": row[1],
      "pdbCode": row[2],
-     "het": row[3],
+     "hetId": row[3],
      "bindingResidues": row[4],
      "bindSequence": row[5],
      "manuallyMarkedCorrect": row[6],
@@ -241,11 +241,11 @@ def get_interaction_pdb_maps(connection):
     return interaction_pdb_maps
 
 
-def give_pdb_map_het_code(interaction_id, pdb_code, het_code, connection):
+def give_pdb_map_het_code(interaction_id, pdb_code, het_id, connection):
     cursor = connection.cursor()
     cursor.execute(
-     "UPDATE interaction_pdb_maps SET het=%s WHERE mapId=%s;",
-     (het_code, str(interaction_id) + pdb_code)
+     "UPDATE interaction_pdb_maps SET hetId=%s WHERE mapId=%s;",
+     (het_id, het_code, str(interaction_id) + pdb_code)
     )
     connection.commit()
     cursor.close()
