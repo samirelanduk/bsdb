@@ -270,7 +270,7 @@ public class DatabaseAccess {
 	//Adds a het to a pdbmap
 	public static void addHet(String mapId, String het) {
 		issuePreparedSqlQuery(
-		 "UPDATE interaction_pdb_maps SET het = ? WHERE mapId=?",
+		 "UPDATE interaction_pdb_maps SET hetId = ? WHERE mapId=?",
 		 (het.equals("") || het.equals("-")) ? null : het,
 		 mapId
 		);

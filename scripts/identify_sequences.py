@@ -21,7 +21,7 @@ try:
     print("Looking for bind sequences...")
     for pdb_map in interaction_pdb_maps:
         pdb = molecupy.get_pdb_remotely(pdb_map["pdbCode"])
-        ligand = pdb.model.get_small_molecule_by_id(pdb_map["het"])
+        ligand = pdb.model.get_small_molecule_by_id(pdb_map["hetId"])
         print("\t%i%s: Looking for %s's bind sequence in PDB %s..." % (
          pdb_map["interactionId"], pdb_map["pdbCode"], ligand, pdb_map["pdbCode"]
         ), end=" ")

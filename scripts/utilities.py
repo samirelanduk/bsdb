@@ -214,7 +214,7 @@ def get_interaction_pdb_maps(connection):
      SELECT
       interactions.targetId, interaction_pdb_maps.interactionId, interaction_pdb_maps.pdb,
       interaction_pdb_maps.hetId, interaction_pdb_maps.bindingResidues, interaction_pdb_maps.bindSequence,
-      interaction_pdb_maps.manualCorrectMapMark, interaction_pdb_maps.receptorChain, interaction_pdb_maps.originalChainLength,
+      interaction_pdb_maps.manualCorrectMark, interaction_pdb_maps.receptorChain, interaction_pdb_maps.originalChainLength,
       interaction_pdb_maps.proportionalLength, interaction_pdb_maps.internalContacts,
       interaction_pdb_maps.externalContacts, interaction_pdb_maps.contactRatio, interaction_pdb_maps.residueIds
      FROM interaction_pdb_maps LEFT JOIN interactions ON
@@ -245,7 +245,7 @@ def give_pdb_map_het_code(interaction_id, pdb_code, het_id, connection):
     cursor = connection.cursor()
     cursor.execute(
      "UPDATE interaction_pdb_maps SET hetId=%s WHERE mapId=%s;",
-     (het_id, het_code, str(interaction_id) + pdb_code)
+     (het_id, str(interaction_id) + pdb_code)
     )
     connection.commit()
     cursor.close()

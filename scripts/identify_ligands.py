@@ -10,7 +10,7 @@ try:
     print("There are %i Interaction-PDB maps." % len(interaction_pdb_maps))
 
     interaction_pdb_maps = [
-     pdb_map for pdb_map in interaction_pdb_maps if not pdb_map["het"]
+     pdb_map for pdb_map in interaction_pdb_maps if not pdb_map["hetId"]
     ]
     print("There are %i Interaction-PDB maps with no HET." % len(interaction_pdb_maps))
 
