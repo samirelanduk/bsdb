@@ -18,7 +18,7 @@
 <%@include file="/includes/start.html"%>
 <link rel="stylesheet" type="text/css" href="/css/detail.css">
 <title><%
- out.print(sequence.getSpecies() + " " + Utilities.stripHtml(sequence.getTarget().getName()));
+ out.print(sequence.getSpecies() + " " + Utilities.stripHtml(sequence.getTargetNameStripped()));
 %> - BindSequenceDB</title>
 <%@include file="/includes/bodytop.html"%>
 
@@ -26,7 +26,7 @@
 	<tr>
 		<td class="col">
 			<div id="sequence_title">
-				<h1><% out.print(sequence.getSpecies() + " " + sequence.getTarget().getName()); %></h1>
+				<h1><% out.print(sequence.getSpecies() + " " + sequence.getTargetName()); %></h1>
 				<div id="ligand_link">
 					with <a href="/ligands/detail.jsp?id=<% out.print(sequence.getLigand().getLigandId()); %>"><% out.print(sequence.getLigand().getName()); %></a>
 				</div>

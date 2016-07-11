@@ -10,6 +10,7 @@ public class Sequence {
 	private int targetId;
 	private String targetName;
 	private String targetNameStripped;
+	private String targetType;
 	private String species;
 	private String type;
 	private String action;
@@ -46,26 +47,27 @@ public class Sequence {
 		this.targetId = (Integer)fields[2];
 		this.targetName = (String)fields[3];
 		this.targetNameStripped = (String)fields[4];
-		this.species = (String)fields[5];
-		this.type = (String)fields[6];
-		this.action = (String)fields[7];
-		this.affinity = (float)fields[8];
-		this.affinityRange = (String)fields[9];
-		this.affinityType = (String)fields[10];
-		this.dateAdded = (Date)fields[11];
-		this.dateModified = (Date)fields[12];
-		this.pdb = (String)fields[13];
-		this.hetCode = (String)fields[14];
+		this.targetType = (String)fields[5];
+		this.species = (String)fields[6];
+		this.type = (String)fields[7];
+		this.action = (String)fields[8];
+		this.affinity = (float)fields[9];
+		this.affinityRange = (String)fields[10];
+		this.affinityType = (String)fields[11];
+		this.dateAdded = (Date)fields[12];
+		this.dateModified = (Date)fields[13];
+		this.pdb = (String)fields[14];
+		this.hetCode = (String)fields[15];
 		this.hetId = (String)fields[16];
-		this.bindingResidues = (String)fields[16];
-		this.chain = (String)fields[17];
-		this.originalChainLength = (Integer)fields[18];
-		this.sequence = (String)fields[19];
-		this.proportionalLength = (float)fields[20];
-		this.internalContacts = (Integer)fields[21];
-		this.externalContacts = (Integer)fields[22];
-		this.contactRatio = (float)fields[23];
-		this.residueIds = (String)fields[24];
+		this.bindingResidues = (String)fields[17];
+		this.chain = (String)fields[18];
+		this.originalChainLength = (Integer)fields[19];
+		this.sequence = (String)fields[20];
+		this.proportionalLength = (float)fields[21];
+		this.internalContacts = (Integer)fields[22];
+		this.externalContacts = (Integer)fields[23];
+		this.contactRatio = (float)fields[24];
+		this.residueIds = (String)fields[25];
 	}
 
 	public String getConciseHtml() {
@@ -129,6 +131,16 @@ public class Sequence {
 
 	public void setTargetNameStripped(String targetNameStripped) {
 		this.targetNameStripped = targetNameStripped;
+	}
+
+
+	public String getTargetType() {
+		return targetType;
+	}
+
+
+	public void setTargetType(String targetType) {
+		this.targetType = targetType;
 	}
 
 

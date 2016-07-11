@@ -214,7 +214,7 @@ public class DatabaseAccess {
 	public static LigandLink[] getLigandLinks(int ligandId) {
 		LigandLink[] links;
 		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
-		 "SELECT * FROM ligandLinks WHERE ligandId=?",
+		 "SELECT * FROM ligand_links WHERE ligandId=?",
 		 ligandId
 		);
 		Object[][] sqlResults = DatabaseAccess.getObjectGridFromResultSet(rs);
