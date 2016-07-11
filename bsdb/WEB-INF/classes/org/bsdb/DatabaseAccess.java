@@ -327,7 +327,7 @@ public class DatabaseAccess {
 
 	public static Object[][] getSequenceLengthDistribution() {
 		ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
-		 "SELECT length(sequence) FROM sequences ORDER BY length(sequence) DESC"
+		 "SELECT length(bindsequence) FROM sequences ORDER BY length(bindsequence) DESC"
 		);
 		Object[][] grid = getObjectGridFromResultSet(rs);
 		int[] lengths = new int[grid.length];
@@ -368,7 +368,7 @@ public class DatabaseAccess {
 		ArrayList<int[][]> sequenceContiguity = new ArrayList<int[][]>();
 		for (int i = 0; i < targetTypes.length; i++) {
 			ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
-			 "SELECT sequences.sequence, sequences.bindingResidues FROM sequences LEFT JOIN targets ON sequences.targetId=targets.targetId WHERE targets.type=?",
+			 "SELECT sequences.bindsequence, sequences.bindingResidues FROM sequences WHERE sequences.targetType=?",
 			 targetTypes[i]
 			);
 			Object[][] grid = getObjectGridFromResultSet(rs);
