@@ -71,7 +71,7 @@ public class DatabaseAccess {
 	// Gets HTML rows for each ligand
 	public static String[] getLigandRows() {
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT name, ligandId, approved, type, mass, synonyms FROM ligands"
+		 "SELECT ligandName, ligandId, approved, ligandType, mass, synonyms FROM ligands"
 		);
 		if (rs != null) {
 			Object[][] sqlRows = getObjectGridFromResultSet(rs);
