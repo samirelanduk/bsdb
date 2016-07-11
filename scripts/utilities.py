@@ -423,7 +423,7 @@ def get_sequence_ids_from_table(connection):
 def get_sequence_as_dict(sequence_id, connection):
     cursor = connection.cursor()
     cursor.execute(
-     "SELECT sequenceId, pdb, chain, sequence, residueIds FROM sequences WHERE sequenceId=%s",
+     "SELECT sequenceId, pdb, receptorChain, bindsequence, residueIds FROM sequences WHERE sequenceId=%s",
      (sequence_id,)
     )
     row = cursor.fetchone()
