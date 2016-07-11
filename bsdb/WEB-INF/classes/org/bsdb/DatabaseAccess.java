@@ -128,7 +128,7 @@ public class DatabaseAccess {
 	// Gets HTML rows for each sequence
 	public static String[] getSequenceRows() {
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT s.sequenceId, t.name, s.species, l.name, s.sequence, s.proportionalLength, l.approved FROM sequences s INNER JOIN targets t ON s.targetId=t.targetId INNER JOIN ligands l on s.ligandId=l.ligandId ORDER BY s.sequenceId"
+		 "SELECT s.sequenceId, s.targetName, s.species, l.ligandName, s.bindSequence, s.proportionalLength, l.approved FROM sequences s INNER JOIN ligands l on s.ligandId=l.ligandId ORDER BY s.sequenceId"
 		);
 		if (rs != null) {
 			Object[][] sqlRows = getObjectGridFromResultSet(rs);
