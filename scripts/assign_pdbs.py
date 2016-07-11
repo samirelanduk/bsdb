@@ -15,11 +15,15 @@ if len(sys.argv) > 1:
 connection = utilities.get_connection()
 
 print("Getting interaction objects that have never been checked for PDBs...")
-unchecked_interactions = [
- pygtop.get_target_by_id(target_id).get_interaction_by_id(interaction_id)
-  for interaction_id, target_id
-   in utilities.get_interaction_ids_never_checked_for_pdbs(connection)
-]
+unchecked_interactions = []
+for interaction_id, target_id in utilities.get_interaction_ids_never_checked_for_pdbs(connection):
+    try:
+        unchecked_interactions.append(
+         pygtop.get_target_by_id(target_id).get_interaction_by_id(interaction_id)
+        )
+    except pygtop.NoSuchInteractionError:
+        print("\tWeb services did not produce interaction %i of target %i" % (interaction_id, target_id))
+
 never_checked_ids = [i.interaction_id for i in unchecked_interactions]
 print("There are %i such interactions." % (len(unchecked_interactions)))
 
@@ -30,7 +34,7 @@ if unchecked_interactions:
     while unchecked_interactions:
         interaction = unchecked_interactions.pop()
         print("\tChecking %s" % str(interaction), end=" ")
-        pdbs = interaction.find_all_pdbs()
+        pdbs = interaction.all_pdbs()
         pdbs_assigned = utilities.give_pdbs_to_interaction(interaction, pdbs, connection)
         if pdbs_assigned:
             pdbs_assigned_count += len(pdbs_assigned)
@@ -57,7 +61,7 @@ if check_previous:
         while checked_interactions:
             interaction = checked_interactions.pop()
             print("\tChecking %s" % str(interaction), end=" ")
-            pdbs = interaction.find_all_pdbs()
+            pdbs = interaction.all_pdbs()
             pdbs_assigned = utilities.give_pdbs_to_interaction(interaction, pdbs, connection)
             if pdbs_assigned:
                 pdbs_assigned_count += len(pdbs_assigned)

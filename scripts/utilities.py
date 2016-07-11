@@ -49,15 +49,15 @@ def affinity_range_to_str(range_tuple):
 
 def interaction_object_to_dict(interaction):
     return {
-     "interactionId": interaction.interaction_id,
-     "ligandId": interaction._ligand_id,
-     "targetId": interaction._target_id,
-     "species": interaction.species,
-     "type": interaction.type,
-     "action": interaction.action,
-     "affinityType": interaction.affinity_type,
-     "affinityValue": interaction.affinity_value,
-     "affinityRange": affinity_range_to_str(interaction.affinity_range)
+     "interactionId": interaction.interaction_id(),
+     "ligandId": interaction.ligand_id(),
+     "targetId": interaction.target_id(),
+     "species": interaction.species(),
+     "type": interaction.interaction_type(),
+     "action": interaction.action(),
+     "affinityType": interaction.affinity_type(),
+     "affinityValue": interaction.affinity_high(),
+     "affinityRange": interaction.json_data["affinity"]
     }
 
 
@@ -65,7 +65,7 @@ def get_table_interaction_as_dict(interaction, connection):
     cursor = connection.cursor()
     cursor.execute(
      "SELECT * FROM interactions WHERE interactionId=%s",
-     (interaction.interaction_id,)
+     (interaction.interaction_id(),)
     )
     row = cursor.fetchone()
     dictionary = {
@@ -180,17 +180,17 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
     cursor = connection.cursor()
     cursor.execute(
      "UPDATE interactions SET lastPdbCheck=%s WHERE interactionId=%s;",
-     (now, interaction.interaction_id)
+     (now, interaction.interaction_id())
     )
     connection.commit()
     cursor.execute(
      "SELECT pdb FROM interaction_pdb_maps WHERE interactionId=%s",
-     (interaction.interaction_id,)
+     (interaction.interaction_id(),)
     )
     pdbs_already_assigned = [row[0] for row in cursor.fetchall()]
     cursor.execute(
      "SELECT pdb FROM false_maps WHERE interactionId=%s",
-     (interaction.interaction_id,)
+     (interaction.interaction_id(),)
     )
     blacklisted_pdbs = [row[0] for row in cursor.fetchall()]
 
@@ -200,7 +200,7 @@ def give_pdbs_to_interaction(interaction, pdbs, connection):
             pdbs_assigned_now.append(pdb)
             cursor.execute(
              "INSERT INTO interaction_pdb_maps VALUES (%s, %s, %s, false, false);",
-             (str(interaction.interaction_id) + pdb, interaction.interaction_id, pdb)
+             (str(interaction.interaction_id()) + pdb, interaction.interaction_id(), pdb)
             )
             connection.commit()
     cursor.close()

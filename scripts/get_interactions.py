@@ -19,8 +19,8 @@ targets = pygtop.get_all_targets()
 
 print("Obtaining interactions from GtoP...")
 interactions = []
-for target in targets[0:10]:
-    interactions += target.get_interactions()
+for target in targets[0:20]:
+    interactions += target.interactions()
 print("There are %i interactions currently in GtoP." % len(interactions))
 
 connection = utilities.get_connection()
@@ -33,7 +33,7 @@ interactions_added = 0
 interactions_modified = 0
 print("Updating stage database with interactions...")
 for interaction in interactions:
-    if interaction.interaction_id not in interaction_ids_in_table:
+    if interaction.interaction_id() not in interaction_ids_in_table:
         utilities.add_interaction_to_table(interaction, connection)
         interactions_added += 1
     elif utilities.interaction_differs_from_table(interaction, connection):
@@ -42,7 +42,7 @@ for interaction in interactions:
 
 interactions_removed = 0
 if flag_unknown or del_unknown:
-    object_ids = [interaction.interaction_id for interaction in interactions]
+    object_ids = [interaction.interaction_id() for interaction in interactions]
     for row_id in interaction_ids_in_table:
         if row_id not in object_ids:
             if flag_unknown:

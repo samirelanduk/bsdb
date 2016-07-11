@@ -19,9 +19,9 @@ try:
         interaction = pygtop.get_target_by_id(
          pdb_map["targetId"]).get_interaction_by_id(
           pdb_map["interactionId"])
-        ligand = interaction.get_ligand()
+        ligand = interaction.ligand()
         print("\t%i%s: Looking for %s in PDB %s..." % (
-         pdb_map["interactionId"], pdb_map["pdbCode"], ligand.name, pdb_map["pdbCode"]
+         pdb_map["interactionId"], pdb_map["pdbCode"], ligand.name(), pdb_map["pdbCode"]
         ), end=" ")
         pdb = molecupy.get_pdb_remotely(pdb_map["pdbCode"])
         molecule = ligand.find_in_pdb_by_smiles(pdb)
