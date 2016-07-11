@@ -1,5 +1,6 @@
 import pygtop
 import utilities
+import molecupy
 print("")
 
 live_connection = utilities.get_live_connection()
@@ -41,12 +42,17 @@ try:
             else:
                 map_to_use = sorted(correct_maps, key=lambda k: k["contactRatio"])[-1]
 
-            interaction = pygtop.get_target_by_id(
-             map_to_use["targetId"]).get_interaction_by_id(
-              map_to_use["interactionId"])
+            try:
+                interaction = pygtop.get_target_by_id(
+                 map_to_use["targetId"]).get_interaction_by_id(
+                  map_to_use["interactionId"])
+            except pygtop.NoSuchInteractionError:
+                print("Could not retrieve interaction from web services")
+            het_name = molecupy.get_pdb_remotely(map_to_use["pdbCode"]).model.get_small_molecule_by_id(map_to_use["hetId"]).molecule_name
             utilities.make_live_sequence_from_stage_map(
              interaction,
              map_to_use,
+             het_name,
              stage_connection,
              live_connection
             )
@@ -55,7 +61,7 @@ try:
             print("")
 
 
-    utilities.fill_out_other_tables(live_connection)
+    '''utilities.fill_out_other_tables(live_connection)'''
 
 
 finally:

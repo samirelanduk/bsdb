@@ -301,28 +301,34 @@ def get_live_interaction_ids(connection):
     return ids
 
 
-def make_live_sequence_from_stage_map(interaction, pdb_map, stage_connection, live_connection):
+def make_live_sequence_from_stage_map(interaction, pdb_map, het_name, stage_connection, live_connection):
     interaction_dict = interaction_object_to_dict(interaction)
+    now = datetime.datetime.now()
     cursor = live_connection.cursor()
     cursor.execute("""
      INSERT INTO sequences VALUES (
-      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
      );""", [
       pdb_map["interactionId"],
       interaction_dict["ligandId"],
       interaction_dict["targetId"],
+      interaction.target().name(),
+      interaction.target().name(strip_html=True),
       interaction_dict["species"],
       interaction_dict["type"],
       interaction_dict["action"],
       interaction_dict["affinityValue"],
       interaction_dict["affinityRange"],
       interaction_dict["affinityType"],
-      pdb_map["het"],
+      now,
+      now,
+      pdb_map["pdbCode"],
+      het_name,
+      pdb_map["hetId"],
       pdb_map["bindingResidues"],
       pdb_map["receptorChain"],
       pdb_map["originalChainLength"],
       pdb_map["bindSequence"],
-      pdb_map["pdbCode"],
       pdb_map["proportionalLength"],
       pdb_map["internalContacts"],
       pdb_map["externalContacts"],
