@@ -307,13 +307,14 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, het_name, stage_conn
     cursor = live_connection.cursor()
     cursor.execute("""
      INSERT INTO sequences VALUES (
-      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
      );""", [
       pdb_map["interactionId"],
       interaction_dict["ligandId"],
       interaction_dict["targetId"],
       interaction.target().name(),
       interaction.target().name(strip_html=True),
+      interaction.target().target_type(),
       interaction_dict["species"],
       interaction_dict["type"],
       interaction_dict["action"],
