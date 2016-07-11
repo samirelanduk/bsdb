@@ -60,8 +60,7 @@ try:
         else:
             print("")
 
-
-    '''utilities.fill_out_other_tables(live_connection)'''
+    utilities.fill_out_other_tables(live_connection)
 
 
 finally:

@@ -341,52 +341,34 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, het_name, stage_conn
 
 def fill_out_other_tables(connection):
     cursor = connection.cursor()
-    cursor.execute("SELECT sequenceId, ligandId, targetId FROM sequences;")
+    cursor.execute("SELECT sequenceId, ligandId FROM sequences;")
     sequences = cursor.fetchall()
     print("Adding any ligands that might be needed...")
-    for sequence in sequences:
+    for sequence in sequences[::-1]:
         cursor.execute("SELECT ligandId FROM ligands WHERE ligandId=%s;", (sequence[1],))
         if len(cursor.fetchall()) == 0:
             ligand = pygtop.get_ligand_by_id(sequence[1])
-            ligand.request_molecular_properties()
-            ligand.request_structural_properties()
-            ligand.request_synonym_properties()
             cursor.execute("""
              INSERT INTO ligands VALUES (
-              %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+              %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
              );""", [
-              ligand.ligand_id,
-              ligand.name,
-              ligand.ligand_type,
-              ligand.radioactive,
-              ligand.approved,
-              ligand.approval_source,
-              ligand.hydrogen_bond_acceptors,
-              ligand.hydrogen_bond_donors,
-              ligand.rotatable_bonds,
-              ligand.topological_polar_surface_area,
-              ligand.molecular_weight,
-              ligand.log_p,
-              ligand.lipinksi_rules_broken,
-              "#".join(ligand.synonyms).replace("{", "#").replace("}", "$").replace("'", "''").replace(u'\u2010', "-")
+              ligand.ligand_id(),
+              ligand.name(),
+              ligand.name(strip_html=True),
+              ligand.ligand_type(),
+              ligand.radioactive(),
+              ligand.approved(),
+              ligand.approval_source(),
+              ligand.hydrogen_bond_acceptors(),
+              ligand.hydrogen_bond_donors(),
+              ligand.rotatable_bonds(),
+              ligand.topological_polar_surface_area(),
+              ligand.molecular_weight(),
+              ligand.log_p(),
+              ligand.lipinski_rules_broken(),
+              "#".join(ligand.synonyms()).replace("{", "#").replace("}", "$").replace("'", "''").replace(u'\u2010', "-")
              ])
             print("\tAdded %s" % str(ligand))
-            connection.commit()
-
-    print("Adding any targets that might be needed...")
-    for sequence in sequences:
-        cursor.execute("SELECT targetId FROM targets WHERE targetId=%s;", (sequence[2],))
-        if len(cursor.fetchall()) == 0:
-            target = pygtop.get_target_by_id(sequence[2])
-            cursor.execute("""
-             INSERT INTO targets VALUES (
-              %s, %s, %s
-             );""", [
-              target.target_id,
-              target.name,
-              target.target_type,
-             ])
-            print("\tAdded %s" % str(target))
             connection.commit()
 
     cursor.execute("SELECT ligandId FROM ligands;")
@@ -394,19 +376,18 @@ def fill_out_other_tables(connection):
     print("Adding any database links that might be needed...")
     for ligand_row in ligands:
         ligand = pygtop.get_ligand_by_id(ligand_row[0])
-        cursor.execute("SELECT accession FROM ligandLinks WHERE ligandId=%s", (ligand.ligand_id,))
+        cursor.execute("SELECT accession FROM ligand_links WHERE ligandId=%s", (ligand.ligand_id(),))
         accessions = [row[0] for row in cursor.fetchall()]
-        ligand.request_database_properties()
-        for db_link in ligand.database_links:
+        for db_link in ligand.database_links():
             if db_link.accession not in accessions:
                 cursor.execute("""
-                 INSERT INTO ligandLinks VALUES (
+                 INSERT INTO ligand_links VALUES (
                   %s, %s, %s, %s
                  );""", [
                   db_link.accession,
                   db_link.database,
                   db_link.url,
-                  ligand.ligand_id
+                  ligand.ligand_id()
                  ])
                 connection.commit()
                 print("\tAdded %s" % str(db_link))
