@@ -248,7 +248,7 @@ public class DatabaseAccess {
 		long[] ligandTypeCounts = new long[7];
 		for (int i = 0; i < 7; i++) {
 			ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
-			 "SELECT COUNT(*) FROM ligands WHERE type=?",
+			 "SELECT COUNT(*) FROM ligands WHERE ligandtype=?",
 			 ligandTypes[i]
 			);
 			ligandTypeCounts[i] = (Long)getObjectGridFromResultSet(rs)[0][0];
@@ -316,7 +316,7 @@ public class DatabaseAccess {
 		long[] sequenceTypeCounts = new long[9];
 		for (int i = 0; i < 9; i++) {
 			ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
-			 "SELECT COUNT(*) FROM sequences LEFT JOIN targets ON sequences.targetId=targets.targetId WHERE targets.type=?",
+			 "SELECT COUNT(*) FROM sequences WHERE targetType=?",
 			 targetTypes[i]
 			);
 			sequenceTypeCounts[i] = (Long)getObjectGridFromResultSet(rs)[0][0];
