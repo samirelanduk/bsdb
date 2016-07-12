@@ -121,19 +121,19 @@
 				<div id="speciescheckbox"  class="pure-u-11-24">
 					<div class="checkrow pure-u-1">
 						<label for="alltype" class="pure-u-4-5 checklabel">All:</label>
-						<input type="checkbox" class="pure-u-1-12" id="alltype" name="type" value="all" checked>
+						<input type="checkbox" class="pure-u-1-12" id="alltype" name="species" value="all" checked>
 					</div>
 					<div class="checkrow pure-u-1">
 						<label for="human" class="pure-u-4-5 checklabel">Human:</label>
-						<input type="checkbox" class="pure-u-1-12" id="human" name="type" value="human">
+						<input type="checkbox" class="pure-u-1-12" id="human" name="species" value="human">
 					</div>
 					<div class="checkrow pure-u-1">
 						<label for="mouse" class="pure-u-4-5 checklabel">Mouse:</label>
-						<input type="checkbox" class="pure-u-1-12" id="mouse" name="type" value="mouse">
+						<input type="checkbox" class="pure-u-1-12" id="mouse" name="species" value="mouse">
 					</div>
 					<div class="checkrow pure-u-1">
 						<label for="rat" class="pure-u-4-5 checklabel">Rat:</label>
-						<input type="checkbox" class="pure-u-1-12" id="rat" name="rat" value="rat">
+						<input type="checkbox" class="pure-u-1-12" id="rat" name="species" value="rat">
 					</div>
 				</div>
 			</div>

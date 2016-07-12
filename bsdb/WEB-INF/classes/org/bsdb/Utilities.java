@@ -247,15 +247,15 @@ public class Utilities {
 		ArrayList<String> conditions = new ArrayList<String>();
 
 		if (searchTerms.containsKey("targetname")) {
-			conditions.add(String.format("targets.name LIKE '%%%s%%'", searchTerms.get("targetname")));
+			conditions.add(String.format("sequences.targetName LIKE '%%%s%%'", searchTerms.get("targetname")));
 		}
 		if (searchTerms.containsKey("sequence")) {
-			conditions.add(String.format("sequences.sequence LIKE '%%%s%%'", searchTerms.get("sequence")));
+			conditions.add(String.format("sequences.bindSequence LIKE '%%%s%%'", searchTerms.get("sequence")));
 		}
 		if (searchTerms.containsKey("types")) {
 			StringBuilder typeCondition = new StringBuilder("(");
 			for (String type : (ArrayList<String>)searchTerms.get("types")) {
-				typeCondition.append("targets.type=\"" + type + "\" OR ");
+				typeCondition.append("sequences.targetType=\'" + type + "\' OR ");
 			}
 			typeCondition.delete(typeCondition.length() - 4, typeCondition.length());
 			typeCondition.append(")");
@@ -264,17 +264,17 @@ public class Utilities {
 		if (searchTerms.containsKey("species")) {
 			StringBuilder typeCondition = new StringBuilder("(");
 			for (String type : (ArrayList<String>)searchTerms.get("species")) {
-				typeCondition.append("sequences.species=\"" + type + "\" OR ");
+				typeCondition.append("LOWER(sequences.species)=\'" + type + "\' OR ");
 			}
 			typeCondition.delete(typeCondition.length() - 4, typeCondition.length());
 			typeCondition.append(")");
 			conditions.add(typeCondition.toString());
 		}
 		if (searchTerms.containsKey("lengthGt")) {
-			conditions.add(String.format("length(sequences.sequence)>=%d", searchTerms.get("lengthGt")));
+			conditions.add(String.format("length(sequences.bindSequence)>=%d", searchTerms.get("lengthGt")));
 		}
 		if (searchTerms.containsKey("lengthLt")) {
-			conditions.add(String.format("length(sequences.sequence)<=%d", searchTerms.get("lengthLt")));
+			conditions.add(String.format("length(sequences.bindSequence)<=%d", searchTerms.get("lengthLt")));
 		}
 		if (searchTerms.containsKey("proplengthGt")) {
 			conditions.add(String.format("sequences.proportionalLength>=%f", searchTerms.get("proplengthGt")));
@@ -303,10 +303,9 @@ public class Utilities {
 		if ((searchTerms.containsKey("approvedOnly")) && (boolean)(searchTerms.get("approvedOnly"))) {
 			conditions.add("ligands.approved=true");
 		}
-		String queryStart = "select sequences.sequenceId,targets.name,sequences.species," +
-				"ligands.name,sequences.sequence,sequences.proportionalLength, ligands.approved from sequences inner join targets on " +
-				"sequences.targetId=targets.targetId inner join ligands on " +
-				"sequences.ligandId=ligands.ligandId";
+		String queryStart = "select sequences.sequenceId,sequences.targetName,sequences.species," +
+				"ligands.ligandName,sequences.bindSequence,sequences.proportionalLength, ligands.approved from sequences" +
+				" inner join ligands on sequences.ligandId=ligands.ligandId";
 		StringBuilder query = new StringBuilder(queryStart);
 		if (conditions.size() >= 1) {
 			query.append(" WHERE");
