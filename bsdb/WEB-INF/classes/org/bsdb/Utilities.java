@@ -175,12 +175,12 @@ public class Utilities {
 		ArrayList<String> conditions = new ArrayList<String>();
 
 		if (searchTerms.containsKey("ligandname")) {
-			conditions.add(String.format("(name LIKE '%%%s%%' OR synonyms LIKE '%%%s%%')", searchTerms.get("ligandname"), searchTerms.get("ligandname")));
+			conditions.add(String.format("(ligandName LIKE '%%%s%%' OR synonyms LIKE '%%%s%%')", searchTerms.get("ligandname"), searchTerms.get("ligandname")));
 		}
 		if (searchTerms.containsKey("types")) {
 			StringBuilder typeCondition = new StringBuilder("(");
 			for (String type : (ArrayList<String>)searchTerms.get("types")) {
-				typeCondition.append("type=\"" + type + "\" OR ");
+				typeCondition.append("ligandType=\'" + type + "\' OR ");
 			}
 			typeCondition.delete(typeCondition.length() - 4, typeCondition.length());
 			typeCondition.append(")");
@@ -211,10 +211,10 @@ public class Utilities {
 			conditions.add(String.format("surfaceArea<=%f", searchTerms.get("surfaceLt")));
 		}
 		if (searchTerms.containsKey("lipinskiGt")) {
-			conditions.add(String.format("lipinski>=%d", searchTerms.get("lipinskiGt")));
+			conditions.add(String.format("lipinskirulesbroken>=%d", searchTerms.get("lipinskiGt")));
 		}
 		if (searchTerms.containsKey("lipinskiLt")) {
-			conditions.add(String.format("lipinski<=%d", searchTerms.get("lipinskiLt")));
+			conditions.add(String.format("lipinskirulesbroken<=%d", searchTerms.get("lipinskiLt")));
 		}
 		if (searchTerms.containsKey("logpGt")) {
 			conditions.add(String.format("logP>=%f", searchTerms.get("logpGt")));
@@ -226,7 +226,7 @@ public class Utilities {
 			conditions.add("approved=true");
 		}
 
-		StringBuilder query = new StringBuilder("SELECT name,ligandID,approved,type,mass,synonyms FROM ligands");
+		StringBuilder query = new StringBuilder("SELECT ligandName,ligandId,approved,ligandType,mass,synonyms FROM ligands");
 		if (conditions.size() >= 1) {
 			query.append(" WHERE");
 			for (String condition : conditions) {
