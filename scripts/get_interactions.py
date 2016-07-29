@@ -19,7 +19,7 @@ targets = pygtop.get_all_targets()
 
 print("Obtaining interactions from GtoP...")
 interactions = []
-for target in targets[0:50]:
+for target in targets[0:200]:
     interactions += target.interactions()
 print("There are %i interactions currently in GtoP." % len(interactions))
 
