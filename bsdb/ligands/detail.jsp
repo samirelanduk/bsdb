@@ -61,23 +61,23 @@
 					</tr>
 					<tr>
 						<td class="field">Hydrogen bond acceptors</td>
-						<td class="value"><% out.print(ligand.gethBondAcceptors()); %></td>
+						<td class="value"><% out.print(ligand.gethBondAcceptors() == -1 ? "-" : ligand.gethBondAcceptors()); %></td>
 					</tr>
 					<tr>
 						<td class="field">Hydrogen bond donors</td>
-						<td class="value"><% out.print(ligand.gethBondDonors()); %></td>
+						<td class="value"><% out.print(ligand.gethBondDonors() == -1 ? "-" : ligand.gethBondDonors()); %></td>
 					</tr>
 					<tr>
 						<td class="field">Polar surface area (A<sup>2</sup>)</td>
-						<td class="value"><% out.print(ligand.getSurfaceArea()); %></td>
+						<td class="value"><% out.print(ligand.getSurfaceArea() == -1.0f ? "-" : ligand.getSurfaceArea()); %></td>
 					</tr>
 					<tr>
 						<td class="field">Lipinski rules broken</td>
-						<td class="value"><% out.print(ligand.getLipinksi()); %></td>
+						<td class="value"><% out.print(ligand.getLipinksi() == -1 ? "-" : ligand.getLipinksi()); %></td>
 					</tr>
 					<tr>
 						<td class="field">logP</td>
-						<td class="value"><% out.print(ligand.getLogP()); %></td>
+						<td class="value"><% out.print(ligand.getLogP() == -1000.0f ? "-" : ligand.getLogP()); %></td>
 					</tr>
 				</table>
 			</div>

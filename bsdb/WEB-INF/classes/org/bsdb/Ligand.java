@@ -32,13 +32,13 @@ public class Ligand {
 		this.radioactive = (Boolean)fields[4];
 		this.approved = (Boolean)fields[5];
 		this.approvalSource = (String)fields[6];
-		this.hBondAcceptors = (Integer)fields[7];
-		this.hBondDonors = (Integer)fields[8];
-		this.rotatableBonds = (Integer)fields[9];
-		this.surfaceArea = (Float)fields[10];
-		this.mass = (Float)fields[11];
-		this.logP = (Float)fields[12];
-		this.lipinksi = (Integer)fields[13];
+		this.hBondAcceptors = fields[7] == null ? -1 : (Integer)fields[7];
+		this.hBondDonors = fields[8] == null ? -1 : (Integer)fields[8];
+		this.rotatableBonds = fields[9] == null ? -1 : (Integer)fields[9];
+		this.surfaceArea = fields[10] == null ? -1.0f : (Float)fields[10];
+		this.mass = fields[11] == null ? -1.0f : (Float)fields[11];
+		this.logP = fields[12] == null ? -1000.0f : (Float)fields[12];
+		this.lipinksi = fields[13] == null ? -1 : (Integer)fields[13];
 		this.synonyms = ((String)fields[14]).split("#");
 	}
 
