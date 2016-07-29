@@ -385,9 +385,9 @@ def fill_out_other_tables(connection):
                  INSERT INTO ligand_links VALUES (
                   %s, %s, %s, %s
                  );""", [
-                  db_link.accession,
-                  db_link.database,
-                  db_link.url,
+                  db_link.accession(),
+                  db_link.database(),
+                  db_link.url(),
                   ligand.ligand_id()
                  ])
                 connection.commit()

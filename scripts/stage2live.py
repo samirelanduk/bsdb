@@ -48,7 +48,9 @@ try:
                   map_to_use["interactionId"])
             except pygtop.NoSuchInteractionError:
                 print("Could not retrieve interaction from web services")
-            het_name = molecupy.get_pdb_remotely(map_to_use["pdbCode"]).model.get_small_molecule_by_id(map_to_use["hetId"]).molecule_name
+            het_name = het_name if len(map_to_use["hetId"]) == 1 else molecupy.get_pdb_remotely(
+             map_to_use["pdbCode"]
+            ).model().get_small_molecule_by_id(map_to_use["hetId"]).molecule_name()
             utilities.make_live_sequence_from_stage_map(
              interaction,
              map_to_use,
