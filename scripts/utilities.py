@@ -4,6 +4,7 @@ import os
 import config
 import math
 import pygtop
+import molecupy
 
 def get_connection():
     conn = pg8000.connect(
@@ -342,13 +343,22 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, het_name, stage_conn
 
 def fill_out_other_tables(connection):
     cursor = connection.cursor()
-    cursor.execute("SELECT sequenceId, ligandId FROM sequences;")
+    cursor.execute("SELECT sequenceId, ligandId, pdb, hetId FROM sequences;")
     sequences = cursor.fetchall()
     print("Adding any ligands that might be needed...")
     for sequence in sequences[::-1]:
         cursor.execute("SELECT ligandId FROM ligands WHERE ligandId=%s;", (sequence[1],))
         if len(cursor.fetchall()) == 0:
             ligand = pygtop.get_ligand_by_id(sequence[1])
+            mass = ligand.molecular_weight()
+            if not mass:
+                pdb = molecupy.get_pdb_remotely(sequence[2])
+                if len(sequence[3]) == 1:
+                    chain = pdb.model().get_chain_by_id(sequence[3])
+                    mass = chain.mass()
+                else:
+                    ligand_ = pdb.model().get_small_molecule_by_id(sequence[3])
+                    mass = ligand_.mass()
             cursor.execute("""
              INSERT INTO ligands VALUES (
               %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
@@ -364,7 +374,7 @@ def fill_out_other_tables(connection):
               ligand.hydrogen_bond_donors(),
               ligand.rotatable_bonds(),
               ligand.topological_polar_surface_area(),
-              ligand.molecular_weight(),
+              mass,
               ligand.log_p(),
               ligand.lipinski_rules_broken(),
               "#".join(ligand.synonyms()).replace("{", "#").replace("}", "$").replace("'", "''").replace(u'\u2010', "-")
@@ -380,7 +390,7 @@ def fill_out_other_tables(connection):
         cursor.execute("SELECT accession FROM ligand_links WHERE ligandId=%s", (ligand.ligand_id(),))
         accessions = [row[0] for row in cursor.fetchall()]
         for db_link in ligand.database_links():
-            if db_link.accession not in accessions:
+            if db_link.accession() not in accessions:
                 cursor.execute("""
                  INSERT INTO ligand_links VALUES (
                   %s, %s, %s, %s
