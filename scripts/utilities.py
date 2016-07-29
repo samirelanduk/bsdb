@@ -255,7 +255,7 @@ def give_pdb_map_bind_site(interaction_id, pdb_code, site, connection):
     cursor = connection.cursor()
     cursor.execute(
      "UPDATE interaction_pdb_maps SET bindingResidues=%s WHERE mapId=%s;", (
-      ", ".join([residue.residue_id for residue in site.residues]),
+      ", ".join([residue.residue_id() for residue in site.residues()]),
       str(interaction_id) + pdb_code
      )
     )
