@@ -20,7 +20,7 @@ try:
     for sequence_id in sequences_without_matrix:
         sequence = utilities.get_sequence_as_dict(sequence_id, connection)
         pdb = molecupy.get_pdb_remotely(sequence["pdb"])
-        chain = pdb.model.get_chain_by_id(sequence["chain"])
+        chain = pdb.model().get_chain_by_id(sequence["chain"])
         matrix = chain.generate_residue_distance_matrix(subsequence=(
          chain.get_residue_by_id(sequence["residueIds"][0]),
          chain.get_residue_by_id(sequence["residueIds"][-1])
