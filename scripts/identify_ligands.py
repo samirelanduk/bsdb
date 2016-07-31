@@ -25,25 +25,28 @@ try:
          pdb_map["interactionId"], pdb_map["pdbCode"], ligand.name(), pdb_map["pdbCode"]
         ), end=" ")
         warnings.simplefilter("ignore")
-        pdb = molecupy.get_pdb_remotely(pdb_map["pdbCode"])
-        molecule = ligand.find_in_pdb_by_smiles(pdb)
-        if not molecule:
-            molecule = ligand.find_in_pdb_by_name(pdb)
-        if not molecule:
-            molecule = ligand.find_in_pdb_by_mass(pdb)
-        if not molecule:
-            molecule = ligand.find_in_pdb_by_peptide_string(pdb)
-        if molecule:
-            try:
-                name = molecule.molecule_id()
-            except:
-                name = molecule.chain_id()
-            print(name)
-            utilities.give_pdb_map_het_code(
-             pdb_map["interactionId"], pdb_map["pdbCode"], name, connection
-            )
-        else:
-            print("Not found")
+        try:
+            pdb = molecupy.get_pdb_remotely(pdb_map["pdbCode"])
+            molecule = ligand.find_in_pdb_by_smiles(pdb)
+            if not molecule:
+                molecule = ligand.find_in_pdb_by_name(pdb)
+            if not molecule:
+                molecule = ligand.find_in_pdb_by_mass(pdb)
+            if not molecule:
+                molecule = ligand.find_in_pdb_by_peptide_string(pdb)
+            if molecule:
+                try:
+                    name = molecule.molecule_id()
+                except:
+                    name = molecule.chain_id()
+                print(name)
+                utilities.give_pdb_map_het_code(
+                 pdb_map["interactionId"], pdb_map["pdbCode"], name, connection
+                )
+            else:
+                print("Not found")
+        except molecupy.InvalidPdbCodeError:
+            print("PDB not found")
 
 finally:
     connection.close()

@@ -19,32 +19,35 @@ try:
     print("Looking for binding sites...")
     for pdb_map in interaction_pdb_maps:
         warnings.simplefilter("ignore")
-        pdb = molecupy.get_pdb_remotely(pdb_map["pdbCode"])
-        ligand_is_peptide = len(pdb_map["hetId"]) == 1
-        ligand = pdb.model().get_chain_by_id(pdb_map["hetId"]) if ligand_is_peptide\
-         else pdb.model().get_small_molecule_by_id(pdb_map["hetId"])
-        print("\t%i%s: Looking for %s's binding site in PDB %s..." % (
-         pdb_map["interactionId"], pdb_map["pdbCode"], ligand, pdb_map["pdbCode"]
-        ), end=" ")
-        if ligand:
-            site = ligand.bind_site() if not ligand_is_peptide else None
-            calculation_required = False
-            if not site:
-                calculation_required = True
-                site = ligand.predict_bind_site()
-            if site:
-                utilities.give_pdb_map_bind_site(
-                 pdb_map["interactionId"], pdb_map["pdbCode"], site, connection
-                )
-                print("Found %i residues via %s." % (
-                 len(site.residues()),
-                 "calculation" if calculation_required else "mapping"
-                 )
-                )
+        try:
+            pdb = molecupy.get_pdb_remotely(pdb_map["pdbCode"])
+            ligand_is_peptide = len(pdb_map["hetId"]) == 1
+            ligand = pdb.model().get_chain_by_id(pdb_map["hetId"]) if ligand_is_peptide\
+             else pdb.model().get_small_molecule_by_id(pdb_map["hetId"])
+            print("\t%i%s: Looking for %s's binding site in PDB %s..." % (
+             pdb_map["interactionId"], pdb_map["pdbCode"], ligand, pdb_map["pdbCode"]
+            ), end=" ")
+            if ligand:
+                site = ligand.bind_site() if not ligand_is_peptide else None
+                calculation_required = False
+                if not site:
+                    calculation_required = True
+                    site = ligand.predict_bind_site()
+                if site:
+                    utilities.give_pdb_map_bind_site(
+                     pdb_map["interactionId"], pdb_map["pdbCode"], site, connection
+                    )
+                    print("Found %i residues via %s." % (
+                     len(site.residues()),
+                     "calculation" if calculation_required else "mapping"
+                     )
+                    )
+                else:
+                    print("Not found")
             else:
                 print("Not found")
-        else:
-            print("Not found")
+        except molecupy.InvalidPdbCodeError:
+            print("\t%s not found" % pdb_map["pdbCode"])
 finally:
     connection.close()
     print("")
