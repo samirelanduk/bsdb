@@ -15,6 +15,20 @@ header #headertitle {
   line-height: 80px;
 }
 
+#headertitle #syn {
+  font-family: 'courier new';
+  font-style: italic;
+  font-weight: 500;
+}
+
+#headertitle #pharm {
+  font-variant: small-caps;
+  letter-spacing: 3px;
+  margin-left: 4px;
+  font-size: 150%;
+  color: #70B1F4;
+}
+
 header #omnisearch input {
   width: 90%;
   height: 30px;
