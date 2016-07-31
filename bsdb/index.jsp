@@ -29,7 +29,7 @@ long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
 <%@include file="/includes/bodytop.html"%>
 
 <div id="intro">
-  BSDB is a database of drug-responsive protein sequences, derived from
+  SynPharm is a database of drug-responsive protein sequences, derived from
   the <a href="http://guidetopharmacology.org" target="_blank">IUPHAR/BPS Guide
   to PHARMACOLOGY</a>.
 </div>

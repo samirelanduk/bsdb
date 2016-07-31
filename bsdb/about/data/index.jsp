@@ -38,7 +38,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 		</div>
 		<div class="box_body">
 			<div class="explanation">
-				A breakdown of the ligands in the BSDB database by Guide to PHARMACOLOGY
+				A breakdown of the ligands in the SynPharm database by Guide to PHARMACOLOGY
 				type.
 			</div>
 			<table class="boxtable">

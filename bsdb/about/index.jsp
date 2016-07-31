@@ -9,7 +9,7 @@
 		This Database
 	</div>
 	<div class="box_body">
-		<p>BSDB is a database of drug-responsive protein sequences, derived from
+		<p>SynPharm is a database of drug-responsive protein sequences, derived from
 	  the <a href="http://guidetopharmacology.org" target="_blank">IUPHAR/BPS Guide
 	  to PHARMACOLOGY</a>.</p>
 		<p>The sequences can be used to confer druggability to a synthetic protein,
@@ -40,7 +40,7 @@
 	</div>
 	<div class="box_body">
 		<p>This section contains various visualisations of the data contained
-		in the BSDB database, such as breakdowns by type and status for ligands
+		in the SynPharm database, such as breakdowns by type and status for ligands
 	and sequences.</p>
 		<div class="box_body_readmore">
 			<a href="data">Read more...</a>
