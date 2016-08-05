@@ -122,7 +122,11 @@
 							<td class="value"><% out.print(sequence.getHetId()); %></td>
 						</tr>
 						<tr>
-							<td class="field">Chain</td>
+							<td class="field">HET name</td>
+							<td class="value"><% out.print(sequence.getHetCode()); %></td>
+						</tr>
+						<tr>
+							<td class="field">Receptor Chain</td>
 							<td class="value"><% out.print(sequence.getChain()); %></td>
 						</tr>
 					</table>
