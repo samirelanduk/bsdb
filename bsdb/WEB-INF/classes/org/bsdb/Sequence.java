@@ -295,6 +295,13 @@ public class Sequence {
 
 
 	public String getSequenceHtml() {
+		int lastUpper = sequence.length();
+		for (int i = sequence.length() - 1; i > 0; i--) {
+			if (Character.isUpperCase(sequence.charAt(i))) {
+				lastUpper = i;
+				break;
+			}
+		}
 		boolean preSequence = true;
 		StringBuilder s = new StringBuilder();
 		for (int i = 0; i < sequence.length(); i++) {
@@ -304,7 +311,7 @@ public class Sequence {
 			s.append(String.format(
 			 "<span class='%s %s'>%s</span>",
 			 Character.isUpperCase(sequence.charAt(i)) ? "up" : "between",
-			 preSequence ? "outside" : "inside",
+			 (preSequence || i > lastUpper) ? "outside" : "inside",
 			 sequence.charAt(i)
 			));
 		}
