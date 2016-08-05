@@ -115,7 +115,7 @@
 				<table>
 						<tr>
 							<td class="field">PDB code</td>
-							<td class="value"><% out.print(sequence.getPdb()); %></td>
+							<td class="value"><a href="http://www.rcsb.org/pdb/explore.do?structureId=<% out.print(sequence.getPdb()); %>" target="_blank"><% out.print(sequence.getPdb()); %></a></td>
 						</tr>
 						<tr>
 							<td class="field">HET ID</td>
