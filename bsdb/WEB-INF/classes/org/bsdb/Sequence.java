@@ -295,12 +295,17 @@ public class Sequence {
 
 
 	public String getSequenceHtml() {
+		boolean preSequence = true;
 		StringBuilder s = new StringBuilder();
-		for (char c : sequence.toCharArray()) {
+		for (int i = 0; i < sequence.length(); i++) {
+			if (preSequence && Character.isUpperCase(sequence.charAt(i))) {
+				preSequence = false;
+			}
 			s.append(String.format(
-			 "<span class='%s'>%s</span>",
-			 Character.isUpperCase(c) ? "up" : "between",
-			 c
+			 "<span class='%s %s'>%s</span>",
+			 Character.isUpperCase(sequence.charAt(i)) ? "up" : "between",
+			 preSequence ? "outside" : "inside",
+			 sequence.charAt(i)
 			));
 		}
 		return s.toString();
