@@ -36,6 +36,10 @@ print("%i of these are missing from the PDB structure." % (
  len(chain.residues()) - len(chain.residues(include_missing=False)))
 )
 
+# Secondary structure information
+helices = [{"x": chain.residues().index(helix.residues()[0]), "y": chain.residues().index(helix.residues()[-1])} for helix in chain.alpha_helices()]
+strands = [{"x": chain.residues().index(strand.residues()[0]), "y": chain.residues().index(strand.residues()[-1])} for strand in chain.beta_strands()]
+
 # Go through each possible cut
 for index, residue in enumerate(chain.residues()[:-1]):
     next_residue = chain.residues()[index + 1]
