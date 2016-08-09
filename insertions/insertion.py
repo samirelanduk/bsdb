@@ -37,8 +37,14 @@ print("%i of these are missing from the PDB structure." % (
 )
 
 # Secondary structure information
-helices = [{"x": chain.residues().index(helix.residues()[0]), "y": chain.residues().index(helix.residues()[-1])} for helix in chain.alpha_helices()]
-strands = [{"x": chain.residues().index(strand.residues()[0]), "y": chain.residues().index(strand.residues()[-1])} for strand in chain.beta_strands()]
+helices = [{
+ "x": chain.residues().index(helix.residues()[0]) + 1,
+ "y": chain.residues().index(helix.residues()[-1]) + 1
+} for helix in chain.alpha_helices()]
+strands = [{
+ "x": chain.residues().index(strand.residues()[0]) + 1,
+ "y": chain.residues().index(strand.residues()[-1]) + 1
+} for strand in chain.beta_strands()]
 
 # Go through each possible cut
 for index, residue in enumerate(chain.residues()[:-1]):
@@ -51,5 +57,17 @@ for index, residue in enumerate(chain.residues()[:-1]):
         internal1 = len(sequence1.internal_contacts())
         external = len(sequence1.contacts_with(sequence2))
         internal2 = len(sequence2.internal_contacts())
-        print("\t%i: %s-%s (%.1f/%.1f)" % (index + 1, residue.residue_name(), next_residue.residue_name(), internal1/external, internal2/external))
+        print("\t%i: %s-%s (%.1f/%.1f)" % (
+         index + 1,
+         residue.residue_name(),
+         next_residue.residue_name(),
+         internal1/external,
+         internal2/external
+        ))
+
+feature = ""
+with open("insertions/feature.html") as f:
+    feature = f.read() % (chain.sequence_string(), str(helices), str(strands))
+with open("output.html", "w") as f:
+    f.write(feature)
 print("")
