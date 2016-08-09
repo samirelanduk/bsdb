@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <style>
+      #feature {
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel='stylesheet' type='text/css'>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/calipho-sib/feature-viewer/master/css/style.css">
+    <script src="https://wzrd.in/bundle/feature-viewer@0.1.41"></script>
+  </head>
+  <body>
+    <div id="feature"></div>
+    <script>
+    var FeatureViewer = require("feature-viewer");
+
+    window.onload = function() {
+      var sequence = "%s";
+      var ft2 = new FeatureViewer(sequence,"#feature", {
+       showAxis: true,
+       showSequence: true,
+       brushActive: true,
+       toolbar: true,
+       bubbleHelp: true,
+       zoomMax: 10
+      });
+
+      ft2.addFeature({
+       data: %s,
+       name: "Alpha helices",
+       color: "#FF0094",
+       type: "rect",
+       height: "20",
+       filter: "type1"
+      });
+
+      ft2.addFeature({
+       data: %s,
+       name: "Beta strands",
+       color: "#00F6FF",
+       type: "rect",
+       height: "20",
+       filter: "type1"
+      });
+    };
+    </script>
+  </body>
+</html>
