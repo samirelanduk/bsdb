@@ -23,6 +23,15 @@ except IndexError:
     print("Please provide a chain ID.\n")
     sys.exit()
 if chain is None:
-    print("%s doesn't seem to be a valid chain in PDB %s\n" % (sys.argv[2], pdb.pdb_code()))
+    print("%s doesn't seem to be a valid chain in PDB %s\n" % (
+     sys.argv[2], pdb.pdb_code())
+    )
     sys.exit()
+
+# Report information
+print("Identified chain %s in PDB %s." % (chain.chain_id(), pdb.pdb_code()))
+print("It has %i residues." % len(chain.residues()))
+print("%i of these are missing from the PDB structure." % (
+ len(chain.residues()) - len(chain.residues(include_missing=False)))
+)
 print("")
