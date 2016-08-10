@@ -9,7 +9,16 @@ function leftout() {
 }
 
 function leftin() {
-
+  var sequence = document.getElementById("sequence");
+  for (var i = 0; i < sequence.children.length; i++) {
+    if (sequence.children[i].className.includes("up")) {
+      break;
+    }
+    if (sequence.children[i].className.includes("inside")) {
+      sequence.children[i].className = "between outside";
+      break;
+    }
+  }
 }
 
 function reset() {
