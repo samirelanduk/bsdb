@@ -21,30 +21,28 @@
 	derived from an interaction between a GtoPdb ligand and a GtoPdb target.
 </p>
 
-<h2>Heading 2</h2>
+<h2>SynPharm</h2>
 <p>
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-	nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.
- 	Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
- 	Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
- 	massa. Vestibulum lacinia arcu eget nulla.
+	SynPharm is a database of ligand-responsive protein sequences, derived from
+	interactions from the Guide to PHARMACOLOGY and using data from the
+	<a href="http://rscb.org" target="_blank">Protein Data Bank</a>.
 </p>
 <p>
-	Class aptent taciti sociosqu ad litora torquent per conubia
-	nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.
-	Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh.
-	Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed
-	convallis tristique sem. Proin ut ligula vel nunc egestas porttitor.
- 	Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.
-	Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla
-	metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.
+	The sequences here are obtained by identifying the protein chain that
+	interacts with a ligand for a given Guide to PHARMACOLOGY interaction,
+	determining the binding residues, and producing a continuous 'bind sequence'
+	that can be used to conver drugability to another protein.
 </p>
 <p>
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-	nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.
- 	Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
- 	Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
- 	massa. Vestibulum lacinia arcu eget nulla.
+	Each bind sequence also contains metrics such as atomic contact ratio and
+	proportional length, and visualisations such as the residue distance matrix,
+	to allow you to better judge whether a sequence is likely to be able to fold
+	independently.
+</p>
+<p>
+	The rationale for such a project was to enable the development of orthogonal
+	molecular switches - switches which only respond to an exogenous molecular
+	trigger, which itself will not interfere with endogenous receptors.
 </p>
 
 <div id="aboutback">
