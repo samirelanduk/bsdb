@@ -26,7 +26,16 @@ function reset() {
 }
 
 function rightin() {
-
+  var sequence = document.getElementById("sequence");
+  for (var i = sequence.children.length - 1; i > 0; i--) {
+    if (sequence.children[i].className.includes("up")) {
+      break;
+    }
+    if (sequence.children[i].className.includes("inside")) {
+      sequence.children[i].className = "between outside";
+      break;
+    }
+  }
 }
 
 function rightout() {
