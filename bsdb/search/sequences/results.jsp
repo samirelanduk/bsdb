@@ -13,6 +13,7 @@
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Sequence Search Results</h1>
+<p>There <% out.print(rows.length == 1 ? "is" : "are"); %> <% out.print(rows.length); %> result<% out.print(rows.length == 1 ? "" : "s"); %> matching your query.</p>
 <table id="list_table">
 	<thead>
 		<th onclick="sortColumn(0,false)" class="N">ID</th>
