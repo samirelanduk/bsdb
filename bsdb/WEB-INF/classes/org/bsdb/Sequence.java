@@ -309,9 +309,10 @@ public class Sequence {
 				preSequence = false;
 			}
 			s.append(String.format(
-			 "<span class='%s %s'>%s</span>",
+			 "<span class='%s %s %s'>%s</span>",
 			 Character.isUpperCase(sequence.charAt(i)) ? "up" : "between",
 			 (preSequence || i > lastUpper) ? "outside" : "inside",
+			 (preSequence || i > lastUpper) ? "grayseq" : "blackseq",
 			 sequence.charAt(i)
 			));
 		}

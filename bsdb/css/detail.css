@@ -126,6 +126,10 @@
   display: none;
 }
 
+.grayseq {
+  color: #888888;
+}
+
 .box iframe {
 	border: none;
 }
