@@ -101,6 +101,13 @@
 				<div id="sequence">
 					<% out.println(sequence.getSequenceHtml()); %>
 				</div>
+				<div>
+					<button><</button>
+					<button>></button>
+					<button>Reset</button>
+					<button><</button>
+					<button>></button>
+				</div>
 			</div>
 		</td>
 	</tr>
