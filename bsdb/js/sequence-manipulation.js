@@ -22,7 +22,23 @@ function leftin() {
 }
 
 function reset() {
-
+  var sequence = document.getElementById("sequence");
+  for (var i = 0; i < sequence.children.length; i++) {
+    if (sequence.children[i].className.includes("up")) {
+      for (var j = 0; j < i; j++) {
+        sequence.children[j].className = "between outside";
+      }
+      break;
+    }
+  }
+  for (var i = sequence.children.length - 1; i > 0; i--) {
+    if (sequence.children[i].className.includes("up")) {
+      for (var j = sequence.children.length - 1; j > i; j--) {
+        sequence.children[j].className = "between outside";
+      }
+      break;
+    }
+  }
 }
 
 function rightin() {

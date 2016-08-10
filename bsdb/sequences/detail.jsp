@@ -105,7 +105,7 @@
 				<div>
 					<button onclick="leftout();"><</button>
 					<button onclick="leftin();">></button>
-					<button onclick="detail();">Reset</button>
+					<button onclick="reset();">Reset</button>
 					<button onclick="rightin();"><</button>
 					<button onclick="rightout();">></button>
 				</div>
