@@ -20,6 +20,7 @@
 <title><%
  out.print(sequence.getSpecies() + " " + Utilities.stripHtml(sequence.getTargetNameStripped()));
 %> - BindSequenceDB</title>
+<script src="/js/sequence-manipulation.js"></script>
 <%@include file="/includes/bodytop.html"%>
 
 <table id="detail_container">
@@ -102,11 +103,11 @@
 					<% out.println(sequence.getSequenceHtml()); %>
 				</div>
 				<div>
-					<button><</button>
-					<button>></button>
-					<button>Reset</button>
-					<button><</button>
-					<button>></button>
+					<button onclick="leftout();"><</button>
+					<button onclick="leftin();">></button>
+					<button onclick="detail();">Reset</button>
+					<button onclick="rightin();"><</button>
+					<button onclick="rightout();">></button>
 				</div>
 			</div>
 		</td>
