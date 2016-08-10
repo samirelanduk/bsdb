@@ -157,7 +157,7 @@
 						</tr>
 						<tr>
 							<td class="field">Sequence length</td>
-							<td class="value"><% out.print(sequence.getSequence().length()); %></td>
+							<td class="value"><% out.print(sequence.getSequenceLength()); %></td>
 						</tr>
 						<tr>
 							<td class="field">Proportion of original chain length</td>
