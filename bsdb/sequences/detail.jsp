@@ -102,7 +102,7 @@
 				<div id="sequence">
 					<% out.println(sequence.getSequenceHtml()); %>
 				</div>
-				<div>
+				<div id="sequencebuttons">
 					<button onclick="leftout();"><</button>
 					<button onclick="leftin();">></button>
 					<button onclick="reset();">Reset</button>
