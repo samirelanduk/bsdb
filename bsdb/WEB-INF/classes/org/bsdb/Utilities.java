@@ -42,6 +42,25 @@ public class Utilities {
 	}
 
 
+  public static int getSequenceLength(String sequence) {
+    int firstUpper = 0;
+		for (int i = 0; i < sequence.length(); i++) {
+			if (Character.isUpperCase(sequence.charAt(i))) {
+				firstUpper = i;
+				break;
+			}
+		}
+		int lastUpper = sequence.length();
+		for (int i = sequence.length() - 1; i > 0; i--) {
+			if (Character.isUpperCase(sequence.charAt(i))) {
+				lastUpper = i;
+				break;
+			}
+		}
+		return (lastUpper - firstUpper) + 1;
+  }
+
+
   // Takes a Ligand Search request and produces a HashMap of the query
 	public static HashMap<String, Object> processLigandSearchRequest(HttpServletRequest request) {
 		HashMap<String, Object> searchTerms = new HashMap<String, Object>();

@@ -145,7 +145,7 @@ public class DatabaseAccess {
 			Object[] row = sqlRows[i];
 			int id = (Integer)row[0];
 			String hyperlink = String.format("/sequences/detail.jsp?id=%d", id);
-			int length = ((String)row[4]).length();
+			int length = Utilities.getSequenceLength((String)row[4]);
 			String percent = Utilities.floatToPercentage((Float)row[5]);
 			String approved = (Boolean)row[6] ? "Yes" : "No";
 			String cells = String.format(

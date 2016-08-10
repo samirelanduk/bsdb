@@ -295,21 +295,7 @@ public class Sequence {
 
 
 	public int getSequenceLength() {
-		int firstUpper = 0;
-		for (int i = 0; i < sequence.length(); i++) {
-			if (Character.isUpperCase(sequence.charAt(i))) {
-				firstUpper = i;
-				break;
-			}
-		}
-		int lastUpper = sequence.length();
-		for (int i = sequence.length() - 1; i > 0; i--) {
-			if (Character.isUpperCase(sequence.charAt(i))) {
-				lastUpper = i;
-				break;
-			}
-		}
-		return (lastUpper - firstUpper) + 1;
+		return Utilities.getSequenceLength(sequence);
 	}
 
 
