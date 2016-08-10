@@ -47,6 +47,7 @@ strands = [{
 } for strand in chain.beta_strands()]
 
 # Go through each possible cut
+data = []
 for index, residue in enumerate(chain.residues()[:-1]):
     next_residue = chain.residues()[index + 1]
     sequence1 = ResiduicSequence(*chain.residues()[:index + 1])
@@ -57,17 +58,19 @@ for index, residue in enumerate(chain.residues()[:-1]):
         internal1 = len(sequence1.internal_contacts())
         external = len(sequence1.contacts_with(sequence2))
         internal2 = len(sequence2.internal_contacts())
-        print("\t%i: %s-%s (%.1f/%.1f)" % (
+        print("\t%i: %s-%s (%.1f/%.1f %.1f)" % (
          index + 1,
          residue.residue_name(),
          next_residue.residue_name(),
          internal1/external,
-         internal2/external
+         internal2/external,
+         (internal1/external) + (internal2/external)
         ))
+        data.append({"x": index + 1, "y": (internal1/external) + (internal2/external)})
 
 feature = ""
 with open("insertions/feature.html") as f:
-    feature = f.read() % (chain.sequence_string(), str(helices), str(strands))
+    feature = f.read() % (chain.sequence_string(), str(helices), str(strands), str(data))
 with open("output.html", "w") as f:
     f.write(feature)
 print("")
