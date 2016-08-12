@@ -2,8 +2,8 @@ var descriptions = ["All drug-responsive elements which respond to a Guide to PH
                     "Sequences which respond to approved drugs only",
                     "Sequences less than 100 residues in length",
                     "Sequences at least 100 residues in length",
-                    "Hydrophobic sequences",
-                    "Hydrophilic sequences",
+                    "Sequences derived from human proteins",
+                    "Sequences derived from non-human proteins",
                     "Sequences less than 30% of the original chain length"
                     ]
 
@@ -11,8 +11,8 @@ var functions = [function() {return true;},
                  isApproved,
                  isShort,
                  isLong,
-                 isHydrophobic,
-                 isHydrophilic,
+                 isHuman,
+                 isNonHuman,
                  isSmallProportional];
 
 
@@ -41,12 +41,20 @@ function isLong(row) {
 	}
 }
 
-function isHydrophobic(row) {
-	return true;
+function isHuman(row) {
+  if (row.children[2].innerHTML == "Human") {
+		return true;
+	} else {
+		return false;
+	}
 }
 
-function isHydrophilic(row) {
-	return true;
+function isNonHuman(row) {
+  if (row.children[2].innerHTML != "Human") {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function isSmallProportional(row) {

@@ -17,8 +17,8 @@
       <div class="list_category" onclick="selectRows(1)">Approved drugs</div>
       <div class="list_category" onclick="selectRows(2)">Short</div>
       <div class="list_category" onclick="selectRows(3)">Long</div>
-      <div class="list_category" onclick="selectRows(4)">Hydrophobic</div>
-      <div class="list_category" onclick="selectRows(5)">Hydrophilic</div>
+      <div class="list_category" onclick="selectRows(4)">Human</div>
+      <div class="list_category" onclick="selectRows(5)">Non-Human</div>
       <div class="list_category" onclick="selectRows(6)">Small proportional length</div>
     </div>
   </div>
