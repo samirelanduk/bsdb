@@ -2,7 +2,7 @@ import os
 import subprocess
 import utilities
 
-paths = utilities.get_paths("bsdb")
+paths = utilities.get_paths("synpharm")
 os.chdir(paths["java_dir"])
 
 subprocess.call('javac -cp "%s":"%s":"%s" *.java' % (

@@ -1,4 +1,4 @@
-<%@ page import = "org.bsdb.*" %>
+<%@ page import = "org.synpharm.*" %>
 
 <%
 	Ligand ligand;

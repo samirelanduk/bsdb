@@ -1,4 +1,4 @@
-package org.bsdb;
+package org.synpharm;
 
 import java.sql.*;
 import java.util.*;

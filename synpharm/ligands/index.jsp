@@ -1,4 +1,4 @@
-<%@ page import = "org.bsdb.*" %>
+<%@ page import = "org.synpharm.*" %>
 
 <%@include file="/includes/start.html"%>
 <link rel="stylesheet" type="text/css" href="/css/list.css">

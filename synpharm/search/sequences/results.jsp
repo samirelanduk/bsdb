@@ -1,4 +1,4 @@
-<%@ page import = "org.bsdb.*" %>
+<%@ page import = "org.synpharm.*" %>
 <%@ page import = "java.util.*" %>
 <%
 	HashMap<String, Object> searchTerms = Utilities.processSequenceSearchRequest(request);

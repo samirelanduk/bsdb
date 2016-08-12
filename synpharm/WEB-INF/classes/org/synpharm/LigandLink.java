@@ -1,4 +1,4 @@
-package org.bsdb;
+package org.synpharm;
 
 public class LigandLink {
 
