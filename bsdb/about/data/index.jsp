@@ -132,7 +132,9 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 						<table class="datatable">
 							<thead><th>Ligand Mass (Da)</th><th>Count</th></thead>
 							<% for (int i = 0; i < ligandMassDistribution.length; i++) {
+								 	if ((Long)ligandMassDistribution[i][1] != 0) {
 										out.println(String.format("<tr><td>%s</td><td>%d</td</tr>", ligandMassDistribution[i][0], ligandMassDistribution[i][1]));
+									}
 							} %>
 
 						</table>
