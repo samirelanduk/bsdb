@@ -38,11 +38,20 @@
 		</td>
 
 		<td class="col">
-			<div class="box">
+			<div class="box" id="img-box">
 				<div class="box_title">
 					Structure
 				</div>
-				<img src="http://www.guidetopharmacology.org/CHEMSTRUCT/iuphar/<% out.print(ligand.getLigandId()); %>.gif">
+				<img id="lig-img" src="http://www.guidetopharmacology.org/CHEMSTRUCT/iuphar/<% out.print(ligand.getLigandId()); %>.gif">
+				<script>
+					var box = document.getElementById("img-box");
+					console.log(box.clientHeight)
+					if (box.clientHeight <= 60) {
+						console.log("removing")
+						$('#lig-img').remove();
+						box.innerHTML = box.innerHTML + "<p>No image available</p>";
+					}
+				</script>
 			</div>
 		</td>
 
