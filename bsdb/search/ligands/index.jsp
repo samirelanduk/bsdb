@@ -103,12 +103,8 @@
 							<input type="checkbox" class="pure-u-1-12" id="natprod" name="type" value="Natural product">
 						</div>
 						<div class="checkrow pure-u-1">
-							<label for="endpep" class="pure-u-4-5 checklabel">Endogenous peptide:</label>
-							<input type="checkbox" class="pure-u-1-12" id="endpep" name="type" value="Endogenous peptide">
-						</div>
-						<div class="checkrow pure-u-1">
-							<label for="othpep" class="pure-u-4-5 checklabel">Other peptide:</label>
-							<input type="checkbox" class="pure-u-1-12" id="othpep" name="type" value="Other peptide">
+							<label for="othpep" class="pure-u-4-5 checklabel">Peptide:</label>
+							<input type="checkbox" class="pure-u-1-12" id="pep" name="type" value="Peptide">
 						</div>
 						<div class="checkrow pure-u-1">
 							<label for="inorganic" class="pure-u-4-5 checklabel">Inorganic:</label>
