@@ -48,10 +48,9 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 							<tr><td>Synthetic Organic</td><td><% out.print(ligandTypeCounts[0]); %></td></tr>
 							<tr><td>Metabolite</td><td><% out.print(ligandTypeCounts[1]); %></td></tr>
 							<tr><td>Natural Product</td><td><% out.print(ligandTypeCounts[2]); %></td></tr>
-							<tr><td>Endogenous Peptide</td><td><% out.print(ligandTypeCounts[3]); %></td></tr>
-							<tr><td>Other Peptide</td><td><% out.print(ligandTypeCounts[4]); %></td></tr>
-							<tr><td>Inorganic</td><td><% out.print(ligandTypeCounts[5]); %></td></tr>
-							<tr><td>Antibody</td><td><% out.print(ligandTypeCounts[6]); %></td></tr>
+							<tr><td>Peptide</td><td><% out.print(ligandTypeCounts[3]); %></td></tr>
+							<tr><td>Inorganic</td><td><% out.print(ligandTypeCounts[4]); %></td></tr>
+							<tr><td>Antibody</td><td><% out.print(ligandTypeCounts[5]); %></td></tr>
 						</table>
 					</td><td>
 
@@ -97,17 +96,14 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 		                name: 'Natural Product',
 		                y: <% out.print(ligandTypeCounts[2]); %>
 			            }, {
-		                name: 'Endogenous Peptide',
+		                name: 'Peptide',
 		                y: <% out.print(ligandTypeCounts[3]); %>
 			            }, {
-		                name: 'Other Peptide',
+		                name: 'Inorganic',
 		                y: <% out.print(ligandTypeCounts[4]); %>
 			            }, {
-		                name: 'Inorganic',
-		                y: <% out.print(ligandTypeCounts[5]); %>
-			            }, {
 		                name: 'Antibody',
-		                y:<% out.print(ligandTypeCounts[6]); %>
+		                y:<% out.print(ligandTypeCounts[5]); %>
 			            }]
 				        }]
 						  });
