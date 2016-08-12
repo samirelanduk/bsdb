@@ -44,7 +44,7 @@ long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
 					Ligands
 				</div>
         <div>
-          <div class="entity-description"><a href="">Molecules which interact with a sequence</a></div>
+          <div class="entity-description"><a href="ligands">Molecules which interact with a sequence</a></div>
           <table class="datatable">
             <tr><td>Synthetic Organic</td><td><% out.print(ligandTypeCounts[0]); %></td></tr>
             <tr><td>Metabolite</td><td><% out.print(ligandTypeCounts[1]); %></td></tr>
