@@ -29,15 +29,18 @@ header #headertitle {
   color: #70B1F4;
 }
 
-header #omnisearch input {
+header #blurb {
   width: 90%;
   height: 30px;
   border-radius: 10px;
   padding: 3px;
   font-size: large;
+  color: #EEEEEE;
+  font-weight: bold;
+  font-style: italic;
 }
 
-header #headertitle, header #omnisearch {
+header #headertitle, header #blurb {
   border: 0px;
   margin: 0px;
   box-sizing: border-box;
