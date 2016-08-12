@@ -12,7 +12,8 @@ function selectRows(functionNumber) {
 	}
 
 	var headers = document.getElementById("list_categories").children;
-	for (var i = 0; i < (headers.length - 1); i++) {
+	console.log(headers.length)
+	for (var i = 0; i < (headers.length); i++) {
 		headers[i].className = "list_category unselected";
 	}
 	headers[functionNumber].className = "list_category selected";

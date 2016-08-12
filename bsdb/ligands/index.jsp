@@ -17,10 +17,9 @@
       <div class="list_category" onclick="selectRows(2)">Synthetic organic</div>
       <div class="list_category" onclick="selectRows(3)">Metabolite</div>
       <div class="list_category" onclick="selectRows(4)">Natural product</div>
-      <div class="list_category" onclick="selectRows(5)">Endogenous peptide</div>
-      <div class="list_category" onclick="selectRows(6)">Other peptide</div>
-      <div class="list_category" onclick="selectRows(7)">Inorganic</div>
-      <div class="list_category" onclick="selectRows(8)">Antibody</div>
+      <div class="list_category" onclick="selectRows(5)">Peptide</div>
+      <div class="list_category" onclick="selectRows(6)">Inorganic</div>
+      <div class="list_category" onclick="selectRows(7)">Antibody</div>
     </div>
   </div>
 

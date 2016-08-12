@@ -4,7 +4,6 @@ var descriptions = ["All ligands with an affinity for one or more of the drug-re
                     "Low molecular weight, non-peptidic, biogenic compounds produced by life processes (normally endogenous and of animal origin, including hormones and neurotransmitters) and their close analogues",
                     "Non-peptidic, biogenic compounds derived from living organisms and their close synthetic derivatives",
                     "Peptides encoded in the human, rat and mouse genomes",
-                    "Synthetic, semi-synthetic and natural peptides encoded in genomes other than human, rat and mouse (including oligopeptides and cyclic peptides)",
                     "Ions and other inorganic compounds",
                     "Includes therapeutic monoclonal antibodies"]
 
@@ -13,8 +12,7 @@ var functions = [function() {return true;},
                  isSyntheticOrganic,
                  isMetabolite,
                  isNaturalProduct,
-                 isEndogenousPeptide,
-                 isOtherPeptide,
+                 isPeptide,
                  isInorganic,
                  isAntibody];
 
@@ -54,7 +52,7 @@ function isNaturalProduct(row) {
 	}
 }
 
-function isEndogenousPeptide(row) {
+function isPeptide(row) {
 	if (row.children[3].innerHTML == document.getElementById("list_categories").children[5].innerHTML.trim()) {
 		return true;
 	} else {
@@ -62,7 +60,7 @@ function isEndogenousPeptide(row) {
 	}
 }
 
-function isOtherPeptide(row) {
+function isInorganic(row) {
 	if (row.children[3].innerHTML == document.getElementById("list_categories").children[6].innerHTML.trim()) {
 		return true;
 	} else {
@@ -70,16 +68,8 @@ function isOtherPeptide(row) {
 	}
 }
 
-function isInorganic(row) {
-	if (row.children[3].innerHTML == document.getElementById("list_categories").children[7].innerHTML.trim()) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 function isAntibody(row) {
-	if (row.children[3].innerHTML == document.getElementById("list_categories").children[8].innerHTML.trim()) {
+	if (row.children[3].innerHTML == document.getElementById("list_categories").children[7].innerHTML.trim()) {
 		return true;
 	} else {
 		return false;
