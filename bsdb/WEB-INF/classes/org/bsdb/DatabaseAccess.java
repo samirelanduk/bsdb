@@ -243,10 +243,10 @@ public class DatabaseAccess {
 	public static long[] getLigandTypeCounts() {
 		String[] ligandTypes = {
 			 "Synthetic organic", "Metabolite", "Natural product",
-			 "Endogenous peptide", "Other peptide", "Inorganic", "Antibody"
+			 "Peptide", "Inorganic", "Antibody"
 		};
 		long[] ligandTypeCounts = new long[7];
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 6; i++) {
 			ResultSet rs = DatabaseAccess.issuePreparedSqlQuery(
 			 "SELECT COUNT(*) FROM ligands WHERE ligandtype=?",
 			 ligandTypes[i]
