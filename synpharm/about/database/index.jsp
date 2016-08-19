@@ -31,7 +31,7 @@
 	The sequences here are obtained by identifying the protein chain that
 	interacts with a ligand for a given Guide to PHARMACOLOGY interaction,
 	determining the binding residues, and producing a continuous 'bind sequence'
-	that can be used to conver drugability to another protein.
+	that can be used to confer drugability to another protein.
 </p>
 <p>
 	Each bind sequence also contains metrics such as atomic contact ratio and
