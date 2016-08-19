@@ -136,21 +136,11 @@
 		<div class="help_subsection">
 			<h2>Contacting us</h2>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-				nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.
-			 	Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
-			 	Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
-			 	massa. Vestibulum lacinia arcu eget nulla.
-			</p>
-			<p>
-				Class aptent taciti sociosqu ad litora torquent per conubia
-				nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.
-				Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh.
-				Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed
-				convallis tristique sem. Proin ut ligula vel nunc egestas porttitor.
-			 	Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.
-				Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla
-				metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.
+				This resource is maintained by the Guide to PHARMACOLOGY team. To contact
+				a member of the team, use the
+				<a href="https://www.google.com/recaptcha/mailhide/d?k=01vYhjd4942K8mcJsTfn9STA==&c=gyybhwWR1ziUWzMMiVIf72wtrsNBtTCzJMQcN2lPmvi7B4vjy65HPFlKpsLE3rQ7" target="_blank">
+				e-mail address here</a> and indicate that your enquiry concerns SynPharm
+				in the subject line.
 			</p>
 		</div>
 	</div>
