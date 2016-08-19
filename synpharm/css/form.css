@@ -12,7 +12,7 @@ input[type=submit] {
   margin-top: 15px;
 }
 
-#search_ligands, #search_sequences {
+#ligands, #sequences {
   margin-bottom: 120px;
 }
 

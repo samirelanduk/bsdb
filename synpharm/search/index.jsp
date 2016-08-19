@@ -6,7 +6,7 @@
 
 <h1>Search</h1>
 
-<div id="search_ligands">
+<div id="ligands">
 	<h2>Ligands</h2>
 		<form action="/search/ligands/results.jsp" method="GET" class="pure-form">
 			<div id="nameentry">
@@ -20,7 +20,7 @@
 		</form>
 </div>
 
-<div id="search_sequences">
+<div id="sequences">
 	<h2>Sequences</h2>
 		<form action="/search/sequences/results.jsp" method="GET" class="pure-form">
 			<div id="nameentry">
