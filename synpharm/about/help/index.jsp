@@ -108,21 +108,59 @@
 		<div class="help_subsection">
 			<h2>Sequence page</h2>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-				nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.
-			 	Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
-			 	Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
-			 	massa. Vestibulum lacinia arcu eget nulla.
+				At the top of sequence page is a 3D model of the binding sequence in
+				complex with its ligand, which uses
+				<a href="https://biasmv.github.io/pv/" target="_blank">PV, a JavaScript
+				Protein Viewer</a>. This should work in all modern browsers, and can be
+				used to visualise the complex.
 			</p>
 			<p>
-				Class aptent taciti sociosqu ad litora torquent per conubia
-				nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.
-				Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh.
-				Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed
-				convallis tristique sem. Proin ut ligula vel nunc egestas porttitor.
-			 	Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.
-				Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla
-				metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.
+				The sequence itself follows. The actual binding residues themselves are
+				in bold, and the sequence can be expanded to include more of the rest of
+				the chain using the buttons below the sequence.
+			</p>
+			<p>
+				Then comes the metrics about the sequence. This includes links to the
+				PDB file the sequence was derived from, as well as certain important
+				descriptors:
+			</p>
+			<ul>
+				<li><b>Affinity</b> - this is derived from the Guide to PHARMACOLOGY
+				database, and as such are empirically determined values sourced from the
+				literature.</li>
+				<li><b>Proportional sequence length</b> - the length of the binding
+				sequence compared with the length of the chain it comes from. This is
+				provided to aid the decision of whether to use the sequence itself, or
+				simply the chain it comes from - the higher this percentage, the more
+				useful it is to use the sequence alone.</li>
+				<li><b>Contact ratio</b> - to be useful these sequences must fold
+				independently. Obviously this will not be the case for all the sequences
+				here but to aid in judging how likely they are to do so, the ratio of internal
+				contacts (atomic distances less than five Angstroms within the sequence)
+				to external contacts (atomic distances between the sequence and the rest
+				of the chain less than five Angstroms) is provided. This represents the
+				degree to which the sequence is 'self-contained' - the higher this ratio,
+				the more 'domain-like' the sequence is and the more likely it is believed
+				to be able to fold independently.</li>
+			</ul>
+			<p>
+				Below this is a feature viewer, which shows the location of binding
+				residues and secondary structure elements along the sequence, as well as
+				measures of hydrophobicity along the sequence.
+			</p>
+			<p>
+				Finally, there is a residue distance matrix for the whole chain, with
+				the binding sequence itself marked as a dotted line. This graphic shows
+				the distance between any two given residues, with green representing
+				nearby residues and red distant residues (capped at 40 Angstroms). This
+				is provided to give a sense of how 'globular' a binding sequence is
+				within its chain of origin - if the area within the dotted line is much
+				greener than the surrounding area, it is a compact sequence.
+			</p>
+			<p>
+				(Note that some areas of the matrix will be white - this is because some
+				residues in that chain are missing from the PDB file of origin, and so
+				there is no location information available.)
 			</p>
 		</div>
 	</div>
