@@ -65,21 +65,20 @@
 		<div class="help_subsection">
 			<h2>Ligand page</h2>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-				nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.
-			 	Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
-			 	Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
-			 	massa. Vestibulum lacinia arcu eget nulla.
+				On the ligand's detailed page you will find more information about the
+				ligand. This is just a subset of the information that the Guide to
+				PHARMACOLOGY holds for the ligand - to see the full entry go to that
+				ligand's GtoP page.
 			</p>
 			<p>
-				Class aptent taciti sociosqu ad litora torquent per conubia
-				nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.
-				Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh.
-				Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed
-				convallis tristique sem. Proin ut ligula vel nunc egestas porttitor.
-			 	Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.
-				Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla
-				metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.
+				The page contains links to other databases, a structural diagram of the
+				ligand (if available – generally peptides and ligands do not have such
+				images stored), and molecular information about the ligand, such as mass,
+				surface area, and approval status.
+			</p>
+			<p>
+				At the bottom of the page are links to the protein sequences which
+				respond to this ligand.
 			</p>
 		</div>
 	</div>
@@ -93,21 +92,17 @@
 		<div class="help_subsection">
 			<h2>Sequence list</h2>
 			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-				nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi.
-			 	Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
-			 	Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
-			 	massa. Vestibulum lacinia arcu eget nulla.
+				The binding sequences in the database are listed here, along with basic
+				information about the name of the target it is derived from, the species
+				it is from, the ligand that binds to it, its length, and its length as a
+				proportion of the protein chain it comes from. This list can be sorted
+				by any of these values, and the list can also be filtered to show only
+				sequences of a certain target type (or only sequence that respond to
+				approved ligands) by clicking the headers at the top of the list.
 			</p>
 			<p>
-				Class aptent taciti sociosqu ad litora torquent per conubia
-				nostra, per inceptos himenaeos. Curabitur sodales ligula in libero.
-				Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh.
-				Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed
-				convallis tristique sem. Proin ut ligula vel nunc egestas porttitor.
-			 	Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa.
-				Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla
-				metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh.
+				Clicking the sequence ID of any of the ligands on this list will take
+				you to that sequence's detailed page (see below).
 			</p>
 		</div>
 		<div class="help_subsection">
