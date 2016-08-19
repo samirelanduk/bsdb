@@ -17,7 +17,7 @@
 				be returned.
 			</p>
 			<p>
-				The <a href="/search/ligands/">more advanced ligand search</a> allows
+				The more <a href="/search/ligands/">advanced ligand search</a> allows
 				for searching by essentially any combination of values that SynPharm
 				records. This includes ligand mass, surface area, ligand type, approval
 				status, and more.
