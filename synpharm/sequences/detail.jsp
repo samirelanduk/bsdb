@@ -55,19 +55,27 @@
 					function loadStructure() {
 						pv.io.fetchPdb("/static/pdbs/<% out.print(sequence.getSequenceId()); %>.pdb", function(structure) {
 							var ligandId = "<% out.print(sequence.getHetId()); %>";
-							var ligand;
+							var ligandObjects = [];
 							if (ligandId.length == 1) {
-								ligand = structure.select({chain:ligandId});
-							} else {
-								ligand = structure.select({rnum : parseInt("<% out.print(sequence.getHetId()); %>".replace(/\D/g,''))});
+								ligandObjects.push(structure.select({chain:ligandId}));
+							} else if (ligandId.includes(",")) {
+								var ligandIds = ligandId.split(",");
+								for (var l = 0; l < ligandIds.length; l++) {
+									ligandObjects.push(structure.select({chain:ligandIds[l]}));
+								}
+							}	else {
+								ligandObjects.push(structure.select({rnum : parseInt("<% out.print(sequence.getHetId()); %>".replace(/\D/g,''))}));
 							}
 							var chains = structure.chains();
 							for (var c = 0; c < chains.length; c++) {
-								if (chains[c].name() != ligandId) {
+								if ((chains[c].name() != ligandId) && (ligandId.split(",").indexOf(chains[c].name()) == -1)) {
 									viewer.cartoon("chain", structure.select({chain:chains[c].name()}), {color: pv.color.uniform("white")});
 								}
 							}
-							viewer.ballsAndSticks("ligand", ligand);
+							console.log(ligandObjects)
+							for (var l = 0; l < ligandObjects.length; l++) {
+								viewer.ballsAndSticks("ligand", ligandObjects[l]);
+							}
 							var residueIds = ["<% out.print(sequence.getResidueIds().replace(",", "\",\"")); %>"];
 							var sequenceIds = [];
 							for (var i = 0; i < residueIds.length; i++) {
@@ -78,7 +86,12 @@
 							  object.setOpacity(0.1);
 								object.setOpacity(1, object.select({chain:"<% out.print(sequence.getChain()); %>"}));
 								if (ligandId.length == 1) {
-										object.setOpacity(1, object.select({chain:ligandId}));
+									object.setOpacity(1, object.select({chain:ligandId}));
+								} else if (ligandId.includes(",")) {
+									var ligandIds = ligandId.split(",");
+									for (var l = 0; l < ligandIds.length; l++) {
+										object.setOpacity(1, object.select({chain:ligandIds[l]}));
+									}
 								}
 								object.colorBy(color.uniform("#34944D"), object.select({chain:"<% out.print(sequence.getChain()); %>", rnums:sequenceIds}));
 							});
