@@ -61,9 +61,11 @@ try:
                  live_connection
                 )
                 print("Using map %i%s" % (map_to_use["interactionId"], map_to_use["pdbCode"]))
+            else:
+                print("")
 
         utilities.fill_out_other_tables(live_connection)
-        
+
     elif sys.argv[1] == "-del":
         print("DELETION")
     elif sys.argv[1] == "-rep":
