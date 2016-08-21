@@ -442,16 +442,22 @@ def get_sequence_ids_from_table(connection):
 def get_sequence_as_dict(sequence_id, connection):
     cursor = connection.cursor()
     cursor.execute(
-     "SELECT sequenceId, pdb, receptorChain, bindsequence, residueIds FROM sequences WHERE sequenceId=%s",
+     "SELECT sequenceId, pdb, receptorChain, bindsequence, residueIds, targetName, species FROM sequences WHERE sequenceId=%s",
      (sequence_id,)
     )
-    row = cursor.fetchone()
-    dictionary = {
-     "sequenceId": row[0],
-     "pdb": row[1],
-     "chain": row[2],
-     "sequence": row[3],
-     "residueIds": row[4].split(",")
-    }
-    cursor.close()
-    return dictionary
+    if cursor.rowcount == 0:
+        cursor.close()
+        return None
+    else:
+        row = cursor.fetchone()
+        dictionary = {
+         "sequenceId": row[0],
+         "pdb": row[1],
+         "chain": row[2],
+         "sequence": row[3],
+         "residueIds": row[4].split(","),
+         "targetName": row[5],
+         "species": row[6]
+        }
+        cursor.close()
+        return dictionary

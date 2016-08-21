@@ -71,7 +71,24 @@ try:
     elif sys.argv[1] == "-rep":
         print("REPLACE")
     elif sys.argv[1] == "-reg":
-        print("REGENERATION")
+        if len(sys.argv) < 3:
+            print("REGENERATION")
+            print("Please provide a sequence ID")
+        else:
+            sequence = utilities.get_sequence_as_dict(sys.argv[2], live_connection)
+            if sequence is None:
+                print("There is no sequence with ID %s" % sys.argv[2])
+            else:
+                response = input("Regenerate sequence %s %s from PDB map %s%s? (Y/N) " % (
+                 sequence["species"],
+                 sequence["targetName"],
+                 sequence["sequenceId"],
+                 sequence["pdb"]
+                ))
+                if response.upper() == "Y":
+                    pass
+                else:
+                    print("Doing nothing")
     else:
         print("Unrecognised argument: %s" % sys.argv[1])
 
