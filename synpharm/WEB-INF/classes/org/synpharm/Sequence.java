@@ -51,7 +51,11 @@ public class Sequence {
 		this.species = (String)fields[6];
 		this.type = (String)fields[7];
 		this.action = (String)fields[8];
-		this.affinity = (float)fields[9];
+		try {
+    	this.affinity = (Float)fields[9];
+		} catch (NullPointerException e) {
+
+		}
 		this.affinityRange = (String)fields[10];
 		this.affinityType = (String)fields[11];
 		this.dateAdded = (Date)fields[12];
