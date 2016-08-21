@@ -5,6 +5,7 @@ import config
 import math
 import pygtop
 import molecupy
+from molecupy.structures import ResiduicStructure
 
 def get_connection():
     conn = pg8000.connect(
@@ -356,6 +357,13 @@ def fill_out_other_tables(connection):
                 if len(sequence[3]) == 1:
                     chain = pdb.model().get_chain_by_id(sequence[3])
                     mass = chain.mass()
+                elif "," in sequence[3]:
+                    chains = [pdb.model().get_chain_by_id(id_) for id_ in sequence[3].split(",")]
+                    residues = []
+                    for chain in chains:
+                        residues += chain.residues()
+                    ligand_ = ResiduicStructure(*residues)
+                    mass = ligand_.mass()
                 else:
                     ligand_ = pdb.model().get_small_molecule_by_id(sequence[3])
                     mass = ligand_.mass()
