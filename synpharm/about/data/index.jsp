@@ -140,7 +140,8 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 					    var chart = new Highcharts.Chart({
 					        chart: {
 					            type: 'column',
-											renderTo: 'ligandMassChart'
+											renderTo: 'ligandMassChart',
+											zoomType: 'x'
 					        },
 					        title: {
 					            text: 'Ligand Mass Distribution'
@@ -467,7 +468,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 		        plotOptions: {
 		            scatter: {
 		                marker: {
-		                    radius: 5,
+		                    radius: 2,
 		                    states: {
 		                        hover: {
 		                            enabled: true,
