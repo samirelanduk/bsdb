@@ -72,7 +72,6 @@
 									viewer.cartoon("chain", structure.select({chain:chains[c].name()}), {color: pv.color.uniform("white")});
 								}
 							}
-							console.log(ligandObjects)
 							for (var l = 0; l < ligandObjects.length; l++) {
 								viewer.ballsAndSticks("ligand", ligandObjects[l]);
 							}
@@ -81,7 +80,6 @@
 							for (var i = 0; i < residueIds.length; i++) {
 								sequenceIds.push(parseInt(residueIds[i].replace(/\D/g,'')))
 							}
-							console.log(structure.chains());
 							viewer.forEach(function(object) {
 							  object.setOpacity(0.1);
 								object.setOpacity(1, object.select({chain:"<% out.print(sequence.getChain()); %>"}));
@@ -94,6 +92,7 @@
 									}
 								}
 								object.colorBy(color.uniform("#34944D"), object.select({chain:"<% out.print(sequence.getChain()); %>", rnums:sequenceIds}));
+								object.setOpacity(0, object.select("water"));
 							});
 
 							viewer.centerOn(structure);
