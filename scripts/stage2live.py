@@ -86,7 +86,7 @@ try:
                  sequence["pdb"]
                 ))
                 if response.upper() == "Y":
-                    pass
+                    utilities.regenerate_sequence(sys.argv[2], stage_connection, live_connection)
                 else:
                     print("Doing nothing")
     else:

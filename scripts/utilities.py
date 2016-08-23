@@ -461,3 +461,67 @@ def get_sequence_as_dict(sequence_id, connection):
         }
         cursor.close()
         return dictionary
+
+
+def regenerate_sequence(sequence_id, stage_connection, live_connection):
+    stage_cursor = stage_connection.cursor()
+    live_cursor = live_connection.cursor()
+    live_cursor.execute("SELECT pdb FROM sequences WHERE sequenceId=%s", (sequence_id,))
+    pdb = live_cursor.fetchall()[0][0]
+
+    stage_cursor.execute(
+     "SELECT hetId, bindingResidues, receptorChain, originalChainLength, bindSequence, proportionalLength, internalContacts, externalContacts, residueIds FROM interaction_pdb_maps WHERE mapId=%s",
+     (sequence_id + pdb,)
+    )
+    if stage_cursor.rowcount == 1:
+        row = stage_cursor.fetchone()
+        dictionary = {
+         "hetId": row[0],
+         "bindingResidues": row[1],
+         "receptorChain": row[2],
+         "originalChainLength": row[3],
+         "bindSequence": row[4],
+         "proportionalLength": row[5],
+         "internalContacts": row[6],
+         "externalContacts": row[7],
+         "residueIds": row[8]
+        }
+        if dictionary["bindSequence"]:
+            dictionary["hetCode"] = dictionary["hetId"] if len(dictionary["hetId"]) == 1 or "," in dictionary["hetId"] else molecupy.get_pdb_remotely(
+             pdb
+            ).model().get_small_molecule_by_id(dictionary["hetId"]).molecule_name()
+            live_cursor.execute(
+             """UPDATE sequences SET
+              hetCode=%s,
+              hetId=%s,
+              bindingResidues=%s,
+              receptorChain=%s,
+              originalChainLength=%s,
+              bindSequence=%s,
+              proportionalLength=%s,
+              internalContacts=%s,
+              externalContacts=%s,
+              residueIds=%s,
+              dateModified=%s
+              WHERE sequenceId=%s;""", (
+              dictionary["hetId"],
+              dictionary["hetCode"],
+              dictionary["bindingResidues"],
+              dictionary["receptorChain"],
+              dictionary["originalChainLength"],
+              dictionary["bindSequence"],
+              dictionary["proportionalLength"],
+              dictionary["internalContacts"],
+              dictionary["externalContacts"],
+              dictionary["residueIds"],
+              datetime.datetime.now(),
+              sequence_id
+             )
+            )
+            live_connection.commit()
+        else:
+            print("Doing nothing - map no longer has sequence")
+    else:
+        print("Doing nothing")
+    stage_cursor.close()
+    live_cursor.close()
