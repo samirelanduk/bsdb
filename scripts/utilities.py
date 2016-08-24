@@ -516,8 +516,8 @@ def regenerate_sequence(sequence_id, stage_connection, live_connection):
               dateModified=%s,
               sequenceLength=%s
               WHERE sequenceId=%s;""", (
-              dictionary["hetId"],
               dictionary["hetCode"],
+              dictionary["hetId"],
               dictionary["bindingResidues"],
               dictionary["receptorChain"],
               dictionary["originalChainLength"],
