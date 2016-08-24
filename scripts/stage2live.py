@@ -50,6 +50,7 @@ try:
                       map_to_use["interactionId"])
                 except pygtop.NoSuchInteractionError:
                     print("Could not retrieve interaction from web services")
+                    continue
                 het_name = map_to_use["hetId"] if len(map_to_use["hetId"]) == 1 or "," in map_to_use["hetId"] else molecupy.get_pdb_remotely(
                  map_to_use["pdbCode"]
                 ).model().get_small_molecule_by_id(map_to_use["hetId"]).molecule_name()

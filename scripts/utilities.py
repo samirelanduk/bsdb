@@ -307,9 +307,14 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, het_name, stage_conn
     interaction_dict = interaction_object_to_dict(interaction)
     now = datetime.datetime.now()
     cursor = live_connection.cursor()
+    locs = []
+    for index, char in enumerate(pdb_map["bindSequence"]):
+        if char.isupper():
+            locs.append(index)
+    length = (locs[-1] - locs[0]) + 1
     cursor.execute("""
      INSERT INTO sequences VALUES (
-      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+      %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
      );""", [
       pdb_map["interactionId"],
       interaction_dict["ligandId"],
@@ -336,7 +341,8 @@ def make_live_sequence_from_stage_map(interaction, pdb_map, het_name, stage_conn
       pdb_map["internalContacts"],
       pdb_map["externalContacts"],
       pdb_map["contactRatio"],
-      pdb_map["residueIds"]
+      pdb_map["residueIds"],
+      length
      ])
     live_connection.commit()
     cursor.close()
