@@ -120,7 +120,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 		</div>
 		<div class="box_body">
 			<div class="explanation">
-				A breakdown of the ligands in the BSDB database by mass.
+				A breakdown of the ligands in the SynPharm database by mass.
 			</div>
 			<table class="boxtable">
 				<tr>
@@ -193,7 +193,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 		</div>
 		<div class="box_body">
 			<div class="explanation">
-				A breakdown of the ligands in the BSDB database by approval status.
+				A breakdown of the ligands in the SynPharm database by approval status.
 			</div>
 			<table class="boxtable">
 				<tr>
@@ -263,7 +263,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 		</div>
 		<div class="box_body">
 			<div class="explanation">
-				A breakdown of the sequences in the BSDB database by Guide to PHARMACOLOGY
+				A breakdown of the sequences in the SynPharm database by Guide to PHARMACOLOGY
 				target type.
 			</div>
 			<table class="boxtable">
@@ -357,7 +357,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 		</div>
 		<div class="box_body">
 			<div class="explanation">
-				A breakdown of the sequences in the BSDB database by sequence length.
+				A breakdown of the sequences in the SynPharm database by sequence length.
 			</div>
 			<table class="boxtable">
 				<tr>
