@@ -271,10 +271,10 @@ public class Utilities {
 			conditions.add(typeCondition.toString());
 		}
 		if (searchTerms.containsKey("lengthGt")) {
-			conditions.add(String.format("length(sequences.bindSequence)>=%d", searchTerms.get("lengthGt")));
+			conditions.add(String.format("sequences.sequenceLength>=%d", searchTerms.get("lengthGt")));
 		}
 		if (searchTerms.containsKey("lengthLt")) {
-			conditions.add(String.format("length(sequences.bindSequence)<=%d", searchTerms.get("lengthLt")));
+			conditions.add(String.format("sequences.sequenceLength<=%d", searchTerms.get("lengthLt")));
 		}
 		if (searchTerms.containsKey("proplengthGt")) {
 			conditions.add(String.format("sequences.proportionalLength>=%f", searchTerms.get("proplengthGt")));
@@ -304,7 +304,7 @@ public class Utilities {
 			conditions.add("ligands.approved=true");
 		}
 		String queryStart = "select sequences.sequenceId,sequences.targetName,sequences.species," +
-				"ligands.ligandName,sequences.bindSequence,sequences.proportionalLength, ligands.approved from sequences" +
+				"ligands.ligandName,sequences.bindSequence,sequences.proportionalLength, ligands.approved, sequences.sequenceLength from sequences" +
 				" inner join ligands on sequences.ligandId=ligands.ligandId";
 		StringBuilder query = new StringBuilder(queryStart);
 		if (conditions.size() >= 1) {
