@@ -83,7 +83,7 @@ public class Sequence {
 				String.format(
 				 "%s (%d residues)",
 				 getTargetName(),
-				 getSequence().length()
+				 getSequenceLength()
 				)
 		);
 		return Utilities.enclose("div", "class='sequence_link'", contents);
