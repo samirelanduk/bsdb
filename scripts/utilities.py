@@ -496,6 +496,11 @@ def regenerate_sequence(sequence_id, stage_connection, live_connection):
             dictionary["hetCode"] = dictionary["hetId"] if len(dictionary["hetId"]) == 1 or "," in dictionary["hetId"] else molecupy.get_pdb_remotely(
              pdb
             ).model().get_small_molecule_by_id(dictionary["hetId"]).molecule_name()
+            locs = []
+            for index, char in enumerate(dictionary["bindSequence"]):
+                if char.isupper():
+                    locs.append(index)
+            length = (locs[-1] - locs[0]) + 1
             live_cursor.execute(
              """UPDATE sequences SET
               hetCode=%s,
@@ -508,7 +513,8 @@ def regenerate_sequence(sequence_id, stage_connection, live_connection):
               internalContacts=%s,
               externalContacts=%s,
               residueIds=%s,
-              dateModified=%s
+              dateModified=%s,
+              sequenceLength=%s
               WHERE sequenceId=%s;""", (
               dictionary["hetId"],
               dictionary["hetCode"],
@@ -521,6 +527,7 @@ def regenerate_sequence(sequence_id, stage_connection, live_connection):
               dictionary["externalContacts"],
               dictionary["residueIds"],
               datetime.datetime.now(),
+              length,
               sequence_id
              )
             )
