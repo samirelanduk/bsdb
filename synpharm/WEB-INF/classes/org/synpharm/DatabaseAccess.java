@@ -128,7 +128,7 @@ public class DatabaseAccess {
 	// Gets HTML rows for each sequence
 	public static String[] getSequenceRows() {
 		ResultSet rs = issuePreparedSqlQuery(
-		 "SELECT s.sequenceId, s.targetName, s.species, l.ligandName, s.bindSequence, s.proportionalLength, l.approved FROM sequences s INNER JOIN ligands l on s.ligandId=l.ligandId ORDER BY s.sequenceId"
+		 "SELECT s.sequenceId, s.targetName, s.species, l.ligandName, s.bindSequence, s.proportionalLength, l.approved, s.sequenceLength FROM sequences s INNER JOIN ligands l on s.ligandId=l.ligandId ORDER BY s.sequenceId"
 		);
 		if (rs != null) {
 			Object[][] sqlRows = getObjectGridFromResultSet(rs);
@@ -145,7 +145,7 @@ public class DatabaseAccess {
 			Object[] row = sqlRows[i];
 			int id = (Integer)row[0];
 			String hyperlink = String.format("/sequences/detail.jsp?id=%d", id);
-			int length = Utilities.getSequenceLength((String)row[4]);
+			int length = (Integer)row[7];
 			String percent = Utilities.floatToPercentage((Float)row[5]);
 			String approved = (Boolean)row[6] ? "Yes" : "No";
 			String cells = String.format(

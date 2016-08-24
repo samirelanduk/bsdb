@@ -31,6 +31,7 @@ public class Sequence {
 	private int externalContacts;
 	private float contactRatio;
 	private String residueIds;
+	private int sequenceLength;
 
 	public Sequence() {
 		this.ligand = new Ligand();
@@ -72,6 +73,7 @@ public class Sequence {
 		this.externalContacts = (Integer)fields[23];
 		this.contactRatio = (float)fields[24];
 		this.residueIds = (String)fields[25];
+		this.sequenceLength = (Integer)fields[26];
 	}
 
 	public String getConciseHtml() {
@@ -299,7 +301,12 @@ public class Sequence {
 
 
 	public int getSequenceLength() {
-		return Utilities.getSequenceLength(sequence);
+		return sequenceLength;
+	}
+
+
+	public void setSequenceLength(int sequenceLength) {
+		this.sequenceLength = sequenceLength;
 	}
 
 
