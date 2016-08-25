@@ -69,11 +69,22 @@ try:
 
     elif sys.argv[1] == "-del":
         print("DELETION")
+        if len(sys.argv) < 3:
+            print("Please provide a sequence ID")
+        else:
+            sequence = utilities.get_sequence_as_dict(sys.argv[2], live_connection)
+            if sequence is None:
+                print("There is no sequence with ID %s" % sys.argv[2])
+            else:
+                response = input("Delete sequence %s %s? (Y/N) " % (
+                 sequence["species"],
+                 sequence["targetName"]
+                ))
     elif sys.argv[1] == "-rep":
         print("REPLACE")
     elif sys.argv[1] == "-reg":
+        print("REGENERATION")
         if len(sys.argv) < 3:
-            print("REGENERATION")
             print("Please provide a sequence ID")
         else:
             sequence = utilities.get_sequence_as_dict(sys.argv[2], live_connection)
