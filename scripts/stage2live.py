@@ -80,6 +80,10 @@ try:
                  sequence["species"],
                  sequence["targetName"]
                 ))
+                if response.upper() == "Y":
+                    utilities.delete_sequence(sys.argv[2], stage_connection, live_connection)
+                else:
+                    print("Doing nothing")
     elif sys.argv[1] == "-rep":
         print("REPLACE")
     elif sys.argv[1] == "-reg":

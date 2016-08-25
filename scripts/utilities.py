@@ -538,3 +538,23 @@ def regenerate_sequence(sequence_id, stage_connection, live_connection):
         print("Doing nothing")
     stage_cursor.close()
     live_cursor.close()
+
+
+def delete_sequence(sequence_id, stage_connection, live_connection):
+    stage_cursor = stage_connection.cursor()
+    live_cursor = live_connection.cursor()
+
+    stage_cursor.execute("SELECT mapId FROM interaction_pdb_maps WHERE interactionId=%s", (sequence_id,))
+    mapIds = [row[0] for row in stage_cursor.fetchall()]
+    for mapId in mapIds:
+        pdb = mapId[-4:]
+        stage_cursor.execute("INSERT INTO false_maps VALUES (%s, %s, %s)", (mapId, sequence_id, pdb))
+        stage_connection.commit()
+        stage_cursor.execute("DELETE FROM interaction_pdb_maps WHERE mapId=%s", (mapId,))
+        stage_connection.commit()
+
+    live_cursor.execute("DELETE FROM sequences WHERE sequenceId=%s", (sequence_id,))
+    live_connection.commit()
+
+    stage_cursor.close()
+    live_cursor.close()
