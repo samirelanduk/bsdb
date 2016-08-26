@@ -8,7 +8,7 @@ public class FalseMap {
 
   public FalseMap(Object[] fields) {
     this.mapId = (String)fields[0];
-    this.interactionId = (int)fields[1];
+    this.interactionId = (Integer)fields[1];
     this.pdbCode = (String)fields[2];
   }
 

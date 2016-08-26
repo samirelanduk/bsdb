@@ -5,7 +5,7 @@ import utilities
 paths = utilities.get_paths("manage")
 os.chdir(paths["java_dir"])
 
-subprocess.call('javac -cp "%s":"%s":"%s" *.java' % (
+subprocess.call('javac -source 1.6 -target 1.6 -cp "%s":"%s":"%s" *.java' % (
  paths["jar_dir"],
  paths["class_dir"],
  paths["servlet_dir"]

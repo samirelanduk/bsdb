@@ -21,19 +21,19 @@ public class InteractionPdb {
 
   public InteractionPdb(Object[] fields) {
     this.mapId = (String)fields[0];
-    this.interactionId = (int)fields[1];
+    this.interactionId = (Integer)fields[1];
     this.pdbCode = (String)fields[2];
-    this.manuallyAdded = (boolean)fields[3];
-    this.manuallyMarkedCorrect = (boolean)fields[4];
+    this.manuallyAdded = (Boolean)fields[3];
+    this.manuallyMarkedCorrect = (Boolean)fields[4];
     this.hetId = (String)fields[5];
     this.bindingResidues = ((String)fields[6]) == null ? null : ((String)fields[6]).split(", ");
     this.receptorChain = (String)fields[7];
-    this.originalChainLength = fields[8] == null ? 0 : (int)fields[8];
+    this.originalChainLength = fields[8] == null ? 0 : (Integer)fields[8];
     this.bindSequence = (String)fields[9];
-    this.proportionalLength = fields[10] == null ? 0.0 : (float)fields[10];
-    this.internalContacts = fields[11] == null ? 0 : (int)fields[11];
-    this.externalContacts = fields[12] == null ? 0 : (int)fields[12];
-    this.contactRatio = fields[13] == null ? 0.0 : (float)fields[13];
+    this.proportionalLength = fields[10] == null ? 0.0 : (Float)fields[10];
+    this.internalContacts = fields[11] == null ? 0 : (Integer)fields[11];
+    this.externalContacts = fields[12] == null ? 0 : (Integer)fields[12];
+    this.contactRatio = fields[13] == null ? 0.0 : (Float)fields[13];
     this.residueIds = (String)fields[14];
   }
 

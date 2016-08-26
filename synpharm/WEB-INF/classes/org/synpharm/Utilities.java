@@ -222,7 +222,7 @@ public class Utilities {
 		if (searchTerms.containsKey("logpLt")) {
 			conditions.add(String.format("logP<=%f", searchTerms.get("logpLt")));
 		}
-		if ((searchTerms.containsKey("approvedOnly")) && (boolean)(searchTerms.get("approvedOnly"))) {
+		if ((searchTerms.containsKey("approvedOnly")) && (Boolean)(searchTerms.get("approvedOnly"))) {
 			conditions.add("approved=true");
 		}
 
@@ -300,7 +300,7 @@ public class Utilities {
 		if (searchTerms.containsKey("contactratioLt")) {
 			conditions.add(String.format("sequences.contactRatio<=%f", searchTerms.get("contactratioLt")));
 		}
-		if ((searchTerms.containsKey("approvedOnly")) && (boolean)(searchTerms.get("approvedOnly"))) {
+		if ((searchTerms.containsKey("approvedOnly")) && (Boolean)(searchTerms.get("approvedOnly"))) {
 			conditions.add("ligands.approved=true");
 		}
 		String queryStart = "select sequences.sequenceId,sequences.targetName,sequences.species," +

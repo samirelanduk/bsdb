@@ -68,10 +68,10 @@ public class Sequence {
 		this.chain = (String)fields[18];
 		this.originalChainLength = (Integer)fields[19];
 		this.sequence = (String)fields[20];
-		this.proportionalLength = (float)fields[21];
+		this.proportionalLength = (Float)fields[21];
 		this.internalContacts = (Integer)fields[22];
 		this.externalContacts = (Integer)fields[23];
-		this.contactRatio = (float)fields[24];
+		this.contactRatio = (Float)fields[24];
 		this.residueIds = (String)fields[25];
 		this.sequenceLength = (Integer)fields[26];
 	}

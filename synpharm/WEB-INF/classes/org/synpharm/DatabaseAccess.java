@@ -264,7 +264,7 @@ public class DatabaseAccess {
 		Object[][] grid = getObjectGridFromResultSet(rs);
 		float[] masses = new float[grid.length];
 		for (int i = 0; i < grid.length; i++) {
-			masses[i] = (float)grid[i][0];
+			masses[i] = (Float)(grid[i][0]);
 		}
 		ArrayList<Integer> boundaries = new ArrayList<Integer>();
 		int value = 0;
@@ -332,7 +332,7 @@ public class DatabaseAccess {
 		Object[][] grid = getObjectGridFromResultSet(rs);
 		int[] lengths = new int[grid.length];
 		for (int i = 0; i < grid.length; i++) {
-			lengths[i] = (int)grid[i][0];
+			lengths[i] = (Integer)grid[i][0];
 		}
 		ArrayList<Integer> boundaries = new ArrayList<Integer>();
 		int value = 0;
