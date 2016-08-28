@@ -228,4 +228,10 @@ footer a:hover {
     width: 940px;
   }
 
+  .cell {
+    width: 49%;
+    display: inline-block;
+    vertical-align: top;
+  }
+
 }
