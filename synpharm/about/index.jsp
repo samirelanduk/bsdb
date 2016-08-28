@@ -1,5 +1,10 @@
 <%@include file="/includes/start.html"%>
 <title>About - BindSequenceDB</title>
+<style>
+	h1 {
+		margin-left: 5%;
+	}
+</style>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>About</h1>
