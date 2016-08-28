@@ -4,9 +4,10 @@
 <title>Search - BindSequenceDB</title>
 <%@include file="/includes/bodytop.html"%>
 
-<h1>Search</h1>
 
 <div id="ligands">
+
+	<h1>Search</h1>
 	<h2>Ligands</h2>
 		<form action="/search/ligands/results.jsp" method="GET" class="pure-form">
 			<div id="nameentry">

@@ -13,7 +13,10 @@ input[type=submit] {
 }
 
 #ligands, #sequences {
+  width: 90%;
   margin-bottom: 120px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pure-form-aligned .pure-control-group label {
@@ -21,7 +24,6 @@ input[type=submit] {
 }
 
 label {
-  text-align: right;
   font-size: 90%;
 }
 
@@ -36,4 +38,27 @@ label {
 
 input[type=checkbox] {
   margin-top: 8px;
+}
+
+
+@media only screen and (min-width: 568px) {
+  /* iPad down */
+
+}
+
+
+@media only screen and (min-width: 769px) {
+  /* Small Desktop screens */
+
+}
+
+
+@media only screen and (min-width: 940px) {
+  /* Big Desktop screens */
+
+  #ligands, #sequences {
+    width: 100%;
+  }
+
+
 }
