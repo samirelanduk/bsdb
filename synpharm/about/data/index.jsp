@@ -41,9 +41,8 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 				A breakdown of the ligands in the SynPharm database by Guide to PHARMACOLOGY
 				type.
 			</div>
-			<table class="boxtable">
-				<tr>
-					<td>
+			<div class="boxtable">
+				<div class="cell">
 						<table class="datatable">
 							<tr><td>Synthetic Organic</td><td><% out.print(ligandTypeCounts[0]); %></td></tr>
 							<tr><td>Metabolite</td><td><% out.print(ligandTypeCounts[1]); %></td></tr>
@@ -52,9 +51,9 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 							<tr><td>Inorganic</td><td><% out.print(ligandTypeCounts[4]); %></td></tr>
 							<tr><td>Antibody</td><td><% out.print(ligandTypeCounts[5]); %></td></tr>
 						</table>
-					</td><td>
+				</div>
 
-						<div id="ligandTypesChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				<div id="ligandTypesChart" class="cell"></div>
 						<script>
 							var chart = new Highcharts.Chart({
 				        chart: {
@@ -109,8 +108,8 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 						  });
 						</script>
 					</td>
-				</tr>
-			</table>
+
+			</div>
 		</div>
 	</div>
 
