@@ -13,6 +13,7 @@ header #headertitle {
   color: #FFFFFF;
   font-size: 200%;
   line-height: 80px;
+  width 100%;
 }
 
 #headertitle #syn {
@@ -30,22 +31,13 @@ header #headertitle {
 }
 
 header #blurb {
-  width: 90%;
-  height: 30px;
-  border-radius: 10px;
-  padding: 3px;
-  font-size: large;
-  color: #EEEEEE;
-  font-weight: bold;
-  font-style: italic;
+  display: none;
 }
 
 header #headertitle, header #blurb {
   border: 0px;
   margin: 0px;
   box-sizing: border-box;
-  width: 49%;
-  display: inline-block;
   text-align: center;
   vertical-align: middle;
 }
@@ -164,4 +156,41 @@ footer a:hover {
   margin-bottom: 50px;
   width: 30%;
   height: auto;
+}
+
+
+
+@media only screen and (min-width: 568px) {
+  /* iPad down */
+  header #headertitle {
+    display: inline-block;
+    width: 49%;
+  }
+
+  header #blurb {
+    display: inline-block;
+    width: 49%;
+    height: 30px;
+    border-radius: 10px;
+    padding: 3px;
+    font-size: large;
+    color: #EEEEEE;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+}
+
+
+@media only screen and (min-width: 769px) {
+  /* Small Desktop screens */
+
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+  /* Big Desktop screens */
+
+
 }
