@@ -121,9 +121,8 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 			<div class="explanation">
 				A breakdown of the ligands in the SynPharm database by mass.
 			</div>
-			<table class="boxtable">
-				<tr>
-					<td>
+			<div class="boxtable">
+				<div class="cell">
 						<table class="datatable">
 							<thead><th>Ligand Mass (Da)</th><th>Count</th></thead>
 							<% for (int i = 0; i < ligandMassDistribution.length; i++) {
@@ -133,8 +132,8 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 							} %>
 
 						</table>
-					</td><td>
-						<div id="ligandMassChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+					</div>
+					<div id="ligandMassChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 						<script>
 					    var chart = new Highcharts.Chart({
 					        chart: {
@@ -180,9 +179,8 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 					        }]
 					    });
 						</script>
-					</td>
-				</tr>
-			</table>
+					</div>
+			</div>
 		</div>
 	</div>
 
@@ -194,15 +192,14 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 			<div class="explanation">
 				A breakdown of the ligands in the SynPharm database by approval status.
 			</div>
-			<table class="boxtable">
-				<tr>
-					<td>
-						<table class="datatable">
-							<tr><td>Approved</td><td><% out.print(ligandApprovalCounts[0]); %></td></tr>
-							<tr><td>Not Approved</td><td><% out.print(ligandApprovalCounts[1]); %></td></tr>
-						</table>
-					</td><td>
-					<div id="ligandApprovalChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+			<div class="boxtable">
+				<div class="cell">
+					<table class="datatable">
+						<tr><td>Approved</td><td><% out.print(ligandApprovalCounts[0]); %></td></tr>
+						<tr><td>Not Approved</td><td><% out.print(ligandApprovalCounts[1]); %></td></tr>
+					</table>
+				</div>
+				<div id="ligandApprovalChart" class="cell">
 					<script>
 						var chart = new Highcharts.Chart({
 							chart: {
@@ -246,9 +243,8 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 							}]
 						});
 					</script>
-					</td>
-				</tr>
-			</table>
+				</div>
+			</div>
 		</div>
 	</div>
 
