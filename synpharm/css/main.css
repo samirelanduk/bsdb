@@ -173,6 +173,10 @@ footer a:hover {
   height: auto;
 }
 
+#aboutback {
+  margin-left: 5%;
+}
+
 
 
 @media only screen and (min-width: 568px) {
