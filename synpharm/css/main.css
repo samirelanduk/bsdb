@@ -80,6 +80,10 @@ a:hover {
   text-decoration: underline;
 }
 
+h1 {
+  margin-left: 5%;
+}
+
 .box_container {
   width: 100%;
 }
