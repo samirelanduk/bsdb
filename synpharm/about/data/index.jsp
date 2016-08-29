@@ -26,6 +26,11 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 <link rel="stylesheet" type="text/css" href="/css/charts.css">
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.jquery.com/jquery.min.js"></script>
+<style>
+	h1 {
+		margin-left: 5%;
+	}
+</style>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Data and Statistics</h1>
@@ -42,7 +47,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 				type.
 			</div>
 			<div class="boxtable">
-				<div class="cell">
+				<div class="cell cell-l">
 						<table class="datatable">
 							<tr><td>Synthetic Organic</td><td><% out.print(ligandTypeCounts[0]); %></td></tr>
 							<tr><td>Metabolite</td><td><% out.print(ligandTypeCounts[1]); %></td></tr>
@@ -53,62 +58,61 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 						</table>
 				</div>
 
-				<div id="ligandTypesChart" class="cell"></div>
-						<script>
-							var chart = new Highcharts.Chart({
-				        chart: {
-			            plotBackgroundColor: null,
-			            plotBorderWidth: null,
-			            plotShadow: false,
-			            type: 'pie',
-									renderTo: 'ligandTypesChart'
-				        },
-				        title: {
-			            text: 'Ligand Types'
-				        },
-				        tooltip: {
-			            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-				        },
-				        plotOptions: {
-			            pie: {
-		                allowPointSelect: true,
-		                cursor: 'pointer',
-		                dataLabels: {
-	                    enabled: true,
-	                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-	                    style: {
-	                    	color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-	                    }
-		                }
-			            }
-				        },
-				        series: [{
-			            name: 'Proportion',
-			            colorByPoint: true,
-			            data: [{
-		                name: 'Synthetic Organic',
-		                y: <% out.print(ligandTypeCounts[0]); %>
-			            }, {
-		                name: 'Metabolite',
-		                y: <% out.print(ligandTypeCounts[1]); %>
-			            }, {
-		                name: 'Natural Product',
-		                y: <% out.print(ligandTypeCounts[2]); %>
-			            }, {
-		                name: 'Peptide',
-		                y: <% out.print(ligandTypeCounts[3]); %>
-			            }, {
-		                name: 'Inorganic',
-		                y: <% out.print(ligandTypeCounts[4]); %>
-			            }, {
-		                name: 'Antibody',
-		                y:<% out.print(ligandTypeCounts[5]); %>
-			            }]
-				        }]
-						  });
-						</script>
-					</td>
-
+				<div id="ligandTypesChart" class="cell cell-r">
+					<script>
+						var chart = new Highcharts.Chart({
+			        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            type: 'pie',
+								renderTo: 'ligandTypesChart'
+			        },
+			        title: {
+		            text: 'Ligand Types'
+			        },
+			        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			        },
+			        plotOptions: {
+		            pie: {
+	                allowPointSelect: true,
+	                cursor: 'pointer',
+	                dataLabels: {
+	                  enabled: true,
+	                  format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+	                  style: {
+	                  	color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+	                  }
+	                }
+		            }
+			        },
+			        series: [{
+		            name: 'Proportion',
+		            colorByPoint: true,
+		            data: [{
+	                name: 'Synthetic Organic',
+	                y: <% out.print(ligandTypeCounts[0]); %>
+		            }, {
+	                name: 'Metabolite',
+	                y: <% out.print(ligandTypeCounts[1]); %>
+		            }, {
+	                name: 'Natural Product',
+	                y: <% out.print(ligandTypeCounts[2]); %>
+		            }, {
+	                name: 'Peptide',
+	                y: <% out.print(ligandTypeCounts[3]); %>
+		            }, {
+	                name: 'Inorganic',
+	                y: <% out.print(ligandTypeCounts[4]); %>
+		            }, {
+	                name: 'Antibody',
+	                y:<% out.print(ligandTypeCounts[5]); %>
+		            }]
+			        }]
+					  });
+					</script>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -122,18 +126,18 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 				A breakdown of the ligands in the SynPharm database by mass.
 			</div>
 			<div class="boxtable">
-				<div class="cell">
-						<table class="datatable">
-							<thead><th>Ligand Mass (Da)</th><th>Count</th></thead>
-							<% for (int i = 0; i < ligandMassDistribution.length; i++) {
-								 	if ((Long)ligandMassDistribution[i][1] != 0) {
-										out.println(String.format("<tr><td>%s</td><td>%d</td</tr>", ligandMassDistribution[i][0], ligandMassDistribution[i][1]));
-									}
-							} %>
+				<div class="cell cell-l">
+					<table class="datatable">
+						<thead><th>Ligand Mass (Da)</th><th>Count</th></thead>
+						<% for (int i = 0; i < ligandMassDistribution.length; i++) {
+							 	if ((Long)ligandMassDistribution[i][1] != 0) {
+									out.println(String.format("<tr><td>%s</td><td>%d</td</tr>", ligandMassDistribution[i][0], ligandMassDistribution[i][1]));
+								}
+						} %>
 
-						</table>
-					</div>
-					<div id="ligandMassChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+					</table>
+				</div>
+				<div id="ligandMassChart" class="cell cell-r" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
 						<script>
 					    var chart = new Highcharts.Chart({
 					        chart: {
@@ -193,13 +197,13 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 				A breakdown of the ligands in the SynPharm database by approval status.
 			</div>
 			<div class="boxtable">
-				<div class="cell">
+				<div class="cell cell-l">
 					<table class="datatable">
 						<tr><td>Approved</td><td><% out.print(ligandApprovalCounts[0]); %></td></tr>
 						<tr><td>Not Approved</td><td><% out.print(ligandApprovalCounts[1]); %></td></tr>
 					</table>
 				</div>
-				<div id="ligandApprovalChart" class="cell">
+				<div id="ligandApprovalChart" class="cell cell-r">
 					<script>
 						var chart = new Highcharts.Chart({
 							chart: {

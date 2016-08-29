@@ -246,6 +246,16 @@ footer a:hover {
     vertical-align: top;
   }
 
+  .cell-l {
+    width: 39%;
+    vertical-align: middle;
+  }
+
+  .cell-r {
+    width: 60%;
+    vertical-align: middle;
+  }
+
   .sponsor img {
     width: 30%;
   }
