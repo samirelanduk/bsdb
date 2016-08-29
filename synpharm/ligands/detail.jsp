@@ -17,10 +17,11 @@
 <title><% out.print(ligand.getName()); %> - BindSequenceDB</title>
 <%@include file="/includes/bodytop.html"%>
 
+<h1><% out.print(ligand.getName()); %></h1>
+
 <div id="box_container">
 	<div class="cell">
 		<div id="ligand_title">
-			<h1><% out.print(ligand.getName()); %></h1>
 			<div id="gtop_link">
 				<a href= "http://www.guidetopharmacology.org/GRAC/LigandDisplayForward?ligandId=<% out.print(ligand.getLigandId()); %>">
 					Guide to PHARMACOLOGY ID: <% out.print(ligand.getLigandId()); %>
