@@ -99,7 +99,7 @@ public class DatabaseAccess {
 			 ),
 			 Utilities.enclose(
 				"td",
-				String.format("value='%d'", id),
+				String.format("value='%d' class='expendable'", id),
 				"" + id
 			 ),
 			 Utilities.enclose(
@@ -117,7 +117,7 @@ public class DatabaseAccess {
 				String.format("value='%f'", (Float)row[4]),
 				String.format("%f", (Float)row[4])
 			 ),
-			 Utilities.enclose("td", "", synonyms)
+			 Utilities.enclose("td", "class='expendable'", synonyms)
 			);
 			tableRows[i] = Utilities.enclose("tr", "", cells);
 		}
@@ -172,12 +172,12 @@ public class DatabaseAccess {
 			 ),
 			 Utilities.enclose(
 				"td",
-				String.format("value='%d'", length),
+				String.format("value='%d' class='expendable'", length),
 				String.format("%d", length)
 			 ),
 			 Utilities.enclose(
 				"td",
-				String.format("value='%s'", percent.replace("%", "")),
+				String.format("value='%s' class='expendable'", percent.replace("%", "")),
 				percent
 			 ),
 			 Utilities.enclose("td", "style='display:none;'", approved)

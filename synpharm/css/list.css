@@ -1,8 +1,9 @@
 #list_container {
   width: 100%;
-  border: 1px solid black;
+  border: 0px solid black;
   padding: 0px;
   margin: 0px;
+  box-sizing: border-box;
 }
 
 #category_container {
@@ -38,7 +39,7 @@
 }
 
 table#list_table {
-  width: 90%;;
+  width: 100%;;
   margin-left: auto;
   margin-right: auto;
   font-size: 12px;
@@ -67,16 +68,26 @@ table#list_table {
   white-space: nowrap;
 }
 
-#list_table td, th {
-  padding-left: 1%;
-  padding-right: 1%;
-  word-wrap: break-word;
+
+
+.expendable {
+  display: none;
 }
 
 
 @media only screen and (min-width: 568px) {
   /* iPad down */
+  table#list_table {
+    width: 90%;
+  }
 
+  .expendable {
+    display: table-cell;
+  }
+
+  #list_container {
+    border: 1px solid black;
+  }
 
 }
 
@@ -94,6 +105,12 @@ table#list_table {
     padding-right: 200px;
     padding-top: 40px;
     padding-bottom: 40px;
+  }
+
+  #list_table td, th {
+    padding-left: 1%;
+    padding-right: 1%;
+    word-wrap: break-word;
   }
 }
 

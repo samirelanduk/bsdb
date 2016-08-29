@@ -31,11 +31,11 @@
   <table id="list_table">
 		<thead>
 			<th onclick="sortColumn(0,true)" class="N">Name</th>
-			<th onclick="sortColumn(1,true)" class="A">ID</th>
+			<th onclick="sortColumn(1,true)" class="A expendable">ID</th>
 			<th onclick="sortColumn(2,true)" class="N">Approved</th>
 			<th onclick="sortColumn(3,true)" class="N">Type</th>
 			<th onclick="sortColumn(4,true)" class="N">Mass</th>
-			<th>Synonyms</th>
+			<th class="expendable">Synonyms</th>
 		</thead>
 		<tbody>
       <%
