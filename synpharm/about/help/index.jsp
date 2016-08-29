@@ -3,11 +3,6 @@
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Help</h1>
-<style>
-	h1 {
-		margin-left: 5%;
-	}
-</style>
 
 <div class="box">
 	<div class="box_title">

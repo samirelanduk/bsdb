@@ -26,11 +26,6 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 <link rel="stylesheet" type="text/css" href="/css/charts.css">
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.jquery.com/jquery.min.js"></script>
-<style>
-	h1 {
-		margin-left: 5%;
-	}
-</style>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Data and Statistics</h1>
