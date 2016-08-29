@@ -137,7 +137,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 
 					</table>
 				</div>
-				<div id="ligandMassChart" class="cell cell-r" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+				<div id="ligandMassChart" class="cell cell-r">
 						<script>
 					    var chart = new Highcharts.Chart({
 					        chart: {
@@ -265,88 +265,86 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 				A breakdown of the sequences in the SynPharm database by Guide to PHARMACOLOGY
 				target type.
 			</div>
-			<table class="boxtable">
-				<tr>
-					<td>
-						<table class="datatable">
-							<tr><td>GPCR</td><td><% out.print(sequenceTypeCounts[0]); %></td></tr>
-							<tr><td>LGIC</td><td><% out.print(sequenceTypeCounts[1]); %></td></tr>
-							<tr><td>VGIC</td><td><% out.print(sequenceTypeCounts[2]); %></td></tr>
-							<tr><td>Other Ion Channel</td><td><% out.print(sequenceTypeCounts[3]); %></td></tr>
-							<tr><td>NHR</td><td><% out.print(sequenceTypeCounts[4]); %></td></tr>
-							<tr><td>Enzyme</td><td><% out.print(sequenceTypeCounts[5]); %></td></tr>
-							<tr><td>Catalytic Receptor</td><td><% out.print(sequenceTypeCounts[6]); %></td></tr>
-							<tr><td>Transporter</td><td><% out.print(sequenceTypeCounts[7]); %></td></tr>
-							<tr><td>Other Protein</td><td><% out.print(sequenceTypeCounts[8]); %></td></tr>
-						</table>
-					</td><td>
+			<div class="boxtable">
+				<div class="cell cell-l">
+					<table class="datatable">
+						<tr><td>GPCR</td><td><% out.print(sequenceTypeCounts[0]); %></td></tr>
+						<tr><td>LGIC</td><td><% out.print(sequenceTypeCounts[1]); %></td></tr>
+						<tr><td>VGIC</td><td><% out.print(sequenceTypeCounts[2]); %></td></tr>
+						<tr><td>Other Ion Channel</td><td><% out.print(sequenceTypeCounts[3]); %></td></tr>
+						<tr><td>NHR</td><td><% out.print(sequenceTypeCounts[4]); %></td></tr>
+						<tr><td>Enzyme</td><td><% out.print(sequenceTypeCounts[5]); %></td></tr>
+						<tr><td>Catalytic Receptor</td><td><% out.print(sequenceTypeCounts[6]); %></td></tr>
+						<tr><td>Transporter</td><td><% out.print(sequenceTypeCounts[7]); %></td></tr>
+						<tr><td>Other Protein</td><td><% out.print(sequenceTypeCounts[8]); %></td></tr>
+					</table>
+				</div>
 
-						<div id="sequenceTypesChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-						<script>
-							var chart = new Highcharts.Chart({
-								chart: {
-									plotBackgroundColor: null,
-									plotBorderWidth: null,
-									plotShadow: false,
-									type: 'pie',
-									renderTo: 'sequenceTypesChart'
-								},
-								title: {
-									text: 'Sequence Types'
-								},
-								tooltip: {
-									pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-								},
-								plotOptions: {
-									pie: {
-										allowPointSelect: true,
-										cursor: 'pointer',
-										dataLabels: {
-											enabled: true,
-											format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-											style: {
-												color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-											}
+				<div id="sequenceTypesChart" class="cell cell-r">
+					<script>
+						var chart = new Highcharts.Chart({
+							chart: {
+								plotBackgroundColor: null,
+								plotBorderWidth: null,
+								plotShadow: false,
+								type: 'pie',
+								renderTo: 'sequenceTypesChart'
+							},
+							title: {
+								text: 'Sequence Types'
+							},
+							tooltip: {
+								pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+							},
+							plotOptions: {
+								pie: {
+									allowPointSelect: true,
+									cursor: 'pointer',
+									dataLabels: {
+										enabled: true,
+										format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+										style: {
+											color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
 										}
 									}
-								},
-								series: [{
-									name: 'Proportion',
-									colorByPoint: true,
-									data: [{
-										name: 'GPCR',
-										y: <% out.print(sequenceTypeCounts[0]); %>
-									}, {
-										name: 'LGIC',
-										y: <% out.print(sequenceTypeCounts[1]); %>
-									}, {
-										name: 'VGIC',
-										y: <% out.print(sequenceTypeCounts[2]); %>
-									}, {
-										name: 'Other Ion Channel',
-										y: <% out.print(sequenceTypeCounts[3]); %>
-									}, {
-										name: 'NHR',
-										y: <% out.print(sequenceTypeCounts[4]); %>
-									}, {
-										name: 'Enzyme',
-										y: <% out.print(sequenceTypeCounts[5]); %>
-									}, {
-										name: 'Catalytic Receptor',
-										y:<% out.print(sequenceTypeCounts[6]); %>
-									}, {
-										name: 'Transporter',
-										y: <% out.print(sequenceTypeCounts[7]); %>
-									}, {
-										name: 'Other Protein',
-										y: <% out.print(sequenceTypeCounts[8]); %>
-									}]
+								}
+							},
+							series: [{
+								name: 'Proportion',
+								colorByPoint: true,
+								data: [{
+									name: 'GPCR',
+									y: <% out.print(sequenceTypeCounts[0]); %>
+								}, {
+									name: 'LGIC',
+									y: <% out.print(sequenceTypeCounts[1]); %>
+								}, {
+									name: 'VGIC',
+									y: <% out.print(sequenceTypeCounts[2]); %>
+								}, {
+									name: 'Other Ion Channel',
+									y: <% out.print(sequenceTypeCounts[3]); %>
+								}, {
+									name: 'NHR',
+									y: <% out.print(sequenceTypeCounts[4]); %>
+								}, {
+									name: 'Enzyme',
+									y: <% out.print(sequenceTypeCounts[5]); %>
+								}, {
+									name: 'Catalytic Receptor',
+									y:<% out.print(sequenceTypeCounts[6]); %>
+								}, {
+									name: 'Transporter',
+									y: <% out.print(sequenceTypeCounts[7]); %>
+								}, {
+									name: 'Other Protein',
+									y: <% out.print(sequenceTypeCounts[8]); %>
 								}]
-							});
-						</script>
-					</td>
-				</tr>
-			</table>
+							}]
+						});
+					</script>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -358,65 +356,63 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 			<div class="explanation">
 				A breakdown of the sequences in the SynPharm database by sequence length.
 			</div>
-			<table class="boxtable">
-				<tr>
-					<td>
-						<table class="datatable">
-							<thead><th>Sequence Length (residues)</th><th>Count</th></thead>
-							<% for (int i = 0; i < sequenceLengthDistribution.length; i++) {
-										out.println(String.format("<tr><td>%s</td><td>%d</td</tr>", sequenceLengthDistribution[i][0], sequenceLengthDistribution[i][1]));
-							} %>
+			<div class="boxtable">
+				<div class="cell cell-l">
+					<table class="datatable">
+						<thead><th>Sequence Length (residues)</th><th>Count</th></thead>
+						<% for (int i = 0; i < sequenceLengthDistribution.length; i++) {
+									out.println(String.format("<tr><td>%s</td><td>%d</td</tr>", sequenceLengthDistribution[i][0], sequenceLengthDistribution[i][1]));
+						} %>
 
-						</table>
-					</td><td>
-						<div id="sequenceLengthChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-						<script>
-					    var chart = new Highcharts.Chart({
-					        chart: {
-					            type: 'column',
-											renderTo: 'sequenceLengthChart'
-					        },
-					        title: {
-					            text: 'Sequence Length Distribution'
-					        },
-					        xAxis: {
-					            categories: [
-												<% for (int i = 0; i < sequenceLengthDistribution.length; i++) {
-															out.println(String.format("'%s',", sequenceLengthDistribution[i][0]));
-												} %>
-					            ],
-					            crosshair: true
-					        },
-					        yAxis: {
-					            min: 0,
-					            title: {
-					                text: 'Count'
-					            }
-					        },
-					        tooltip: {
-					            headerFormat: '<span style="font-size:10px">{point.key} residues</span><table>',
-					            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-					                '<td style="padding:0"><b>{point.y}</b></td></tr>',
-					            footerFormat: '</table>',
-					            shared: true,
-					            useHTML: true
-					        },
-					        plotOptions: {
-					            column: {
-					                pointPadding: 0.2,
-					                borderWidth: 0
-					            }
-					        },
-					        series: [{
-					            name: 'Sequence Count',
-					            data: <% out.print(Arrays.toString(sequenceLengths)); %>
+					</table>
+				</div>
+				<div id="sequenceLengthChart" class="cell cell-r">
+					<script>
+				    var chart = new Highcharts.Chart({
+				        chart: {
+				            type: 'column',
+										renderTo: 'sequenceLengthChart'
+				        },
+				        title: {
+				            text: 'Sequence Length Distribution'
+				        },
+				        xAxis: {
+				            categories: [
+											<% for (int i = 0; i < sequenceLengthDistribution.length; i++) {
+														out.println(String.format("'%s',", sequenceLengthDistribution[i][0]));
+											} %>
+				            ],
+				            crosshair: true
+				        },
+				        yAxis: {
+				            min: 0,
+				            title: {
+				                text: 'Count'
+				            }
+				        },
+				        tooltip: {
+				            headerFormat: '<span style="font-size:10px">{point.key} residues</span><table>',
+				            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				                '<td style="padding:0"><b>{point.y}</b></td></tr>',
+				            footerFormat: '</table>',
+				            shared: true,
+				            useHTML: true
+				        },
+				        plotOptions: {
+				            column: {
+				                pointPadding: 0.2,
+				                borderWidth: 0
+				            }
+				        },
+				        series: [{
+				            name: 'Sequence Count',
+				            data: <% out.print(Arrays.toString(sequenceLengths)); %>
 
-					        }]
-					    });
-						</script>
-					</td>
-				</tr>
-			</table>
+				        }]
+				    });
+					</script>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -431,7 +427,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 				separated residues. Here it is represented as the proportion of binding
 				residues to non-binding residues.
 			</div>
-			<div id="sequenceContiguityChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+			<div id="sequenceContiguityChart"></div>
 			<script>
 		    var chart = new Highcharts.Chart({
 		        chart: {
@@ -458,8 +454,8 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 								allowDecimals: false
 		        },
 		        legend: {
-		            layout: 'vertical',
-		            align: 'left',
+		            layout: 'horizontal',
+		            align: 'center',
 		            verticalAlign: 'top',
 		            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
 		            borderWidth: 1
