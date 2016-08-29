@@ -7,7 +7,7 @@
 
 #category_container {
   width: 100%;
-  display: table;
+  display: none;
   table-layout: fixed;
 }
 
@@ -34,11 +34,7 @@
 }
 
 #category_description {
-  text-align: center;
-  padding-left: 200px;
-  padding-right: 200px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  display: none;
 }
 
 table#list_table {
@@ -75,4 +71,35 @@ table#list_table {
   padding-left: 1%;
   padding-right: 1%;
   word-wrap: break-word;
+}
+
+
+@media only screen and (min-width: 568px) {
+  /* iPad down */
+
+
+}
+
+
+@media only screen and (min-width: 769px) {
+  /* Small Desktop screens */
+  #category_container {
+    display: table;
+  }
+
+  #category_description {
+    display: block;
+    text-align: center;
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+
+@media only screen and (min-width: 940px) {
+  /* Big Desktop screens */
+
+
 }
