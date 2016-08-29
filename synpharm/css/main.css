@@ -84,7 +84,8 @@ h1 {
   margin-left: 5%;
 }
 
-.box_container {
+#box_container {
+  margin-top: 30px;
   width: 100%;
 }
 
@@ -258,6 +259,15 @@ footer a:hover {
   .cell-r {
     width: 60%;
     vertical-align: middle;
+  }
+
+  .cell-f {
+    width: 95%;
+    margin-left: 2.5%;
+  }
+
+  .cell-f .box {
+    width: 100%;
   }
 
   .sponsor img {
