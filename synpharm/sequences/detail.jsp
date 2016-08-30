@@ -102,27 +102,91 @@
 			</script>
 		</div>
 	</div>
+
+	<div class="cell cell-f">
+		<div class="box">
+			<div class="box_title">
+				Sequence
+			</div>
+			<div id="sequence">
+				<% out.println(sequence.getSequenceHtml()); %>
+			</div>
+			<div id="sequencebuttons">
+				<button onclick="leftout();"><</button>
+				<button onclick="leftin();">></button>
+				<button onclick="reset();">Reset</button>
+				<button onclick="rightin();"><</button>
+				<button onclick="rightout();">></button>
+			</div>
+		</div>
+	</div>
+
+	<div class="cell">
+		<div class="box">
+			<div class="box_title">
+				PDB Details
+			</div>
+			<table>
+					<tr>
+						<td class="field">PDB code</td>
+						<td class="value"><a href="http://www.rcsb.org/pdb/explore.do?structureId=<% out.print(sequence.getPdb()); %>" target="_blank"><% out.print(sequence.getPdb()); %></a></td>
+					</tr>
+					<tr>
+						<td class="field">HET ID</td>
+						<td class="value"><% out.print(sequence.getHetId()); %></td>
+					</tr>
+					<tr>
+						<td class="field">HET name</td>
+						<td class="value"><% out.print(sequence.getHetCode()); %></td>
+					</tr>
+					<tr>
+						<td class="field">Receptor Chain</td>
+						<td class="value"><% out.print(sequence.getChain()); %></td>
+					</tr>
+				</table>
+		</div>
+	</div>
+
+	<div class="cell">
+		<div class="box">
+			<div class="box_title">
+				Other Details
+			</div>
+			<table>
+					<tr>
+						<td class="field">Affinity</td>
+						<td class="value"><% out.print(sequence.getAffinity()); %></td>
+					</tr>
+					<tr>
+						<td class="field">Affinity type</td>
+						<td class="value"><% out.print(sequence.getAffinityType()); %></td>
+					</tr>
+					<tr>
+						<td class="field">Sequence length</td>
+						<td class="value"><% out.print(sequence.getSequenceLength()); %></td>
+					</tr>
+					<tr>
+						<td class="field">Proportion of original chain length</td>
+						<td class="value"><% out.print(Utilities.floatToPercentage(sequence.getProportionalLength())); %></td>
+					</tr>
+					<tr>
+						<td class="field">Internal contacts</td>
+						<td class="value"><% out.print(sequence.getInternalContacts()); %></td>
+					</tr>
+					<tr>
+						<td class="field">External contacts</td>
+						<td class="value"><% out.print(sequence.getExternalContacts()); %></td>
+					</tr>
+					<tr>
+						<td class="field">Contact ratio</td>
+						<td class="value"><% out.print(Utilities.floatToPercentage(sequence.getContactRatio() / 10)); %></td>
+					</tr>
+				</table>
+		</div>
+	</div>
 </div>
 
-	<!--<tr>
-		<td class="col" colspan="2">
-			<div class="box">
-				<div class="box_title">
-					Sequence
-				</div>
-				<div id="sequence">
-					<% out.println(sequence.getSequenceHtml()); %>
-				</div>
-				<div id="sequencebuttons">
-					<button onclick="leftout();"><</button>
-					<button onclick="leftin();">></button>
-					<button onclick="reset();">Reset</button>
-					<button onclick="rightin();"><</button>
-					<button onclick="rightout();">></button>
-				</div>
-			</div>
-		</td>
-	</tr>
+	<!--
 
 
 	<tr>
