@@ -194,34 +194,16 @@
 		</div>
 	</div>
 
+	<div class="cell cell-f">
+		<div class="box">
+			<div class="box_title">
+				Residue Distances
+			</div>
+			<iframe seamless='seamless' style="width:100%;" height="750px" src="/static/matrices/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
+		</div>
+	</div>
+
 </div>
-
-	<!--
-
-
-
-	<tr>
-		<td class="col" colspan="2">
-			<div class="box">
-				<div class="box_title">
-					Features
-				</div>
-				<iframe seamless='seamless' width="750px" height="450px" src="/static/features/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
-			</div>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="col" colspan="2">
-			<div class="box">
-				<div class="box_title">
-					Residue Distances
-				</div>
-				<iframe seamless='seamless' width="750px" height="750px" src="/static/matrices/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
-			</div>
-		</td>
-	</tr>
-</table>-->
 
 
 <script type="text/javascript">
