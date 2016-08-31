@@ -19,8 +19,8 @@
 		<th onclick="sortColumn(0,false)" class="N">Name</th>
 		<th onclick="sortColumn(1,false)" class="N">ID</th>
 		<th onclick="sortColumn(2,false)" class="N">Approved</th>
-		<th onclick="sortColumn(3,false)" class="N">Type</th>
-		<th onclick="sortColumn(4,false)" class="N">Mass</th>
+		<th onclick="sortColumn(3,false)" class="N expendable">Type</th>
+		<th onclick="sortColumn(4,false)" class="N expendable">Mass</th>
 		<th>Synonyms</th>
 	</thead>
 	<tbody>

@@ -20,8 +20,8 @@
 		<th onclick="sortColumn(1,false)" class="N">Target</th>
 		<th onclick="sortColumn(2,false)" class="N">Species</th>
 		<th onclick="sortColumn(3,false)" class="N">Ligand</th>
-		<th onclick="sortColumn(4,false)" class="N">Length</th>
-		<th onclick="sortColumn(5,false)" class="N">Proportional Length</th>
+		<th onclick="sortColumn(4,false)" class="N expendable">Length</th>
+		<th onclick="sortColumn(5,false)" class="N expendable">Proportional Length</th>
 </thead>
 	<tbody>
 	<%
