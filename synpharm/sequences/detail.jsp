@@ -57,7 +57,7 @@
 						var ligandObjects = [];
 						if (ligandId.length == 1) {
 							ligandObjects.push(structure.select({chain:ligandId}));
-						} else if (ligandId.indexOf(",") > 0) {
+						} else if (ligandId.indexOf(",") > -1) {
 							var ligandIds = ligandId.split(",");
 							for (var l = 0; l < ligandIds.length; l++) {
 								ligandObjects.push(structure.select({chain:ligandIds[l]}));
@@ -84,7 +84,7 @@
 							object.setOpacity(1, object.select({chain:"<% out.print(sequence.getChain()); %>"}));
 							if (ligandId.length == 1) {
 								object.setOpacity(1, object.select({chain:ligandId}));
-							} else if (ligandId.indexOf(",") > 0) {
+							} else if (ligandId.indexOf(",") > -1) {
 								var ligandIds = ligandId.split(",");
 								for (var l = 0; l < ligandIds.length; l++) {
 									object.setOpacity(1, object.select({chain:ligandIds[l]}));
