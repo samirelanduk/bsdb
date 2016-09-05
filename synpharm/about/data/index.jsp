@@ -143,6 +143,9 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 					        title: {
 					            text: 'Ligand Mass Distribution'
 					        },
+									subtitle: {
+									    text: 'Click and drag for more detail'
+									},
 					        xAxis: {
 					            categories: [
 												<% for (int i = 0; i < ligandMassDistribution.length; i++) {
