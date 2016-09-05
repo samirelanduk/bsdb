@@ -246,7 +246,7 @@ footer a:hover {
   }
 
   .cell {
-    width: 49%;
+    width: 49.77%;
     display: inline-block;
     vertical-align: top;
   }
@@ -272,6 +272,10 @@ footer a:hover {
 
   .sponsor img {
     width: 30%;
+  }
+
+  #intro {
+    width: 95%;
   }
 
 }
