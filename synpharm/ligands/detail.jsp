@@ -40,16 +40,18 @@
 			<div class="box_title">
 				Structure
 			</div>
-			<img id="lig-img" src="http://www.guidetopharmacology.org/CHEMSTRUCT/iuphar/<% out.print(ligand.getLigandId()); %>.gif">
 			<script>
-				var box = document.getElementById("img-box");
-				console.log(box.clientHeight)
-				if (box.clientHeight <= 60) {
-					console.log("removing")
-					$('#lig-img').remove();
-					box.innerHTML = box.innerHTML + "<p>No image available</p>";
+				function noImage() {
+					var box = document.getElementById("img-box");
+					console.log(box.clientHeight)
+					if ((box.clientHeight <= 60) && (box.clientHeight >= 10)) {
+						console.log("removing")
+						$('#lig-img').remove();
+						box.innerHTML = box.innerHTML + "<p>No image available</p>";
+					}
 				}
 			</script>
+			<img id="lig-img" src="http://www.guidetopharmacology.org/CHEMSTRUCT/iuphar/<% out.print(ligand.getLigandId()); %>.gif" onerror="noImage();">
 		</div>
 	</div>
 
