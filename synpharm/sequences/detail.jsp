@@ -186,20 +186,20 @@
 	</div>
 
 	<div class="cell cell-f">
-		<div class="box">
+		<div class="box" style="overflow:scroll;position:relative;webkit-overflow-scrolling:touch;">
 			<div class="box_title">
 				Features
 			</div>
-			<iframe seamless='seamless' style="width:100%;" height="450px" src="/static/features/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
+			<iframe seamless='seamless' style="overflow:scroll;webkit-overflow-scrolling:touch;position:relative;width:100%;" height="450px" src="/static/features/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
 		</div>
 	</div>
 
 	<div class="cell cell-f">
-		<div class="box">
+		<div class="box" style="overflow:scroll;position:relative;">
 			<div class="box_title">
 				Residue Distances
 			</div>
-			<iframe seamless='seamless' style="width:100%;" height="750px" src="/static/matrices/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
+			<iframe seamless='seamless' style="overflow:scroll;position:relative;width:100%;" height="750px" src="/static/matrices/<% out.print(sequence.getSequenceId()); %>.html"></iframe>
 		</div>
 	</div>
 
