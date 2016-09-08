@@ -74,7 +74,7 @@ long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
 					<tr><td>Transporter</td><td><% out.print(sequenceTypeCounts[7]); %></td></tr>
 					<tr><td>Other Protein</td><td><% out.print(sequenceTypeCounts[8]); %></td></tr>
 				</table>
-        <div class="search-link"><a href="search/ligands">Search sequences...</a></div>
+        <div class="search-link"><a href="search/sequences">Search sequences...</a></div>
 			</div>
 		</div>
 	</div>
