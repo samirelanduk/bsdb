@@ -22,7 +22,7 @@ ArrayList<int[][]> sequenceContiguity = DatabaseAccess.getSequenceContiguity();
 %>
 
 <%@include file="/includes/start.html"%>
-<title>Data and Statistics - BindSequenceDB</title>
+<title>Data and Statistics - SynPharm</title>
 <link rel="stylesheet" type="text/css" href="/css/charts.css">
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.jquery.com/jquery.min.js"></script>

@@ -25,7 +25,7 @@ long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
     margin-bottom: 10px;
   }
 </style>
-<title>Home - BindSequenceDB</title>
+<title>Home - SynPharm</title>
 <%@include file="/includes/bodytop.html"%>
 
 <div id="intro">

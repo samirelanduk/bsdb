@@ -1,5 +1,5 @@
 <%@include file="/includes/start.html"%>
-<title>Privacy - BindSequenceDB</title>
+<title>Privacy - SynPharm</title>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Privacy Policy</h1>

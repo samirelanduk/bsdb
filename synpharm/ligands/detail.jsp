@@ -14,7 +14,7 @@
 
 <%@include file="/includes/start.html"%>
 <link rel="stylesheet" type="text/css" href="/css/detail.css">
-<title><% out.print(ligand.getName()); %> - BindSequenceDB</title>
+<title><% out.print(ligand.getName()); %> - SynPharm</title>
 <%@include file="/includes/bodytop.html"%>
 
 <h1><% out.print(ligand.getName()); %></h1>

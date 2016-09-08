@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="/css/detail.css">
 <title><%
  out.print(sequence.getSpecies() + " " + Utilities.stripHtml(sequence.getTargetNameStripped()));
-%> - BindSequenceDB</title>
+%> - SynPharm</title>
 <script src="/js/sequence-manipulation.js"></script>
 <%@include file="/includes/bodytop.html"%>
 

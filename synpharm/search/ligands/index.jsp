@@ -1,7 +1,7 @@
 <%@include file="/includes/start.html"%>
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 <link rel="stylesheet" href="/css/form.css">
-<title>Search Ligands - BindSequenceDB</title>
+<title>Search Ligands - SynPharm</title>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>Search Ligands</h1>

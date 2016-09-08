@@ -1,5 +1,5 @@
 <%@include file="/includes/start.html"%>
-<title>Citing - BindSequenceDB</title>
+<title>Citing - SynPharm</title>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>How to Cite</h1>

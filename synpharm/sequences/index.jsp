@@ -2,7 +2,7 @@
 
 <%@include file="/includes/start.html"%>
 <link rel="stylesheet" type="text/css" href="/css/list.css">
-<title>Sequences - BindSequenceDB</title>
+<title>Sequences - SynPharm</title>
 <script src="/js/sequences.js"></script>
 <script src="/js/list.js"></script>
 <script src="/js/listsort.js"></script>

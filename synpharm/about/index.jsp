@@ -1,5 +1,5 @@
 <%@include file="/includes/start.html"%>
-<title>About - BindSequenceDB</title>
+<title>About - SynPharm</title>
 <%@include file="/includes/bodytop.html"%>
 
 <h1>About</h1>

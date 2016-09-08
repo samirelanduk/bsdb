@@ -9,7 +9,7 @@ class RootTest(unittest.TestCase):
     if len(sys.argv) > 1:
         root_url = sys.argv[1]
 
-    app_name = "bindsequencedb"
+    app_name = "SynPharm"
     root_url = "http://%s.%s" % (app_name, root_url)
 
 

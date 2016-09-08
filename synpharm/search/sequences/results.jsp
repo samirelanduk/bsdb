@@ -8,7 +8,7 @@
 <%@include file="/includes/start.html"%>
 <link rel="stylesheet" type="text/css" href="/css/list.css">
 <link rel="stylesheet" type="text/css" href="/css/results.css">
-<title>Sequence Search Results - BindSequenceDB</title>
+<title>Sequence Search Results - SynPharm</title>
 <script src="/js/listsort.js"></script>
 <%@include file="/includes/bodytop.html"%>
 
