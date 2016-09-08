@@ -35,7 +35,7 @@
 		<p>
 			SynPharm is a database of ligand-responsive protein sequences, derived from
 			interactions from the Guide to PHARMACOLOGY and using data from the
-			<a href="http://rscb.org" target="_blank">Protein Data Bank</a>.
+			<a href="http://rcsb.org" target="_blank">Protein Data Bank</a>.
 		</p>
 		<p>
 			The sequences here are obtained by identifying the protein chain that
