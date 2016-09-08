@@ -100,7 +100,7 @@ long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
 			</div>
       <table class="datatable">
         <tr><td><a href="about/database#gtop">About the Guide to PHARMACOLOGY</a></td></tr>
-        <tr><td><a href="http://guidetopharmacology" target="_blank">Guide to PHARMACOLOGY home page</a></td></tr>
+        <tr><td><a href="http://guidetopharmacology.org" target="_blank">Guide to PHARMACOLOGY home page</a></td></tr>
         <tr><td><a href="http://guidetopharmacology.org/GRAC/LigandListForward?database=all" target="_blank">Guide to PHARMACOLOGY ligands</a></td></tr>
         <tr><td><a href="http://guidetopharmacology.org/targets.jsp" target="_blank">Guide to PHARMACOLOGY targets</a></td></tr>
       </table>
