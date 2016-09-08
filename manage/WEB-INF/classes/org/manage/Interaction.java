@@ -72,7 +72,7 @@ public class Interaction {
 		}
 		StringBuilder falsePdbs = new StringBuilder();
 		for (FalseMap falseMap : falseMaps) {
-			falsePdbs.append(String.format("<span class='incorrect'>%s</span>", Utilities.enclose("a", String.format("href='/manage/falsemap.jsp?id=%d%s'", interactionId, falseMap.getPdbCode()), falseMap.getPdbCode())));
+			falsePdbs.append(String.format("<span class='incorrect'>%s</span>, ", Utilities.enclose("a", String.format("href='/manage/falsemap.jsp?id=%d%s'", interactionId, falseMap.getPdbCode()), falseMap.getPdbCode())));
 		}
 		return Utilities.enclose(
 			"tr", "",
