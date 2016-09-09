@@ -97,7 +97,7 @@ try:
                     print("Please provide a replacement PDB code")
                 else:
                     if not utilities.interaction_has_pdb(sequence["sequenceId"], sys.argv[3], stage_connection):
-                        print("%s is not a PDB of interaction %i" % (sys.argv[3], sequence["sequenceId"]))
+                        print("%s is not a valid PDB map of interaction %i" % (sys.argv[3], sequence["sequenceId"]))
                     else:
                         pass
     elif sys.argv[1] == "-reg":
