@@ -558,10 +558,3 @@ def delete_sequence(sequence_id, stage_connection, live_connection):
 
     stage_cursor.close()
     live_cursor.close()
-
-
-def interaction_has_pdb(interaction_id, pdb, stage_connection):
-    stage_cursor = stage_connection.cursor()
-    stage_cursor.execute("SELECT pdb FROM interaction_pdb_maps WHERE NOT bindsequence IS null AND interactionId=%s", (interaction_id,))
-    pdbs = [row[0] for row in stage_cursor.fetchall()]
-    return pdb in pdbs

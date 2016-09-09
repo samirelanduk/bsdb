@@ -84,22 +84,6 @@ try:
                     utilities.delete_sequence(sys.argv[2], stage_connection, live_connection)
                 else:
                     print("Doing nothing")
-    elif sys.argv[1] == "-rep":
-        print("REPLACE")
-        if len(sys.argv) < 3:
-            print("Please provide a sequence ID")
-        else:
-            sequence = utilities.get_sequence_as_dict(sys.argv[2], live_connection)
-            if sequence is None:
-                print("There is no sequence with ID %s" % sys.argv[2])
-            else:
-                if len(sys.argv) < 4:
-                    print("Please provide a replacement PDB code")
-                else:
-                    if not utilities.interaction_has_pdb(sequence["sequenceId"], sys.argv[3], stage_connection):
-                        print("%s is not a valid PDB map of interaction %i" % (sys.argv[3], sequence["sequenceId"]))
-                    else:
-                        pass
     elif sys.argv[1] == "-reg":
         print("REGENERATION")
         if len(sys.argv) < 3:
