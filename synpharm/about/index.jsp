@@ -14,7 +14,7 @@
 	  to PHARMACOLOGY</a>.</p>
 		<p>The sequences can be used to confer druggability to a synthetic protein,
 		and each sequence contains links back to the Guide to PHARMACOLOGY for more
-		detailed information on the oriignal drug target and the ligand itself.</p>
+		detailed information on the original drug target and the ligand itself.</p>
 		<div class="box_body_readmore">
 			<a href="database">Read more...</a>
 		</div>

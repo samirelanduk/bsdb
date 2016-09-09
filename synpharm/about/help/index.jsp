@@ -72,7 +72,7 @@
 			</p>
 			<p>
 				The page contains links to other databases, a structural diagram of the
-				ligand (if available - generally peptides and ligands do not have such
+				ligand (if available - generally peptides and antibodies do not have such
 				images stored), and molecular information about the ligand, such as mass,
 				surface area, and approval status.
 			</p>
