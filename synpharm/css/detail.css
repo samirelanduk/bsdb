@@ -98,7 +98,7 @@
 
 .sequence_link a, .sequence_link a:hover {
 	text-decoration: none;
-	color: inherit;
+	/*color: inherit;*/
 }
 
 #ligand_link {

@@ -3,7 +3,7 @@ var descriptions = ["All ligands with an affinity for one or more of the drug-re
                     "Low molecular weight, non-polymeric compounds produced via either total synthesis or semi-synthetic processes",
                     "Low molecular weight, non-peptidic, biogenic compounds produced by life processes (normally endogenous and of animal origin, including hormones and neurotransmitters) and their close analogues",
                     "Non-peptidic, biogenic compounds derived from living organisms and their close synthetic derivatives",
-                    "Peptides encoded in the human, rat and mouse genomes",
+                    "Includes synthetic and semi-synthetic peptides and peptides encoded in the genomes of humans and other organisms",
                     "Ions and other inorganic compounds",
                     "Includes therapeutic monoclonal antibodies"]
 

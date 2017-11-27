@@ -88,6 +88,7 @@ long[] sequenceTypeCounts = DatabaseAccess.getSequenceTypeCounts();
         <tr><td><a href="about/database">About the database</a></td></tr>
         <tr><td><a href="about/data">Summary of the data</a></td></tr>
         <tr><td><a href="about/help">Help and documentation</a></td></tr>
+        <tr><td><a href="about/synPHARM_tutorial.pdf" target="_blank">Tutorial</a></td></tr>
         <tr><td><a href="about/privacy">Privacy policy</a></td></tr>
       </table>
 		</div>

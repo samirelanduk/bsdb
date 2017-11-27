@@ -132,19 +132,30 @@ def update_interaction(interaction, connection):
     now = datetime.datetime.now()
     dictionary = interaction_object_to_dict(interaction)
     dictionary["dateModified"] = now
-
+    values = [dictionary[key] for key in [
+     "ligandId",
+     "targetId",
+     "species",
+     "type",
+     "action",
+     "affinityValue",
+     "affinityRange",
+     "affinityType",
+     "dateModified",
+     "interactionId"
+    ]]
     cursor = connection.cursor()
     cursor.execute(
      """UPDATE interactions SET
-      ligandId = '%(ligandId)s',
-      targetId = '%(targetId)s',
-      species = '%(species)s',
-      type = '%(type)s',
-      action = '%(action)s',
-      affinityValue = '%(affinityValue)s',
-      affinityRange = '%(affinityRange)s',
-      affinityType = '%(affinityType)s',
-      dateModified = '%(dateModified)s' WHERE interactionId=%(interactionId)s;""" % dictionary
+      ligandId = %s,
+      targetId = %s,
+      species = %s,
+      type = %s,
+      action = %s,
+      affinityValue = %s,
+      affinityRange = %s,
+      affinityType = %s,
+      dateModified = %s WHERE interactionId=%s;""", values
     )
     connection.commit()
     cursor.close()
@@ -152,7 +163,7 @@ def update_interaction(interaction, connection):
 
 def remove_interaction_row_by_id(interaction_id, connection):
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM interactions WHERE interactionId='%s'", (interaction_id,))
+    cursor.execute("DELETE FROM interactions WHERE interactionId=%s", (interaction_id,))
     connection.commit()
     cursor.close()
 
@@ -425,8 +436,10 @@ def get_paths(app_name):
     paths["class_dir"] = paths["app_dir"] + "/WEB-INF/classes"
     paths["jar_dir"] = paths["app_dir"] + "/WEB-INF/lib/postgresql-connector.jar"
     paths["java_dir"] = paths["class_dir"] + "/org/" + app_name
-    paths["tomcat_dir"] = "/var/lib/tomcat7/webapps/"
-    paths["servlet_dir"] = "/usr/share/tomcat7/lib/servlet-api.jar"
+    #paths["tomcat_dir"] = "/var/lib/tomcat7/webapps/"
+    #paths["servlet_dir"] = "/usr/share/tomcat7/lib/servlet-api.jar"
+    paths["tomcat_dir"] = "/var/lib/tomcat/webapps/"
+    paths["servlet_dir"] = "/usr/share/tomcat/lib/tomcat-servlet-3.1-api.jar"
     if not os.path.exists(paths["tomcat_dir"]):
         paths["app_dir"] = current_dir + "/../" + app_name
         paths["class_dir"] = paths["app_dir"] + "/WEB-INF/classes"

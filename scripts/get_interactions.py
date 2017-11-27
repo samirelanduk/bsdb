@@ -24,7 +24,7 @@ for target in targets:
 print("There are %i interactions currently in GtoP." % len(interactions))
 
 connection = utilities.get_connection()
-print("There are %i interactions already in the BSDB staging database."
+print("There are %i interactions already in the synpharm staging database."
  % utilities.get_interactions_row_count(connection))
 
 interaction_ids_in_table = utilities.get_interaction_ids_from_table(connection)
@@ -47,7 +47,7 @@ if flag_unknown or del_unknown:
         if row_id not in object_ids:
             if flag_unknown:
                 print(
-                 "\tInteraction %i exists in the BSDB stage database but doesn't seem to be in GtoP any longer."
+                 "\tInteraction %i exists in the synpharm stage database but doesn't seem to be in GtoP any longer."
                   % row_id
                 )
             elif del_unknown:

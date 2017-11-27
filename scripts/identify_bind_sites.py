@@ -59,6 +59,8 @@ try:
                 print("Not found")
         except molecupy.InvalidPdbCodeError:
             print("\t%s not found" % pdb_map["pdbCode"])
+        except Exception as e:
+            print("\t%s encountered a problem (%s)" % (pdb_map["pdbCode"], repr(e)))
 finally:
     connection.close()
     print("")

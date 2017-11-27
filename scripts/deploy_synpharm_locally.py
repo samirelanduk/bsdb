@@ -16,4 +16,4 @@ subprocess.call("jar -cvf ROOT.war *", shell=True)
 
 subprocess.call("sudo rm -r %sROOT" % paths["tomcat_dir"], shell=True)
 subprocess.call("sudo rm -r %sROOT.war" % paths["tomcat_dir"], shell=True)
-subprocess.call("sudo mv ROOT.war %sROOT.war" % paths["tomcat_dir"], shell=True)
+subprocess.call("sudo cp ROOT.war %sROOT.war" % paths["tomcat_dir"], shell=True)

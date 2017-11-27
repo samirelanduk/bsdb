@@ -44,11 +44,13 @@ if unchecked_interactions:
 
 if check_previous:
     print("Getting interactions that have been previously checked for PDBs...")
-    checked_interactions = [
-     pygtop.get_target_by_id(target_id).get_interaction_by_id(interaction_id)
-      for interaction_id, target_id
-       in utilities.get_interaction_ids_already_checked_for_pdbs(connection)
-    ]
+    checked_interactions = []
+    for interaction_id, target_id in utilities.get_interaction_ids_already_checked_for_pdbs(connection):
+        try:
+            checked_interactions.append(
+             pygtop.get_target_by_id(target_id).get_interaction_by_id(interaction_id)
+            )
+        except: pass
     checked_interactions = [
      i for i in checked_interactions if i.interaction_id not in never_checked_ids
     ]

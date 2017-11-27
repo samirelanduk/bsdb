@@ -175,7 +175,7 @@ public class Utilities {
 		ArrayList<String> conditions = new ArrayList<String>();
 
 		if (searchTerms.containsKey("ligandname")) {
-			conditions.add(String.format("(ligandName LIKE '%%%s%%' OR synonyms LIKE '%%%s%%')", searchTerms.get("ligandname"), searchTerms.get("ligandname")));
+			conditions.add(String.format("(ligandName ILIKE '%%%s%%' OR synonyms ILIKE '%%%s%%')", searchTerms.get("ligandname"), searchTerms.get("ligandname")));
 		}
 		if (searchTerms.containsKey("types")) {
 			StringBuilder typeCondition = new StringBuilder("(");
@@ -247,10 +247,10 @@ public class Utilities {
 		ArrayList<String> conditions = new ArrayList<String>();
 
 		if (searchTerms.containsKey("targetname")) {
-			conditions.add(String.format("sequences.targetName LIKE '%%%s%%'", searchTerms.get("targetname")));
+			conditions.add(String.format("sequences.targetName ILIKE '%%%s%%'", searchTerms.get("targetname")));
 		}
 		if (searchTerms.containsKey("sequence")) {
-			conditions.add(String.format("sequences.bindSequence LIKE '%%%s%%'", searchTerms.get("sequence")));
+			conditions.add(String.format("sequences.bindSequence ILIKE '%%%s%%'", searchTerms.get("sequence")));
 		}
 		if (searchTerms.containsKey("types")) {
 			StringBuilder typeCondition = new StringBuilder("(");

@@ -28,6 +28,7 @@
 	<div class="box_body">
 		<p>Documentation for the site, as well as examples of sequence displays. If
 		you require any further assistance, please do <a href="http://www.google.com/recaptcha/mailhide/d?k=01vYhjd4942K8mcJsTfn9STA==&c=gyybhwWR1ziUWzMMiVIf72wtrsNBtTCzJMQcN2lPmvi7B4vjy65HPFlKpsLE3rQ7">get in touch</a>.
+                <p>New to synPHARM? Take our short <a href="synPHARM_tutorial.pdf" target="_blank">tutorial</a>.</p>
 		<div class="box_body_readmore">
 			<a href="help">Read more...</a>
 		</div>

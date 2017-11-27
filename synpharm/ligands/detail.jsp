@@ -29,7 +29,9 @@
 			</div>
 			<%
 			for (LigandLink link : ligand.getExternalLinks()) {
+                            if(!link.getDatabase().contains("DiscoveRx")){
 				out.println(link.getHtml());
+                            }
 			}
 			%>
 		</div>

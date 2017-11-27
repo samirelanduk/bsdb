@@ -6,6 +6,20 @@
 
 <div class="box">
 	<div class="box_title">
+		Tutorial
+	</div>
+        <div class="box_body">
+            <div class="help_subsection">
+                    <h2>Tutorial</h2>
+                    <p>
+                            If you are new to synPHARM we advise taking our short <a href="/about/synPHARM_tutorial.pdf" target="_blank">tutorial</a>, with screenshots and explanations of the search functions and main features of synPHARM.
+                    </p>
+            </div>
+        </div>
+</div>
+
+<div class="box">
+	<div class="box_title">
 		Searching
 	</div>
 	<div class="box_body">
@@ -34,9 +48,11 @@
 				to search by target type, sequence length, etc.
 			</p>
 			<p>
-				Currently searching by sequence will only return exact matches. If you
+				Currently searching by sequence will only return exact* matches. If you
 				wish to BLAST search, consider using the Guide to PHARMACOLOGY's
-				<a href="http://guidetopharmacology.org/blast/">BLAST search</a> feature.
+				<a href="http://www.guidetopharmacology.org/blast/">BLAST search</a> feature.
+                                <br/>*Searches will only match sequences that are stored in synPHARM, i.e. sequences extracted from PDB entries, which may often 
+differ from the native protein sequence (e.g. the N and C termini can be truncated and sometimes residues differ or are undefined in the solved structure).
 			</p>
 		</div>
 	</div>
@@ -74,7 +90,7 @@
 				The page contains links to other databases, a structural diagram of the
 				ligand (if available - generally peptides and antibodies do not have such
 				images stored), and molecular information about the ligand, such as mass,
-				surface area, and approval status.
+				surface area, and approval status. A more extensive set of database out-links for further information on the ligand is available via the GtoP page.
 			</p>
 			<p>
 				At the bottom of the page are links to the protein sequences which
@@ -114,6 +130,9 @@
 				Protein Viewer</a>. This should work in all modern browsers, and can be
 				used to visualise the complex.
 			</p>
+                        <p>
+                            On the left under the sequence name are links to the ligand page, and to the GtoP target page where there are out-links to other databases for further information on the target.
+                        </p>
 			<p>
 				The sequence itself follows. The actual binding residues themselves are
 				in bold, and the sequence can be expanded to include more of the rest of

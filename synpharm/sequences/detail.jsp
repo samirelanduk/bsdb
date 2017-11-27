@@ -30,6 +30,9 @@
 			<div id="ligand_link">
 				with <a href="/ligands/detail.jsp?id=<% out.print(sequence.getLigand().getLigandId()); %>"><% out.print(sequence.getLigand().getName()); %></a>
 			</div>
+			<div id="ligand_link">
+				GtoP Target: <a href="http://guidetopharmacology.org/GRAC/ObjectDisplayForward?objectId=<% out.print(sequence.getTargetId()); %>"><% out.print(sequence.getTargetName()); %></a>
+			</div>
 		</div>
 	</div>
 
@@ -153,6 +156,10 @@
 				Other Details
 			</div>
 			<table>
+					<tr>
+						<td class="field">Target Type</td>
+						<td class="value"><% out.print(sequence.getTargetType()); %></td>
+					</tr>
 					<tr>
 						<td class="field">Affinity</td>
 						<td class="value"><% out.print(sequence.getAffinity()); %></td>

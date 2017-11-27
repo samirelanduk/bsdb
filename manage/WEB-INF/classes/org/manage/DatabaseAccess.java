@@ -305,9 +305,14 @@ public class DatabaseAccess {
 	public static void addMapResidue(String mapId, String newResidue) {
 		InteractionPdb map = getInteractionPdb(mapId);
 		StringBuilder newResidues = new StringBuilder();
-		for (String residue : map.getBindingResidues()) {
-			newResidues.append(residue + ", ");
+
+		String[] currentResidues = map.getBindingResidues();
+		if (currentResidues != null) {
+			for (String residue : currentResidues) {
+				newResidues.append(residue + ", ");
+			}
 		}
+
 		newResidues.append(newResidue);
 		String residues = newResidues.toString();
 		issuePreparedSqlQuery(
