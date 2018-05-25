@@ -195,9 +195,7 @@ differ from the native protein sequence (e.g. the N and C termini can be truncat
 			<p>
 				This resource is maintained by the Guide to PHARMACOLOGY team. To contact
 				a member of the team, use the
-				<a href="https://www.google.com/recaptcha/mailhide/d?k=01vYhjd4942K8mcJsTfn9STA==&c=gyybhwWR1ziUWzMMiVIf72wtrsNBtTCzJMQcN2lPmvi7B4vjy65HPFlKpsLE3rQ7" target="_blank">
-				e-mail address here</a> and indicate that your enquiry concerns SynPharm
-				in the subject line.
+				<a href="http://www.guidetopharmacology.org/GRAC/revealEmail.jsp" onclick="window.open('http://www.guidetopharmacology.org/GRAC/revealEmail.jsp', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=550,height=300'); return false;" title="Reveal this e-mail address">e-mail address here</a> and indicate that your enquiry concerns SynPharm in the subject line.
 			</p>
 		</div>
 	</div>
