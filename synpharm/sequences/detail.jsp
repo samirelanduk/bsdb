@@ -49,7 +49,7 @@
 				 height: 390,
 				 antialias: true,
 				 quality : "high",
-				 background: "#000000"
+				 background: "#ffffff"
 				};
 				var viewer = pv.Viewer(document.getElementById("viewer"), options);
 			</script>
@@ -59,13 +59,16 @@
 						var ligandId = "<% out.print(sequence.getHetId()); %>";
 						var ligandObjects = [];
 						if (ligandId.length == 1) {
+							// The ligand is a chain
 							ligandObjects.push(structure.select({chain:ligandId}));
 						} else if (ligandId.indexOf(",") > -1) {
+							// The ligand is multiple chains
 							var ligandIds = ligandId.split(",");
 							for (var l = 0; l < ligandIds.length; l++) {
 								ligandObjects.push(structure.select({chain:ligandIds[l]}));
 							}
 						}	else {
+							// The ligand is an ordinary molecule
 							ligandObjects.push(structure.select({rnum : parseInt("<% out.print(sequence.getHetId()); %>".replace(/\D/g,''))}));
 						}
 						var chains = structure.chains();
@@ -77,13 +80,21 @@
 						for (var l = 0; l < ligandObjects.length; l++) {
 							viewer.ballsAndSticks("ligand", ligandObjects[l]);
 						}
+
 						var residueIds = ["<% out.print(sequence.getResidueIds().replace(",", "\",\"")); %>"];
+						var bindingIds = ["<% out.print(sequence.getBindingResidues().replace(",", "\",\"")); %>"];
+                        var bindingResidueIds = []
+						for (var i = 0; i < bindingIds.length; i++) {
+                            bindingResidueIds.push(parseInt(bindingIds[i].replace(/\D/g,'')))
+                        }
+                        viewer.ballsAndSticks("ligand", structure.select({chain:"A", rnums:bindingResidueIds}));
+
 						var sequenceIds = [];
 						for (var i = 0; i < residueIds.length; i++) {
 							sequenceIds.push(parseInt(residueIds[i].replace(/\D/g,'')))
 						}
 						viewer.forEach(function(object) {
-						  object.setOpacity(0.1);
+						  object.setOpacity(0.8);
 							object.setOpacity(1, object.select({chain:"<% out.print(sequence.getChain()); %>"}));
 							if (ligandId.length == 1) {
 								object.setOpacity(1, object.select({chain:ligandId}));
@@ -95,10 +106,13 @@
 							}
 							object.colorBy(color.uniform("#34944D"), object.select({chain:"<% out.print(sequence.getChain()); %>", rnums:sequenceIds}));
 							object.setOpacity(0, object.select("water"));
+
+							object.colorBy(color.uniform("#660066"), object.select({chain:"A", rnums:bindingResidueIds}));
 						});
 
 						viewer.centerOn(structure);
 						viewer.autoZoom();
+						viewer.setZoom(100);
 					});
 				}
 				document.addEventListener("DOMContentLoaded", loadStructure);

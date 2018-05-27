@@ -124,6 +124,7 @@
 .up {
 	font-size: 150%;
 	font-weight: bold;
+    color: #660066;
 }
 
 #sequence span.outside {
@@ -150,7 +151,8 @@
 }
 
 #viewer {
-  background-color: #000000;
+  background-color: #ffffff;
+  cursor: -webkit-grab;
   padding: 0px;
 }
 
