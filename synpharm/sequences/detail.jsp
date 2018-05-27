@@ -183,24 +183,24 @@
 						<td class="value"><% out.print(sequence.getAffinityType()); %></td>
 					</tr>
 					<tr>
-						<td class="field">Sequence length</td>
+						<td class="field"><div class="help" title="The number of residues the binding sequence has.">?</div>Sequence length</td>
 						<td class="value"><% out.print(sequence.getSequenceLength()); %></td>
 					</tr>
 					<tr>
-						<td class="field">Proportion of original chain length</td>
+						<td class="field"><div class="help" title="The length of the sequence compared with the chain it comes from - smaller values indicate a more useful cassette.">?</div>Proportion of original chain length</td>
 						<td class="value"><% out.print(Utilities.floatToPercentage(sequence.getProportionalLength())); %></td>
 					</tr>
 					<tr>
-						<td class="field">Internal contacts</td>
+						<td class="field"><div class="help" title="The number of atomic contacts within the sequence, exlcuding those between adjacent residues.">?</div>Internal contacts</td>
 						<td class="value"><% out.print(sequence.getInternalContacts()); %></td>
 					</tr>
 					<tr>
-						<td class="field">External contacts</td>
+						<td class="field"><div class="help" title="The number of atomic contacts between the sequence and the rest of its chain.">?</div>External contacts</td>
 						<td class="value"><% out.print(sequence.getExternalContacts()); %></td>
 					</tr>
 					<tr>
-						<td class="field">Contact ratio</td>
-						<td class="value"><% out.print(Utilities.floatToPercentage(sequence.getContactRatio() / 10)); %></td>
+						<td class="field"><div class="help" title="The ratio of the above two values - the higher this is, the more intenral contacts predominate, and the more modular the construct is likely to be.">?</div>Contact ratio</td>
+						<td class="value"><% out.print(sequence.getContactRatio()); %></td>
 					</tr>
 				</table>
 		</div>

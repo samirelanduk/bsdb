@@ -63,3 +63,9 @@ function rightout() {
     }
   }
 }
+
+$(document).ready(function() {
+	$('.help').on('click', function() {
+		window.location.href = "/about/help/"
+	});
+});
