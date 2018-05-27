@@ -78,7 +78,7 @@
 							}
 						}
 						for (var l = 0; l < ligandObjects.length; l++) {
-							viewer.ballsAndSticks("ligand", ligandObjects[l]);
+							viewer.spheres("ligand", ligandObjects[l]);
 						}
 
 						var residueIds = ["<% out.print(sequence.getResidueIds().replace(",", "\",\"")); %>"];
